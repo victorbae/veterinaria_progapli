@@ -2,12 +2,14 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.util.Date;
 
+import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class ControllerCliente {
 
@@ -46,7 +48,14 @@ public class ControllerCliente {
 
 	@FXML
 	void Editar(ActionEvent event) {
+		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
+		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
 
+		boolean clicadoSalvar = clienteDialog.showDialog();
+
+		if (clicadoSalvar) {
+			atualizaLista();
+		}
 	}
 
 	@FXML
@@ -56,6 +65,17 @@ public class ControllerCliente {
 
 	@FXML
 	void Novo(ActionEvent event) {
+		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
+		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
+
+		boolean clicadoSalvar = clienteDialog.showDialog();
+
+		if (clicadoSalvar) {
+			atualizaLista();
+		}
+	}
+
+	public void atualizaLista() {
 
 	}
 

@@ -1,18 +1,31 @@
 package br.com.unoesc.veterinaria.principal;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
+	public static BorderPane root;
+
 	@Override
 	public void start(Stage primaryStage) {
+
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root, 400, 400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			root = (BorderPane) FXMLLoader
+					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/PaginaInicial.fxml"));
+			Scene scene = new Scene(root, 1200, 800);
+			scene.getStylesheets().add(
+					getClass().getResource("/br/com/unoesc/veterinaria/principal/application.css").toExternalForm());
+			primaryStage.setTitle("Veterinaria PRK");
 			primaryStage.setScene(scene);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
+			AnchorPane agenciaView = (AnchorPane) loader.load();
+			root.setCenter(agenciaView);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

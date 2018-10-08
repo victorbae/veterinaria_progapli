@@ -2,7 +2,7 @@ package br.com.unoesc.veterinaria.banco.conf;
 
 public enum TipoBanco {
 
-	DESENVOLVIMENTO(new PropriedadesConexao("desenvolvimento.properties")),
+	DESENVOLVIMENTO(new PropriedadesConexao("desenvolvimentoVet.properties")),
 	CLIENTE(new PropriedadesConexao("cliente.properties"));
 
 	TipoBanco(PropriedadesConexao propiedadesconexao) {
