@@ -8,6 +8,7 @@ public class Venda {
 	Date dataVenda;
 	Cliente cliente;
 	// Filial filial;
+	Produto produto;
 	Double valorDesconto;
 	Double valorTotal;
 
