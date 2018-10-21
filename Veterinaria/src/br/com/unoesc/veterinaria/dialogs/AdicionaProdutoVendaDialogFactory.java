@@ -2,7 +2,7 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroVenda;
+import br.com.unoesc.veterinaria.controller.cadastro.ControllerAdicionaProdutoVenda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,12 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AdicionaProdutoVendaDialog {
+public class AdicionaProdutoVendaDialogFactory {
 	private Stage stageDono;
 
 	private VendaProduto vendaProdutoDevolta;
 
-	public AdicionaProdutoVendaDialog(Stage stage) {
+	public AdicionaProdutoVendaDialogFactory(Stage stage) {
 		this.stageDono = stage;
 	}
 
@@ -35,7 +35,7 @@ public class AdicionaProdutoVendaDialog {
 			Scene scene = new Scene(produtoDialog);
 			dialogStage.setScene(scene);
 
-			ControllerCadastroVenda controller = loader.getController();
+			ControllerAdicionaProdutoVenda controller = loader.getController();
 			controller.setStageDialog(dialogStage);
 			dialogStage.showAndWait();
 

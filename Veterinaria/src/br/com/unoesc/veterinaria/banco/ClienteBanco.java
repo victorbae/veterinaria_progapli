@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 
 public class ClienteBanco implements ClienteDao {
 	@Override
@@ -53,7 +54,6 @@ public class ClienteBanco implements ClienteDao {
 			stmt.setInt(7, dado.getIdCliente());
 
 			stmt.executeUpdate();
-			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -92,8 +92,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setDataNascimento(Date.valueOf(rs.getString("Data_Nascimento")));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
-				cliente.setFilial(cliente.achaFilial(rs.getInt("Id_Filial")));
-				// TODO Criar metodo para buscar filial pelo codigo passado
+				cliente.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));
 				clientes.add(cliente);
 			}
 		} catch (SQLException e) {

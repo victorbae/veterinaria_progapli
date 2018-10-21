@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -90,7 +91,7 @@ public class ControllerCadastroCliente {
 		cliente.setEndereco(tfEndereco.getText());
 		cliente.setDataNascimento(Date.valueOf(dtDataNascimento.getValue()));
 		cliente.setTelefone(tfTelefone.getText());
-		cliente.setFilial(cliente.achaFilial(cbxFilial.getValue().getIdFilial()));
+		cliente.setFilial(EstaticosParaCliente.achaFilial(cbxFilial.getValue().getIdFilial()));
 	}
 
 	public void limpaTela() {

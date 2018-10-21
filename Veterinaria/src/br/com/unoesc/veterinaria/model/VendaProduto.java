@@ -1,8 +1,5 @@
 package br.com.unoesc.veterinaria.model;
 
-import br.com.unoesc.veterinaria.banco.ProdutoBanco;
-import br.com.unoesc.veterinaria.dao.ProdutoDao;
-
 public class VendaProduto {
 
 	private Integer IdVendaProduto;
@@ -76,19 +73,6 @@ public class VendaProduto {
 
 	public Double calculaValorTotal(Double qnt, Double valorUnitario) {
 		return qnt * valorUnitario;
-	}
-
-	public Produto achaProduto(Integer idProduto) {
-		Produto produtoDaVendaProduto = new Produto();
-		ProdutoDao produtoDao = new ProdutoBanco();
-
-		for (Produto produto : produtoDao.listar()) {
-			if (idProduto == produto.getIdProduto()) {
-				produtoDaVendaProduto = produto;
-			}
-		}
-
-		return produtoDaVendaProduto;
 	}
 
 	@Override

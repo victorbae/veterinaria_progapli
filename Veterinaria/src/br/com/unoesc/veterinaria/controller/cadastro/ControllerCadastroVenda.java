@@ -6,10 +6,12 @@ import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
-import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.AdicionaProdutoVendaDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ControllerCadastroVenda {
@@ -64,13 +67,11 @@ public class ControllerCadastroVenda {
 	@FXML
 	private Button btnAdicionarProduto;
 
-	private Stage dialogStage;
-
-	private boolean clicadoSalvar;
-
 	private Venda venda;
 
 	private VendaDao vendaDao = new VendaBanco();
+
+	private VendaProduto vendaProduto;
 
 	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
 
@@ -80,6 +81,12 @@ public class ControllerCadastroVenda {
 	private void initialize() {
 		tfValorTotal.setDisable(true);
 		populaCombo();
+
+		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+		tcValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
 	}
 
 	@FXML
@@ -87,10 +94,6 @@ public class ControllerCadastroVenda {
 
 		vendaDao.inserir(venda);
 
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
-		}
 	}
 
 	@FXML
@@ -106,16 +109,18 @@ public class ControllerCadastroVenda {
 	@FXML
 	void AdicionarProduto(ActionEvent event) {
 		Stage stageDono = (Stage) btnAdicionarProduto.getScene().getWindow();
-		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
+		AdicionaProdutoVendaDialogFactory adicionaProdutoVendaDialog = new AdicionaProdutoVendaDialogFactory(stageDono);
 
-		boolean clicadoSalvar = clienteDialog.showDialog();
+		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
 
 		if (clicadoSalvar) {
 			atualizaLista();
+			vendaProduto = EstaticosParaVenda.vendaProduto;
 		}
 	}
 
 	private void atualizaLista() {
+		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
 		tvCarinho.refresh();
 
 	}
@@ -129,14 +134,6 @@ public class ControllerCadastroVenda {
 		for (Cliente cliente : clienteDao.listar()) {
 			cbxCliente.getItems().add(cliente);
 		}
-	}
-
-	public void setStageDialog(Stage dialogStage) {
-		this.dialogStage = dialogStage;
-	}
-
-	public boolean clicadoSalvar() {
-		return clicadoSalvar;
 	}
 
 }

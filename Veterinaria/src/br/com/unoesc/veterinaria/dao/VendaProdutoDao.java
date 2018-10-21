@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.dao;
 
-public interface VendaProdutoDao extends CrudDao<VendaProdutoDao> {
+import br.com.unoesc.veterinaria.model.VendaProduto;
+
+public interface VendaProdutoDao extends CrudDao<VendaProduto> {
 
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Venda {
 
-	Integer idvenda;
+	Integer idVenda;
 	Date dataVenda;
 	Cliente cliente;
 	// Filial filial;
@@ -17,21 +17,21 @@ public class Venda {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Venda(Integer idvenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
+	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
 		super();
-		this.idvenda = idvenda;
+		this.idVenda = idVenda;
 		this.dataVenda = dataVenda;
 		this.cliente = cliente;
 		this.valorDesconto = valorDesconto;
 		this.valorTotal = valorTotal;
 	}
 
-	public Integer getIdvenda() {
-		return idvenda;
+	public Integer getIdVenda() {
+		return idVenda;
 	}
 
-	public void setIdvenda(Integer idvenda) {
-		this.idvenda = idvenda;
+	public void setIdvenda(Integer idVenda) {
+		this.idVenda = idVenda;
 	}
 
 	public Date getDataVenda() {
@@ -70,7 +70,7 @@ public class Venda {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idvenda == null) ? 0 : idvenda.hashCode());
+		result = prime * result + ((idVenda == null) ? 0 : idVenda.hashCode());
 		return result;
 	}
 
@@ -83,17 +83,17 @@ public class Venda {
 		if (getClass() != obj.getClass())
 			return false;
 		Venda other = (Venda) obj;
-		if (idvenda == null) {
-			if (other.idvenda != null)
+		if (idVenda == null) {
+			if (other.idVenda != null)
 				return false;
-		} else if (!idvenda.equals(other.idvenda))
+		} else if (!idVenda.equals(other.idVenda))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Venda: " + idvenda + " Data:" + dataVenda + " Cliente" + cliente + " Valor Total:" + valorTotal;
+		return "Venda: " + idVenda + " Data:" + dataVenda + " Cliente" + cliente + " Valor Total:" + valorTotal;
 	}
 
 }

@@ -67,19 +67,6 @@ public class Produto {
 		this.margemLucro = margemLucro;
 	}
 
-//	public Estoque achaEstoque(Integer idEstoque) {
-//		Estoque estoqueDoCliente = new Estoque();
-//		EstoqueDao estoqueDao = new EstoqueBanco();
-//
-//		for (Estoque estoque : estoqueDao.listar()) {
-//			if (idEstoque == estoque.getIdEstoque()) {
-//				estoqueDoCliente = estoque;
-//			}
-//		}
-//
-//		return estoqueDoCliente;
-//	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -2,9 +2,6 @@ package br.com.unoesc.veterinaria.model;
 
 import java.util.Date;
 
-import br.com.unoesc.veterinaria.banco.FilialBanco;
-import br.com.unoesc.veterinaria.dao.FilialDao;
-
 public class Cliente {
 
 	Integer idCliente;
@@ -84,19 +81,6 @@ public class Cliente {
 
 	public void setFilial(Filial filial) {
 		this.filial = filial;
-	}
-
-	public Filial achaFilial(Integer idFilial) {
-		Filial filialDoCliente = new Filial();
-		FilialDao filialDao = new FilialBanco();
-
-//		for (Filial filial : filialDao.listar()) {
-//			if (idFilial == filial.getIdFilial()) {
-//				filialDoCliente = filial;
-//			}
-//		}
-
-		return filialDoCliente;
 	}
 
 	@Override
