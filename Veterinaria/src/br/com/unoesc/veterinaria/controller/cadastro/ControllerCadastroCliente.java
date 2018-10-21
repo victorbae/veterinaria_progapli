@@ -3,11 +3,15 @@ package br.com.unoesc.veterinaria.controller.cadastro;
 import java.sql.Date;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
+import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
+import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.model.Filial;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,8 +33,8 @@ public class ControllerCadastroCliente {
 	@FXML
 	private TextField tfEndereco;
 
-//	@FXML
-//	private ComboBox<Filial> cbxFilial;
+	@FXML
+	private ComboBox<Filial> cbxFilial;
 
 	@FXML
 	private Button btnCancelar;
@@ -48,6 +52,13 @@ public class ControllerCadastroCliente {
 	private boolean clicadoSalvar;
 
 	private ClienteDao clienteDao = new ClienteBanco();
+
+	private FilialDao filialDao = new FilialBanco();
+
+	@FXML
+	private void initialize() {
+		populaCombo();
+	}
 
 	@FXML
 	void Cancelar(ActionEvent event) {
@@ -79,6 +90,7 @@ public class ControllerCadastroCliente {
 		cliente.setEndereco(tfEndereco.getText());
 		cliente.setDataNascimento(Date.valueOf(dtDataNascimento.getValue()));
 		cliente.setTelefone(tfTelefone.getText());
+		cliente.setFilial(cliente.achaFilial(cbxFilial.getValue().getIdFilial()));
 	}
 
 	public void limpaTela() {
@@ -89,6 +101,14 @@ public class ControllerCadastroCliente {
 		tfTelefone.clear();
 
 		tfEndereco.clear();
+
+		cbxFilial.getSelectionModel().clearSelection();
+	}
+
+	private void populaCombo() {
+		for (Filial filial : filialDao.listar()) {
+			cbxFilial.getItems().add(filial);
+		}
 	}
 
 	public void setStageDialog(Stage dialogStage) {

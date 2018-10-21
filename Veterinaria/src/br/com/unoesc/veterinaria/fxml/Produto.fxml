@@ -7,17 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerProduto">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerProduto">
    <children>
       <TableView fx:id="tvProdutos" layoutX="10.0" layoutY="186.0" prefHeight="500.0" prefWidth="880.0">
         <columns>
-          <TableColumn fx:id="tcId" prefWidth="75.0" text="Id " />
           <TableColumn fx:id="tcNome" prefWidth="240.0" text="Nome" />
-            <TableColumn fx:id="tcQuantidade" prefWidth="141.0" text="Quantidade" />
-            <TableColumn fx:id="tcValorEntrada" prefWidth="141.0" text="Valor Entrada" />
-            <TableColumn fx:id="tcMargemLucro" prefWidth="141.0" text="Margem de lucro" />
-            <TableColumn fx:id="tcIdEstoque" prefWidth="141.0" text="Id Estoque" />
+            <TableColumn fx:id="tcQuantidade" prefWidth="160.0" text="Quantidade" />
+            <TableColumn fx:id="tcValorEntrada" prefWidth="160.0" text="Valor Entrada" />
+            <TableColumn fx:id="tcMargemLucro" prefWidth="160.0" text="Margem de lucro" />
+            <TableColumn fx:id="tcIdEstoque" prefWidth="160.0" text="Id Estoque" />
         </columns>
       </TableView>
       <Label layoutX="358.0" layoutY="14.0" text="Produtos">

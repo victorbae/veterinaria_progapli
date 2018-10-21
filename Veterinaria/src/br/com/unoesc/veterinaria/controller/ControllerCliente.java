@@ -2,22 +2,24 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.util.Date;
 
+import br.com.unoesc.veterinaria.banco.ClienteBanco;
+import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.model.Filial;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ControllerCliente {
 
 	@FXML
 	private TableView<Cliente> tvCliente;
-
-	@FXML
-	private TableColumn<Cliente, Integer> tcIdCliente;
 
 	@FXML
 	private TableColumn<Cliente, String> tcNomeCompleto;
@@ -34,8 +36,8 @@ public class ControllerCliente {
 	@FXML
 	private TableColumn<Cliente, String> tcTelefone;
 
-//	@FXML
-//	private TableColumn<Cliente, Filial> tcFilial;
+	@FXML
+	private TableColumn<Cliente, Filial> tcFilial;
 
 	@FXML
 	private Button btnNovo;
@@ -45,6 +47,21 @@ public class ControllerCliente {
 
 	@FXML
 	private Button btnEditar;
+
+	Cliente cliente;
+
+	ClienteDao clienteDao = new ClienteBanco();
+
+	@FXML
+	private void initialize() {
+		tcNomeCompleto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+		tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+		tcCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
+		tcFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
+		tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+		tvCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
+	}
 
 	@FXML
 	void Editar(ActionEvent event) {
@@ -61,6 +78,11 @@ public class ControllerCliente {
 	@FXML
 	void Excluir(ActionEvent event) {
 
+		if (tvCliente.getSelectionModel().getSelectedItem() != null) {
+			cliente = tvCliente.getSelectionModel().getSelectedItem();
+			clienteDao.excluir(cliente);
+		}
+		atualizaLista();
 	}
 
 	@FXML
@@ -76,7 +98,8 @@ public class ControllerCliente {
 	}
 
 	public void atualizaLista() {
-
+		tvCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
+		tvCliente.refresh();
 	}
 
 }

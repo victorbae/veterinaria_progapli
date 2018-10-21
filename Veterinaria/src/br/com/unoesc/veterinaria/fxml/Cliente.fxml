@@ -7,18 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerCliente">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerCliente">
    <children>
       <TableView fx:id="tvCliente" layoutX="10.0" layoutY="186.0" prefHeight="500.0" prefWidth="880.0">
         <columns>
-          <TableColumn fx:id="tcIdCliente" prefWidth="75.0" text="Id " />
-          <TableColumn fx:id="tcNomeCompleto" prefWidth="240.0" text="Nome Completo" />
-            <TableColumn fx:id="tcCpf" prefWidth="113.0" text="CPF" />
-            <TableColumn fx:id="tcDataNascimento" prefWidth="113.0" text="Data Nascimento" />
-            <TableColumn fx:id="tcEndereco" prefWidth="113.0" text="Endereco" />
-            <TableColumn fx:id="tcTelefone" prefWidth="113.0" text="Telefone" />
-            <TableColumn fx:id="tcFilial" prefWidth="113.0" text="Filial" />
+          <TableColumn fx:id="tcNomeCompleto" prefWidth="240.0" text="Nome" />
+            <TableColumn fx:id="tcCpf" prefWidth="128.0" text="CPF" />
+            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" text="Data Nascimento" />
+            <TableColumn fx:id="tcEndereco" prefWidth="128.0" text="Endereco" />
+            <TableColumn fx:id="tcTelefone" prefWidth="128.0" text="Telefone" />
+            <TableColumn fx:id="tcFilial" prefWidth="128.0" text="Filial" />
         </columns>
       </TableView>
       <Label layoutX="369.0" layoutY="14.0" text="Clientes">

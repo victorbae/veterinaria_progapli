@@ -17,16 +17,14 @@ public class ClienteBanco implements ClienteDao {
 	public void inserir(Cliente dado) {
 		try {
 			String sql = "INSERT INTO `cliente`(`idCliente`, `Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) "
-					+ " VALUES (?,?,?,?,?,?,null)";
+					+ " VALUES (null,?,?,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-//			stmt.setInt(1, dado.getIdCliente());
-			stmt.setInt(1, 1);
-			stmt.setString(2, dado.getNomeCompleto());
-			stmt.setString(3, dado.getCpf());
-			stmt.setDate(4, (Date) dado.getDataNascimento());
-			stmt.setString(5, dado.getEndereco());
-			stmt.setString(6, dado.getTelefone());
-//			stmt.setInt(7,dado.getFilial().getIdFilial());
+			stmt.setString(1, dado.getNomeCompleto());
+			stmt.setString(2, dado.getCpf());
+			stmt.setDate(3, (Date) dado.getDataNascimento());
+			stmt.setString(4, dado.getEndereco());
+			stmt.setString(5, dado.getTelefone());
+			stmt.setInt(6, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
 
 			// Quando o campo é auto increment no banco
@@ -51,7 +49,7 @@ public class ClienteBanco implements ClienteDao {
 			stmt.setDate(3, (Date) dado.getDataNascimento());
 			stmt.setString(4, dado.getEndereco());
 			stmt.setString(5, dado.getTelefone());
-//			stmt.setInt(6,dado.getFilial().getIdFilial());
+			stmt.setInt(6, dado.getFilial().getIdFilial());
 			stmt.setInt(7, dado.getIdCliente());
 
 			stmt.executeUpdate();
@@ -94,7 +92,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setDataNascimento(Date.valueOf(rs.getString("Data_Nascimento")));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
-//				cliente.setFilial
+				cliente.setFilial(cliente.achaFilial(rs.getInt("Id_Filial")));
 				// TODO Criar metodo para buscar filial pelo codigo passado
 				clientes.add(cliente);
 			}

@@ -122,8 +122,7 @@ public class Filial {
 
 	@Override
 	public String toString() {
-		return "Filial [idFilial=" + idFilial + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
-				+ ", cnpj=" + cnpj + "]";
+		return nome;
 	}
 
 }
