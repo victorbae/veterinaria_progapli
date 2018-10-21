@@ -93,6 +93,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
 				cliente.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));
+
 				clientes.add(cliente);
 			}
 		} catch (SQLException e) {
