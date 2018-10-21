@@ -23,6 +23,10 @@ public class Produto {
 		this.margemLucro = margemLucro;
 	}
 
+	public Double getValorUnitario() {
+		return this.valorEntrada + (this.valorEntrada * this.margemLucro / 100);
+	}
+
 	public Integer getIdProduto() {
 		return idProduto;
 	}

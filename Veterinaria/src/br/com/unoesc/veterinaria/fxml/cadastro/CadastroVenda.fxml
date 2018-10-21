@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroVenda">
    <children>
       <Label layoutX="53.0" layoutY="173.0" text="Data Venda:">
          <font>
@@ -38,17 +37,17 @@
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="600.0" layoutY="37.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Button fx:id="btnCancelar" layoutX="560.0" layoutY="43.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalvar" layoutX="787.0" layoutY="37.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="767.0" layoutY="43.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnLimpar" layoutX="700.0" layoutY="37.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
+      <Button fx:id="btnLimpar" layoutX="666.0" layoutY="43.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
@@ -65,12 +64,12 @@
             <TableColumn fx:id="tcValorTotal" prefWidth="200.0" text="Valor Total" />
         </columns>
       </TableView>
-      <Button fx:id="btnExcluirProduto" layoutX="739.0" layoutY="244.0" mnemonicParsing="false" onAction="#ExcluirProduto" text="Excluir Produto" textAlignment="CENTER">
+      <Button fx:id="btnExcluirProduto" layoutX="719.0" layoutY="250.0" mnemonicParsing="false" onAction="#ExcluirProduto" text="Excluir Produto" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnAdicionarProduto" layoutX="580.0" layoutY="244.0" mnemonicParsing="false" onAction="#AdicionarProduto" text="Adicionar Produto" textAlignment="CENTER">
+      <Button fx:id="btnAdicionarProduto" layoutX="560.0" layoutY="250.0" mnemonicParsing="false" onAction="#AdicionarProduto" text="Adicionar Produto" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
