@@ -1,5 +1,10 @@
 package br.com.unoesc.veterinaria.model;
 
+import java.util.List;
+
+import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
+import br.com.unoesc.veterinaria.dao.FuncionarioDao;
+
 public class Filial {
 	Integer idFilial;
 	String nome;
@@ -69,6 +74,18 @@ public class Filial {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public Funcionario buscaFuncionarioById(Integer id) {
+		FuncionarioDao funcionarioDao = new FuncionarioBanco();
+		Funcionario funcionariodoid = new Funcionario();
+		List<Funcionario> lista = funcionarioDao.listar();
+		for (Funcionario funcionario : lista) {
+			if (funcionario.getIdFuncionario() == id) {
+				funcionariodoid = funcionario;
+			}
+		}
+		return funcionariodoid;
 	}
 
 	@Override

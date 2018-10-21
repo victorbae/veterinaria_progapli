@@ -35,7 +35,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		System.setProperty("tipoPersistencia", TipoPersistencia.BANCO.name());
 
-		// System.setProperty("ambiente", TipoBanco.DESENVOLVIMENTO.name());
+		//System.setProperty("ambiente", TipoBanco.DESENVOLVIMENTO.name());
 
 		if (args.length > 0) {
 			System.setProperty("ambiente", args[0]);

@@ -90,11 +90,11 @@ public class Cliente {
 		Filial filialDoCliente = new Filial();
 		FilialDao filialDao = new FilialBanco();
 
-//		for (Filial filial : filialDao.listar()) {
-//			if (idFilial == filial.getIdFilial()) {
-//				filialDoCliente = filial;
-//			}
-//		}
+		for (Filial filial : filialDao.listar()) {
+			if (idFilial == filial.getIdFilial()) {
+				filialDoCliente = filial;
+			}
+		}
 
 		return filialDoCliente;
 	}

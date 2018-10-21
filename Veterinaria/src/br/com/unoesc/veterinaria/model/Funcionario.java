@@ -1,6 +1,12 @@
 package br.com.unoesc.veterinaria.model;
 
 import java.util.Date;
+import java.util.List;
+
+import br.com.unoesc.veterinaria.banco.ClienteBanco;
+import br.com.unoesc.veterinaria.banco.FilialBanco;
+import br.com.unoesc.veterinaria.dao.ClienteDao;
+import br.com.unoesc.veterinaria.dao.FilialDao;
 
 public class Funcionario {
 	Integer idFuncionario;
@@ -74,6 +80,32 @@ public class Funcionario {
 		this.filial = filial;
 	}
 
+	public Cliente buscaClienteById(Integer id) {
+		ClienteDao clientedao = new ClienteBanco();
+		Cliente clientedoid = new Cliente();
+		List<Cliente> lista = clientedao.listar();
+		for (Cliente cliente : lista) {
+			if (cliente.getIdCliente() == id) {
+				clientedoid = cliente;
+			}
+		}
+		return clientedoid;
+	}
+
+	public Filial buscaFilialById(Integer id) {
+		Filial filialDoCliente = new Filial();
+		FilialDao filialDao = new FilialBanco();
+		List<Filial> lista = filialDao.listar();
+
+		for (Filial filial : lista) {
+			if (id == filial.getIdFilial()) {
+				filialDoCliente = filial;
+			}
+		}
+
+		return filialDoCliente;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,8 +163,7 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario [idFuncionario=" + idFuncionario + ", nome=" + nome + ", cpf=" + cpf + ", data_Nascimento="
-				+ data_Nascimento + ", cliente=" + cliente + ", filial=" + filial + "]";
+		return nome;
 	}
 
 }

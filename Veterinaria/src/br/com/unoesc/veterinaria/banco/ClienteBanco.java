@@ -93,7 +93,6 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
 				cliente.setFilial(cliente.achaFilial(rs.getInt("Id_Filial")));
-				// TODO Criar metodo para buscar filial pelo codigo passado
 				clientes.add(cliente);
 			}
 		} catch (SQLException e) {
