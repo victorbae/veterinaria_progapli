@@ -24,6 +24,11 @@
                   <Font name="Gabriola" size="23.0" />
                </font>
             </Button>
+            <Button fx:id="btnAdicionarVenda" layoutX="24.0" layoutY="327.0" mnemonicParsing="false" onAction="#AdicionarVenda" text="Adicionar Venda">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font>
+            </Button>
          </children></Pane>
    </left>
    <center>

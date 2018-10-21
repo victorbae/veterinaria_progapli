@@ -24,6 +24,21 @@ public class PaginaInicialController {
 	private Button btnVenda;
 
 	@FXML
+	private Button btnAdicionarVenda;
+
+	@FXML
+	void AdicionarVenda(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroVenda.fxml"));
+		try {
+			AnchorPane cursoView = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(cursoView);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@FXML
 	void Cliente(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
@@ -58,4 +73,5 @@ public class PaginaInicialController {
 			e1.printStackTrace();
 		}
 	}
+
 }

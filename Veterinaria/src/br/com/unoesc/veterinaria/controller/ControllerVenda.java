@@ -3,12 +3,14 @@ package br.com.unoesc.veterinaria.controller;
 import java.util.Date;
 
 import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Venda;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 
 public class ControllerVenda {
 
@@ -21,8 +23,8 @@ public class ControllerVenda {
 	@FXML
 	private TableColumn<Venda, Cliente> tcCliente;
 
-//	@FXML
-//	private TableColumn<Venda, Filial> tcFilial;
+	@FXML
+	private TableColumn<Venda, Filial> tcFilial;
 
 	@FXML
 	private TableColumn<Venda, Double> tcValorDesconto;
@@ -40,11 +42,15 @@ public class ControllerVenda {
 	private Button btnExcluir;
 
 	@FXML
-	private Button btnEditar;
+	private Button btnVisualizar;
 
 	@FXML
-	void Editar(ActionEvent event) {
+	private BorderPane bpPrincipal;
 
+	private PaginaInicialController pagInicialController;
+
+	@FXML
+	void Visualizar(ActionEvent event) {
 	}
 
 	@FXML
@@ -54,7 +60,6 @@ public class ControllerVenda {
 
 	@FXML
 	void Novo(ActionEvent event) {
-
 	}
 
 }
