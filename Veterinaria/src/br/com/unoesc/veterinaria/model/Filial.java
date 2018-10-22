@@ -79,7 +79,7 @@ public class Filial {
 	public Funcionario buscaFuncionarioById(Integer id) {
 		FuncionarioDao funcionarioDao = new FuncionarioBanco();
 		Funcionario funcionariodoid = new Funcionario();
-		List<Funcionario> lista = funcionarioDao.listar();
+		List<Funcionario> lista = funcionarioDao.listarNome();
 		for (Funcionario funcionario : lista) {
 			if (funcionario.getIdFuncionario() == id) {
 				funcionariodoid = funcionario;

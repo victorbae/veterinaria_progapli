@@ -83,7 +83,7 @@ public class Funcionario {
 	public Cliente buscaClienteById(Integer id) {
 		ClienteDao clientedao = new ClienteBanco();
 		Cliente clientedoid = new Cliente();
-		List<Cliente> lista = clientedao.listar();
+		List<Cliente> lista = clientedao.listarNome();
 		for (Cliente cliente : lista) {
 			if (cliente.getIdCliente() == id) {
 				clientedoid = cliente;
@@ -95,7 +95,7 @@ public class Funcionario {
 	public Filial buscaFilialById(Integer id) {
 		Filial filialDoCliente = new Filial();
 		FilialDao filialDao = new FilialBanco();
-		List<Filial> lista = filialDao.listar();
+		List<Filial> lista = filialDao.listarNome();
 
 		for (Filial filial : lista) {
 			if (id == filial.getIdFilial()) {

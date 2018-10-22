@@ -83,4 +83,43 @@ public class FilialBanco implements FilialDao {
 		return filiais;
 	}
 
+	public List<Filial> listarSemObjSecundarios() {
+		List<Filial> filiais = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM view_lista_filiais");
+			while (rs.next()) {
+				Filial filial = new Filial();
+				filial.setIdFilial(rs.getInt("Id_Filial"));
+				filial.setNome(rs.getString("Nome"));
+				filial.setEndereco(rs.getString("Endereco"));
+				// filial.setGerente(filial.buscaFuncionarioById(rs.getInt("Id_Gerente")));
+				filial.setTelefone(rs.getString("Telefone"));
+				filial.setCnpj(rs.getString("CNPJ"));
+				filiais.add(filial);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return filiais;
+	}
+
+	@Override
+	public List<Filial> listarNome() {
+		List<Filial> filiais = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM view_lista_filiais");
+			while (rs.next()) {
+				Filial filial = new Filial();
+				filial.setIdFilial(rs.getInt("Id_Filial"));
+				filial.setNome(rs.getString("Nome"));
+				filiais.add(filial);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return filiais;
+	}
+
 }

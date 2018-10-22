@@ -31,4 +31,16 @@ public class AnimaisBanco implements AnimaisDao {
 		return null;
 	}
 
+	@Override
+	public List<Animais> listarSemObjSecundarios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Animais> listarNome() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

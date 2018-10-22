@@ -102,4 +102,28 @@ public class ClienteBanco implements ClienteDao {
 		return clientes;
 	}
 
+	@Override
+	public List<Cliente> listarSemObjSecundarios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cliente> listarNome() {
+		List<Cliente> clientes = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_cliente");
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setIdCliente(rs.getInt("Id_Cliente"));
+				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
+				clientes.add(cliente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+
 }
