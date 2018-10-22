@@ -18,4 +18,4 @@ idFilial as 'Id_Filial'
 from funcionario;
 
 
-
+create or replace view view_lista_filiais as select idFilial as 'Id_Filial', Nome, Endereco, id_Gerente as 'Id_Gerente', Telefone, CNPJ from filial;
