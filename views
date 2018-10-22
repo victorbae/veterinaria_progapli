@@ -11,3 +11,11 @@ cl.Endereco AS Endereco, cl.Telefone AS Telefone, cl.idFilial AS Id_Filial FROM 
 
 CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Qnt_Estoque, 
 pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idEstoque AS Id_Estoque FROM Produto pd;
+
+
+create or replace view view_lista_funcionarios as select idFuncionario as 'Id_Funcionario', Nome as 'Nome', CPF as 'CPF', Data_Nascimento, id_Cliente as 'Id_Cliente',
+idFilial as 'Id_Filial'
+from funcionario;
+
+
+
