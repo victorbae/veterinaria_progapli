@@ -1,0 +1,13 @@
+Views usadas em listas 
+
+create or replace view lista_dados_vendaProduto as select vp.idVenda as Id_Venda, vp.idProduto as Id_Produto, vp.idVenda_Produto as Id_Venda_Produto,
+	vp.Quantidade as Quantidade, vp.Valor_Unitario as Valor_Unitario, vp.Valor_Total as Valor_Total from Venda_Produto vp;
+
+create or replace view lista_dados_venda as select v.idVenda as Id_Venda, v.Valor_Desconto as Valor_Desconto, v.Data_Venda as Data_Venda, v.idCliente as Id_Cliente, 
+v.idFilial as Id_Filial, v.valorTotal as Valor_Total from Venda v;
+
+CREATE OR REPLACE VIEW lista_dados_cliente AS SELECT cl.idCliente AS Id_Cliente, cl.Nome_Completo AS Nome_Completo, cl.CPF AS CPF, cl.Data_Nascimento AS Data_Nascimento, 
+cl.Endereco AS Endereco, cl.Telefone AS Telefone, cl.idFilial AS Id_Filial FROM Cliente cl;
+
+CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Qnt_Estoque, 
+pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idEstoque AS Id_Estoque FROM Produto pd;
