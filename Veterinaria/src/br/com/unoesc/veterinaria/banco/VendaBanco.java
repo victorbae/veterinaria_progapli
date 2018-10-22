@@ -98,4 +98,16 @@ public class VendaBanco implements VendaDao {
 		return vendas;
 	}
 
+	@Override
+	public List<Venda> listarSemObjSecundarios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Venda> listarNome() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
+import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 
 public class FuncionarioBanco implements FuncionarioDao {
@@ -76,6 +77,45 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento"));
 				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
 				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionarios.add(funcionario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return funcionarios;
+	}
+	
+	public List<Funcionario> listarSemObjSecundarios(){
+		List<Funcionario> funcionarios = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM view_lista_funcionarios");
+			while (rs.next()) {
+				Funcionario funcionario = new Funcionario();
+				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
+				funcionario.setNome(rs.getString("Nome"));
+				funcionario.setCpf(rs.getString("CPF"));
+				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento"));
+				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
+				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionarios.add(funcionario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return funcionarios;
+	}
+
+	@Override
+	public List<Funcionario> listarNome() {
+		List<Funcionario> funcionarios = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM view_lista_funcionarios");
+			while (rs.next()) {
+				Funcionario funcionario = new Funcionario();
+				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
+				funcionario.setNome(rs.getString("Nome"));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
