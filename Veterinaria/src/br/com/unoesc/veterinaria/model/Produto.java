@@ -2,12 +2,12 @@ package br.com.unoesc.veterinaria.model;
 
 public class Produto {
 
-	Integer idProduto;
-	String nome;
-	Double quantidadeEstoque;
-	Double valorEntrada;
-	Double margemLucro;
-//	Estoque estoque;
+	private Integer idProduto;
+	private String nome;
+	private Double quantidadeEstoque;
+	private Double valorEntrada;
+	private Double margemLucro;
+//private	Estoque estoque;
 
 	public Produto() {
 		super();
@@ -94,7 +94,7 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome + " Quantidade Estoque: " + quantidadeEstoque;
+		return nome;
 	}
 
 }

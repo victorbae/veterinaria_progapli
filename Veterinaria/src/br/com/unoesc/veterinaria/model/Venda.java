@@ -4,33 +4,35 @@ import java.util.Date;
 
 public class Venda {
 
-	Integer idVenda;
-	Date dataVenda;
-	Cliente cliente;
-	// Filial filial;
-	Produto produto;
-	Double valorDesconto;
-	Double valorTotal;
+	private Integer idVenda;
+	private Date dataVenda;
+	private Cliente cliente;
+	private Filial filial;
+	private Double valorDesconto;
+	private Double valorTotal;
+	private VendaProduto vendaProduto;
 
 	public Venda() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
+	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal,
+			VendaProduto vendaProduto) {
 		super();
 		this.idVenda = idVenda;
 		this.dataVenda = dataVenda;
 		this.cliente = cliente;
 		this.valorDesconto = valorDesconto;
 		this.valorTotal = valorTotal;
+		this.vendaProduto = vendaProduto;
 	}
 
 	public Integer getIdVenda() {
 		return idVenda;
 	}
 
-	public void setIdvenda(Integer idVenda) {
+	public void setIdVenda(Integer idVenda) {
 		this.idVenda = idVenda;
 	}
 
@@ -50,6 +52,14 @@ public class Venda {
 		this.cliente = cliente;
 	}
 
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
+	}
+
 	public Double getValorDesconto() {
 		return valorDesconto;
 	}
@@ -64,6 +74,14 @@ public class Venda {
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public VendaProduto getVendaProduto() {
+		return vendaProduto;
+	}
+
+	public void setVendaProduto(VendaProduto vendaProduto) {
+		this.vendaProduto = vendaProduto;
 	}
 
 	@Override

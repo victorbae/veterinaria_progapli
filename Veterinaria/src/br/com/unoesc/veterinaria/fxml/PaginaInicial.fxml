@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpPrincipal" prefHeight="800.0"
-	prefWidth="1200.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
+<BorderPane fx:id="bpPrincipal" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
 	<left>
-		<Pane prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER">
+		<Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="btnCliente" layoutX="59.0" layoutY="127.0"
-					mnemonicParsing="false" onAction="#Cliente" text="Cliente">
+				<Button fx:id="btnCliente" layoutX="59.0" layoutY="127.0" mnemonicParsing="false" onAction="#Cliente" text="Cliente">
 					<font>
 						<Font name="Gabriola" size="23.0" />
 					</font>
 				</Button>
-				<Button fx:id="btnProduto" layoutX="55.0" layoutY="192.0"
-					mnemonicParsing="false" onAction="#Produto" text="Produto">
+				<Button fx:id="btnProduto" layoutX="55.0" layoutY="192.0" mnemonicParsing="false" onAction="#Produto" text="Produto">
 					<font>
 						<Font name="Gabriola" size="23.0" />
 					</font>
 				</Button>
-				<Button fx:id="btnVenda" layoutX="61.0" layoutY="254.0"
-					mnemonicParsing="false" onAction="#Venda" text="Venda">
+				<Button fx:id="btnVenda" layoutX="61.0" layoutY="254.0" mnemonicParsing="false" onAction="#Venda" text="Venda">
 					<font>
 						<Font name="Gabriola" size="23.0" />
 					</font>
 				</Button>
-				<Button fx:id="btFilial" layoutX="54.0" layoutY="320.0"
-					mnemonicParsing="false" onAction="#filial" prefHeight="53.0"
-					prefWidth="92.0" text="Filial" />
-				<Button fx:id="btFuncionario" layoutX="51.0" layoutY="392.0"
-					mnemonicParsing="false" onAction="#funcionario" text="Funcionario" />
-				<Button fx:id="btnAdicionarVenda" layoutX="24.0"
-					layoutY="327.0" mnemonicParsing="false" onAction="#AdicionarVenda"
-					text="Adicionar Venda">
+				<Button fx:id="btFilial" layoutX="67.0" layoutY="323.0" mnemonicParsing="false" onAction="#filial" text="Filial">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font></Button>
+				<Button fx:id="btFuncionario" layoutX="42.0" layoutY="388.0" mnemonicParsing="false" onAction="#funcionario" text="Funcionario">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font></Button>
+				<Button fx:id="btnAdicionarVenda" layoutX="25.0" layoutY="453.0" mnemonicParsing="false" onAction="#AdicionarVenda" text="Adicionar Venda">
 					<font>
 						<Font name="Gabriola" size="23.0" />
 					</font>
@@ -51,7 +41,6 @@
 		</Pane>
 	</left>
 	<center>
-		<Pane prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER" />
+		<Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
 	</center>
 </BorderPane>

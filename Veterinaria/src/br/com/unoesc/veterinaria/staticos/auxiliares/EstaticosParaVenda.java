@@ -2,8 +2,10 @@ package br.com.unoesc.veterinaria.staticos.auxiliares;
 
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
+import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
+import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
@@ -11,6 +13,7 @@ import br.com.unoesc.veterinaria.model.VendaProduto;
 public class EstaticosParaVenda {
 
 	public static VendaProduto vendaProduto;
+	public static Venda venda;
 
 	public static Produto achaProduto(Integer idProduto) {
 		Produto produtoDaVendaProduto = new Produto();
@@ -36,5 +39,18 @@ public class EstaticosParaVenda {
 		}
 
 		return vendaDaVendaProduto;
+	}
+
+	public static VendaProduto achaVendaProduto(Integer idVendaProduto) {
+		VendaProduto vendaProdutoDaVenda = new VendaProduto();
+		VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
+
+		for (VendaProduto vendaProduto : vendaProdutoDao.listar()) {
+			if (idVendaProduto == vendaProduto.getIdVendaProduto()) {
+				vendaProdutoDaVenda = vendaProduto;
+			}
+		}
+
+		return vendaProdutoDaVenda;
 	}
 }

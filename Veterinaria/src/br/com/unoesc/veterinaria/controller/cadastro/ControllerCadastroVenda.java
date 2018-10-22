@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
@@ -7,7 +9,6 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.AdicionaProdutoVendaDialogFactory;
-import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
@@ -15,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,7 +35,7 @@ public class ControllerCadastroVenda {
 	private Button btnLimpar;
 
 	@FXML
-	private ComboBox<Cliente> cbxCliente;
+	private TextField tfCliente;
 
 	@FXML
 	private DatePicker dtDataVenda;
@@ -80,7 +80,7 @@ public class ControllerCadastroVenda {
 	@FXML
 	private void initialize() {
 		tfValorTotal.setDisable(true);
-		populaCombo();
+		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 
 		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
@@ -91,9 +91,7 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-
 		vendaDao.inserir(venda);
-
 	}
 
 	@FXML
@@ -103,7 +101,7 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void Limpar(ActionEvent event) {
-
+		limpaTudo();
 	}
 
 	@FXML
@@ -127,13 +125,18 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void ExcluirProduto(ActionEvent event) {
-
+		if (tvCarinho.getSelectionModel().getSelectedItem() != null) {
+			vendaProduto = tvCarinho.getSelectionModel().getSelectedItem();
+			vendaProdutoDao.excluir(vendaProduto);
+		}
+		atualizaLista();
 	}
 
-	private void populaCombo() {
-		for (Cliente cliente : clienteDao.listar()) {
-			cbxCliente.getItems().add(cliente);
-		}
+	private void limpaTudo() {
+		tfCliente.clear();
+		tfValorDesconto.clear();
+		tfValorTotal.clear();
+		tvCarinho.getItems().removeAll(vendaProdutoDao.listar());
 	}
 
 }

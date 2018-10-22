@@ -1,7 +1,10 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
+import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
+import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.FilialDao;
+import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 
 public class EstaticosParaCliente {
@@ -17,6 +20,19 @@ public class EstaticosParaCliente {
 //		}
 
 		return filialDoCliente;
+	}
+
+	public static Cliente achaCliente(Integer idCliente) {
+		Cliente clienteAchado = new Cliente();
+		ClienteDao clienteDao = new ClienteBanco();
+
+		for (Cliente cliente : clienteDao.listar()) {
+			if (idCliente == cliente.getIdCliente()) {
+				clienteAchado = cliente;
+			}
+		}
+
+		return clienteAchado;
 	}
 
 }
