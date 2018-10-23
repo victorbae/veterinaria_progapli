@@ -1,14 +1,20 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import java.sql.Date;
+
+import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
-import br.com.unoesc.veterinaria.banco.FilialBanco;
+import br.com.unoesc.veterinaria.banco.RacaBanco;
+import br.com.unoesc.veterinaria.banco.Tipo_AnimalBanco;
+import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
-import br.com.unoesc.veterinaria.dao.FilialDao;
+import br.com.unoesc.veterinaria.dao.RacaDao;
+import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
-import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.Tipo_Animal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,9 +53,10 @@ public class ControllerCadastroAnimais {
 	private Stage dialogStage;
 
 	private boolean clicadoSalvar;
-
+	private AnimaisDao animaisDao = new AnimaisBanco();
 	private ClienteDao clienteDao = new ClienteBanco();
-	private Tipo_AnimalDao tipoAnimalDao = new Tipo_Animal;
+	private Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
+	private RacaDao racaDao = new RacaBanco();
 
 	@FXML
 	private void initialize() {
@@ -68,19 +75,41 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void Salvar(ActionEvent event) {
+		preencheAnimais();
+		animaisDao.inserir(animais);
 
+		clicadoSalvar = true;
+		if (dialogStage != null) {
+			dialogStage.close();
+		}
+	}
+
+	public void preencheAnimais() {
+		animais = new Animais();
+		animais.setNome(tfNome.getText());
+		animais.setData_Nascimento(Date.valueOf(dtDataNascimento.getValue()));
+		animais.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
+		animais.setCliente(EstaticosParaAnimal.achaCliente(cbxCliente.getValue().getIdCliente()));
 	}
 
 	public void limpaTela() {
 		tfNome.clear();
-
 		cbxRaca.getSelectionModel().clearSelection();
+		cbxCliente.getSelectionModel().clearSelection();
+		cbxTipoAnimal.getSelectionModel().clearSelection();
 	}
 
 	private void populaCombo() {
-		for (Cliente filial : filialDao.listar()) {
-			cbxFilial.getItems().add(filial);
+		for (Cliente cliente : clienteDao.listar()) {
+			cbxCliente.getItems().add(cliente);
 		}
+		for (Raca raca : racaDao.listar()) {
+			cbxRaca.getItems().add(raca);
+		}
+		for (Tipo_Animal tipoAnimal : tipoAnimalDao.listar()) {
+			cbxTipoAnimal.getItems().add(tipoAnimal);
+		}
+
 	}
 
 	public void setStageDialog(Stage dialogStage) {

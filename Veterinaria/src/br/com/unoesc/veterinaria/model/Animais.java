@@ -9,6 +9,7 @@ public class Animais {
 	Date Data_Nascimento;
 	Cliente cliente;
 	Tipo_Animal tipo_animal;
+	Raca raca;
 
 	public Animais() {
 		super();
@@ -64,6 +65,14 @@ public class Animais {
 
 	public void setTipo_animal(Tipo_Animal tipo_animal) {
 		this.tipo_animal = tipo_animal;
+	}
+
+	public Raca getRaca() {
+		return raca;
+	}
+
+	public void setRaca(Raca raca) {
+		this.raca = raca;
 	}
 
 	@Override
