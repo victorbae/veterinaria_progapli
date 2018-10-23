@@ -103,12 +103,6 @@ public class ClienteBanco implements ClienteDao {
 	}
 
 	@Override
-	public List<Cliente> listarSemObjSecundarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Cliente> listarNome() {
 		List<Cliente> clientes = new ArrayList<>();
 		try {

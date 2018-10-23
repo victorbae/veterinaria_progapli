@@ -99,29 +99,4 @@ public class ProdutoBanco implements ProdutoDao {
 		}
 		return produtos;
 	}
-
-	@Override
-	public List<Produto> listarSemObjSecundarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Produto> listarNome() {
-		List<Produto> produtos = new ArrayList<>();
-		try {
-			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_produto");
-			while (rs.next()) {
-
-				Produto produto = new Produto();
-				produto.setIdProduto(rs.getInt("Id_Produto"));
-				produto.setNome(rs.getString("Nome"));
-				produtos.add(produto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return produtos;
-	}
 }

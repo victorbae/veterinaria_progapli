@@ -12,8 +12,4 @@ public interface CrudDao<T> {
 
 	List<T> listar();
 
-	List<T> listarSemObjSecundarios();
-
-	List<T> listarNome();
-
 }

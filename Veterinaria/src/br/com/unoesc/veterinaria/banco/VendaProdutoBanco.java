@@ -99,16 +99,4 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 		}
 		return vendaProdutos;
 	}
-
-	@Override
-	public List<VendaProduto> listarSemObjSecundarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<VendaProduto> listarNome() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
