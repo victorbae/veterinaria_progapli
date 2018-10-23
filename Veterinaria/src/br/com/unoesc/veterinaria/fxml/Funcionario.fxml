@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Pane prefHeight="700.0" prefWidth="900.0">
+         <children>
+            <TableView layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button layoutX="699.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Salvar">
+               <font>
+                  <Font name="Gabriola" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="808.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Excluir">
+               <font>
+                  <Font name="Gabriola" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="591.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Novo">
+               <font>
+                  <Font name="Gabriola" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="318.0" layoutY="20.0" text="Funcionários">
+               <font>
+                  <Font name="Gabriola" size="66.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
