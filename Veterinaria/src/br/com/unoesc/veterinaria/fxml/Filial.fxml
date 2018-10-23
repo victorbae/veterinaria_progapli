@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFilial">
    <children>
-      <TableView fx:id="tvFilial" layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
+      <TableView fx:id="tvFilial" layoutX="10.0" layoutY="187.0" onMouseClicked="#filialClicked" prefHeight="500.0" prefWidth="880.0">
          <columns>
             <TableColumn fx:id="tcId" prefWidth="75.0" text="Id " />
             <TableColumn fx:id="tcNome" prefWidth="240.0" text="Nome" />

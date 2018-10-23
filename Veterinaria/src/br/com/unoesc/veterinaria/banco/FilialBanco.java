@@ -93,7 +93,7 @@ public class FilialBanco implements FilialDao {
 				filial.setIdFilial(rs.getInt("Id_Filial"));
 				filial.setNome(rs.getString("Nome"));
 				filial.setEndereco(rs.getString("Endereco"));
-				// filial.setGerente(filial.buscaFuncionarioById(rs.getInt("Id_Gerente")));
+				filial.setGerente(filial.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
 				filiais.add(filial);
