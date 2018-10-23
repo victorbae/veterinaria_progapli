@@ -4,6 +4,8 @@ import java.util.Date;
 
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
+import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
@@ -14,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ControllerFuncionario {
 
@@ -52,6 +55,7 @@ public class ControllerFuncionario {
 	@FXML
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		tcDtNascimento.setCellValueFactory(new PropertyValueFactory<>("data_Nascimento"));
 		tcId.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
 		tcCPF.setCellValueFactory(new PropertyValueFactory<>("Cpf"));
 		tcNomeFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
@@ -71,7 +75,19 @@ public class ControllerFuncionario {
 
 	@FXML
 	void novo(ActionEvent event) {
+		Stage stageDono = (Stage) btNovo.getScene().getWindow();
+		FuncionarioDialogFactory funcionarioDialog = new FuncionarioDialogFactory(stageDono);
 
+		boolean clicadoSalvar = funcionarioDialog.showDialog();
+
+		if (clicadoSalvar) {
+			atualizaLista();
+		}
+
+	}
+
+	void atualizaLista() {
+		tvFuncionarios.refresh();
 	}
 
 }
