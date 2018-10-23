@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import java.sql.Date;
+
 import org.controlsfx.control.textfield.TextFields;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
@@ -9,8 +11,11 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.AdicionaProdutoVendaDialogFactory;
+import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -50,7 +55,7 @@ public class ControllerCadastroVenda {
 	private TableView<VendaProduto> tvCarinho;
 
 	@FXML
-	private TableColumn<VendaProduto, String> tcNomeProduto;
+	private TableColumn<VendaProduto, Produto> tcNomeProduto;
 
 	@FXML
 	private TableColumn<VendaProduto, Double> tcQuantidade;
@@ -79,18 +84,22 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	private void initialize() {
-		tfValorTotal.setDisable(true);
+//		tfValorTotal.setDisable(true);
+
+		EstaticosParaGeral.tvCarinhoAux = tvCarinho;
+
 		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 
-		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		tcValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
-		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
+//		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
 	}
 
 	@FXML
 	void Salvar(ActionEvent event) {
+		populaVenda();
 		vendaDao.inserir(venda);
 	}
 
@@ -112,15 +121,16 @@ public class ControllerCadastroVenda {
 		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
 
 		if (clicadoSalvar) {
-			atualizaLista();
+			atualizaListaCarinho();
 			vendaProduto = EstaticosParaVenda.vendaProduto;
 		}
 	}
 
-	private void atualizaLista() {
-		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
-		tvCarinho.refresh();
-
+// TODO Arrumar esta merda esse listar traz as parada NULL e nao pode
+	public static void atualizaListaCarinho() {
+		EstaticosParaGeral.tvCarinhoAux
+				.setItems(FXCollections.observableArrayList(EstaticosParaVenda.venda.getCarrinho()));
+		EstaticosParaGeral.tvCarinhoAux.refresh();
 	}
 
 	@FXML
@@ -129,14 +139,24 @@ public class ControllerCadastroVenda {
 			vendaProduto = tvCarinho.getSelectionModel().getSelectedItem();
 			vendaProdutoDao.excluir(vendaProduto);
 		}
-		atualizaLista();
+		atualizaListaCarinho();
 	}
 
 	private void limpaTudo() {
 		tfCliente.clear();
 		tfValorDesconto.clear();
 		tfValorTotal.clear();
-		tvCarinho.getItems().removeAll(vendaProdutoDao.listar());
+		tvCarinho.getItems().removeAll(venda.getCarrinho());
+	}
+
+	public void populaVenda() {
+		venda = EstaticosParaVenda.venda;
+
+		venda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
+		venda.setDataVenda(Date.valueOf(dtDataVenda.getValue()));
+//		venda.setFilial(filial);
+		venda.setValorDesconto(Double.valueOf(tfValorDesconto.getText()));
+		venda.setValorTotal(Double.valueOf(tfValorTotal.getText()));
 	}
 
 }

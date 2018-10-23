@@ -31,4 +31,5 @@ public class EstaticosParaProduto {
 
 		return produtoAchado;
 	}
+
 }

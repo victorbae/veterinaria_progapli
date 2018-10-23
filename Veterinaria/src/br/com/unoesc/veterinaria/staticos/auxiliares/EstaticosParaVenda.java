@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
+import java.util.List;
+
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
@@ -14,8 +16,11 @@ public class EstaticosParaVenda {
 
 	public static VendaProduto vendaProduto;
 	public static Venda venda;
+	public static VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
+	public static List<VendaProduto> carrinhoAux;
 
 	public static Produto achaProduto(Integer idProduto) {
+
 		Produto produtoDaVendaProduto = new Produto();
 		ProdutoDao produtoDao = new ProdutoBanco();
 
@@ -53,4 +58,5 @@ public class EstaticosParaVenda {
 
 		return vendaProdutoDaVenda;
 	}
+
 }

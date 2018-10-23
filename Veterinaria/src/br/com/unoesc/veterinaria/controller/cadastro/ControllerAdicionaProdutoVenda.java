@@ -50,16 +50,18 @@ public class ControllerAdicionaProdutoVenda {
 
 	@FXML
 	private void initialize() {
-		tfValorTotal.setDisable(true);
+//		tfValorTotal.setDisable(true);
 		TextFields.bindAutoCompletion(tfProduto, produtoDao.listar());
 
 	}
 
 	@FXML
 	void Adicionar(ActionEvent event) {
-		EstaticosParaVenda.vendaProduto = vendaProduto;
 		populaVendaProduto();
-		vendaProdutoDao.inserir(vendaProduto);
+		EstaticosParaVenda.carrinhoAux.add(vendaProduto);
+		EstaticosParaVenda.venda.setCarrinho(EstaticosParaVenda.carrinhoAux);
+//		vendaProdutoDao.inserir(vendaProduto);
+		ControllerCadastroVenda.atualizaListaCarinho();
 		dialogStage.close();
 	}
 
@@ -72,7 +74,7 @@ public class ControllerAdicionaProdutoVenda {
 		produto = EstaticosParaProduto.achaProdutoByNome(tfProduto.getText());
 
 		vendaProduto = new VendaProduto();
-
+		vendaProduto.setVenda(EstaticosParaVenda.venda);
 		vendaProduto.setProduto(EstaticosParaVenda.achaProduto(produto.getIdProduto()));
 		vendaProduto.setQuantidade(Double.parseDouble(tfQuantidade.getText()));
 		vendaProduto.setValorUnitario(produto.getValorUnitario());
