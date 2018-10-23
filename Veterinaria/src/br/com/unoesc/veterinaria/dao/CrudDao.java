@@ -12,4 +12,6 @@ public interface CrudDao<T> {
 
 	List<T> listar();
 
+	List<T> listarNome();
+
 }
