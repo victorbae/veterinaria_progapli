@@ -59,10 +59,6 @@ public class ControllerCadastroFuncionario {
 	void ChamaTelaAddClienteRapid(ActionEvent event) {
 		Stage stageDono = (Stage) ChamaTelaAddCliente.getScene().getWindow();
 		ClienteDialogFactoryRapid clienteDialog = new ClienteDialogFactoryRapid(stageDono);
-
-		boolean clicadoSalvar = clienteDialog.showDialog();
-
-		// utilizado para atualizar após salvar
+		clienteDialog.showDialog();
 	}
-
 }
