@@ -16,11 +16,15 @@ public class Animais {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Animais(Integer idAnimal, String nome, Date data_Nascimento) {
+	public Animais(Integer idAnimal, String nome, Date data_Nascimento, Cliente cliente, Tipo_Animal tipo_animal,
+			Raca raca) {
 		super();
 		this.idAnimal = idAnimal;
 		Nome = nome;
 		Data_Nascimento = data_Nascimento;
+		this.cliente = cliente;
+		this.tipo_animal = tipo_animal;
+		this.raca = raca;
 	}
 
 	public Cliente getidcliente() {
@@ -83,6 +87,8 @@ public class Animais {
 		result = prime * result + ((Nome == null) ? 0 : Nome.hashCode());
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((idAnimal == null) ? 0 : idAnimal.hashCode());
+		result = prime * result + ((raca == null) ? 0 : raca.hashCode());
+		result = prime * result + ((tipo_animal == null) ? 0 : tipo_animal.hashCode());
 		return result;
 	}
 
@@ -115,13 +121,23 @@ public class Animais {
 				return false;
 		} else if (!idAnimal.equals(other.idAnimal))
 			return false;
+		if (raca == null) {
+			if (other.raca != null)
+				return false;
+		} else if (!raca.equals(other.raca))
+			return false;
+		if (tipo_animal == null) {
+			if (other.tipo_animal != null)
+				return false;
+		} else if (!tipo_animal.equals(other.tipo_animal))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Animais [idAnimal=" + idAnimal + ", Nome=" + Nome + ", Data_Nascimento=" + Data_Nascimento
-				+ ", cliente=" + cliente + "]";
+				+ ", cliente=" + cliente + ", tipo_animal=" + tipo_animal + ", raca=" + raca + "]";
 	}
 
 }
