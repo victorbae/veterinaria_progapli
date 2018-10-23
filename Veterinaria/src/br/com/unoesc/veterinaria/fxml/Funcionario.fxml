@@ -6,28 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFuncionario">
    <children>
       <Pane prefHeight="700.0" prefWidth="900.0">
          <children>
-            <TableView layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
+            <TableView fx:id="tvFuncionarios" layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="tcId" prefWidth="75.0" text="#" />
+                <TableColumn fx:id="tcNome" prefWidth="247.0" text="Nome" />
+                  <TableColumn fx:id="tcCPF" prefWidth="136.0" text="CPF" />
+                  <TableColumn fx:id="tcDtNascimento" prefWidth="150.0" text="Data de Nascimento" />
+                  <TableColumn fx:id="tcNomeCliente" prefWidth="145.0" text="Nome como cliente" />
+                  <TableColumn fx:id="tcNomeFilial" prefWidth="126.0" text="Nome da Filial" />
               </columns>
             </TableView>
-            <Button layoutX="699.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Salvar">
+            <Button fx:id="btSalvar" layoutX="699.0" layoutY="137.0" mnemonicParsing="false" onAction="#salvar" prefWidth="77.0" text="Salvar">
                <font>
                   <Font name="Gabriola" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="808.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Excluir">
+            <Button fx:id="btExcluir" layoutX="808.0" layoutY="137.0" mnemonicParsing="false" onAction="#excluir" prefWidth="77.0" text="Excluir">
                <font>
                   <Font name="Gabriola" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="591.0" layoutY="137.0" mnemonicParsing="false" prefWidth="77.0" text="Novo">
+            <Button fx:id="btNovo" layoutX="591.0" layoutY="137.0" mnemonicParsing="false" onAction="#novo" prefWidth="77.0" text="Novo">
                <font>
                   <Font name="Gabriola" size="20.0" />
                </font>
