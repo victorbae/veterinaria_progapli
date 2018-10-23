@@ -8,6 +8,7 @@ public class Animais {
 	String Nome;
 	Date Data_Nascimento;
 	Cliente cliente;
+	Tipo_Animal tipo_animal;
 
 	public Animais() {
 		super();
@@ -47,6 +48,22 @@ public class Animais {
 
 	public void setData_Nascimento(Date data_Nascimento) {
 		Data_Nascimento = data_Nascimento;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Tipo_Animal getTipo_animal() {
+		return tipo_animal;
+	}
+
+	public void setTipo_animal(Tipo_Animal tipo_animal) {
+		this.tipo_animal = tipo_animal;
 	}
 
 	@Override
