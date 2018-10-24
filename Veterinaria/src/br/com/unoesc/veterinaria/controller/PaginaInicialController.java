@@ -2,6 +2,7 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
 
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,10 @@ public class PaginaInicialController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	public void initialize() {
+		EstaticosParaGeral.bpPrincipalAux = bpPrincipal;
 	}
 
 	@FXML

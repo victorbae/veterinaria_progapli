@@ -1,5 +1,8 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
@@ -9,13 +12,20 @@ import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
+import javafx.scene.control.TableView;
 
 public class EstaticosParaVenda {
 
-	public static VendaProduto vendaProduto;
+	public static TableView<VendaProduto> tableViewCarinhoAux;
+
 	public static Venda venda;
 
+	public static VendaProduto vendaProduto;
+
+	public static List<VendaProduto> carrinhoAux = new ArrayList<>();
+
 	public static Produto achaProduto(Integer idProduto) {
+
 		Produto produtoDaVendaProduto = new Produto();
 		ProdutoDao produtoDao = new ProdutoBanco();
 
@@ -53,4 +63,5 @@ public class EstaticosParaVenda {
 
 		return vendaProdutoDaVenda;
 	}
+
 }

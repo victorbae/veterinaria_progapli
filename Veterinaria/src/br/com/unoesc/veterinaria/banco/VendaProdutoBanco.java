@@ -19,7 +19,8 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 		try {
 			String sql = "INSERT INTO `venda_produto`(`idVenda_Produto`, `idVenda`, `idProduto`, `Quantidade`, `Valor_Unitario`, `Valor_Total`)"
 					+ " VALUES (null,null,?,?,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, dado.getProduto().getIdProduto());
 			stmt.setDouble(2, dado.getQuantidade());
 			stmt.setDouble(3, dado.getValorUnitario());
@@ -60,7 +61,7 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 	@Override
 	public void excluir(VendaProduto dado) {
 		try {
-			String sql = "DELETE FROM `vendaProduto` WHERE `idVendaProduto`= ?";
+			String sql = "DELETE FROM `venda_produto` WHERE `idVenda_Produto`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setInt(1, dado.getIdVendaProduto());
 			stmt.executeUpdate();

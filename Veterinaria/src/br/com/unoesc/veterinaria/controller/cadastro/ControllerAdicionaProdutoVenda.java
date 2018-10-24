@@ -40,26 +40,27 @@ public class ControllerAdicionaProdutoVenda {
 
 	private boolean clicadoSalvar;
 
-	private ProdutoDao produtoDao = new ProdutoBanco();
+	private Produto produto;
 
 	private VendaProduto vendaProduto;
 
-	private Produto produto;
+	private ProdutoDao produtoDao = new ProdutoBanco();
 
 	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
 
 	@FXML
 	private void initialize() {
-		tfValorTotal.setDisable(true);
+//		tfValorTotal.setDisable(true);
 		TextFields.bindAutoCompletion(tfProduto, produtoDao.listar());
 
 	}
 
 	@FXML
 	void Adicionar(ActionEvent event) {
-		EstaticosParaVenda.vendaProduto = vendaProduto;
 		populaVendaProduto();
-		vendaProdutoDao.inserir(vendaProduto);
+
+		EstaticosParaVenda.carrinhoAux.add(vendaProduto);
+		ControllerCadastroVenda.atualizaListaCarinho();
 		dialogStage.close();
 	}
 
@@ -72,12 +73,15 @@ public class ControllerAdicionaProdutoVenda {
 		produto = EstaticosParaProduto.achaProdutoByNome(tfProduto.getText());
 
 		vendaProduto = new VendaProduto();
-
+		vendaProduto.setIdVendaProduto(666);
+		vendaProduto.setVenda(EstaticosParaVenda.venda);
 		vendaProduto.setProduto(EstaticosParaVenda.achaProduto(produto.getIdProduto()));
 		vendaProduto.setQuantidade(Double.parseDouble(tfQuantidade.getText()));
 		vendaProduto.setValorUnitario(produto.getValorUnitario());
 		vendaProduto.setValorTotal(
 				vendaProduto.calculaValorTotal(Double.parseDouble(tfQuantidade.getText()), produto.getValorUnitario()));
+
+		EstaticosParaVenda.vendaProduto = vendaProduto;
 
 	}
 
