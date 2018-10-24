@@ -1,7 +1,5 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import org.controlsfx.control.textfield.TextFields;
-
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
@@ -80,7 +78,7 @@ public class ControllerCadastroVenda {
 	@FXML
 	private void initialize() {
 		tfValorTotal.setDisable(true);
-		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
+//		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 
 		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
