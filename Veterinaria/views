@@ -12,3 +12,6 @@ cl.Endereco AS Endereco, cl.Telefone AS Telefone, cl.idFilial AS Id_Filial FROM 
 
 CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Qnt_Estoque, 
 pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idEstoque AS Id_Estoque FROM Produto pd;
+
+CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS Id_Animal, ani.Nome AS Nome,
+ ani.Data_Nascimento AS Data_Nascimento,ani.idRaca as idRaca, ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente FROM animal ani;

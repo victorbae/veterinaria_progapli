@@ -35,4 +35,17 @@ public class EstaticosParaCliente {
 		return clienteAchado;
 	}
 
+	public static Cliente achaClienteByName(String NomeCliente) {
+		Cliente clienteAchado = new Cliente();
+		ClienteDao clienteDao = new ClienteBanco();
+
+		for (Cliente cliente : clienteDao.listar()) {
+			if (NomeCliente == cliente.getNomeCompleto()) {
+				clienteAchado = cliente;
+			}
+		}
+
+		return clienteAchado;
+	}
+
 }

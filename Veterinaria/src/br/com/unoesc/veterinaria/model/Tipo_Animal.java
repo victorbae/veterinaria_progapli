@@ -47,6 +47,7 @@ public class Tipo_Animal {
 		int result = 1;
 		result = prime * result + ((idTipoAnimal == null) ? 0 : idTipoAnimal.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((raca == null) ? 0 : raca.hashCode());
 		return result;
 	}
 
@@ -69,12 +70,17 @@ public class Tipo_Animal {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (raca == null) {
+			if (other.raca != null)
+				return false;
+		} else if (!raca.equals(other.raca))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Tipo_Animal [idTipoAnimal=" + idTipoAnimal + ", nome=" + nome + "]";
+		return "Tipo_Animal [idTipoAnimal=" + idTipoAnimal + ", nome=" + nome + ", raca=" + raca + "]";
 	}
 
 }

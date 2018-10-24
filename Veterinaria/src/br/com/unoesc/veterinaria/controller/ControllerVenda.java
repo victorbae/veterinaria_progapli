@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
 import br.com.unoesc.veterinaria.banco.VendaBanco;
@@ -7,13 +8,17 @@ import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Venda;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class ControllerVenda {
 
@@ -74,12 +79,25 @@ public class ControllerVenda {
 
 	@FXML
 	void Novo(ActionEvent event) {
-
+		venda = new Venda();
+		EstaticosParaVenda.venda = venda;
+		chamaTelaNovaVenda();
 	}
 
 	public void atualizaLista() {
 		tvVendas.setItems(FXCollections.observableArrayList(vendaDao.listar()));
 		tvVendas.refresh();
+	}
+
+	private void chamaTelaNovaVenda() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroVenda.fxml"));
+		try {
+			AnchorPane cursoView = (AnchorPane) loader.load();
+			EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }

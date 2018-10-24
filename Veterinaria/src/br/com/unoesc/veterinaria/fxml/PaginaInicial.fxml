@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpPrincipal" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
+<BorderPane fx:id="bpPrincipal" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
 	<left>
 		<Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
@@ -32,11 +32,29 @@
                <font>
                   <Font name="Gabriola" size="23.0" />
                </font></Button>
+<<<<<<< HEAD
 				<Button fx:id="btnAdicionarVenda" layoutX="25.0" layoutY="453.0" mnemonicParsing="false" onAction="#AdicionarVenda" text="Adicionar Venda">
 					<font>
 						<Font name="Gabriola" size="23.0" />
 					</font>
 				</Button>
+            <Button fx:id="btnAnimais" layoutX="55.0" layoutY="519.0" mnemonicParsing="false" onAction="#Animais" text="Animais">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnRaca" layoutX="67.0" layoutY="591.0" mnemonicParsing="false" onAction="#Raca" text="Raça">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnTipoAnimal" layoutX="28.0" layoutY="653.0" mnemonicParsing="false" onAction="#TipoAnimal" text="Tipo Do Animal">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font>
+            </Button>
+=======
+>>>>>>> branch 'master' of https://github.com/victorbae/veterinaria_progapli.git
 			</children>
 		</Pane>
 	</left>

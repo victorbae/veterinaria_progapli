@@ -1,6 +1,7 @@
 package br.com.unoesc.veterinaria.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Venda {
 
@@ -10,22 +11,20 @@ public class Venda {
 	private Filial filial;
 	private Double valorDesconto;
 	private Double valorTotal;
-	private VendaProduto vendaProduto;
+	private List<VendaProduto> carrinho;
 
 	public Venda() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal,
-			VendaProduto vendaProduto) {
+	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
 		super();
 		this.idVenda = idVenda;
 		this.dataVenda = dataVenda;
 		this.cliente = cliente;
 		this.valorDesconto = valorDesconto;
 		this.valorTotal = valorTotal;
-		this.vendaProduto = vendaProduto;
 	}
 
 	public Integer getIdVenda() {
@@ -76,12 +75,12 @@ public class Venda {
 		this.valorTotal = valorTotal;
 	}
 
-	public VendaProduto getVendaProduto() {
-		return vendaProduto;
+	public List<VendaProduto> getCarrinho() {
+		return carrinho;
 	}
 
-	public void setVendaProduto(VendaProduto vendaProduto) {
-		this.vendaProduto = vendaProduto;
+	public void setCarrinho(List<VendaProduto> carrinho) {
+		this.carrinho = carrinho;
 	}
 
 	@Override

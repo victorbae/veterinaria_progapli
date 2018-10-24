@@ -23,7 +23,7 @@ public class ProdutoBanco implements ProdutoDao {
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
-//			stmt.setInt(5, dado.getEstoque().getIdEstoque());
+			// stmt.setInt(5, dado.getEstoque().getIdEstoque());
 			stmt.executeUpdate();
 
 			// Quando o campo é auto increment no banco
@@ -47,7 +47,7 @@ public class ProdutoBanco implements ProdutoDao {
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
-//			stmt.setInt(5, dado.getEstoque().getIdEstoque());
+			// stmt.setInt(5, dado.getEstoque().getIdEstoque());
 			stmt.setInt(6, dado.getIdProduto());
 
 			stmt.executeUpdate();
@@ -90,7 +90,7 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setQuantidadeEstoque(rs.getDouble("Qnt_Estoque"));
 				produto.setValorEntrada(rs.getDouble("Valor_Ent_Unt"));
 				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
-//				produto.setEstoque(produto.achaEstoque(rs.getInt("Id_Estoque")));
+				// produto.setEstoque(produto.achaEstoque(rs.getInt("Id_Estoque")));
 				// TODO Criar metodo para buscar filial pelo codigo passado
 				produtos.add(produto);
 			}
@@ -98,5 +98,11 @@ public class ProdutoBanco implements ProdutoDao {
 			e.printStackTrace();
 		}
 		return produtos;
+	}
+
+	@Override
+	public List<Produto> listarNome() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
