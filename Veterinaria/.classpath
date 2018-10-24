@@ -7,7 +7,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/eclipse/controlsfx-8.40.11.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/mysql-connector-java-8.0.11.jar"/>
+=======
+	<classpathentry exported="true" kind="lib" path="C:/eclipse/controlsfx-8.40.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/eclipse/mysql-connector-java-8.0.11.jar"/>
+>>>>>>> branch 'master' of https://github.com/victorbae/veterinaria_progapli
 	<classpathentry kind="output" path="bin"/>
 </classpath>
