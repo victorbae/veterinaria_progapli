@@ -40,7 +40,7 @@ public class EstaticosParaCliente {
 		ClienteDao clienteDao = new ClienteBanco();
 
 		for (Cliente cliente : clienteDao.listar()) {
-			if (NomeCliente == cliente.getNomeCompleto()) {
+			if (NomeCliente.equals(cliente.getNomeCompleto())) {
 				clienteAchado = cliente;
 			}
 		}

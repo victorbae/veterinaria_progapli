@@ -1,6 +1,7 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -93,15 +94,14 @@ public class ControllerCadastroVenda {
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		tcValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
-		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
-//		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.venda.getCarrinho()));
+		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
 	}
 
 	@FXML
 	void Salvar(ActionEvent event) {
 		populaVenda();
-//		vendaDao.inserir(venda);
-//		 TODO Inserir todo o carrinho de vendaProduto DEPOIS de inserir uma venda
+		vendaDao.inserir(venda);
+		salvaCarrinho(EstaticosParaVenda.carrinhoAux);
 	}
 
 	@FXML
@@ -149,13 +149,28 @@ public class ControllerCadastroVenda {
 	}
 
 	public void populaVenda() {
-		venda = EstaticosParaVenda.venda;
+		venda = new Venda();
 
 		venda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
 		venda.setDataVenda(Date.valueOf(dtDataVenda.getValue()));
-//		venda.setFilial(filial);
+		EstaticosParaCliente.achaClienteByName(tfCliente.getText()).getFilial().setIdFilial(1);
+		venda.setFilial(EstaticosParaCliente.achaClienteByName(tfCliente.getText()).getFilial());
 		venda.setValorDesconto(Double.valueOf(tfValorDesconto.getText()));
 		venda.setValorTotal(Double.valueOf(tfValorTotal.getText()));
+
+		colocaVendaNoCarrinho(EstaticosParaVenda.carrinhoAux);
+	}
+
+	public void colocaVendaNoCarrinho(List<VendaProduto> carrinho) {
+		for (VendaProduto vendaProduto : carrinho) {
+			vendaProduto.setVenda(venda);
+		}
+	}
+
+	public void salvaCarrinho(List<VendaProduto> carrinho) {
+		for (VendaProduto vendaProduto : carrinho) {
+			vendaProdutoDao.inserir(vendaProduto);
+		}
 	}
 
 }

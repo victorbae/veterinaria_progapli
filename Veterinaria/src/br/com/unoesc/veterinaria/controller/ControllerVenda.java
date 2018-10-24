@@ -9,7 +9,6 @@ import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,8 +78,6 @@ public class ControllerVenda {
 
 	@FXML
 	void Novo(ActionEvent event) {
-		venda = new Venda();
-		EstaticosParaVenda.venda = venda;
 		chamaTelaNovaVenda();
 	}
 
