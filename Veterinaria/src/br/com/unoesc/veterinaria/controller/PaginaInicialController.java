@@ -79,6 +79,13 @@ public class PaginaInicialController {
 
 	@FXML
 	void funcionario(ActionEvent event) {
-
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Funcionario.fxml"));
+		try {
+			AnchorPane cursoView = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(cursoView);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 }
