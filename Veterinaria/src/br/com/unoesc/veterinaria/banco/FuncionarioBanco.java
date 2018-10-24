@@ -20,7 +20,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 		try {
 			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`) VALUES (?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-			stmt.setString(1, dado.getNome());
+			stmt.setString(1, String.valueOf(dado.getNome()));
 			stmt.setString(2, dado.getCpf());
 			stmt.setDate(3, (Date) dado.getData_Nascimento());
 			stmt.setInt(4, dado.getCliente().getIdCliente());
@@ -84,8 +84,8 @@ public class FuncionarioBanco implements FuncionarioDao {
 		}
 		return funcionarios;
 	}
-	
-	public List<Funcionario> listarSemObjSecundarios(){
+
+	public List<Funcionario> listarSemObjSecundarios() {
 		List<Funcionario> funcionarios = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();

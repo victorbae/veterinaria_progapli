@@ -73,8 +73,8 @@ public class ControllerCadastroCliente {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-
 		preencheCliente();
+
 		clienteDao.inserir(cliente);
 
 		clicadoSalvar = true;
