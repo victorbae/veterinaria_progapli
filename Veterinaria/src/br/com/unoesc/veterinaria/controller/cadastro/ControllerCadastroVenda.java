@@ -15,7 +15,6 @@ import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -74,9 +73,9 @@ public class ControllerCadastroVenda {
 
 	private Venda venda;
 
-	private VendaDao vendaDao = new VendaBanco();
-
 	private VendaProduto vendaProduto;
+
+	private VendaDao vendaDao = new VendaBanco();
 
 	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
 
@@ -86,7 +85,7 @@ public class ControllerCadastroVenda {
 	private void initialize() {
 //		tfValorTotal.setDisable(true);
 
-		EstaticosParaGeral.tvCarinhoAux = tvCarinho;
+		EstaticosParaVenda.tableViewCarinhoAux = tvCarinho;
 
 		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 
@@ -94,13 +93,15 @@ public class ControllerCadastroVenda {
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		tcValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
-//		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
+		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
+//		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.venda.getCarrinho()));
 	}
 
 	@FXML
 	void Salvar(ActionEvent event) {
 		populaVenda();
-		vendaDao.inserir(venda);
+//		vendaDao.inserir(venda);
+//		 TODO Inserir todo o carrinho de vendaProduto DEPOIS de inserir uma venda
 	}
 
 	@FXML
@@ -122,22 +123,20 @@ public class ControllerCadastroVenda {
 
 		if (clicadoSalvar) {
 			atualizaListaCarinho();
-			vendaProduto = EstaticosParaVenda.vendaProduto;
 		}
 	}
 
-// TODO Arrumar esta merda esse listar traz as parada NULL e nao pode
 	public static void atualizaListaCarinho() {
-		EstaticosParaGeral.tvCarinhoAux
-				.setItems(FXCollections.observableArrayList(EstaticosParaVenda.venda.getCarrinho()));
-		EstaticosParaGeral.tvCarinhoAux.refresh();
+		EstaticosParaVenda.tableViewCarinhoAux
+				.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
+		EstaticosParaVenda.tableViewCarinhoAux.refresh();
 	}
 
 	@FXML
 	void ExcluirProduto(ActionEvent event) {
 		if (tvCarinho.getSelectionModel().getSelectedItem() != null) {
 			vendaProduto = tvCarinho.getSelectionModel().getSelectedItem();
-			vendaProdutoDao.excluir(vendaProduto);
+			EstaticosParaVenda.carrinhoAux.remove(vendaProduto);
 		}
 		atualizaListaCarinho();
 	}
