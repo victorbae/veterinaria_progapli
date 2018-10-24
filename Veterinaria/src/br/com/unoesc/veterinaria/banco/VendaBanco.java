@@ -33,7 +33,7 @@ public class VendaBanco implements VendaDao {
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			dado.setIdVenda(rs.getInt(1));
-			// EstaticosParaVenda.venda.setIdVenda(rs.getInt(1));
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

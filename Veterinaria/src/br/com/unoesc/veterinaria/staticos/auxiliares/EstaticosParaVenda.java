@@ -18,6 +18,10 @@ public class EstaticosParaVenda {
 
 	public static TableView<VendaProduto> tableViewCarinhoAux;
 
+	public static Venda venda;
+
+	public static VendaProduto vendaProduto;
+
 	public static List<VendaProduto> carrinhoAux = new ArrayList<>();
 
 	public static Produto achaProduto(Integer idProduto) {
