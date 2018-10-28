@@ -19,10 +19,11 @@ public class ClienteBanco implements ClienteDao {
 		try {
 			String sql = "INSERT INTO `cliente`(`idCliente`, `Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) "
 					+ " VALUES (null,?,?,?,?,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNomeCompleto());
 			stmt.setString(2, dado.getCpf());
-			stmt.setDate(3, (Date) dado.getDataNascimento());
+			stmt.setDate(3, Date.valueOf(dado.getDataNascimento()));
 			stmt.setString(4, dado.getEndereco());
 			stmt.setString(5, dado.getTelefone());
 			stmt.setInt(6, dado.getFilial().getIdFilial());
@@ -47,7 +48,7 @@ public class ClienteBanco implements ClienteDao {
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNomeCompleto());
 			stmt.setString(2, dado.getCpf());
-			stmt.setDate(3, (Date) dado.getDataNascimento());
+			stmt.setDate(3, Date.valueOf(dado.getDataNascimento()));
 			stmt.setString(4, dado.getEndereco());
 			stmt.setString(5, dado.getTelefone());
 			stmt.setInt(6, dado.getFilial().getIdFilial());
@@ -89,7 +90,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setIdCliente(rs.getInt("Id_Cliente"));
 				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
 				cliente.setCpf(rs.getString("CPF"));
-				cliente.setDataNascimento(Date.valueOf(rs.getString("Data_Nascimento")));
+				cliente.setDataNascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
 				cliente.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));

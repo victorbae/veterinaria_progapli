@@ -1,7 +1,5 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import java.sql.Date;
-
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
@@ -58,12 +56,18 @@ public class ControllerCadastroCliente {
 
 	@FXML
 	private void initialize() {
+		this.cliente = EstaticosParaCliente.cliente;
 		populaCombo();
+
+		if (EstaticosParaCliente.isEditando) {
+			populaTela();
+		}
 	}
 
 	@FXML
 	void Cancelar(ActionEvent event) {
-
+		limpaTela();
+		dialogStage.close();
 	}
 
 	@FXML
@@ -75,8 +79,12 @@ public class ControllerCadastroCliente {
 	void Salvar(ActionEvent event) {
 		preencheCliente();
 
-		clienteDao.inserir(cliente);
-
+		if (EstaticosParaCliente.isEditando) {
+			clienteDao.alterar(cliente);
+			EstaticosParaCliente.isEditando = false;
+		} else {
+			clienteDao.inserir(cliente);
+		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
@@ -84,26 +92,39 @@ public class ControllerCadastroCliente {
 
 	}
 
+	public void populaTela() {
+		tfNome.setText(cliente.getNomeCompleto());
+		tfCpf.setText(cliente.getCpf());
+		dtDataNascimento.setValue(cliente.getDataNascimento());
+		tfTelefone.setText(cliente.getTelefone());
+		tfEndereco.setText(cliente.getEndereco());
+		cbxFilial.setValue(cliente.getFilial());
+	}
+
 	public void preencheCliente() {
-		cliente = new Cliente();
+		if (!EstaticosParaCliente.isEditando) {
+			cliente = new Cliente();
+		} else {
+			cliente.setIdCliente(EstaticosParaCliente.cliente.getIdCliente());
+
+		}
 		cliente.setNomeCompleto(tfNome.getText());
 		cliente.setCpf(tfCpf.getText());
 		cliente.setEndereco(tfEndereco.getText());
-		cliente.setDataNascimento(Date.valueOf(dtDataNascimento.getValue()));
+		cliente.setDataNascimento(dtDataNascimento.getValue());
 		cliente.setTelefone(tfTelefone.getText());
 		cliente.setFilial(EstaticosParaCliente.achaFilial(cbxFilial.getValue().getIdFilial()));
 	}
 
 	public void limpaTela() {
-		tfNome.clear();
-
-		tfCpf.clear();
-
+		if (!EstaticosParaCliente.isEditando) {
+			tfNome.clear();
+			tfCpf.clear();
+		}
 		tfTelefone.clear();
-
 		tfEndereco.clear();
-
 		cbxFilial.getSelectionModel().clearSelection();
+		dtDataNascimento.setValue(null);
 	}
 
 	private void populaCombo() {

@@ -1,9 +1,9 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
-import br.com.unoesc.veterinaria.banco.VendaProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
-import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
@@ -44,14 +44,11 @@ public class ControllerAdicionaProdutoVenda {
 
 	private ProdutoDao produtoDao = new ProdutoBanco();
 
-	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
-
 	@FXML
 	private void initialize() {
-
-//		tfValorTotal.setDisable(true);
-//		TextFields.bindAutoCompletion(tfProduto, produtoDao.listar());
-
+		tfValorUnitario.setEditable(false);
+		tfValorTotal.setEditable(false);
+		TextFields.bindAutoCompletion(tfProduto, produtoDao.listar());
 	}
 
 	@FXML
@@ -59,6 +56,7 @@ public class ControllerAdicionaProdutoVenda {
 		populaVendaProduto();
 
 		EstaticosParaVenda.carrinhoAux.add(vendaProduto);
+		ControllerCadastroVenda.atualizaTotalVenda();
 		ControllerCadastroVenda.atualizaListaCarinho();
 		dialogStage.close();
 	}
@@ -68,19 +66,30 @@ public class ControllerAdicionaProdutoVenda {
 		dialogStage.close();
 	}
 
+	@FXML
+	void carregaProduto(ActionEvent event) {
+		tfValorUnitario
+				.setText(EstaticosParaProduto.achaProdutoByNome(tfProduto.getText()).getValorUnitario().toString());
+
+	}
+
+	@FXML
+	void carregaValorTotal(ActionEvent event) {
+		tfValorTotal
+				.setText(String.valueOf(EstaticosParaProduto.achaProdutoByNome(tfProduto.getText()).getValorUnitario()
+						* Double.parseDouble(tfQuantidade.getText())));
+	}
+
 	public void populaVendaProduto() {
 		produto = EstaticosParaProduto.achaProdutoByNome(tfProduto.getText());
 
 		vendaProduto = new VendaProduto();
 		vendaProduto.setIdVendaProduto(666);
-		vendaProduto.setVenda(EstaticosParaVenda.venda);
 		vendaProduto.setProduto(EstaticosParaVenda.achaProduto(produto.getIdProduto()));
 		vendaProduto.setQuantidade(Double.parseDouble(tfQuantidade.getText()));
 		vendaProduto.setValorUnitario(produto.getValorUnitario());
 		vendaProduto.setValorTotal(
 				vendaProduto.calculaValorTotal(Double.parseDouble(tfQuantidade.getText()), produto.getValorUnitario()));
-
-		EstaticosParaVenda.vendaProduto = vendaProduto;
 
 	}
 

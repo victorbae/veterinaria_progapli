@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
+import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 
@@ -18,13 +19,14 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 	public void inserir(VendaProduto dado) {
 		try {
 			String sql = "INSERT INTO `venda_produto`(`idVenda_Produto`, `idVenda`, `idProduto`, `Quantidade`, `Valor_Unitario`, `Valor_Total`)"
-					+ " VALUES (null,null,?,?,?,?)";
+					+ " VALUES (null,?,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, dado.getProduto().getIdProduto());
-			stmt.setDouble(2, dado.getQuantidade());
-			stmt.setDouble(3, dado.getValorUnitario());
-			stmt.setDouble(4, dado.getValorTotal());
+			stmt.setInt(1, dado.getVenda().getIdVenda());
+			stmt.setInt(2, dado.getProduto().getIdProduto());
+			stmt.setDouble(3, dado.getQuantidade());
+			stmt.setDouble(4, dado.getValorUnitario());
+			stmt.setDouble(5, dado.getValorTotal());
 			stmt.executeUpdate();
 
 			// Quando o campo é auto increment no banco
@@ -84,6 +86,32 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_vendaProduto");
+			while (rs.next()) {
+				VendaProduto vendaProduto = new VendaProduto();
+				vendaProduto.setIdVendaProduto(rs.getInt("Id_Venda_Produto"));
+				vendaProduto.setProduto(EstaticosParaVenda.achaProduto(rs.getInt("Id_Produto")));
+				vendaProduto.setVenda(EstaticosParaVenda.achaVenda(rs.getInt("Id_Venda")));
+				vendaProduto.setQuantidade(rs.getDouble("Quantidade"));
+				vendaProduto.setValorUnitario(rs.getDouble("Valor_Unitario"));
+				vendaProduto.setValorTotal(rs.getDouble("Valor_Total"));
+
+				vendaProdutos.add(vendaProduto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vendaProdutos;
+	}
+
+	@Override
+	public List<VendaProduto> listarPelaVenda(Venda dado) {
+		List<VendaProduto> vendaProdutos = new ArrayList<>();
+		try {
+			// TODO arrumar esse SQL
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM lista_dados_vendaProduto  where Id_Venda_Produto = " + dado.getIdVenda() + "");
+
 			while (rs.next()) {
 				VendaProduto vendaProduto = new VendaProduto();
 				vendaProduto.setIdVendaProduto(rs.getInt("Id_Venda_Produto"));

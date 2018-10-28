@@ -56,16 +56,24 @@ public class ControllerVenda {
 	@FXML
 	private void initialize() {
 
+		EstaticosParaVenda.isVisualizando = false;
+
 		tcDataVenda.setCellValueFactory(new PropertyValueFactory<>("dataVenda"));
 		tcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tcFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
 		tcValorDesconto.setCellValueFactory(new PropertyValueFactory<>("valorDesconto"));
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 		tvVendas.setItems(FXCollections.observableArrayList(vendaDao.listar()));
+		tvVendas.refresh();
 	}
 
 	@FXML
 	void Visualizar(ActionEvent event) {
+		if (tvVendas.getSelectionModel().getSelectedItem() != null) {
+			EstaticosParaVenda.isVisualizando = true;
+			EstaticosParaVenda.venda = tvVendas.getSelectionModel().getSelectedItem();
+			chamaTelaNovaVenda();
+		}
 	}
 
 	@FXML
@@ -79,8 +87,6 @@ public class ControllerVenda {
 
 	@FXML
 	void Novo(ActionEvent event) {
-		venda = new Venda();
-		EstaticosParaVenda.venda = venda;
 		chamaTelaNovaVenda();
 	}
 

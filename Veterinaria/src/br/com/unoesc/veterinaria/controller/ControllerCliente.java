@@ -7,6 +7,7 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,9 +49,9 @@ public class ControllerCliente {
 	@FXML
 	private Button btnEditar;
 
-	Cliente cliente;
+	private Cliente cliente;
 
-	ClienteDao clienteDao = new ClienteBanco();
+	private ClienteDao clienteDao = new ClienteBanco();
 
 	@FXML
 	private void initialize() {
@@ -65,6 +66,10 @@ public class ControllerCliente {
 
 	@FXML
 	void Editar(ActionEvent event) {
+		if (tvCliente.getSelectionModel().getSelectedItem() != null) {
+			EstaticosParaCliente.cliente = tvCliente.getSelectionModel().getSelectedItem();
+			EstaticosParaCliente.isEditando = true;
+		}
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
 
@@ -77,7 +82,6 @@ public class ControllerCliente {
 
 	@FXML
 	void Excluir(ActionEvent event) {
-
 		if (tvCliente.getSelectionModel().getSelectedItem() != null) {
 			cliente = tvCliente.getSelectionModel().getSelectedItem();
 			clienteDao.excluir(cliente);

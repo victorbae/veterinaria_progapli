@@ -13,16 +13,33 @@ import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class EstaticosParaVenda {
 
 	public static TableView<VendaProduto> tableViewCarinhoAux;
 
-	public static Venda venda;
+	public static TextField tfValorTotalAux;
 
-	public static VendaProduto vendaProduto;
+	public static TextField tfValorDescontoAux;
 
 	public static List<VendaProduto> carrinhoAux = new ArrayList<>();
+
+	public static boolean isVisualizando;
+
+	public static Venda venda = new Venda();
+
+	public static Double valorTotalVenda(List<VendaProduto> carrinho) {
+		Double vt = 0d;
+
+		for (VendaProduto vendaProduto : carrinho) {
+			vt += vendaProduto.getValorTotal();
+		}
+		if (venda.getValorDesconto() != null) {
+			return vt - venda.getValorDesconto();
+		}
+		return vt;
+	}
 
 	public static Produto achaProduto(Integer idProduto) {
 

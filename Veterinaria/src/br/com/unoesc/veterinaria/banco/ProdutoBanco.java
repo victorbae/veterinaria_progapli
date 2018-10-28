@@ -18,7 +18,8 @@ public class ProdutoBanco implements ProdutoDao {
 		try {
 			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idEstoque`) "
 					+ "VALUES (null,?,?,?,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());

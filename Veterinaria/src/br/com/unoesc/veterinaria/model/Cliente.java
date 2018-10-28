@@ -1,13 +1,13 @@
 package br.com.unoesc.veterinaria.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Cliente {
 
 	Integer idCliente;
 	String nomeCompleto;
 	String cpf;
-	Date dataNascimento;
+	LocalDate dataNascimento;
 	String endereco;
 	String telefone;
 	Filial filial;
@@ -16,7 +16,7 @@ public class Cliente {
 		super();
 	}
 
-	public Cliente(Integer idCliente, String nomeCompleto, String cpf, Date dataNascimento, String endereco,
+	public Cliente(Integer idCliente, String nomeCompleto, String cpf, LocalDate dataNascimento, String endereco,
 			String telefone) {
 		super();
 		this.idCliente = idCliente;
@@ -51,11 +51,11 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
