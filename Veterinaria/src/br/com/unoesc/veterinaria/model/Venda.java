@@ -1,12 +1,12 @@
 package br.com.unoesc.veterinaria.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Venda {
 
 	private Integer idVenda;
-	private Date dataVenda;
+	private LocalDate dataVenda;
 	private Cliente cliente;
 	private Filial filial;
 	private Double valorDesconto;
@@ -18,7 +18,7 @@ public class Venda {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Venda(Integer idVenda, Date dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
+	public Venda(Integer idVenda, LocalDate dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
 		super();
 		this.idVenda = idVenda;
 		this.dataVenda = dataVenda;
@@ -35,11 +35,11 @@ public class Venda {
 		this.idVenda = idVenda;
 	}
 
-	public Date getDataVenda() {
+	public LocalDate getDataVenda() {
 		return dataVenda;
 	}
 
-	public void setDataVenda(Date dataVenda) {
+	public void setDataVenda(LocalDate dataVenda) {
 		this.dataVenda = dataVenda;
 	}
 

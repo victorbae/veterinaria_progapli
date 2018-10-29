@@ -6,6 +6,10 @@ import br.com.unoesc.veterinaria.model.Produto;
 
 public class EstaticosParaProduto {
 
+	public static boolean isEditando = false;
+
+	public static Produto produto = new Produto();
+
 //	public static Estoque achaEstoque(Integer idEstoque) {
 //	Estoque estoqueDoProduto = new Estoque();
 //	EstoqueDao estoqueDao = new EstoqueBanco();

@@ -9,15 +9,19 @@ import br.com.unoesc.veterinaria.model.Filial;
 
 public class EstaticosParaCliente {
 
+	public static boolean isEditando;
+
+	public static Cliente cliente = new Cliente();
+
 	public static Filial achaFilial(Integer idFilial) {
 		Filial filialDoCliente = new Filial();
 		FilialDao filialDao = new FilialBanco();
 
-//		for (Filial filial : filialDao.listar()) {
-//			if (idFilial == filial.getIdFilial()) {
-//				filialDoCliente = filial;
-//			}
-//		}
+		for (Filial filial : filialDao.listar()) {
+			if (idFilial == filial.getIdFilial()) {
+				filialDoCliente = filial;
+			}
+		}
 
 		return filialDoCliente;
 	}
@@ -31,7 +35,6 @@ public class EstaticosParaCliente {
 				clienteAchado = cliente;
 			}
 		}
-
 		return clienteAchado;
 	}
 
@@ -40,11 +43,10 @@ public class EstaticosParaCliente {
 		ClienteDao clienteDao = new ClienteBanco();
 
 		for (Cliente cliente : clienteDao.listar()) {
-			if (NomeCliente == cliente.getNomeCompleto()) {
+			if (NomeCliente.equals(cliente.getNomeCompleto())) {
 				clienteAchado = cliente;
 			}
 		}
-
 		return clienteAchado;
 	}
 

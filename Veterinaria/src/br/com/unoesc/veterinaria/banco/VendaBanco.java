@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,10 @@ public class VendaBanco implements VendaDao {
 		try {
 			String sql = "INSERT INTO `venda`(`idVenda`, `Valor_Desconto`, `Data_Venda`, `idCliente`, `idFilial`, `valorTotal`) "
 					+ "VALUES (null,?,?,?,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setDouble(1, dado.getValorDesconto());
-			stmt.setDate(2, (Date) dado.getDataVenda());
+			stmt.setDate(2, Date.valueOf(dado.getDataVenda()));
 			stmt.setInt(3, dado.getCliente().getIdCliente());
 			stmt.setInt(4, dado.getFilial().getIdFilial());
 			stmt.setDouble(5, dado.getValorTotal());
@@ -33,7 +35,6 @@ public class VendaBanco implements VendaDao {
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			dado.setIdVenda(rs.getInt(1));
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +47,7 @@ public class VendaBanco implements VendaDao {
 			String sql = "UPDATE `venda` SET `Valor_Desconto`=?,`Data_Venda`=?,`idCliente`=?,`idFilial`=?,`valorTotal`=? WHERE `idVenda`=?,";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setDouble(1, dado.getValorDesconto());
-			stmt.setDate(2, (Date) dado.getDataVenda());
+			stmt.setDate(2, Date.valueOf(dado.getDataVenda()));
 			stmt.setInt(3, dado.getCliente().getIdCliente());
 			stmt.setInt(4, dado.getFilial().getIdFilial());
 			stmt.setDouble(5, dado.getValorTotal());
@@ -86,7 +87,7 @@ public class VendaBanco implements VendaDao {
 				Venda venda = new Venda();
 				venda.setIdVenda(rs.getInt("Id_Venda"));
 				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
-				venda.setDataVenda(Date.valueOf(rs.getString("Data_Venda")));
+				venda.setDataVenda(LocalDate.parse(rs.getString("Data_Venda")));
 				venda.setValorTotal(rs.getDouble("Valor_Total"));
 				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
 				venda.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));

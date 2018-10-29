@@ -4,6 +4,7 @@ import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
 import br.com.unoesc.veterinaria.model.Produto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,6 +59,10 @@ public class ControllerProduto {
 
 	@FXML
 	void Editar(ActionEvent event) {
+		if (tvProdutos.getSelectionModel().getSelectedItem() != null) {
+			EstaticosParaProduto.produto = tvProdutos.getSelectionModel().getSelectedItem();
+			EstaticosParaProduto.isEditando = true;
+		}
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ProdutoDialogFactory produtoDialog = new ProdutoDialogFactory(stageDono);
 

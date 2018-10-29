@@ -1,6 +1,9 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import java.sql.Date;
+import java.io.IOException;
+import java.util.List;
+
+import org.controlsfx.control.textfield.TextFields;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.VendaBanco;
@@ -9,20 +12,25 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.AdicionaProdutoVendaDialogFactory;
+import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ControllerCadastroVenda {
@@ -69,7 +77,15 @@ public class ControllerCadastroVenda {
 	@FXML
 	private Button btnAdicionarProduto;
 
+	@FXML
+	private Button btnAplicaDesconto;
+
+	@FXML
+	private Label lblDescontoAplicado;
+
 	private Venda venda;
+
+	private Cliente cliente;
 
 	private VendaProduto vendaProduto;
 
@@ -82,30 +98,48 @@ public class ControllerCadastroVenda {
 	@FXML
 	private void initialize() {
 
-//		tfValorTotal.setDisable(true);
+		tfValorTotal.setEditable(false);
+		btnAplicaDesconto.setDisable(false);
+		tfValorDesconto.setEditable(true);
+		lblDescontoAplicado.setText("Nenhum desconto aplicado.");
 
+		if (EstaticosParaVenda.isVisualizando) {
+			venda = EstaticosParaVenda.venda;
+			populaTela();
+			tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listarPelaVenda(venda)));
+			bloqueiaTudo(true);
+		}
+
+		EstaticosParaVenda.tfValorTotalAux = tfValorTotal;
 		EstaticosParaVenda.tableViewCarinhoAux = tvCarinho;
+		EstaticosParaVenda.tfValorDescontoAux = tfValorDesconto;
 
-//		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
+		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 
 		tcNomeProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		tcValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
-		tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listar()));
-//		tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.venda.getCarrinho()));
+
+		if (!EstaticosParaVenda.isVisualizando) {
+			tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
+			bloqueiaTudo(false);
+		}
 	}
 
 	@FXML
 	void Salvar(ActionEvent event) {
 		populaVenda();
-//		vendaDao.inserir(venda);
-//		 TODO Inserir todo o carrinho de vendaProduto DEPOIS de inserir uma venda
+		vendaDao.inserir(venda);
+		salvaCarrinho(EstaticosParaVenda.carrinhoAux);
+		voltaTelaVenda();
 	}
 
 	@FXML
 	void Cancelar(ActionEvent event) {
-
+		limpaTudo();
+		resetCarrinho();
+		voltaTelaVenda();
 	}
 
 	@FXML
@@ -125,36 +159,108 @@ public class ControllerCadastroVenda {
 		}
 	}
 
-	public static void atualizaListaCarinho() {
-		EstaticosParaVenda.tableViewCarinhoAux
-				.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
-		EstaticosParaVenda.tableViewCarinhoAux.refresh();
-	}
-
 	@FXML
 	void ExcluirProduto(ActionEvent event) {
 		if (tvCarinho.getSelectionModel().getSelectedItem() != null) {
 			vendaProduto = tvCarinho.getSelectionModel().getSelectedItem();
 			EstaticosParaVenda.carrinhoAux.remove(vendaProduto);
 		}
+		ControllerCadastroVenda.atualizaTotalVenda();
 		atualizaListaCarinho();
+	}
+
+	@FXML
+	void AplicarDesconto(ActionEvent event) {
+		if (Double.valueOf(tfValorTotal.getText()) != null && Double.valueOf(tfValorDesconto.getText()) != null
+				&& Double.valueOf(tfValorTotal.getText()) > Double.valueOf(tfValorDesconto.getText())) {
+			Double valorSemDesconto = Double.valueOf(tfValorTotal.getText());
+			Double desconto = Double.valueOf(tfValorDesconto.getText());
+			Double valorComDesconto = valorSemDesconto - desconto;
+			tfValorTotal.setText(valorComDesconto.toString());
+			lblDescontoAplicado.setText("Desconto de " + desconto + " aplicado.");
+			btnAplicaDesconto.setDisable(true);
+			tfValorDesconto.setEditable(false);
+			EstaticosParaVenda.venda.setValorDesconto(desconto);
+		}
+	}
+
+	public static void atualizaListaCarinho() {
+		EstaticosParaVenda.tableViewCarinhoAux
+				.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
+		EstaticosParaVenda.tableViewCarinhoAux.refresh();
+	}
+
+	public static void atualizaTotalVenda() {
+		if (EstaticosParaVenda.valorTotalVenda(EstaticosParaVenda.carrinhoAux) != null) {
+			EstaticosParaVenda.tfValorTotalAux
+					.setText(String.valueOf(EstaticosParaVenda.valorTotalVenda(EstaticosParaVenda.carrinhoAux)));
+		}
 	}
 
 	private void limpaTudo() {
 		tfCliente.clear();
 		tfValorDesconto.clear();
 		tfValorTotal.clear();
-		tvCarinho.getItems().removeAll(venda.getCarrinho());
+		dtDataVenda.setValue(null);
+		resetCarrinho();
+		atualizaListaCarinho();
 	}
 
 	public void populaVenda() {
-		venda = EstaticosParaVenda.venda;
+		venda = new Venda();
+		cliente = new Cliente();
+		cliente = EstaticosParaCliente.achaClienteByName(tfCliente.getText());
 
-		venda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
-		venda.setDataVenda(Date.valueOf(dtDataVenda.getValue()));
-//		venda.setFilial(filial);
-		venda.setValorDesconto(Double.valueOf(tfValorDesconto.getText()));
+		venda.setCliente(cliente);
+		venda.setDataVenda(dtDataVenda.getValue());
+		venda.setFilial(cliente.getFilial());
+		venda.setValorDesconto(EstaticosParaVenda.venda.getValorDesconto());
 		venda.setValorTotal(Double.valueOf(tfValorTotal.getText()));
+
+		colocaVendaNoCarrinho(EstaticosParaVenda.carrinhoAux);
+	}
+
+	public void colocaVendaNoCarrinho(List<VendaProduto> carrinho) {
+		for (VendaProduto vendaProduto : carrinho) {
+			vendaProduto.setVenda(venda);
+		}
+	}
+
+	public void salvaCarrinho(List<VendaProduto> carrinho) {
+		for (VendaProduto vendaProduto : carrinho) {
+			vendaProdutoDao.inserir(vendaProduto);
+		}
+	}
+
+	public void resetCarrinho() {
+		EstaticosParaVenda.carrinhoAux.clear();
+	}
+
+	private void voltaTelaVenda() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Venda.fxml"));
+		try {
+			AnchorPane cursoView = (AnchorPane) loader.load();
+			EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void populaTela() {
+		tfCliente.setText(venda.getCliente().getNomeCompleto());
+		dtDataVenda.setValue(venda.getDataVenda());
+		tfValorDesconto.setText(venda.getValorDesconto().toString());
+		tfValorTotal.setText(venda.getValorTotal().toString());
+	}
+
+	public void bloqueiaTudo(boolean block) {
+		tfCliente.setDisable(block);
+		dtDataVenda.setDisable(block);
+		tfValorDesconto.setDisable(block);
+		tfValorTotal.setDisable(block);
+		btnAdicionarProduto.setDisable(block);
+		btnExcluirProduto.setDisable(block);
 	}
 
 }
