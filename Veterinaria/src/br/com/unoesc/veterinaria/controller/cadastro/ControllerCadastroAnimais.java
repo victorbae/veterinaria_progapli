@@ -40,6 +40,12 @@ public class ControllerCadastroAnimais {
 	private ComboBox<Tipo_Animal> cbxTipoAnimal;
 
 	@FXML
+	private Button btnOutraRaca;
+
+	@FXML
+	private Button btnOutroTipoAnimal;
+
+	@FXML
 	private Button btnSalvar;
 
 	@FXML
@@ -82,6 +88,16 @@ public class ControllerCadastroAnimais {
 		if (dialogStage != null) {
 			dialogStage.close();
 		}
+	}
+
+	@FXML
+	void OutraRaca(ActionEvent event) {
+
+	}
+
+	@FXML
+	void OutroTipoAnimal(ActionEvent event) {
+
 	}
 
 	public void preencheAnimais() {

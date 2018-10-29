@@ -31,12 +31,6 @@ public class PaginaInicialController {
 	private Button btnAnimais;
 
 	@FXML
-	private Button btnRaca;
-
-	@FXML
-	private Button btnTipoAnimal;
-
-	@FXML
 	void AdicionarVenda(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroVenda.fxml"));
@@ -124,13 +118,4 @@ public class PaginaInicialController {
 		}
 	}
 
-	@FXML
-	void Raca(ActionEvent event) {
-
-	}
-
-	@FXML
-	void TipoAnimal(ActionEvent event) {
-
-	}
 }

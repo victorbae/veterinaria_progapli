@@ -32,7 +32,7 @@
                <font>
                   <Font name="Gabriola" size="23.0" />
                </font></Button>
-<<<<<<< HEAD
+
 				<Button fx:id="btnAdicionarVenda" layoutX="25.0" layoutY="453.0" mnemonicParsing="false" onAction="#AdicionarVenda" text="Adicionar Venda">
 					<font>
 						<Font name="Gabriola" size="23.0" />
@@ -43,18 +43,7 @@
                   <Font name="Gabriola" size="23.0" />
                </font>
             </Button>
-            <Button fx:id="btnRaca" layoutX="67.0" layoutY="591.0" mnemonicParsing="false" onAction="#Raca" text="Raça">
-               <font>
-                  <Font name="Gabriola" size="23.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnTipoAnimal" layoutX="28.0" layoutY="653.0" mnemonicParsing="false" onAction="#TipoAnimal" text="Tipo Do Animal">
-               <font>
-                  <Font name="Gabriola" size="23.0" />
-               </font>
-            </Button>
-=======
->>>>>>> branch 'master' of https://github.com/victorbae/veterinaria_progapli.git
+
 			</children>
 		</Pane>
 	</left>
