@@ -107,6 +107,7 @@ public class ControllerCadastroVenda {
 			venda = EstaticosParaVenda.venda;
 			populaTela();
 			tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listarPelaVenda(venda)));
+			lblDescontoAplicado.setText("Desconto de R$" + venda.getValorDesconto() + " aplicado.");
 			bloqueiaTudo(true);
 		}
 
@@ -129,15 +130,19 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-		populaVenda();
-		vendaDao.inserir(venda);
-		salvaCarrinho(EstaticosParaVenda.carrinhoAux);
-		voltaTelaVenda();
+		if (!EstaticosParaVenda.isVisualizando) {
+			populaVenda();
+			vendaDao.inserir(venda);
+			salvaCarrinho(EstaticosParaVenda.carrinhoAux);
+			voltaTelaVenda();
+		}
 	}
 
 	@FXML
 	void Cancelar(ActionEvent event) {
-		limpaTudo();
+		if (!EstaticosParaVenda.isVisualizando) {
+			limpaTudo();
+		}
 		resetCarrinho();
 		voltaTelaVenda();
 	}
@@ -177,7 +182,7 @@ public class ControllerCadastroVenda {
 			Double desconto = Double.valueOf(tfValorDesconto.getText());
 			Double valorComDesconto = valorSemDesconto - desconto;
 			tfValorTotal.setText(valorComDesconto.toString());
-			lblDescontoAplicado.setText("Desconto de " + desconto + " aplicado.");
+			lblDescontoAplicado.setText("Desconto de R$" + desconto + " aplicado.");
 			btnAplicaDesconto.setDisable(true);
 			tfValorDesconto.setEditable(false);
 			EstaticosParaVenda.venda.setValorDesconto(desconto);
@@ -198,12 +203,14 @@ public class ControllerCadastroVenda {
 	}
 
 	private void limpaTudo() {
-		tfCliente.clear();
-		tfValorDesconto.clear();
-		tfValorTotal.clear();
-		dtDataVenda.setValue(null);
-		resetCarrinho();
-		atualizaListaCarinho();
+		if (!EstaticosParaVenda.isVisualizando) {
+			tfCliente.clear();
+			tfValorDesconto.clear();
+			tfValorTotal.clear();
+			dtDataVenda.setValue(null);
+			resetCarrinho();
+			atualizaListaCarinho();
+		}
 	}
 
 	public void populaVenda() {
