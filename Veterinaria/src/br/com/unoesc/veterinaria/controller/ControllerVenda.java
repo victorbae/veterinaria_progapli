@@ -49,6 +49,9 @@ public class ControllerVenda {
 	@FXML
 	private Button btnVisualizar;
 
+	@FXML
+	private Button exibeRelatorio;
+
 	private VendaDao vendaDao = new VendaBanco();
 
 	private Venda venda;
@@ -104,6 +107,11 @@ public class ControllerVenda {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	@FXML
+	void exibeRelatorio(ActionEvent event) {
+
 	}
 
 }
