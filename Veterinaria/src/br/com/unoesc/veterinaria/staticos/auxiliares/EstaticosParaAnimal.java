@@ -1,11 +1,7 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
-import br.com.unoesc.veterinaria.banco.RacaBanco;
-import br.com.unoesc.veterinaria.banco.Tipo_AnimalBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
-import br.com.unoesc.veterinaria.dao.RacaDao;
-import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.Tipo_Animal;
@@ -14,7 +10,7 @@ public class EstaticosParaAnimal {
 
 	public static Tipo_Animal achaTipoAnimal(Integer idTipo_Animal) {
 		Tipo_Animal tipoAnimal = new Tipo_Animal();
-		Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
+//		Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
 
 		return tipoAnimal;
 	}
@@ -34,7 +30,7 @@ public class EstaticosParaAnimal {
 
 	public static Raca achaRaca(Integer idRaca) {
 		Raca racaAchado = new Raca();
-		RacaDao racaDao = new RacaBanco();
+//		RacaDao racaDao = new RacaBanco();
 
 		return racaAchado;
 	}

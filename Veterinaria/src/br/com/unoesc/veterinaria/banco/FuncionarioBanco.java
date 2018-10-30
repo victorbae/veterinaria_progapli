@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
-import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 
 public class FuncionarioBanco implements FuncionarioDao {
