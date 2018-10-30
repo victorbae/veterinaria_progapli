@@ -46,11 +46,14 @@
                   <Font name="Gabriola" size="23.0" />
                </font>
             </Button>
+<<<<<<< HEAD
 
 
 
             
 
+=======
+>>>>>>> branch 'master' of https://github.com/victorbae/veterinaria_progapli.git
 			</children>
 		</Pane>
 	</left>
