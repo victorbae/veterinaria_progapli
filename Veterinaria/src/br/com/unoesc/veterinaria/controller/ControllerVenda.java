@@ -1,9 +1,11 @@
 package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 
 import br.com.unoesc.veterinaria.banco.VendaBanco;
+import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
@@ -19,6 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ControllerVenda {
 
@@ -111,7 +117,14 @@ public class ControllerVenda {
 
 	@FXML
 	void exibeRelatorio(ActionEvent event) {
-
+		URL url = getClass().getResource("/relatorios/RelatorioAgrupado.jasper");
+		try {
+			JasperPrint jasperPrint = JasperFillManager.fillReport(url.getPath(), null,
+					ConexaoPrincipal.retornaconecao());
+			JasperViewer.viewReport(jasperPrint);
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

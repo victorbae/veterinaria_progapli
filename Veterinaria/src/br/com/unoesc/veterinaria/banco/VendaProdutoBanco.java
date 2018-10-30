@@ -86,6 +86,7 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_vendaProduto");
+
 			while (rs.next()) {
 				VendaProduto vendaProduto = new VendaProduto();
 				vendaProduto.setIdVendaProduto(rs.getInt("Id_Venda_Produto"));
@@ -107,10 +108,11 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 	public List<VendaProduto> listarPelaVenda(Venda dado) {
 		List<VendaProduto> vendaProdutos = new ArrayList<>();
 		try {
-			// TODO arrumar esse SQL
-			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM lista_dados_vendaProduto  where Id_Venda_Produto = " + dado.getIdVenda() + "");
+
+			String sql = "SELECT * FROM lista_dados_vendaProduto  where Id_Venda_Produto = ?";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setInt(1, dado.getIdVenda());
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				VendaProduto vendaProduto = new VendaProduto();

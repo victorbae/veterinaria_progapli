@@ -5,7 +5,6 @@ import java.util.Date;
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
-import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
