@@ -40,20 +40,12 @@
 					</font>
 				</Button>
             <Button fx:id="btnAnimais" layoutX="55.0" layoutY="519.0" mnemonicParsing="false" onAction="#Animais" text="Animais">
-     <Button fx:id="btnAnimais" layoutX="54.0" layoutY="462.0" mnemonicParsing="false" onAction="#Animais" text="Animais">
 
                <font>
                   <Font name="Gabriola" size="23.0" />
                </font>
             </Button>
-<<<<<<< HEAD
 
-
-
-            
-
-=======
->>>>>>> branch 'master' of https://github.com/victorbae/veterinaria_progapli.git
 			</children>
 		</Pane>
 	</left>

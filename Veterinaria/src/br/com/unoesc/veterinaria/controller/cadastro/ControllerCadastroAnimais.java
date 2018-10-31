@@ -113,6 +113,7 @@ public class ControllerCadastroAnimais {
 		cbxRaca.getSelectionModel().clearSelection();
 		cbxCliente.getSelectionModel().clearSelection();
 		cbxTipoAnimal.getSelectionModel().clearSelection();
+		dtDataNascimento.setValue(null);
 	}
 
 	private void populaCombo() {

@@ -3,7 +3,6 @@ package br.com.unoesc.veterinaria.controller;
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dialogs.AnimaisDialogFactory;
-import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
@@ -84,9 +83,9 @@ public class ControllerAnimais {
 	@FXML
 	void Novo(ActionEvent event) {
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
-		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
+		AnimaisDialogFactory animaisDialog = new AnimaisDialogFactory(stageDono);
 
-		boolean clicadoSalvar = clienteDialog.showDialog();
+		boolean clicadoSalvar = animaisDialog.showDialog();
 
 		if (clicadoSalvar) {
 			atualizaLista();
