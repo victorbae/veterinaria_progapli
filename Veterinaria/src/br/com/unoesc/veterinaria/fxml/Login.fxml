@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="br.com.unoesc.veterinaria.controller.ControllerLogin">
+   <children>
+      <Pane prefHeight="700.0" prefWidth="900.0">
+         <children>
+            <Pane layoutX="232.0" layoutY="10.0" prefHeight="678.0" prefWidth="442.0" style="-fx-background-color: #0040FF;">
+               <children>
+                  <Label layoutX="35.0" layoutY="73.0" prefHeight="31.0" prefWidth="442.0" text="Faça o Login Para Continuar">
+                     <font>
+                        <Font name="Gabriola" size="42.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfSenha" layoutX="128.0" layoutY="324.0" prefHeight="31.0" prefWidth="220.0" />
+                  <TextField fx:id="tfLogin" layoutX="128.0" layoutY="260.0" prefHeight="31.0" prefWidth="220.0" />
+                  <Label layoutX="61.0" layoutY="262.0" text="Login">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="58.0" layoutY="326.0" text="Senha">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAcessar" layoutX="273.0" layoutY="397.0" mnemonicParsing="false" onAction="#entrar" text="Acessar!" />
+                  <Hyperlink fx:id="hyperSenha" layoutX="311.0" layoutY="635.0" onAction="#enviarEmail" text="Clique Aqui" />
+                  <Label layoutX="186.0" layoutY="639.0" text="Esqueceu a senha?" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -23,7 +23,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Veterinaria PRK");
 			primaryStage.setScene(scene);
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Login.fxml"));
 			AnchorPane agenciaView = (AnchorPane) loader.load();
 			root.setCenter(agenciaView);
 			primaryStage.show();
