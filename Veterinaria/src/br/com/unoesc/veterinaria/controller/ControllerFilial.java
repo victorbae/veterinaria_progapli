@@ -5,6 +5,7 @@ import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,7 +94,7 @@ public class ControllerFilial {
 		filial = new Filial();
 		filial.setCnpj(String.valueOf(tcCNPJ));
 		filial.setEndereco(String.valueOf(tcEndereco));
-		filial.setGerente(filial.buscaFuncionarioById(Integer.valueOf(tcGerente.getId())));
+		filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(Integer.valueOf(tcGerente.getId())));
 		filial.setNome(String.valueOf(tcNome));
 		filial.setTelefone(String.valueOf(tcTelefone));
 	}

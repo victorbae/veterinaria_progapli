@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.model.Filial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 
 public class FilialBanco implements FilialDao {
 
@@ -72,7 +73,7 @@ public class FilialBanco implements FilialDao {
 				filial.setIdFilial(rs.getInt("Id_Filial"));
 				filial.setNome(rs.getString("Nome"));
 				filial.setEndereco(rs.getString("Endereco"));
-				filial.setGerente(filial.buscaFuncionarioById(rs.getInt("Id_Gerente")));
+				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
 				filiais.add(filial);
@@ -93,7 +94,7 @@ public class FilialBanco implements FilialDao {
 				filial.setIdFilial(rs.getInt("Id_Filial"));
 				filial.setNome(rs.getString("Nome"));
 				filial.setEndereco(rs.getString("Endereco"));
-				filial.setGerente(filial.buscaFuncionarioById(rs.getInt("Id_Gerente")));
+				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
 				filiais.add(filial);

@@ -76,17 +76,6 @@ public class Filial {
 		this.cnpj = cnpj;
 	}
 
-	public Funcionario buscaFuncionarioById(Integer id) {
-		FuncionarioDao funcionarioDao = new FuncionarioBanco();
-		Funcionario funcionariodoid = new Funcionario();
-		List<Funcionario> lista = funcionarioDao.listarNome();
-		for (Funcionario funcionario : lista) {
-			if (funcionario.getIdFuncionario() == id) {
-				funcionariodoid = funcionario;
-			}
-		}
-		return funcionariodoid;
-	}
 
 	@Override
 	public int hashCode() {
