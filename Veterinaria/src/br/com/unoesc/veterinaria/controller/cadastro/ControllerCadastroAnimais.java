@@ -71,7 +71,8 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void Cancelar(ActionEvent event) {
-
+		limpaTela();
+		dialogStage.close();
 	}
 
 	@FXML
