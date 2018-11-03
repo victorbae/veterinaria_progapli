@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroRaca">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnimal">
    <children>
-      <TextField fx:id="tfNome" layoutX="225.0" layoutY="220.0" prefHeight="26.0" prefWidth="320.0" />
-      <Label layoutX="141.0" layoutY="218.0" prefHeight="29.0" prefWidth="54.0" text="Nome:">
+      <TextField fx:id="tfNome" layoutX="278.0" layoutY="152.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="187.0" layoutY="150.0" text="Nome:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="225.0" layoutY="46.0" prefHeight="52.0" prefWidth="150.0" text="Nova Raça">
+      <ComboBox fx:id="cbxRaca" layoutX="278.0" layoutY="213.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="193.0" layoutY="212.0" text="Raça:">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="195.0" layoutY="45.0" text="Novo Tipo Animal">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
