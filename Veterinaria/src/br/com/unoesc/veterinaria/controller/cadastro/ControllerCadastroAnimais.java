@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
@@ -17,6 +18,9 @@ import br.com.unoesc.veterinaria.model.Tipo_Animal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -93,12 +97,34 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void OutraRaca(ActionEvent event) {
+		try {
 
+			Parent root = FXMLLoader
+					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroRaca.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(root, 600, 600);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
 	void OutroTipoAnimal(ActionEvent event) {
+		try {
 
+			Parent root = FXMLLoader
+					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroTipoAnimal.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(root, 600, 600);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void preencheAnimais() {

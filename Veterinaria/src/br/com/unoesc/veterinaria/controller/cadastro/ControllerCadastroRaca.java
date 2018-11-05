@@ -1,5 +1,8 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import br.com.unoesc.veterinaria.banco.RacaBanco;
+import br.com.unoesc.veterinaria.dao.RacaDao;
+import br.com.unoesc.veterinaria.model.Raca;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +23,8 @@ public class ControllerCadastroRaca {
 	@FXML
 	private Button btnLimpar;
 
+	private RacaDao racaDao = new RacaBanco();
+	private Raca racas;
 	private Stage dialogStage;
 	private boolean clicadoSalvar;
 
@@ -37,11 +42,18 @@ public class ControllerCadastroRaca {
 
 	@FXML
 	void Salvar(ActionEvent event) {
+		preencheRaca();
+		racaDao.inserir(racas);
 
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
 		}
+	}
+
+	public void preencheRaca() {
+		racas = new Raca();
+		racas.setNome(tfNome.getText());
 	}
 
 	public void limpaTela() {
