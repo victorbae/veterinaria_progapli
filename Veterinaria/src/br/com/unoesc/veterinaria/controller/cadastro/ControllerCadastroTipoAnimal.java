@@ -41,6 +41,11 @@ public class ControllerCadastroTipoAnimal {
 		this.tipoAnimal = EstaticosParaTipoAnimal.tipo_animal;
 		populaCombo();
 
+		if (EstaticosParaTipoAnimal.isEditando) {
+			populaTela();
+		}
+
+		populaCombo();
 	}
 
 	@FXML
@@ -57,12 +62,22 @@ public class ControllerCadastroTipoAnimal {
 	@FXML
 	void Salvar(ActionEvent event) {
 		preencheTipoAnimal();
-		tipoAnimalDao.inserir(tipoAnimal);
-
+		if (EstaticosParaTipoAnimal.isEditando) {
+			tipoAnimalDao.alterar(tipoAnimal);
+			EstaticosParaTipoAnimal.isEditando = false;
+		} else {
+			tipoAnimalDao.inserir(tipoAnimal);
+		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
 		}
+	}
+
+	public void populaTela() {
+		tfNome.setText(tipoAnimal.getNome());
+		cbxRaca.setValue(tipoAnimal.getRaca());
+
 	}
 
 	public void preencheTipoAnimal() {
@@ -74,6 +89,7 @@ public class ControllerCadastroTipoAnimal {
 
 	public void limpaTela() {
 		tfNome.clear();
+		cbxRaca.getSelectionModel().clearSelection();
 
 	}
 

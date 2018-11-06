@@ -1,12 +1,12 @@
 package br.com.unoesc.veterinaria.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Animais {
 
 	Integer idAnimal;
 	String Nome;
-	Date Data_Nascimento;
+	LocalDate Data_Nascimento;
 	Cliente cliente;
 	Tipo_Animal tipo_animal;
 	Raca raca;
@@ -16,7 +16,7 @@ public class Animais {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Animais(Integer idAnimal, String nome, Date data_Nascimento, Cliente cliente, Tipo_Animal tipo_animal,
+	public Animais(Integer idAnimal, String nome, LocalDate data_Nascimento, Cliente cliente, Tipo_Animal tipo_animal,
 			Raca raca) {
 		super();
 		this.idAnimal = idAnimal;
@@ -25,10 +25,6 @@ public class Animais {
 		this.cliente = cliente;
 		this.tipo_animal = tipo_animal;
 		this.raca = raca;
-	}
-
-	public Cliente getidcliente() {
-		return cliente;
 	}
 
 	public Integer getIdAnimal() {
@@ -47,11 +43,11 @@ public class Animais {
 		Nome = nome;
 	}
 
-	public Date getData_Nascimento() {
+	public LocalDate getData_Nascimento() {
 		return Data_Nascimento;
 	}
 
-	public void setData_Nascimento(Date data_Nascimento) {
+	public void setData_Nascimento(LocalDate data_Nascimento) {
 		Data_Nascimento = data_Nascimento;
 	}
 

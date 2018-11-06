@@ -1,7 +1,6 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
@@ -11,11 +10,13 @@ import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
+import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.Tipo_Animal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +71,13 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	private void initialize() {
+		this.animais = EstaticosParaAnimal.animal;
+		populaCombo();
+
+		if (EstaticosParaAnimal.isEditando) {
+			populaTela();
+		}
+
 		populaCombo();
 	}
 
@@ -87,8 +95,12 @@ public class ControllerCadastroAnimais {
 	@FXML
 	void Salvar(ActionEvent event) {
 		preencheAnimais();
-		animaisDao.inserir(animais);
-
+		if (EstaticosParaAnimal.isEditando) {
+			animaisDao.alterar(animais);
+			EstaticosParaCliente.isEditando = false;
+		} else {
+			animaisDao.inserir(animais);
+		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
@@ -97,18 +109,23 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void OutraRaca(ActionEvent event) {
-		try {
+		Stage stageDono = (Stage) btnOutraRaca.getScene().getWindow();
+		RacaDialogFactory adicionaProdutoVendaDialog = new RacaDialogFactory(stageDono);
 
-			Parent root = FXMLLoader
-					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroRaca.fxml"));
-			Stage stage = new Stage();
-			Scene scene = new Scene(root, 600, 600);
-			stage.setScene(scene);
-			stage.show();
+		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (clicadoSalvar) {
+			dialogStage.close();
+
 		}
+	}
+
+	public void populaTela() {
+		tfNome.setText(animais.getNome());
+		dtDataNascimento.setValue(animais.getData_Nascimento());
+		cbxRaca.setValue(animais.getRaca());
+		cbxCliente.setValue(animais.getCliente());
+		cbxTipoAnimal.setValue(animais.getTipo_animal());
 	}
 
 	@FXML
@@ -130,17 +147,19 @@ public class ControllerCadastroAnimais {
 	public void preencheAnimais() {
 		animais = new Animais();
 		animais.setNome(tfNome.getText());
-		animais.setData_Nascimento(Date.valueOf(dtDataNascimento.getValue()));
+		animais.setData_Nascimento(dtDataNascimento.getValue());
 		animais.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
 		animais.setCliente(EstaticosParaAnimal.achaCliente(cbxCliente.getValue().getIdCliente()));
+		animais.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(cbxTipoAnimal.getValue().getIdTipoAnimal()));
 	}
 
 	public void limpaTela() {
 		tfNome.clear();
+		dtDataNascimento.setValue(null);
 		cbxRaca.getSelectionModel().clearSelection();
 		cbxCliente.getSelectionModel().clearSelection();
 		cbxTipoAnimal.getSelectionModel().clearSelection();
-		dtDataNascimento.setValue(null);
+
 	}
 
 	private void populaCombo() {

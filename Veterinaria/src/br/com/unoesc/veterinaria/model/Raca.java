@@ -64,7 +64,7 @@ public class Raca {
 
 	@Override
 	public String toString() {
-		return "Raca [idRaca=" + idRaca + ", nome=" + nome + "]";
+		return nome;
 	}
 
 }

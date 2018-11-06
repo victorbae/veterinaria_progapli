@@ -17,8 +17,9 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 	@Override
 	public void inserir(Tipo_Animal dado) {
 		try {
-			String sql = "INSERT INTO `tipo_animal`(`idTipo_Animal`, `Nome`,`idRaca`) " + " VALUES (null,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			String sql = "INSERT INTO `tipo_animal`(`idTipo_Animal`,`Nome`,`idRaca`) " + " VALUES (null,?,?)";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
 			stmt.setInt(2, dado.getRaca().getIdRaca());
 			stmt.executeUpdate();
@@ -72,7 +73,7 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 				Tipo_Animal tipo_Animal = new Tipo_Animal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
 				tipo_Animal.setNome(rs.getString("Nome"));
-				tipo_Animal.setRaca(EstaticosParaTipoAnimal.achaRaca(rs.getInt("idRaca")));
+				tipo_Animal.setRaca(EstaticosParaTipoAnimal.achaRaca(rs.getInt("Id_Raca")));
 
 				tipoAnimal.add(tipo_Animal);
 			}
