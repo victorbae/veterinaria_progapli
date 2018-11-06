@@ -80,7 +80,7 @@ public class Tipo_Animal {
 
 	@Override
 	public String toString() {
-		return "Tipo_Animal [idTipoAnimal=" + idTipoAnimal + ", nome=" + nome + ", raca=" + raca + "]";
+		return nome;
 	}
 
 }

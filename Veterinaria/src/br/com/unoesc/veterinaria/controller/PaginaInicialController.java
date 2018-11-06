@@ -23,9 +23,6 @@ public class PaginaInicialController {
 	private Button btnProduto;
 
 	@FXML
-	private Button btnVenda;
-
-	@FXML
 	private Button btnAdicionarVenda;
 
 	@FXML
@@ -166,14 +163,6 @@ public class PaginaInicialController {
 		this.btnProduto = btnProduto;
 	}
 
-	public Button getBtnVenda() {
-		return btnVenda;
-	}
-
-	public void setBtnVenda(Button btnVenda) {
-		this.btnVenda = btnVenda;
-	}
-
 	public Button getBtnAdicionarVenda() {
 		return btnAdicionarVenda;
 	}
@@ -205,5 +194,4 @@ public class PaginaInicialController {
 	public void setBtnTipoAnimal(Button btnTipoAnimal) {
 		this.btnTipoAnimal = btnTipoAnimal;
 	}
-
 }
