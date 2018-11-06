@@ -34,17 +34,17 @@
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnSalvar" layoutX="455.0" layoutY="475.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="455.0" layoutY="435.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnLimpar" layoutX="368.0" layoutY="475.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
+      <Button fx:id="btnLimpar" layoutX="363.0" layoutY="435.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="268.0" layoutY="475.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Button fx:id="btnCancelar" layoutX="269.0" layoutY="435.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
@@ -60,5 +60,15 @@
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
+      <Button fx:id="btnOutraRaca" layoutX="37.0" layoutY="506.0" mnemonicParsing="false" onAction="#OutraRaca" text="Outra Raça -&gt; Cadastre Aqui" textAlignment="CENTER">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOutroTipoAnimal" layoutX="265.0" layoutY="506.0" mnemonicParsing="false" onAction="#OutroTipoAnimal" text="Outra Tipo do Animal -&gt; Cadastre Aqui" textAlignment="CENTER">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

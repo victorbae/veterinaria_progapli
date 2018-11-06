@@ -1,7 +1,13 @@
 package br.com.unoesc.veterinaria.banco;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.model.Raca;
 
@@ -9,32 +15,87 @@ public class RacaBanco implements RacaDao {
 
 	@Override
 	public void inserir(Raca dado) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "INSERT INTO `raca`(`idRaca`, `Nome`) " + " VALUES (null,?)";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, dado.getNome());
+			stmt.executeUpdate();
+
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			dado.setIdRaca(rs.getInt(1));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void alterar(Raca dado) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE `raca` SET `Nome`=? WHERE `idRaca`= ?";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setString(1, dado.getNome());
+			stmt.setInt(2, dado.getIdRaca());
 
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void excluir(Raca dado) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "DELETE FROM `raca` WHERE `idRaca`= ?";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setInt(1, dado.getIdRaca());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public List<Raca> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Raca> raca = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
+			while (rs.next()) {
+				Raca racas = new Raca();
+				racas.setIdRaca(rs.getInt("idRaca"));
+				racas.setNome(rs.getString("Nome"));
+
+				raca.add(racas);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return raca;
+
 	}
 
 	@Override
 	public List<Raca> listarNome() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Raca> raca = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
+			while (rs.next()) {
+				Raca racas = new Raca();
+				racas.setIdRaca(rs.getInt("idRaca"));
+				racas.setNome(rs.getString("Nome"));
+				raca.add(racas);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return raca;
 	}
 
 }

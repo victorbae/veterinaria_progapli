@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, String.valueOf(dado.getNome()));
 			stmt.setString(2, dado.getCpf());
-			stmt.setDate(3, (Date) dado.getData_Nascimento());
+			stmt.setDate(3, Date.valueOf(dado.getData_Nascimento()));
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
@@ -38,7 +39,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setString(2, dado.getCpf());
-			stmt.setDate(3, (Date) dado.getData_Nascimento());
+			stmt.setDate(3, Date.valueOf(dado.getData_Nascimento()));
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.setInt(6, dado.getIdFuncionario());
@@ -73,7 +74,9 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
 				funcionario.setNome(rs.getString("Nome"));
 				funcionario.setCpf(rs.getString("CPF"));
-				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento"));
+				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento").toLocalDate());
+				funcionario.setEmail(rs.getString("email"));
+				funcionario.setSenha(rs.getString("senha"));
 				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
 				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
@@ -94,7 +97,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
 				funcionario.setNome(rs.getString("Nome"));
 				funcionario.setCpf(rs.getString("CPF"));
-				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento"));
+				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento").toLocalDate());
 				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
 				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
@@ -121,6 +124,20 @@ public class FuncionarioBanco implements FuncionarioDao {
 			e.printStackTrace();
 		}
 		return funcionarios;
+	}
+
+	@Override
+	public void alterarSenha(Funcionario dado) {
+		try {
+			String sql = "UPDATE `veterinaria`.`funcionario` SET `senha` = ? WHERE `idFuncionario` = ?;";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setString(1, dado.getSenha());
+			stmt.setInt(2, dado.getIdFuncionario());
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

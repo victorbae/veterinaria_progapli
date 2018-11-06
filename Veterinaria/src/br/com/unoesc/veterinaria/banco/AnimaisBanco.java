@@ -18,13 +18,14 @@ public class AnimaisBanco implements AnimaisDao {
 	@Override
 	public void inserir(Animais dado) {
 		try {
-			String sql = "INSERT INTO `animal`(`idAnimal`, `Nome`, `Data_Nascimento`, `idTipo_Animal`, `idCliente`) "
-					+ " VALUES (null,?,?,?,?)";
+			String sql = "INSERT INTO `animal`(`idAnimal`, `Nome`, `Data_Nascimento`, `idTipo_Animal`, `idCliente`,'idRaca') "
+					+ " VALUES (null,?,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
-			stmt.setDate(2, (Date) dado.getData_Nascimento());
+			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
 			stmt.setInt(3, dado.getTipo_animal().getIdTipoAnimal());
 			stmt.setInt(4, dado.getCliente().getIdCliente());
+			stmt.setInt(5, dado.getRaca().getIdRaca());
 			stmt.executeUpdate();
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -42,13 +43,14 @@ public class AnimaisBanco implements AnimaisDao {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`= ?,"
-					+ "`idTipo_Animal`= ?,`idFilial`= ? WHERE `idAnimal`= ?";
+					+ "`idTipo_Animal`= ?,`idCliente`= ?,`idRaca`= ? WHERE `idAnimal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
-			stmt.setDate(2, (Date) dado.getData_Nascimento());
+			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
 			stmt.setInt(3, dado.getTipo_animal().getIdTipoAnimal());
 			stmt.setInt(4, dado.getCliente().getIdCliente());
-			stmt.setInt(5, dado.getIdAnimal());
+			stmt.setInt(5, dado.getRaca().getIdRaca());
+			stmt.setInt(6, dado.getIdAnimal());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -71,6 +73,11 @@ public class AnimaisBanco implements AnimaisDao {
 
 	}
 
+	// CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS
+	// Id_Animal, ani.Nome AS Nome,
+	// ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal,
+	// ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
+	//
 	@Override
 	public List<Animais> listar() {
 		List<Animais> animais = new ArrayList<>();
@@ -81,9 +88,10 @@ public class AnimaisBanco implements AnimaisDao {
 				Animais animal = new Animais();
 				animal.setIdAnimal(rs.getInt("idAnimal"));
 				animal.setNome(rs.getString("Nome"));
-				animal.setData_Nascimento(Date.valueOf(rs.getString("Data_Nascimento")));
+				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				animal.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
-				animal.setCliente(EstaticosParaAnimal.achaCliente(rs.getInt("id_Cliente")));
+				animal.setCliente(EstaticosParaAnimal.achaCliente(rs.getInt("idCliente")));
+				animal.setRaca(EstaticosParaAnimal.achaRaca(rs.getInt("idRaca")));
 
 				animais.add(animal);
 			}

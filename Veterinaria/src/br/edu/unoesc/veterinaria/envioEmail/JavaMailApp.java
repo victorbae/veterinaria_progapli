@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 public class JavaMailApp {
 	public static void enviar(String email, String mensagem) {
 		Properties props = new Properties();
-		/** Parâmetros de conexão com servidor Gmail */
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
@@ -26,20 +25,15 @@ public class JavaMailApp {
 				return new PasswordAuthentication("nao.responder.pet.bull@gmail.com", "ROOTPETBULL");
 			}
 		});
-
-		/** Ativa Debug para sessão */
-		session.setDebug(true);
-
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("nao.responder.pet.bull@gmail.com")); // Remetente
+			message.setFrom(new InternetAddress("nao.responder.pet.bull@gmail.com"));
 
-			Address[] toUser = InternetAddress // Destinatário(s)
-					.parse(email);
+			Address[] toUser = InternetAddress.parse(email);
 
 			message.setRecipients(Message.RecipientType.TO, toUser);
-			message.setSubject("Redefinição de senha - PET BULL");// Assunto
+			message.setSubject("Redefinição de senha - PET BULL");
 			message.setText("Olá caro usuário!" + (char) 13 + (char) 13
 					+ "Recebemos sua solicitação de alteração de senha, geramos a "
 					+ "seguinte senha temporária para você:  " + mensagem + (char) 13
@@ -47,10 +41,8 @@ public class JavaMailApp {
 					+ (char) 13 + (char) 13 + "Atenciosamente, PET BULL." + (char) 13
 					+ "Este E-mail é gerado automáticamente, não sendo preciso responder!" + (char) 13
 					+ "Fone para contato: (49) 99912 6830.");
-			/** Método para enviar a mensagem criada */
 			Transport.send(message);
-
-			System.out.println("Feito!!!");
+			System.out.println("Enviado");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
