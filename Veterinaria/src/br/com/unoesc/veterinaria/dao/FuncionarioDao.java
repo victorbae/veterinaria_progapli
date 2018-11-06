@@ -6,4 +6,6 @@ import br.com.unoesc.veterinaria.model.Funcionario;
 
 public interface FuncionarioDao extends CrudDao<Funcionario> {
 	List<Funcionario> listarNome();
+
+	void alterarSenha(Funcionario dado);
 }

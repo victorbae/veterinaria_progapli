@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,6 +52,10 @@ public class ControllerFuncionario {
 
 	FuncionarioDao funcionariodao = new FuncionarioBanco();
 
+	Funcionario funcionario = new Funcionario();
+
+	boolean escolhido = false;
+
 	@FXML
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -64,29 +69,48 @@ public class ControllerFuncionario {
 
 	@FXML
 	void salvar(ActionEvent event) {
+		preencheFuncionario();
+		if (escolhido) {
+			EstaticosDeFuncionario.editando = true;
+			EstaticosDeFuncionario.funcionario = this.funcionario;
+
+			dialogFunc();
+
+			escolhido = false;
+		}
 
 	}
 
 	@FXML
 	void excluir(ActionEvent event) {
-
+		preencheFuncionario();
+		if (escolhido) {
+			funcionariodao.excluir(this.funcionario);
+			escolhido = false;
+		}
 	}
 
 	@FXML
 	void novo(ActionEvent event) {
+		dialogFunc();
+	}
+
+	void preencheFuncionario() {
+		this.funcionario = tvFuncionarios.getSelectionModel().getSelectedItem();
+		this.escolhido = true;
+
+	}
+
+	void dialogFunc() {
 		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		FuncionarioDialogFactory funcionarioDialog = new FuncionarioDialogFactory(stageDono);
-
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
-
 	}
 
 	void atualizaLista() {
 		tvFuncionarios.refresh();
 	}
-
 }

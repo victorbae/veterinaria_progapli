@@ -1,6 +1,7 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
@@ -12,6 +13,8 @@ import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactoryRapid;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -66,6 +69,10 @@ public class ControllerCadastroFuncionario {
 	private void initialize() {
 		populaComboCliente();
 		populaComboFilial();
+		this.funcionario = EstaticosDeFuncionario.funcionario;
+		if (EstaticosDeFuncionario.editando) {
+			preencheTela();
+		}
 	}
 
 	@FXML
@@ -76,7 +83,11 @@ public class ControllerCadastroFuncionario {
 	@FXML
 	void Salvar(ActionEvent event) {
 		preencheFuncionario();
-		funcionariodao.inserir(funcionario);
+		if (EstaticosDeFuncionario.editando) {
+			funcionariodao.alterar(funcionario);
+		} else {
+			funcionariodao.inserir(funcionario);
+		}
 
 		clicadoSalvar = true;
 		if (dialogStage != null) {
@@ -110,7 +121,15 @@ public class ControllerCadastroFuncionario {
 		funcionario.setCpf(String.valueOf(tfCpf.getText()));
 		funcionario.setCliente(cbxCliente.getValue());
 		funcionario.setFilial(cbxFilial.getValue());
-		funcionario.setData_Nascimento(Date.valueOf(dtDataNascimento.getValue()));
+		funcionario.setData_Nascimento(dtDataNascimento.getValue());
+	}
+
+	void preencheTela() {
+		tfNome.setText(String.valueOf(this.funcionario.getNome()));
+		tfCpf.setText(String.valueOf(this.funcionario.getCpf()));
+		cbxCliente.setValue(EstaticosParaCliente.achaCliente(this.funcionario.getCliente().getIdCliente()));
+		cbxFilial.setValue(this.funcionario.getFilial());
+		dtDataNascimento.setValue(LocalDate.parse(String.valueOf(this.funcionario.getData_Nascimento())));
 	}
 
 	private void populaComboFilial() {
