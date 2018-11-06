@@ -7,7 +7,11 @@ import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
 
 public class EstaticosDeFuncionario {
-	
+
+	public static boolean editando = false;
+
+	public static Funcionario funcionario = new Funcionario();
+
 	public static Funcionario buscaFuncionarioById(Integer id) {
 		FuncionarioDao funcionarioDao = new FuncionarioBanco();
 		Funcionario funcionariodoid = new Funcionario();

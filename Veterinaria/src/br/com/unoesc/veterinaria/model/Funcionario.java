@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Funcionario {
 	Integer idFuncionario;
 	String nome;
 	String cpf;
-	Date data_Nascimento;
+	LocalDate data_Nascimento;
 	Cliente cliente;
 	Filial filial;
 	String senha;
@@ -25,7 +26,7 @@ public class Funcionario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario(Integer idFuncionario, String nome, String cpf, Date data_Nascimento, Cliente cliente,
+	public Funcionario(Integer idFuncionario, String nome, String cpf, LocalDate data_Nascimento, Cliente cliente,
 			Filial filial) {
 		super();
 		this.idFuncionario = idFuncionario;
@@ -60,11 +61,11 @@ public class Funcionario {
 		this.cpf = cpf;
 	}
 
-	public Date getData_Nascimento() {
+	public LocalDate getData_Nascimento() {
 		return data_Nascimento;
 	}
 
-	public void setData_Nascimento(Date data_Nascimento) {
+	public void setData_Nascimento(LocalDate data_Nascimento) {
 		this.data_Nascimento = data_Nascimento;
 	}
 
@@ -102,8 +103,10 @@ public class Funcionario {
 
 	public Funcionario getFuncionarioByLogin(String login) {
 		FuncionarioDao funcionariodao = new FuncionarioBanco();
-		for (Funcionario funcionario2 : funcionariodao.listarNome()) {
-			if (funcionario2.getEmail() == login) {
+		for (Funcionario funcionario2 : funcionariodao.listar()) {
+			System.out.println(funcionario2.getEmail());
+			System.out.println(login);
+			if (funcionario2.equalsLogin(String.valueOf(login))) {
 				return funcionario2;
 			}
 		}
@@ -203,8 +206,15 @@ public class Funcionario {
 		return true;
 	}
 
-	public boolean hashCodeLogin(Funcionario f) {
-		if (f.getSenha() == this.senha && f.getEmail() == this.getEmail()) {
+	public boolean equalsLogin(String f) {
+		if (String.valueOf(f).intern() == this.getEmail().intern()) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean verificaExistencia(Funcionario fc) {
+		if (this.email.equals(fc.getEmail()) && this.senha.equals(fc.getSenha())) {
 			return true;
 		}
 		return false;
