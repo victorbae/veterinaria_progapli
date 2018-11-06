@@ -42,7 +42,7 @@ public class AnimaisBanco implements AnimaisDao {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`= ?,"
-					+ "`idTipo_Animal`= ?,`idFilial`= ? WHERE `idAnimal`= ?";
+					+ "`idTipo_Animal`= ?,`idCliente`= ? WHERE `idAnimal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDate(2, (Date) dado.getData_Nascimento());
