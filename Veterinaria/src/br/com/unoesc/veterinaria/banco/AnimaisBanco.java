@@ -86,7 +86,7 @@ public class AnimaisBanco implements AnimaisDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
-				animal.setIdAnimal(rs.getInt("idAnimal"));
+				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
 				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				animal.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
@@ -109,7 +109,7 @@ public class AnimaisBanco implements AnimaisDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
-				animal.setIdAnimal(rs.getInt("id_Animal"));
+				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
 				animais.add(animal);
 			}

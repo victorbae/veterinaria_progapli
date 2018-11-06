@@ -1,7 +1,5 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import java.io.IOException;
-
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
@@ -11,6 +9,7 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
 import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
@@ -19,9 +18,6 @@ import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -110,9 +106,9 @@ public class ControllerCadastroAnimais {
 	@FXML
 	void OutraRaca(ActionEvent event) {
 		Stage stageDono = (Stage) btnOutraRaca.getScene().getWindow();
-		RacaDialogFactory adicionaProdutoVendaDialog = new RacaDialogFactory(stageDono);
+		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
 
-		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
+		boolean clicadoSalvar = adicionaRacaDialog.showDialog();
 
 		if (clicadoSalvar) {
 			dialogStage.close();
@@ -130,17 +126,14 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void OutroTipoAnimal(ActionEvent event) {
-		try {
+		Stage stageDono = (Stage) btnOutroTipoAnimal.getScene().getWindow();
+		TipoAnimalDialogFactory adicionaTipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
 
-			Parent root = FXMLLoader
-					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroTipoAnimal.fxml"));
-			Stage stage = new Stage();
-			Scene scene = new Scene(root, 600, 600);
-			stage.setScene(scene);
-			stage.show();
+		boolean clicadoSalvar = adicionaTipoAnimalDialog.showDialog();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (clicadoSalvar) {
+			dialogStage.close();
+
 		}
 	}
 
