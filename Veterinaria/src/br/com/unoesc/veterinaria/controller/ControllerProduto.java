@@ -3,6 +3,7 @@ package br.com.unoesc.veterinaria.controller;
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.RelatorioProdutoDialogFactory;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.collections.FXCollections;
@@ -33,6 +34,9 @@ public class ControllerProduto {
 
 	@FXML
 	private TableColumn<Produto, Integer> tcIdEstoque;
+
+	@FXML
+	private Button btnExibeRelatorio;
 
 	@FXML
 	private Button btnNovo;
@@ -94,8 +98,21 @@ public class ControllerProduto {
 		}
 	}
 
+	@FXML
+	void exibeRelatorio(ActionEvent event) {
+		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
+		RelatorioProdutoDialogFactory adicionaProdutoVendaDialog = new RelatorioProdutoDialogFactory(stageDono);
+
+		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
+
+		if (clicadoSalvar) {
+
+		}
+	}
+
 	public void atualizaLista() {
 		tvProdutos.setItems(FXCollections.observableArrayList(produtoDao.listar()));
 		tvProdutos.refresh();
 	}
+
 }

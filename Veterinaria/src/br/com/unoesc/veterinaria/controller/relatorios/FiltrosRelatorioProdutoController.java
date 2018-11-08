@@ -4,40 +4,46 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.controlsfx.control.textfield.TextFields;
-
-import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
-import br.com.unoesc.veterinaria.dao.ClienteDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class FiltrosRelatorioVendaController {
+public class FiltrosRelatorioProdutoController {
 
 	private final String MAIOR_QUE = "Maior que ";
 	private final String MENOR_QUE = "Menor que ";
 	private final String IGUAL_A = "Igual a ";
-
-	@FXML
-	private TextField tfCliente;
-
-	@FXML
-	private DatePicker dpData;
+	private String valorRadioButton;
 
 	@FXML
 	private ComboBox<String> cbxTipoRange;
 
+	private ToggleGroup group = new ToggleGroup();
+
 	@FXML
 	private TextField tfValorRange;
+
+	@FXML
+	private RadioButton rbMaiorQnt;
+
+	@FXML
+	private RadioButton rbMenorQnt;
+
+	@FXML
+	private RadioButton rbMaisVendidos;
+
+	@FXML
+	private RadioButton rbMenosVendidos;
 
 	@FXML
 	private Button btnCancelar;
@@ -54,12 +60,13 @@ public class FiltrosRelatorioVendaController {
 
 	private Map<String, Object> parametros = new HashMap<>();
 
-	private ClienteDao clienteDao = new ClienteBanco();
-
 	@FXML
 	private void initialize() {
 		populaCombo();
-		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
+		rbMaiorQnt.setToggleGroup(group);
+		rbMenorQnt.setToggleGroup(group);
+		rbMaisVendidos.setToggleGroup(group);
+		rbMenosVendidos.setToggleGroup(group);
 	}
 
 	@FXML
@@ -96,20 +103,15 @@ public class FiltrosRelatorioVendaController {
 
 	@FXML
 	void Limpar(ActionEvent event) {
-		tfCliente.clear();
 		tfValorRange.clear();
 		cbxTipoRange.setValue(null);
-		dpData.setValue(null);
+
 	}
 
 	private Map<String, Object> validaFiltros() {
-		if (tfCliente.getText() != null) {
-			parametros.put("nomeCliente", tfCliente.getText());
+		if (group.getSelectedToggle() != null) {
+			parametros.put("tipoQuery", valorRadioButton);
 		}
-		if (dpData.getValue() != null) {
-			parametros.put("dataVenda", dpData.getValue());
-		}
-
 		if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
 			String range = null;
 			switch (cbxTipoRange.getValue()) {
@@ -126,6 +128,26 @@ public class FiltrosRelatorioVendaController {
 			parametros.put("rangeValor", range);
 		}
 		return parametros;
+	}
+
+	@FXML
+	void maiorQnt(ActionEvent event) {
+		valorRadioButton = "produto com maior quantidade";
+	}
+
+	@FXML
+	void maisVendidos(ActionEvent event) {
+		valorRadioButton = "produto mais vendido";
+	}
+
+	@FXML
+	void menorQnt(ActionEvent event) {
+		valorRadioButton = "produto com menor quantidade";
+	}
+
+	@FXML
+	void menosVendidos(ActionEvent event) {
+		valorRadioButton = "produto menos vendido";
 	}
 
 	private void populaCombo() {
