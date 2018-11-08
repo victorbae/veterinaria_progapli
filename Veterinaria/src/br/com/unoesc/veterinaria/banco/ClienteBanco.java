@@ -17,6 +17,7 @@ public class ClienteBanco implements ClienteDao {
 	@Override
 	public void inserir(Cliente dado) {
 		try {
+			EstaticosParaCliente.cliente = dado;
 			String sql = "INSERT INTO `cliente`(`idCliente`, `Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) "
 					+ " VALUES (null,?,?,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
@@ -33,8 +34,7 @@ public class ClienteBanco implements ClienteDao {
 			// SOMENTE QUANDO É AUTO INCEMENT NO BANCO
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			dado.setIdCliente(rs.getInt(1));
-
+			EstaticosParaCliente.cliente.setIdCliente(rs.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
@@ -24,7 +25,7 @@ public class ControllerFuncionario {
 	private TableColumn<Funcionario, String> tcNome;
 
 	@FXML
-	private TableColumn<Funcionario, Cliente> tcNomeCliente;
+	private TableColumn<Funcionario, String> tcNomeCliente;
 
 	@FXML
 	private Button btExcluir;
@@ -42,7 +43,7 @@ public class ControllerFuncionario {
 	private TableColumn<Funcionario, Integer> tcId;
 
 	@FXML
-	private TableColumn<Funcionario, Date> tcDtNascimento;
+	private TableColumn<Funcionario, LocalDate> tcDtNascimento;
 
 	@FXML
 	private TableColumn<Funcionario, Filial> tcNomeFilial;
@@ -87,12 +88,15 @@ public class ControllerFuncionario {
 		if (escolhido) {
 			funcionariodao.excluir(this.funcionario);
 			escolhido = false;
+			atualizaLista();
 		}
 	}
 
 	@FXML
 	void novo(ActionEvent event) {
 		dialogFunc();
+		atualizaLista();
+
 	}
 
 	void preencheFuncionario() {
@@ -107,6 +111,7 @@ public class ControllerFuncionario {
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
 		if (clicadoSalvar) {
 			atualizaLista();
+
 		}
 	}
 

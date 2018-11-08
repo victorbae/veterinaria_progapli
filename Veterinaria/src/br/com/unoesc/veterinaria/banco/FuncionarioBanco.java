@@ -12,6 +12,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 
 public class FuncionarioBanco implements FuncionarioDao {
 
@@ -22,11 +23,10 @@ public class FuncionarioBanco implements FuncionarioDao {
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, String.valueOf(dado.getNome()));
 			stmt.setString(2, dado.getCpf());
-			stmt.setDate(3, Date.valueOf(dado.getData_Nascimento()));
+			stmt.setString(3, dado.getData_Nascimento().toString());
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +53,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 	@Override
 	public void excluir(Funcionario dado) {
 		try {
-			String sql = "DELETE FROM `veterinaria`.`funcionario` WHERE ?;";
+			String sql = "DELETE FROM `veterinaria`.`funcionario` WHERE idFuncionario = ?;";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setInt(1, dado.getIdFuncionario());
 			stmt.executeUpdate();
@@ -74,7 +74,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
 				funcionario.setNome(rs.getString("Nome"));
 				funcionario.setCpf(rs.getString("CPF"));
-				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento").toLocalDate());
+				funcionario.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
 				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));

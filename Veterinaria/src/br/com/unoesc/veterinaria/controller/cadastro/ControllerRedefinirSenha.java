@@ -54,13 +54,11 @@ public class ControllerRedefinirSenha {
 			JavaMailApp.enviar(this.funcionario.getEmail(), this.funcionario.getSenha());
 			dialogStage.close();
 		}
-
 	}
 
 	@FXML
 	void voltar(ActionEvent event) {
 		dialogStage.close();
-
 	}
 
 	void validarFuncionario(String email) {
