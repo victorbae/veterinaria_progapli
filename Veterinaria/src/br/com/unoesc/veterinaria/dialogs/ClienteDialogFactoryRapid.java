@@ -20,7 +20,7 @@ public class ClienteDialogFactoryRapid {
 		this.stageDono = stage;
 	}
 
-	public boolean showDialog() {
+	public Boolean showDialog() {
 		boolean clicandoSalvar = false;
 
 		FXMLLoader loader = new FXMLLoader();
