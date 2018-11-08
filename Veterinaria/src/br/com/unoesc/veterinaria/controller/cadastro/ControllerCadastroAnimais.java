@@ -74,7 +74,6 @@ public class ControllerCadastroAnimais {
 			populaTela();
 		}
 
-		populaCombo();
 	}
 
 	@FXML

@@ -68,6 +68,8 @@ CREATE TABLE Raca(
   idRaca INT NOT NULL auto_increment primary key,
   Nome VARCHAR(45) NULL
   );
+  
+  CREATE OR REPLACE VIEW lista_dados_raca AS SELECT r.idRaca AS idRaca, r.Nome AS Nome FROM Raca r;
 
 CREATE TABLE Tipo_Animal(
   idTipo_Animal INT NOT NULL auto_increment primary key,
@@ -76,6 +78,8 @@ CREATE TABLE Tipo_Animal(
   
   CONSTRAINT fk_Tipo_Animal_Raca FOREIGN KEY (idRaca) REFERENCES Raca (idRaca)
 );
+
+CREATE OR REPLACE VIEW lista_dados_tipo_animal AS SELECT tp.idTipo_Animal AS idTipoAnimal, tp.Nome AS Nome, tp.idRaca AS Id_Raca  FROM tipo_animal tp;
 
 CREATE TABLE Animal(
   idAnimal INT NOT NULL auto_increment primary key,
@@ -88,6 +92,9 @@ CREATE TABLE Animal(
   
   CONSTRAINT fk_Animal_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)
 );
+
+CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS Id_Animal, ani.Nome AS Nome,
+ ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
 
 CREATE TABLE Funcionario (
     idFuncionario INT NOT NULL auto_increment primary key,
