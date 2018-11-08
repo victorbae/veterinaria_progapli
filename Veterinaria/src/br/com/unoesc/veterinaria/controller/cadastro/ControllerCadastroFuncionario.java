@@ -77,7 +77,7 @@ public class ControllerCadastroFuncionario {
 
 	@FXML
 	void Cancelar(ActionEvent event) {
-
+		dialogStage.close();
 	}
 
 	@FXML
@@ -85,10 +85,12 @@ public class ControllerCadastroFuncionario {
 		preencheFuncionario();
 		if (EstaticosDeFuncionario.editando) {
 			funcionariodao.alterar(funcionario);
+			EstaticosDeFuncionario.editando = false;
+			dialogStage.close();
 		} else {
 			funcionariodao.inserir(funcionario);
+			dialogStage.close();
 		}
-
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
@@ -105,6 +107,7 @@ public class ControllerCadastroFuncionario {
 		Stage stageDono = (Stage) ChamaTelaAddCliente.getScene().getWindow();
 		ClienteDialogFactoryRapid clienteDialog = new ClienteDialogFactoryRapid(stageDono);
 		clienteDialog.showDialog();
+		cbxCliente.setValue(EstaticosParaCliente.cliente);
 	}
 
 	public void setStageDialog(Stage dialogStage) {
@@ -117,6 +120,7 @@ public class ControllerCadastroFuncionario {
 
 	void preencheFuncionario() {
 		funcionario = new Funcionario();
+		funcionario.setIdFuncionario(EstaticosDeFuncionario.funcionario.getIdFuncionario());
 		funcionario.setNome(String.valueOf(tfNome.getText()));
 		funcionario.setCpf(String.valueOf(tfCpf.getText()));
 		funcionario.setCliente(cbxCliente.getValue());

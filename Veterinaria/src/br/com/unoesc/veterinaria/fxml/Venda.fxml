@@ -38,6 +38,10 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="exibeRelatorio" layoutX="75.0" layoutY="145.0" mnemonicParsing="false" onAction="#exibeRelatorio" text="Imprime " />
+      <Button fx:id="btnExibeRelatorio" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#exibeRelatorio" text="Relatórios" textAlignment="CENTER">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

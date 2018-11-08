@@ -2,40 +2,40 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroCliente;
-import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.controller.relatorios.FiltrosRelatorioProdutoController;
+import br.com.unoesc.veterinaria.model.Produto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ClienteDialogFactoryRapid {
-
+public class RelatorioProdutoDialogFactory {
 	private Stage stageDono;
 
-	private Cliente clienteDevolta;
+	private Produto produtoDevolta;
 
-	public ClienteDialogFactoryRapid(Stage stage) {
+	public RelatorioProdutoDialogFactory(Stage stage) {
 		this.stageDono = stage;
 	}
 
-	public Boolean showDialog() {
+	public boolean showDialog() {
 		boolean clicandoSalvar = false;
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroCliente.fxml"));
+		loader.setLocation(
+				getClass().getResource("/br/com/unoesc/veterinaria/fxml/relatorios/FiltrosRelatorioProduto.fxml"));
 		try {
-			AnchorPane clienteDialog = (AnchorPane) loader.load();
+			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Novo Cliente");
+			dialogStage.setTitle("Filtros Relatório");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
-			Scene scene = new Scene(clienteDialog);
+			Scene scene = new Scene(produtoDialog);
 			dialogStage.setScene(scene);
 
-			ControllerCadastroCliente controller = loader.getController();
+			FiltrosRelatorioProdutoController controller = loader.getController();
 			controller.setStageDialog(dialogStage);
 			dialogStage.showAndWait();
 
@@ -47,8 +47,7 @@ public class ClienteDialogFactoryRapid {
 		return clicandoSalvar;
 	}
 
-	public Cliente retornaCliente() {
-		return clienteDevolta;
+	public Produto retornaProduto() {
+		return produtoDevolta;
 	}
-
 }

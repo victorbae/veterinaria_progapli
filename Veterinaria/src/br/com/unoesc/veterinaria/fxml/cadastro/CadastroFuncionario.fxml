@@ -65,7 +65,7 @@
       </Button>
       <ComboBox fx:id="cbxCliente" layoutX="268.0" layoutY="293.0" prefHeight="26.0" prefWidth="266.0" />
       <Label layoutX="268.0" layoutY="344.0" text="Caso não for," />
-      <Hyperlink fx:id="ChamaTelaAddCliente" layoutX="353.0" layoutY="340.0" onAction="#ChamaTelaAddClienteRapid" text="Clique aqui" />
-      <Label layoutX="437.0" layoutY="344.0" text="para adiciona-lo." />
+      <Hyperlink fx:id="ChamaTelaAddCliente" layoutX="336.0" layoutY="342.0" onAction="#ChamaTelaAddClienteRapid" text="Clique aqui" />
+      <Label layoutX="402.0" layoutY="344.0" text="para adiciona-lo." />
    </children>
 </AnchorPane>
