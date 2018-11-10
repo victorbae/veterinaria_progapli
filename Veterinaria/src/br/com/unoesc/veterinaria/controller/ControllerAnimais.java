@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +66,10 @@ public class ControllerAnimais {
 
 	@FXML
 	void Editar(ActionEvent event) {
+		if (tvAnimais.getSelectionModel().getSelectedItem() != null) {
+			EstaticosParaAnimal.animal = tvAnimais.getSelectionModel().getSelectedItem();
+			EstaticosParaAnimal.isEditando = true;
+		}
 		Stage stageDono = (Stage) btnEditar.getScene().getWindow();
 		AnimaisDialogFactory animaisDialog = new AnimaisDialogFactory(stageDono);
 

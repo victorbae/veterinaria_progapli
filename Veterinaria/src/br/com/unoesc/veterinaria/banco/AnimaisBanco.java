@@ -21,9 +21,10 @@ public class AnimaisBanco implements AnimaisDao {
 	@Override
 	public void inserir(Animais dado) {
 		try {
-			String sql = "INSERT INTO `animal`(`idAnimal`, `Nome`, `Data_Nascimento`, `idTipo_Animal`, `idCliente`,'idRaca') "
+			String sql = "INSERT INTO `animal` (`idAnimal`, `Nome`, `Data_Nascimento`, `idTipo_Animal`, `idCliente`,`idRaca`)"
 					+ " VALUES (null,?,?,?,?,?)";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
 			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
 			stmt.setInt(3, dado.getTipo_animal().getIdTipoAnimal());
@@ -76,11 +77,13 @@ public class AnimaisBanco implements AnimaisDao {
 
 	}
 
-	// CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS
-	// Id_Animal, ani.Nome AS Nome,
-	// ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal,
-	// ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
-	//
+	/*
+	 * CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS
+	 * Id_Animal, ani.Nome AS Nome, ani.Data_Nascimento AS Data_Nascimento,
+	 * ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as
+	 * idRaca FROM animal ani;
+	 * 
+	 */
 	@Override
 	public List<Animais> listar() {
 		List<Animais> animais = new ArrayList<>();
@@ -112,7 +115,7 @@ public class AnimaisBanco implements AnimaisDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
-				animal.setIdAnimal(rs.getInt("id_Animal"));
+				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
 				animais.add(animal);
 			}
