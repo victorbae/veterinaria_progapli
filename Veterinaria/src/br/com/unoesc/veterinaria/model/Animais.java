@@ -5,10 +5,10 @@ import java.time.LocalDate;
 public class Animais {
 
 	Integer idAnimal;
-	String Nome;
-	LocalDate Data_Nascimento;
+	String nome;
+	LocalDate data_Nascimento;
 	Cliente cliente;
-	Tipo_Animal tipo_animal;
+	TipoAnimal tipo_animal;
 	Raca raca;
 
 	public Animais() {
@@ -16,12 +16,12 @@ public class Animais {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Animais(Integer idAnimal, String nome, LocalDate data_Nascimento, Cliente cliente, Tipo_Animal tipo_animal,
+	public Animais(Integer idAnimal, String nome, LocalDate data_Nascimento, Cliente cliente, TipoAnimal tipo_animal,
 			Raca raca) {
 		super();
 		this.idAnimal = idAnimal;
-		Nome = nome;
-		Data_Nascimento = data_Nascimento;
+		this.nome = nome;
+		this.data_Nascimento = data_Nascimento;
 		this.cliente = cliente;
 		this.tipo_animal = tipo_animal;
 		this.raca = raca;
@@ -36,19 +36,19 @@ public class Animais {
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public LocalDate getData_Nascimento() {
-		return Data_Nascimento;
+		return data_Nascimento;
 	}
 
 	public void setData_Nascimento(LocalDate data_Nascimento) {
-		Data_Nascimento = data_Nascimento;
+		this.data_Nascimento = data_Nascimento;
 	}
 
 	public Cliente getCliente() {
@@ -59,11 +59,11 @@ public class Animais {
 		this.cliente = cliente;
 	}
 
-	public Tipo_Animal getTipo_animal() {
+	public TipoAnimal getTipo_animal() {
 		return tipo_animal;
 	}
 
-	public void setTipo_animal(Tipo_Animal tipo_animal) {
+	public void setTipo_animal(TipoAnimal tipo_animal) {
 		this.tipo_animal = tipo_animal;
 	}
 
@@ -79,8 +79,8 @@ public class Animais {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Data_Nascimento == null) ? 0 : Data_Nascimento.hashCode());
-		result = prime * result + ((Nome == null) ? 0 : Nome.hashCode());
+		result = prime * result + ((data_Nascimento == null) ? 0 : data_Nascimento.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((idAnimal == null) ? 0 : idAnimal.hashCode());
 		result = prime * result + ((raca == null) ? 0 : raca.hashCode());
@@ -97,15 +97,15 @@ public class Animais {
 		if (getClass() != obj.getClass())
 			return false;
 		Animais other = (Animais) obj;
-		if (Data_Nascimento == null) {
-			if (other.Data_Nascimento != null)
+		if (data_Nascimento == null) {
+			if (other.data_Nascimento != null)
 				return false;
-		} else if (!Data_Nascimento.equals(other.Data_Nascimento))
+		} else if (!data_Nascimento.equals(other.data_Nascimento))
 			return false;
-		if (Nome == null) {
-			if (other.Nome != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!Nome.equals(other.Nome))
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (cliente == null) {
 			if (other.cliente != null)
@@ -132,8 +132,7 @@ public class Animais {
 
 	@Override
 	public String toString() {
-		return "Animais [idAnimal=" + idAnimal + ", Nome=" + Nome + ", Data_Nascimento=" + Data_Nascimento
-				+ ", cliente=" + cliente + ", tipo_animal=" + tipo_animal + ", raca=" + raca + "]";
+		return nome;
 	}
 
 }

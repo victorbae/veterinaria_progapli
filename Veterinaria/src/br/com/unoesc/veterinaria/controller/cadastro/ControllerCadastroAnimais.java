@@ -5,16 +5,16 @@ import java.io.IOException;
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
-import br.com.unoesc.veterinaria.banco.Tipo_AnimalBanco;
+import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.RacaDao;
-import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
+import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
-import br.com.unoesc.veterinaria.model.Tipo_Animal;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import javafx.event.ActionEvent;
@@ -42,7 +42,7 @@ public class ControllerCadastroAnimais {
 	private ComboBox<Cliente> cbxCliente;
 
 	@FXML
-	private ComboBox<Tipo_Animal> cbxTipoAnimal;
+	private ComboBox<TipoAnimal> cbxTipoAnimal;
 
 	@FXML
 	private Button btnOutraRaca;
@@ -66,7 +66,7 @@ public class ControllerCadastroAnimais {
 	private boolean clicadoSalvar;
 	private AnimaisDao animaisDao = new AnimaisBanco();
 	private ClienteDao clienteDao = new ClienteBanco();
-	private Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
+	private TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
 	private RacaDao racaDao = new RacaBanco();
 
 	@FXML
@@ -149,7 +149,7 @@ public class ControllerCadastroAnimais {
 		animais.setNome(tfNome.getText());
 		animais.setData_Nascimento(dtDataNascimento.getValue());
 		animais.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
-		animais.setCliente(EstaticosParaAnimal.achaCliente(cbxCliente.getValue().getIdCliente()));
+		animais.setCliente(EstaticosParaCliente.achaCliente(cbxCliente.getValue().getIdCliente()));
 		animais.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(cbxTipoAnimal.getValue().getIdTipoAnimal()));
 	}
 
@@ -169,7 +169,7 @@ public class ControllerCadastroAnimais {
 		for (Raca raca : racaDao.listar()) {
 			cbxRaca.getItems().add(raca);
 		}
-		for (Tipo_Animal tipoAnimal : tipoAnimalDao.listar()) {
+		for (TipoAnimal tipoAnimal : tipoAnimalDao.listar()) {
 			cbxTipoAnimal.getItems().add(tipoAnimal);
 		}
 

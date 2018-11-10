@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -12,7 +11,7 @@
    <children>
       <ComboBox fx:id="cbxTipoRange" layoutX="125.0" layoutY="159.0" prefHeight="26.0" prefWidth="133.0" />
       <TextField fx:id="tfValorRange" layoutX="259.0" layoutY="159.0" prefHeight="26.0" prefWidth="133.0" />
-      <Label layoutX="56.0" layoutY="157.0" text="Valor:">
+      <Label layoutX="67.0" layoutY="157.0" text="Valor:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
@@ -32,26 +31,6 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="rbMaiorQnt" layoutX="125.0" layoutY="203.0" mnemonicParsing="false" onAction="#maiorQnt" text="Maior quantidade estoque">
-         <font>
-            <Font name="Gabriola" size="17.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rbMenorQnt" layoutX="125.0" layoutY="233.0" mnemonicParsing="false" onAction="#menorQnt" text="Menor quantidade estoque">
-         <font>
-            <Font name="Gabriola" size="17.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rbMaisVendidos" layoutX="125.0" layoutY="263.0" mnemonicParsing="false" onAction="#maisVendidos" text="Mais vendidos">
-         <font>
-            <Font name="Gabriola" size="17.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rbMenosVendidos" layoutX="125.0" layoutY="293.0" mnemonicParsing="false" onAction="#menosVendidos" text="Menos vendidos">
-         <font>
-            <Font name="Gabriola" size="17.0" />
-         </font>
-      </RadioButton>
       <Button fx:id="btnCancelar" layoutX="89.0" layoutY="350.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
@@ -67,5 +46,12 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
+      <ComboBox fx:id="cbxTipoRangeQnt" layoutX="124.0" layoutY="215.0" prefHeight="26.0" prefWidth="133.0" />
+      <TextField fx:id="tfValorRangeQnt" layoutX="259.0" layoutY="215.0" prefHeight="26.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="213.0" text="Qnt Estoque:">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
-import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
-import br.com.unoesc.veterinaria.model.Tipo_Animal;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
+import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 
-public class Tipo_AnimalBanco implements Tipo_AnimalDao {
+public class TipoAnimalBanco implements TipoAnimalDao {
 
 	@Override
-	public void inserir(Tipo_Animal dado) {
+	public void inserir(TipoAnimal dado) {
 		try {
 			String sql = "INSERT INTO `tipo_animal`(`idTipo_Animal`,`Nome`,`idRaca`) " + " VALUES (null,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
@@ -35,7 +35,7 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 	}
 
 	@Override
-	public void alterar(Tipo_Animal dado) {
+	public void alterar(TipoAnimal dado) {
 		try {
 			String sql = "UPDATE `tipo_animal` SET `Nome`=?,`idRaca`= ? WHERE `idTipo_Animal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -51,7 +51,7 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 	}
 
 	@Override
-	public void excluir(Tipo_Animal dado) {
+	public void excluir(TipoAnimal dado) {
 		try {
 			String sql = "DELETE FROM `tipo_animal` WHERE `idTipo_Animal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -64,16 +64,16 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 	}
 
 	@Override
-	public List<Tipo_Animal> listar() {
-		List<Tipo_Animal> tipoAnimal = new ArrayList<>();
+	public List<TipoAnimal> listar() {
+		List<TipoAnimal> tipoAnimal = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_tipo_animal");
 			while (rs.next()) {
-				Tipo_Animal tipo_Animal = new Tipo_Animal();
+				TipoAnimal tipo_Animal = new TipoAnimal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
 				tipo_Animal.setNome(rs.getString("Nome"));
-				tipo_Animal.setRaca(EstaticosParaTipoAnimal.achaRaca(rs.getInt("Id_Raca")));
+				tipo_Animal.setRaca(EstaticosParaAnimal.achaRaca(rs.getInt("Id_Raca")));
 
 				tipoAnimal.add(tipo_Animal);
 			}
@@ -84,19 +84,19 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 	}
 
 	@Override
-	public List<Tipo_Animal> listarSemObjSecundarios() {
+	public List<TipoAnimal> listarSemObjSecundarios() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Tipo_Animal> listarNome() {
-		List<Tipo_Animal> tipoAnimal = new ArrayList<>();
+	public List<TipoAnimal> listarNome() {
+		List<TipoAnimal> tipoAnimal = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_tipo_animal");
 			while (rs.next()) {
-				Tipo_Animal tipo_Animal = new Tipo_Animal();
+				TipoAnimal tipo_Animal = new TipoAnimal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
 				tipo_Animal.setNome(rs.getString("Nome"));
 

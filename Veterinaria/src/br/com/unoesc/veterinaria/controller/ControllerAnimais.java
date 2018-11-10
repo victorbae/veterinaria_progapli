@@ -3,10 +3,11 @@ package br.com.unoesc.veterinaria.controller;
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dialogs.AnimaisDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.RelatorioAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
-import br.com.unoesc.veterinaria.model.Tipo_Animal;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class ControllerAnimais {
 	private TableColumn<Animais, Cliente> tcCliente;
 
 	@FXML
-	private TableColumn<Animais, Tipo_Animal> tcTipo_Animal;
+	private TableColumn<Animais, TipoAnimal> tcTipo_Animal;
 
 	@FXML
 	private Button btnNovo;
@@ -45,6 +46,9 @@ public class ControllerAnimais {
 	@FXML
 	private Button btnEditar;
 
+	@FXML
+	private Button btnExibeRelatorio;
+
 	Animais animais;
 
 	AnimaisDao animaisDao = new AnimaisBanco();
@@ -52,7 +56,7 @@ public class ControllerAnimais {
 	@FXML
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
+		tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("data_Nascimento"));
 		tcRaca.setCellValueFactory(new PropertyValueFactory<>("raca"));
 		tcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tcTipo_Animal.setCellValueFactory(new PropertyValueFactory<>("tipo_animal"));
@@ -89,6 +93,18 @@ public class ControllerAnimais {
 
 		if (clicadoSalvar) {
 			atualizaLista();
+		}
+	}
+
+	@FXML
+	void exibeRelatorio(ActionEvent event) {
+		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
+		RelatorioAnimalDialogFactory animalDialog = new RelatorioAnimalDialogFactory(stageDono);
+
+		boolean clicadoSalvar = animalDialog.showDialog();
+
+		if (clicadoSalvar) {
+
 		}
 	}
 

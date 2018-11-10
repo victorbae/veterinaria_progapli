@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
 
 public class ProdutoBanco implements ProdutoDao {
 
@@ -17,7 +18,7 @@ public class ProdutoBanco implements ProdutoDao {
 	public void inserir(Produto dado) {
 		try {
 			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idEstoque`) "
-					+ "VALUES (null,?,?,?,?,?)";
+					+ "VALUES (null,?,?,?,?,null)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
@@ -42,7 +43,7 @@ public class ProdutoBanco implements ProdutoDao {
 	public void alterar(Produto dado) {
 		try {
 			String sql = "UPDATE `produto` SET `Nome`= ?,`Quantidade_Estoque`=?,`Valor_Entrada_Unt`= ?,`Margem_Lucro`= ?,"
-					+ " `idEstoque`= ? WHERE `idProduto` = ?";
+					+ " WHERE `idProduto` = ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
@@ -105,5 +106,44 @@ public class ProdutoBanco implements ProdutoDao {
 	public List<Produto> listarNome() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Produto> findByFiltros(FiltrosProdutos filtrosProdutos) {
+		List<Produto> listaProdutos = new ArrayList<>();
+		String sql;
+		PreparedStatement stmt = null;
+		try {
+
+			if (filtrosProdutos.getCondicaoQntEstoque() != null && filtrosProdutos.getCondicaoValor() == null) {
+				sql = "SELECT * FROM produto prod WHERE Valor_Entrada_Unt ?";
+				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+				stmt.setString(1, filtrosProdutos.getCondicaoQntEstoque());
+			}
+			if (filtrosProdutos.getCondicaoQntEstoque() == null && filtrosProdutos.getCondicaoValor() != null) {
+				sql = "SELECT * FROM produto prod WHERE Valor_Entrada_Unt ?";
+				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+				stmt.setString(1, filtrosProdutos.getCondicaoValor());
+			}
+			if (filtrosProdutos.getCondicaoQntEstoque() == null && filtrosProdutos.getCondicaoValor() == null) {
+				sql = "SELECT * FROM produto";
+				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			}
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Produto produto = new Produto();
+				produto.setIdProduto(rs.getInt("IdProduto"));
+				produto.setNome(rs.getString("Nome"));
+				produto.setQuantidadeEstoque(rs.getDouble("Quantidade_Estoque"));
+				produto.setValorEntrada(rs.getDouble("Valor_Entrada_Unt"));
+				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
+				listaProdutos.add(produto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaProdutos;
 	}
 }

@@ -1,45 +1,29 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
-import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
-import br.com.unoesc.veterinaria.banco.Tipo_AnimalBanco;
-import br.com.unoesc.veterinaria.dao.ClienteDao;
+import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.dao.RacaDao;
-import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
+import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.Animais;
-import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
-import br.com.unoesc.veterinaria.model.Tipo_Animal;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
 
 public class EstaticosParaAnimal {
 
 	public static Animais animal = new Animais();
 	public static boolean isEditando;
 
-	public static Tipo_Animal achaTipoAnimal(Integer idTipo_Animal) {
-		Tipo_Animal TipoAnimalAchado = new Tipo_Animal();
-		Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
+	public static TipoAnimal achaTipoAnimal(Integer idTipo_Animal) {
+		TipoAnimal TipoAnimalAchado = new TipoAnimal();
+		TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
 
-		for (Tipo_Animal tipoAnimal : tipoAnimalDao.listar()) {
+		for (TipoAnimal tipoAnimal : tipoAnimalDao.listar()) {
 			if (idTipo_Animal == tipoAnimal.getIdTipoAnimal()) {
 				TipoAnimalAchado = tipoAnimal;
 			}
 		}
 
 		return TipoAnimalAchado;
-	}
-
-	public static Cliente achaCliente(Integer idCliente) {
-		Cliente clienteAchado = new Cliente();
-		ClienteDao clienteDao = new ClienteBanco();
-
-		for (Cliente cliente : clienteDao.listar()) {
-			if (idCliente == cliente.getIdCliente()) {
-				clienteAchado = cliente;
-			}
-		}
-
-		return clienteAchado;
 	}
 
 	public static Raca achaRaca(Integer idRaca) {
@@ -52,5 +36,29 @@ public class EstaticosParaAnimal {
 			}
 		}
 		return racaAchado;
+	}
+
+	public static Raca achaRacaByNome(String nomeRaca) {
+		Raca racaAchada = new Raca();
+		RacaDao racaDao = new RacaBanco();
+
+		for (Raca raca : racaDao.listar()) {
+			if (nomeRaca.equals(raca.getNome())) {
+				racaAchada = raca;
+			}
+		}
+		return racaAchada;
+	}
+
+	public static TipoAnimal achaTipoAnimalByNome(String NomeCliente) {
+		TipoAnimal tipoAnimalAchado = new TipoAnimal();
+		TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
+
+		for (TipoAnimal tipoAnimal : tipoAnimalDao.listar()) {
+			if (NomeCliente.equals(tipoAnimal.getNome())) {
+				tipoAnimalAchado = tipoAnimal;
+			}
+		}
+		return tipoAnimalAchado;
 	}
 }

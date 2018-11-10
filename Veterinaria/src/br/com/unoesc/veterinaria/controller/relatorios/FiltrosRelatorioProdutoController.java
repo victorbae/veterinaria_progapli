@@ -1,21 +1,23 @@
 package br.com.unoesc.veterinaria.controller.relatorios;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
+import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
+import br.com.unoesc.veterinaria.dao.ProdutoDao;
+import br.com.unoesc.veterinaria.model.Produto;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class FiltrosRelatorioProdutoController {
@@ -23,27 +25,12 @@ public class FiltrosRelatorioProdutoController {
 	private final String MAIOR_QUE = "Maior que ";
 	private final String MENOR_QUE = "Menor que ";
 	private final String IGUAL_A = "Igual a ";
-	private String valorRadioButton;
 
 	@FXML
 	private ComboBox<String> cbxTipoRange;
 
-	private ToggleGroup group = new ToggleGroup();
-
 	@FXML
 	private TextField tfValorRange;
-
-	@FXML
-	private RadioButton rbMaiorQnt;
-
-	@FXML
-	private RadioButton rbMenorQnt;
-
-	@FXML
-	private RadioButton rbMaisVendidos;
-
-	@FXML
-	private RadioButton rbMenosVendidos;
 
 	@FXML
 	private Button btnCancelar;
@@ -54,19 +41,24 @@ public class FiltrosRelatorioProdutoController {
 	@FXML
 	private Button btnLimpar;
 
+	@FXML
+	private ComboBox<String> cbxTipoRangeQnt;
+
+	@FXML
+	private TextField tfValorRangeQnt;
+
 	private Stage dialogStage;
 
 	private boolean clicadoSalvar;
 
-	private Map<String, Object> parametros = new HashMap<>();
+	private FiltrosProdutos filtrosProduto;
+
+	private ProdutoDao produtoDao = new ProdutoBanco();
 
 	@FXML
 	private void initialize() {
 		populaCombo();
-		rbMaiorQnt.setToggleGroup(group);
-		rbMenorQnt.setToggleGroup(group);
-		rbMaisVendidos.setToggleGroup(group);
-		rbMenosVendidos.setToggleGroup(group);
+
 	}
 
 	@FXML
@@ -77,7 +69,7 @@ public class FiltrosRelatorioProdutoController {
 	@FXML
 	void Continuar(ActionEvent event) {
 		validaFiltros();
-		geraRelatorio(parametros);
+		geraRelatorio();
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
@@ -85,17 +77,18 @@ public class FiltrosRelatorioProdutoController {
 
 	}
 
-	public void geraRelatorio(Map<String, Object> parametros) {
-		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioAgrupado.jasper");
+	public void geraRelatorio() {
+		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioProdutos.jasper");
 		JasperPrint jasperPrint;
+		List<Produto> listaVendas = produtoDao.findByFiltros(filtrosProduto);
 		try {
-			if (parametros != null) {
-				jasperPrint = JasperFillManager.fillReport(url.getPath(), parametros,
-						ConexaoPrincipal.retornaconecao());
+			if (listaVendas != null) {
+				JRBeanCollectionDataSource pegaLista = new JRBeanCollectionDataSource(listaVendas);
+				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, pegaLista);
 			} else {
 				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, ConexaoPrincipal.retornaconecao());
 			}
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
@@ -108,9 +101,25 @@ public class FiltrosRelatorioProdutoController {
 
 	}
 
-	private Map<String, Object> validaFiltros() {
-		if (group.getSelectedToggle() != null) {
-			parametros.put("tipoQuery", valorRadioButton);
+	private FiltrosProdutos validaFiltros() {
+		filtrosProduto = new FiltrosProdutos();
+		if (tfValorRangeQnt.getText() != null && cbxTipoRangeQnt.getValue() != null) {
+			String range = null;
+			switch (cbxTipoRange.getValue()) {
+			case MAIOR_QUE:
+				range = ">" + tfValorRangeQnt.getText();
+				break;
+			case MENOR_QUE:
+				range = "<" + tfValorRangeQnt.getText();
+				break;
+			case IGUAL_A:
+				range = "=" + tfValorRangeQnt.getText();
+				break;
+			}
+			filtrosProduto.setCondicaoQntEstoque(range);
+		} else {
+			filtrosProduto.setCondicaoQntEstoque(null);
+
 		}
 		if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
 			String range = null;
@@ -125,35 +134,22 @@ public class FiltrosRelatorioProdutoController {
 				range = "=" + tfValorRange.getText();
 				break;
 			}
-			parametros.put("rangeValor", range);
+			filtrosProduto.setCondicaoValor(range);
+		} else {
+			filtrosProduto.setCondicaoValor(null);
+
 		}
-		return parametros;
-	}
-
-	@FXML
-	void maiorQnt(ActionEvent event) {
-		valorRadioButton = "produto com maior quantidade";
-	}
-
-	@FXML
-	void maisVendidos(ActionEvent event) {
-		valorRadioButton = "produto mais vendido";
-	}
-
-	@FXML
-	void menorQnt(ActionEvent event) {
-		valorRadioButton = "produto com menor quantidade";
-	}
-
-	@FXML
-	void menosVendidos(ActionEvent event) {
-		valorRadioButton = "produto menos vendido";
+		return filtrosProduto;
 	}
 
 	private void populaCombo() {
 		cbxTipoRange.getItems().add(MAIOR_QUE);
 		cbxTipoRange.getItems().add(MENOR_QUE);
 		cbxTipoRange.getItems().add(IGUAL_A);
+
+		cbxTipoRangeQnt.getItems().add(MAIOR_QUE);
+		cbxTipoRangeQnt.getItems().add(MENOR_QUE);
+		cbxTipoRangeQnt.getItems().add(IGUAL_A);
 	}
 
 	public void setStageDialog(Stage dialogStage) {

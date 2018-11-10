@@ -59,6 +59,10 @@ public class RacaBanco implements RacaDao {
 
 	}
 
+	/*
+	 * CREATE OR REPLACE VIEW lista_dados_raca AS SELECT ra.idRaca AS Id_Raca,
+	 * ra.nome AS Nome FROM raca ra;
+	 */
 	@Override
 	public List<Raca> listar() {
 		List<Raca> raca = new ArrayList<>();
@@ -67,7 +71,7 @@ public class RacaBanco implements RacaDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
 			while (rs.next()) {
 				Raca racas = new Raca();
-				racas.setIdRaca(rs.getInt("idRaca"));
+				racas.setIdRaca(rs.getInt("ID_Raca"));
 				racas.setNome(rs.getString("Nome"));
 
 				raca.add(racas);

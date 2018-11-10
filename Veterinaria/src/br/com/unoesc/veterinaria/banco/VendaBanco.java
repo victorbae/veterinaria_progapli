@@ -12,6 +12,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Venda;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 
 public class VendaBanco implements VendaDao {
@@ -98,5 +99,37 @@ public class VendaBanco implements VendaDao {
 			e.printStackTrace();
 		}
 		return vendas;
+	}
+
+	@Override
+	public List<Venda> findByFiltros(FiltrosVenda filtrosVenda) {
+		List<Venda> listaVenda = new ArrayList<>();
+		try {
+			// @formatter:off
+			String sql = "SELECT * FROM venda ve " + " JOIN cliente cl on ve.idCliente = cl.idCliente"
+					+ " WHERE (ve.idCliente = ? or ? is null) OR (ve.Data_Venda = ? or ? is null)";
+			// @formatter:on
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
+			stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
+			stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
+			stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
+//			stmt.setString(5, filtrosVenda.getTipoCondicaoValor());
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Venda venda = new Venda();
+				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
+				venda.setDataVenda(rs.getDate("Data_Venda").toLocalDate());
+				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
+				venda.setValorTotal(rs.getDouble("valorTotal"));
+				venda.setIdVenda(rs.getInt("idVenda"));
+
+				listaVenda.add(venda);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaVenda;
 	}
 }

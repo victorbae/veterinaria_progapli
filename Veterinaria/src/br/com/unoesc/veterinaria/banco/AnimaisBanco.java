@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.model.Animais;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosAnimais;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 
 public class AnimaisBanco implements AnimaisDao {
 
@@ -86,11 +89,11 @@ public class AnimaisBanco implements AnimaisDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
-				animal.setIdAnimal(rs.getInt("idAnimal"));
+				animal.setIdAnimal(rs.getInt("id_Animal"));
 				animal.setNome(rs.getString("Nome"));
 				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				animal.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
-				animal.setCliente(EstaticosParaAnimal.achaCliente(rs.getInt("idCliente")));
+				animal.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
 				animal.setRaca(EstaticosParaAnimal.achaRaca(rs.getInt("idRaca")));
 
 				animais.add(animal);
@@ -117,5 +120,34 @@ public class AnimaisBanco implements AnimaisDao {
 			e.printStackTrace();
 		}
 		return animais;
+	}
+
+	@Override
+	public List<Animais> findByFiltros(FiltrosAnimais filtroAnimal) {
+		List<Animais> listaAnimais = new ArrayList<>();
+		try {
+			String sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca "
+					+ "WHERE (a.idCliente = ?) AND (a.idTipo_Animal = ?) AND (ta.idRaca = ?)";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			stmt.setInt(1, filtroAnimal.getCliente().getIdCliente());
+			stmt.setInt(2, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
+			stmt.setInt(3, filtroAnimal.getRaca().getIdRaca());
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Animais animal = new Animais();
+				animal.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
+				animal.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
+				animal.setIdAnimal(rs.getInt("idAnimal"));
+				animal.setNome(rs.getString("Nome"));
+				animal.setRaca(EstaticosParaAnimal.achaRaca(rs.getInt("idRaca")));
+				animal.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
+
+				listaAnimais.add(animal);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaAnimais;
 	}
 }

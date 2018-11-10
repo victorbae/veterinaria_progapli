@@ -2,21 +2,21 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnimal;
-import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.controller.relatorios.FiltrosRelatorioAnimaisController;
+import br.com.unoesc.veterinaria.model.Produto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class TipoAnimalDialogFactory {
+public class RelatorioAnimalDialogFactory {
 
 	private Stage stageDono;
 
-	private TipoAnimal tipoAnimalDevolta;
+	private Produto produtoDevolta;
 
-	public TipoAnimalDialogFactory(Stage stage) {
+	public RelatorioAnimalDialogFactory(Stage stage) {
 		this.stageDono = stage;
 	}
 
@@ -24,19 +24,20 @@ public class TipoAnimalDialogFactory {
 		boolean clicandoSalvar = false;
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroTipoAnimal.fxml"));
+		loader.setLocation(
+				getClass().getResource("/br/com/unoesc/veterinaria/fxml/relatorios/FiltrosRelatorioAnimais.fxml"));
 		try {
-			AnchorPane animaisDialog = (AnchorPane) loader.load();
+			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Novo Animal");
+			dialogStage.setTitle("Filtros Relatório");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
-			Scene scene = new Scene(animaisDialog);
+			Scene scene = new Scene(produtoDialog);
 			dialogStage.setScene(scene);
 
-			ControllerCadastroTipoAnimal controller = loader.getController();
-			controller.setDialogStage(dialogStage);
+			FiltrosRelatorioAnimaisController controller = loader.getController();
+			controller.setStageDialog(dialogStage);
 			dialogStage.showAndWait();
 
 			clicandoSalvar = controller.clicadoSalvar();
@@ -47,7 +48,8 @@ public class TipoAnimalDialogFactory {
 		return clicandoSalvar;
 	}
 
-	public TipoAnimal retornaTipoAnimal() {
-		return tipoAnimalDevolta;
+	public Produto retornaProduto() {
+		return produtoDevolta;
 	}
+
 }
