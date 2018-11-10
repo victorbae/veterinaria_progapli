@@ -10,9 +10,11 @@ import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
+import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,10 +29,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class FiltrosRelatorioVendaController {
-
-	private final String MAIOR_QUE = "Maior que ";
-	private final String MENOR_QUE = "Menor que ";
-	private final String IGUAL_A = "Igual a ";
 
 	@FXML
 	private TextField tfCliente;
@@ -112,38 +110,47 @@ public class FiltrosRelatorioVendaController {
 
 	private FiltrosVenda validaFiltros() {
 		filtrosVenda = new FiltrosVenda();
-		if (tfCliente.getText() != null) {
-			filtrosVenda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
+		for (Cliente cliente : clienteDao.listar()) {
+			if (tfCliente.getText() == cliente.getNomeCompleto()) {
+				filtrosVenda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
+			}
 		}
+
 		if (dpData.getValue() != null) {
 			filtrosVenda.setDataVenda(dpData.getValue());
 		}
 
 		if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
-			String range = null;
+			Double valor = null;
+			String operacao = null;
 			switch (cbxTipoRange.getValue()) {
-			case MAIOR_QUE:
-				range = ">" + tfValorRange.getText();
+			case EstaticosParaGeral.MAIOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
-			case MENOR_QUE:
-				range = "<" + tfValorRange.getText();
+			case EstaticosParaGeral.MENOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
-			case IGUAL_A:
-				range = "=" + tfValorRange.getText();
+			case EstaticosParaGeral.IGUAL_A:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
 			}
-			filtrosVenda.setTipoCondicaoValor(range);
+			filtrosVenda.setOperacao(operacao);
+			filtrosVenda.setCondicaoValor(valor);
 		} else {
-			filtrosVenda.setTipoCondicaoValor("is not null");
+			filtrosVenda.setOperacao(null);
+			filtrosVenda.setCondicaoValor(null);
 
 		}
 		return filtrosVenda;
 	}
 
 	private void populaCombo() {
-		cbxTipoRange.getItems().add(MAIOR_QUE);
-		cbxTipoRange.getItems().add(MENOR_QUE);
-		cbxTipoRange.getItems().add(IGUAL_A);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MAIOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MENOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.IGUAL_A);
 	}
 
 	public void setStageDialog(Stage dialogStage) {

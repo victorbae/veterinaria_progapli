@@ -11,6 +11,7 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 
 public class ProdutoBanco implements ProdutoDao {
 
@@ -111,21 +112,42 @@ public class ProdutoBanco implements ProdutoDao {
 	@Override
 	public List<Produto> findByFiltros(FiltrosProdutos filtrosProdutos) {
 		List<Produto> listaProdutos = new ArrayList<>();
-		String sql;
+		String sql = null;
 		PreparedStatement stmt = null;
 		try {
 
-			if (filtrosProdutos.getCondicaoQntEstoque() != null && filtrosProdutos.getCondicaoValor() == null) {
-				sql = "SELECT * FROM produto prod WHERE Valor_Entrada_Unt ?";
+			if (filtrosProdutos.getCondicaoQntEstoque() != null && filtrosProdutos.getValorEst() != null) {
+				switch (filtrosProdutos.getCondicaoQntEstoque()) {
+				case EstaticosParaGeral.MAIOR_QUE:
+					sql = "SELECT * FROM produto WHERE (Quantidade_Estoque > ? or ? is null)";
+					break;
+				case EstaticosParaGeral.MENOR_QUE:
+					sql = "SELECT * FROM produto WHERE (Quantidade_Estoque < ? or ? is null)";
+					break;
+				case EstaticosParaGeral.IGUAL_A:
+					sql = "SELECT * FROM produto WHERE (Quantidade_Estoque = ? or ? is null)";
+					break;
+				}
 				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-				stmt.setString(1, filtrosProdutos.getCondicaoQntEstoque());
-			}
-			if (filtrosProdutos.getCondicaoQntEstoque() == null && filtrosProdutos.getCondicaoValor() != null) {
-				sql = "SELECT * FROM produto prod WHERE Valor_Entrada_Unt ?";
+				stmt.setDouble(1, filtrosProdutos.getValorEst() != null ? filtrosProdutos.getValorEst() : null);
+				stmt.setDouble(2, filtrosProdutos.getValorEst() != null ? filtrosProdutos.getValorEst() : null);
+
+			} else if (filtrosProdutos.getCondicaoValor() != null && filtrosProdutos.getValorUnt() != null) {
+				switch (filtrosProdutos.getCondicaoValor()) {
+				case EstaticosParaGeral.MAIOR_QUE:
+					sql = "SELECT * FROM produto WHERE (Valor_Entrada_Unt > ? or ? is null)";
+					break;
+				case EstaticosParaGeral.MENOR_QUE:
+					sql = "SELECT * FROM produto WHERE (Valor_Entrada_Unt < ? or ? is null)";
+					break;
+				case EstaticosParaGeral.IGUAL_A:
+					sql = "SELECT * FROM produto WHERE (Valor_Entrada_Unt = ? or ? is null)";
+					break;
+				}
 				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-				stmt.setString(1, filtrosProdutos.getCondicaoValor());
-			}
-			if (filtrosProdutos.getCondicaoQntEstoque() == null && filtrosProdutos.getCondicaoValor() == null) {
+				stmt.setDouble(1, filtrosProdutos.getValorUnt() != null ? filtrosProdutos.getValorUnt() : null);
+				stmt.setDouble(2, filtrosProdutos.getValorUnt() != null ? filtrosProdutos.getValorUnt() : null);
+			} else {
 				sql = "SELECT * FROM produto";
 				stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			}

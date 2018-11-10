@@ -2,19 +2,41 @@ package br.com.unoesc.veterinaria.model.filtros;
 
 public class FiltrosProdutos {
 
+	private String condicaoValor;
+
+	private Double valorUnt;
+
 	private String condicaoQntEstoque;
 
-	private String condicaoValor;
+	private Double valorEst;
 
 	public FiltrosProdutos() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FiltrosProdutos(String condicaoQntEstoque, String condicaoValor) {
+	public FiltrosProdutos(String condicaoValor, Double valorUnt, String condicaoQntEstoque, Double valorEst) {
 		super();
-		this.condicaoQntEstoque = condicaoQntEstoque;
 		this.condicaoValor = condicaoValor;
+		this.valorUnt = valorUnt;
+		this.condicaoQntEstoque = condicaoQntEstoque;
+		this.valorEst = valorEst;
+	}
+
+	public String getCondicaoValor() {
+		return condicaoValor;
+	}
+
+	public void setCondicaoValor(String condicaoValor) {
+		this.condicaoValor = condicaoValor;
+	}
+
+	public Double getValorUnt() {
+		return valorUnt;
+	}
+
+	public void setValorUnt(Double valorUnt) {
+		this.valorUnt = valorUnt;
 	}
 
 	public String getCondicaoQntEstoque() {
@@ -25,12 +47,12 @@ public class FiltrosProdutos {
 		this.condicaoQntEstoque = condicaoQntEstoque;
 	}
 
-	public String getCondicaoValor() {
-		return condicaoValor;
+	public Double getValorEst() {
+		return valorEst;
 	}
 
-	public void setCondicaoValor(String condicaoValor) {
-		this.condicaoValor = condicaoValor;
+	public void setValorEst(Double valorEst) {
+		this.valorEst = valorEst;
 	}
 
 }

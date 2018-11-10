@@ -14,6 +14,7 @@ import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 
 public class VendaBanco implements VendaDao {
 
@@ -104,19 +105,49 @@ public class VendaBanco implements VendaDao {
 	@Override
 	public List<Venda> findByFiltros(FiltrosVenda filtrosVenda) {
 		List<Venda> listaVenda = new ArrayList<>();
+		String sql = null;
 		try {
-			// @formatter:off
-			String sql = "SELECT * FROM venda ve " + " JOIN cliente cl on ve.idCliente = cl.idCliente"
-					+ " WHERE (ve.idCliente = ? or ? is null) OR (ve.Data_Venda = ? or ? is null)";
-			// @formatter:on
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-			stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
-			stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
-			stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
-			stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
-//			stmt.setString(5, filtrosVenda.getTipoCondicaoValor());
-			ResultSet rs = stmt.executeQuery();
 
+			if (filtrosVenda.getOperacao() != null && filtrosVenda.getCondicaoValor() != null) {
+				switch (filtrosVenda.getOperacao()) {
+				case EstaticosParaGeral.MAIOR_QUE:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal > ?)";
+					break;
+				case EstaticosParaGeral.MENOR_QUE:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal < ?)";
+					break;
+				case EstaticosParaGeral.IGUAL_A:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal = ?)";
+					break;
+				}
+			} else if (filtrosVenda.getCliente() != null && filtrosVenda.getDataVenda() != null) {
+				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+						+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null)";
+			} else {
+				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+						+ " WHERE (? = ?) OR (? = ?)";
+			}
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			try {
+				stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
+				stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
+				stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
+				stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
+			} catch (NullPointerException e) {
+				stmt.setString(1, "null");
+				stmt.setString(2, "null");
+				stmt.setString(3, "null");
+				stmt.setString(4, "null");
+			}
+
+			if (filtrosVenda.getOperacao() != null && filtrosVenda.getCondicaoValor() != null) {
+				stmt.setDouble(5, filtrosVenda.getCondicaoValor() != null ? filtrosVenda.getCondicaoValor() : null);
+			}
+
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));

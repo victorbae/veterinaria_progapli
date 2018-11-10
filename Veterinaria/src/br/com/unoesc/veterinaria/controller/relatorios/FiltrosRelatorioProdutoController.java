@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,10 +22,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class FiltrosRelatorioProdutoController {
-
-	private final String MAIOR_QUE = "Maior que ";
-	private final String MENOR_QUE = "Menor que ";
-	private final String IGUAL_A = "Igual a ";
 
 	@FXML
 	private ComboBox<String> cbxTipoRange;
@@ -103,53 +100,59 @@ public class FiltrosRelatorioProdutoController {
 
 	private FiltrosProdutos validaFiltros() {
 		filtrosProduto = new FiltrosProdutos();
+		String operacao = null;
+		Double valor = null;
 		if (tfValorRangeQnt.getText() != null && cbxTipoRangeQnt.getValue() != null) {
-			String range = null;
-			switch (cbxTipoRange.getValue()) {
-			case MAIOR_QUE:
-				range = ">" + tfValorRangeQnt.getText();
+			switch (cbxTipoRangeQnt.getValue()) {
+			case EstaticosParaGeral.MAIOR_QUE:
+				operacao = cbxTipoRangeQnt.getValue();
+				valor = Double.valueOf(tfValorRangeQnt.getText());
 				break;
-			case MENOR_QUE:
-				range = "<" + tfValorRangeQnt.getText();
+			case EstaticosParaGeral.MENOR_QUE:
+				operacao = cbxTipoRangeQnt.getValue();
+				valor = Double.valueOf(tfValorRangeQnt.getText());
 				break;
-			case IGUAL_A:
-				range = "=" + tfValorRangeQnt.getText();
+			case EstaticosParaGeral.IGUAL_A:
+				operacao = cbxTipoRangeQnt.getValue();
+				valor = Double.valueOf(tfValorRangeQnt.getText());
 				break;
 			}
-			filtrosProduto.setCondicaoQntEstoque(range);
+			filtrosProduto.setCondicaoQntEstoque(operacao);
+			filtrosProduto.setValorEst(valor);
+		} else if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
+			switch (cbxTipoRange.getValue()) {
+			case EstaticosParaGeral.MAIOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
+				break;
+			case EstaticosParaGeral.MENOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
+				break;
+			case EstaticosParaGeral.IGUAL_A:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
+				break;
+			}
+			filtrosProduto.setCondicaoValor(operacao);
+			filtrosProduto.setValorUnt(valor);
 		} else {
 			filtrosProduto.setCondicaoQntEstoque(null);
-
-		}
-		if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
-			String range = null;
-			switch (cbxTipoRange.getValue()) {
-			case MAIOR_QUE:
-				range = ">" + tfValorRange.getText();
-				break;
-			case MENOR_QUE:
-				range = "<" + tfValorRange.getText();
-				break;
-			case IGUAL_A:
-				range = "=" + tfValorRange.getText();
-				break;
-			}
-			filtrosProduto.setCondicaoValor(range);
-		} else {
+			filtrosProduto.setValorEst(null);
 			filtrosProduto.setCondicaoValor(null);
-
+			filtrosProduto.setValorUnt(null);
 		}
 		return filtrosProduto;
 	}
 
 	private void populaCombo() {
-		cbxTipoRange.getItems().add(MAIOR_QUE);
-		cbxTipoRange.getItems().add(MENOR_QUE);
-		cbxTipoRange.getItems().add(IGUAL_A);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MAIOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MENOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.IGUAL_A);
 
-		cbxTipoRangeQnt.getItems().add(MAIOR_QUE);
-		cbxTipoRangeQnt.getItems().add(MENOR_QUE);
-		cbxTipoRangeQnt.getItems().add(IGUAL_A);
+		cbxTipoRangeQnt.getItems().add(EstaticosParaGeral.MAIOR_QUE);
+		cbxTipoRangeQnt.getItems().add(EstaticosParaGeral.MENOR_QUE);
+		cbxTipoRangeQnt.getItems().add(EstaticosParaGeral.IGUAL_A);
 	}
 
 	public void setStageDialog(Stage dialogStage) {

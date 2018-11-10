@@ -8,18 +8,20 @@ public class FiltrosVenda {
 
 	private Cliente cliente;
 	private LocalDate dataVenda;
-	private String tipoCondicaoValor;
+	private Double condicaoValor;
+	private String operacao;
 
 	public FiltrosVenda() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FiltrosVenda(Cliente cliente, LocalDate dataVenda, String tipoCondicaoValor) {
+	public FiltrosVenda(Cliente cliente, LocalDate dataVenda, Double condicaoValor, String operacao) {
 		super();
 		this.cliente = cliente;
 		this.dataVenda = dataVenda;
-		this.tipoCondicaoValor = tipoCondicaoValor;
+		this.condicaoValor = condicaoValor;
+		this.operacao = operacao;
 	}
 
 	public Cliente getCliente() {
@@ -38,12 +40,20 @@ public class FiltrosVenda {
 		this.dataVenda = dataVenda;
 	}
 
-	public String getTipoCondicaoValor() {
-		return tipoCondicaoValor;
+	public Double getCondicaoValor() {
+		return condicaoValor;
 	}
 
-	public void setTipoCondicaoValor(String tipoCondicaoValor) {
-		this.tipoCondicaoValor = tipoCondicaoValor;
+	public void setCondicaoValor(Double condicaoValor) {
+		this.condicaoValor = condicaoValor;
+	}
+
+	public String getOperacao() {
+		return operacao;
+	}
+
+	public void setOperacao(String operacao) {
+		this.operacao = operacao;
 	}
 
 }

@@ -128,13 +128,33 @@ public class AnimaisBanco implements AnimaisDao {
 	@Override
 	public List<Animais> findByFiltros(FiltrosAnimais filtroAnimal) {
 		List<Animais> listaAnimais = new ArrayList<>();
+		String sql = null;
 		try {
-			String sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca "
-					+ "WHERE (a.idCliente = ?) AND (a.idTipo_Animal = ?) AND (ta.idRaca = ?)";
+			if (filtroAnimal.getCliente() != null || filtroAnimal.getTipoAnimal() != null
+					|| filtroAnimal.getRaca() != null) {
+				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca "
+						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (ta.idRaca = ? or ? is null)";
+			} else {
+				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca"
+						+ " WHERE (? = ?) OR (? = ?) OR (? = ?)";
+			}
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-			stmt.setInt(1, filtroAnimal.getCliente().getIdCliente());
-			stmt.setInt(2, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
-			stmt.setInt(3, filtroAnimal.getRaca().getIdRaca());
+
+			try {
+				stmt.setInt(1, filtroAnimal.getCliente().getIdCliente());
+				stmt.setInt(2, filtroAnimal.getCliente().getIdCliente());
+				stmt.setInt(3, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
+				stmt.setInt(4, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
+				stmt.setInt(5, filtroAnimal.getRaca().getIdRaca());
+				stmt.setInt(6, filtroAnimal.getRaca().getIdRaca());
+			} catch (NullPointerException e) {
+				stmt.setString(1, "null");
+				stmt.setString(2, "null");
+				stmt.setString(3, "null");
+				stmt.setString(4, "null");
+				stmt.setString(5, "null");
+				stmt.setString(6, "null");
+			}
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
