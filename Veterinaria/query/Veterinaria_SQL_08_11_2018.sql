@@ -68,8 +68,6 @@ CREATE TABLE Raca(
   idRaca INT NOT NULL auto_increment primary key,
   Nome VARCHAR(45) NULL
   );
-  
-  CREATE OR REPLACE VIEW lista_dados_raca AS SELECT r.idRaca AS idRaca, r.Nome AS Nome FROM Raca r;
 
 CREATE TABLE Tipo_Animal(
   idTipo_Animal INT NOT NULL auto_increment primary key,
@@ -79,22 +77,22 @@ CREATE TABLE Tipo_Animal(
   CONSTRAINT fk_Tipo_Animal_Raca FOREIGN KEY (idRaca) REFERENCES Raca (idRaca)
 );
 
-CREATE OR REPLACE VIEW lista_dados_tipo_animal AS SELECT tp.idTipo_Animal AS idTipoAnimal, tp.Nome AS Nome, tp.idRaca AS Id_Raca  FROM tipo_animal tp;
-
 CREATE TABLE Animal(
   idAnimal INT NOT NULL auto_increment primary key,
   Nome VARCHAR(45) NULL,
   Data_Nascimento VARCHAR(45) NULL,
   idTipo_Animal INT NOT NULL,
+  idRaca INT NOT NULL,
   idCliente INT NOT NULL,
   
   CONSTRAINT fk_Animal_Tipo_Animal FOREIGN KEY (idTipo_Animal) REFERENCES Tipo_Animal (idTipo_Animal),
   
+  CONSTRAINT fk_Animal_Raca_Animal FOREIGN KEY (idRaca) REFERENCES Raca (idRaca),
+  
   CONSTRAINT fk_Animal_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)
 );
 
-CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS Id_Animal, ani.Nome AS Nome,
- ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
+	
 
 CREATE TABLE Funcionario (
     idFuncionario INT NOT NULL auto_increment primary key,
@@ -140,6 +138,11 @@ create or replace view view_lista_filiais as select idFilial as 'Id_Filial', Nom
 CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Qnt_Estoque, 
 pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idEstoque AS Id_Estoque FROM Produto pd;
 
+CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS Id_Animal, ani.Nome AS Nome, ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
+
+CREATE OR REPLACE VIEW lista_dados_tipo_animal AS SELECT tp.idTipo_Animal AS idTipoAnimal, tp.Nome AS Nome, tp.idRaca AS Id_Raca  FROM tipo_animal tp;
+
+CREATE OR REPLACE VIEW lista_dados_raca AS SELECT ra.idRaca AS Id_Raca, ra.nome AS Nome FROM raca ra;
 
 use delimiter $ 
  create trigger trg_apaga_resto_de_venda before delete on venda for each row
@@ -152,7 +155,7 @@ use delimiter $
  
  insert into Filial(Nome, Endereco, Telefone, CNPJ)values("Filial ROOT", "Endereco ROOT", "666666666", "666666666666");
  
- insert into funcionario(Nome, CPF,Data_Nascimento,idFilial,email,senha)values("Funcion√°rio ROOT", "66666666666", "2018-11-08","1", "root", "root");
+ insert into funcionario(Nome, CPF,Data_Nascimento,idFilial,email,senha)values("Funcion·rio ROOT", "66666666666", "2018-11-08","1", "root", "root");
  
  insert into Cliente(Nome_Completo, CPF, Data_Nascimento, Endereco, Telefone, idFilial) values("Cliente ROOT", "666666666", "2018-11-08", "Endereco ROOT", "66666666", 1);
  
