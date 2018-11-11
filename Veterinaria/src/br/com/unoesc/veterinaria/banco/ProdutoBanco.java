@@ -18,15 +18,14 @@ public class ProdutoBanco implements ProdutoDao {
 	@Override
 	public void inserir(Produto dado) {
 		try {
-			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idEstoque`) "
-					+ "VALUES (null,?,?,?,?,null)";
+			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`) "
+					+ "VALUES (null,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
-			// stmt.setInt(5, dado.getEstoque().getIdEstoque());
 			stmt.executeUpdate();
 
 			// Quando o campo é auto increment no banco
@@ -50,7 +49,6 @@ public class ProdutoBanco implements ProdutoDao {
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
-			// stmt.setInt(5, dado.getEstoque().getIdEstoque());
 			stmt.setInt(6, dado.getIdProduto());
 
 			stmt.executeUpdate();
@@ -93,8 +91,6 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setQuantidadeEstoque(rs.getDouble("Qnt_Estoque"));
 				produto.setValorEntrada(rs.getDouble("Valor_Ent_Unt"));
 				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
-				// produto.setEstoque(produto.achaEstoque(rs.getInt("Id_Estoque")));
-				// TODO Criar metodo para buscar filial pelo codigo passado
 				produtos.add(produto);
 			}
 		} catch (SQLException e) {

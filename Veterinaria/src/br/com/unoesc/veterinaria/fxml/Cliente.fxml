@@ -11,12 +11,12 @@
    <children>
       <TableView fx:id="tvCliente" layoutX="10.0" layoutY="186.0" prefHeight="500.0" prefWidth="880.0">
         <columns>
-          <TableColumn fx:id="tcNomeCompleto" prefWidth="240.0" text="Nome" />
-            <TableColumn fx:id="tcCpf" prefWidth="128.0" text="CPF" />
-            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" text="Data Nascimento" />
-            <TableColumn fx:id="tcEndereco" prefWidth="128.0" text="Endereco" />
-            <TableColumn fx:id="tcTelefone" prefWidth="128.0" text="Telefone" />
-            <TableColumn fx:id="tcFilial" prefWidth="128.0" text="Filial" />
+          <TableColumn fx:id="tcNomeCompleto" prefWidth="240.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tcCpf" prefWidth="128.0" resizable="false" text="CPF" />
+            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" resizable="false" text="Data Nascimento" />
+            <TableColumn fx:id="tcEndereco" prefWidth="128.0" resizable="false" text="Endereco" />
+            <TableColumn fx:id="tcTelefone" prefWidth="128.0" resizable="false" text="Telefone" />
+            <TableColumn fx:id="tcFilial" prefWidth="128.0" resizable="false" text="Filial" />
         </columns>
       </TableView>
       <Label layoutX="369.0" layoutY="14.0" text="Clientes">

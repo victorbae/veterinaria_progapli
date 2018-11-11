@@ -7,11 +7,9 @@ public class Produto {
 	private Double quantidadeEstoque;
 	private Double valorEntrada;
 	private Double margemLucro;
-//private	Estoque estoque;
 
 	public Produto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Produto(Integer idProduto, String nome, Double quantidadeEstoque, Double valorEntrada, Double margemLucro) {

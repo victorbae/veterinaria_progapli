@@ -11,11 +11,11 @@
    <children>
       <TableView fx:id="tvVendas" layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
          <columns>
-            <TableColumn fx:id="tcCliente" prefWidth="240.0" text="Cliente" />
-            <TableColumn fx:id="tcFilial" prefWidth="160.0" text="Filial" />
-            <TableColumn fx:id="tcValorDesconto" prefWidth="160.0" text="Valor Desconto" />
-            <TableColumn fx:id="tcDataVenda" prefWidth="160.0" text="Data " />
-            <TableColumn fx:id="tcValorTotal" prefWidth="160.0" text="Valor Total" />
+            <TableColumn fx:id="tcCliente" editable="false" prefWidth="240.0" resizable="false" text="Cliente" />
+            <TableColumn fx:id="tcFilial" editable="false" prefWidth="160.0" resizable="false" text="Filial" />
+            <TableColumn fx:id="tcValorDesconto" editable="false" prefWidth="160.0" resizable="false" text="Valor Desconto" />
+            <TableColumn fx:id="tcDataVenda" editable="false" prefWidth="160.0" resizable="false" text="Data " />
+            <TableColumn fx:id="tcValorTotal" editable="false" prefWidth="160.0" resizable="false" text="Valor Total" />
          </columns>
       </TableView>
       <Label layoutX="375.0" layoutY="23.0" text="Vendas">
