@@ -221,7 +221,9 @@ public class ControllerCadastroVenda {
 		venda.setCliente(cliente);
 		venda.setDataVenda(dtDataVenda.getValue());
 		venda.setFilial(cliente.getFilial());
-		venda.setValorDesconto(EstaticosParaVenda.venda.getValorDesconto());
+		venda.setValorDesconto(
+				EstaticosParaVenda.venda.getValorDesconto() != null ? EstaticosParaVenda.venda.getValorDesconto()
+						: 0.0);
 		venda.setValorTotal(Double.valueOf(tfValorTotal.getText()));
 
 		colocaVendaNoCarrinho(EstaticosParaVenda.carrinhoAux);

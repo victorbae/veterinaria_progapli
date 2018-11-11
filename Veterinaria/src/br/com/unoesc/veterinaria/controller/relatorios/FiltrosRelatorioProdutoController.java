@@ -13,7 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -39,6 +41,15 @@ public class FiltrosRelatorioProdutoController {
 	private Button btnLimpar;
 
 	@FXML
+	private ToggleGroup group = new ToggleGroup();
+
+	@FXML
+	private RadioButton rbValor;
+
+	@FXML
+	private RadioButton rbQntEstoque;
+
+	@FXML
 	private ComboBox<String> cbxTipoRangeQnt;
 
 	@FXML
@@ -55,6 +66,8 @@ public class FiltrosRelatorioProdutoController {
 	@FXML
 	private void initialize() {
 		populaCombo();
+		rbQntEstoque.setToggleGroup(group);
+		rbValor.setToggleGroup(group);
 
 	}
 
@@ -96,6 +109,30 @@ public class FiltrosRelatorioProdutoController {
 		tfValorRange.clear();
 		cbxTipoRange.setValue(null);
 
+	}
+
+	@FXML
+	void liberaEstoque(ActionEvent event) {
+		bloqueiaConformeRadioButton(false);
+	}
+
+	@FXML
+	void liberaValor(ActionEvent event) {
+		bloqueiaConformeRadioButton(true);
+	}
+
+	private void bloqueiaConformeRadioButton(boolean sera) {
+		cbxTipoRangeQnt.setDisable(sera);
+		cbxTipoRangeQnt.setValue(null);
+
+		tfValorRangeQnt.setDisable(sera);
+		tfValorRangeQnt.setText(null);
+
+		cbxTipoRange.setDisable(!sera);
+		cbxTipoRange.setValue(null);
+
+		tfValorRange.setDisable(!sera);
+		tfValorRange.setText(null);
 	}
 
 	private FiltrosProdutos validaFiltros() {

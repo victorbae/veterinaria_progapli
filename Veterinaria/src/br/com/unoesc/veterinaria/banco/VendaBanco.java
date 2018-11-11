@@ -134,11 +134,14 @@ public class VendaBanco implements VendaDao {
 			try {
 				stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
 				stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
-				stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
-				stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
 			} catch (NullPointerException e) {
 				stmt.setString(1, "null");
 				stmt.setString(2, "null");
+			}
+			try {
+				stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
+				stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
+			} catch (NullPointerException e) {
 				stmt.setString(3, "null");
 				stmt.setString(4, "null");
 			}

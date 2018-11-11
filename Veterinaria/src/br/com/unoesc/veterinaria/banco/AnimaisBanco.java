@@ -112,7 +112,7 @@ public class AnimaisBanco implements AnimaisDao {
 		List<Animais> animais = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal ORDER BY a.Id_Animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
 				animal.setIdAnimal(rs.getInt("Id_Animal"));
@@ -133,25 +133,31 @@ public class AnimaisBanco implements AnimaisDao {
 			if (filtroAnimal.getCliente() != null || filtroAnimal.getTipoAnimal() != null
 					|| filtroAnimal.getRaca() != null) {
 				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca "
-						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (ta.idRaca = ? or ? is null)";
+						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (ta.idRaca = ? or ? is null) ORDER BY a.idAnimal";
 			} else {
 				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca"
-						+ " WHERE (? = ?) OR (? = ?) OR (? = ?)";
+						+ " WHERE (? = ?) OR (? = ?) OR (? = ?) ORDER BY a.idAnimal";
 			}
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 
 			try {
 				stmt.setInt(1, filtroAnimal.getCliente().getIdCliente());
 				stmt.setInt(2, filtroAnimal.getCliente().getIdCliente());
-				stmt.setInt(3, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
-				stmt.setInt(4, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
-				stmt.setInt(5, filtroAnimal.getRaca().getIdRaca());
-				stmt.setInt(6, filtroAnimal.getRaca().getIdRaca());
 			} catch (NullPointerException e) {
 				stmt.setString(1, "null");
 				stmt.setString(2, "null");
+			}
+			try {
+				stmt.setInt(3, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
+				stmt.setInt(4, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
+			} catch (NullPointerException e) {
 				stmt.setString(3, "null");
 				stmt.setString(4, "null");
+			}
+			try {
+				stmt.setInt(5, filtroAnimal.getRaca().getIdRaca());
+				stmt.setInt(6, filtroAnimal.getRaca().getIdRaca());
+			} catch (NullPointerException e) {
 				stmt.setString(5, "null");
 				stmt.setString(6, "null");
 			}
