@@ -94,7 +94,7 @@ public class Tipo_AnimalBanco implements Tipo_AnimalDao {
 		List<Tipo_Animal> tipoAnimal = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_tipo_animal");
+			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_tipo_animal");
 			while (rs.next()) {
 				Tipo_Animal tipo_Animal = new Tipo_Animal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
