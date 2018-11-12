@@ -1,11 +1,12 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
 import br.com.unoesc.veterinaria.banco.RacaBanco;
-import br.com.unoesc.veterinaria.banco.Tipo_AnimalBanco;
+import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.dao.RacaDao;
-import br.com.unoesc.veterinaria.dao.Tipo_AnimalDao;
+import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.Raca;
-import br.com.unoesc.veterinaria.model.Tipo_Animal;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,10 +31,10 @@ public class ControllerCadastroTipoAnimal {
 	@FXML
 	private Button btnLimpar;
 
-	private Tipo_Animal tipoAnimal;
+	private TipoAnimal tipoAnimal;
 	private Stage dialogStage;
 	private boolean clicadoSalvar;
-	private Tipo_AnimalDao tipoAnimalDao = new Tipo_AnimalBanco();
+	private TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
 	private RacaDao racaDao = new RacaBanco();
 
 	@FXML
@@ -81,9 +82,9 @@ public class ControllerCadastroTipoAnimal {
 	}
 
 	public void preencheTipoAnimal() {
-		tipoAnimal = new Tipo_Animal();
+		tipoAnimal = new TipoAnimal();
 		tipoAnimal.setNome(tfNome.getText());
-		tipoAnimal.setRaca(EstaticosParaTipoAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
+		tipoAnimal.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
 
 	}
 

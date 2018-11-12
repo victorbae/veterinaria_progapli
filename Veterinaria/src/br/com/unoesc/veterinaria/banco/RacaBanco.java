@@ -13,6 +13,9 @@ import br.com.unoesc.veterinaria.model.Raca;
 
 public class RacaBanco implements RacaDao {
 
+	// CREATE OR REPLACE VIEW lista_dados_raca AS SELECT r.idRaca AS idRaca, r.Nome
+	// AS Nome FROM Raca r;
+
 	@Override
 	public void inserir(Raca dado) {
 		try {
@@ -59,6 +62,10 @@ public class RacaBanco implements RacaDao {
 
 	}
 
+	/*
+	 * CREATE OR REPLACE VIEW lista_dados_raca AS SELECT ra.idRaca AS Id_Raca,
+	 * ra.nome AS Nome FROM raca ra;
+	 */
 	@Override
 	public List<Raca> listar() {
 		List<Raca> raca = new ArrayList<>();
@@ -85,7 +92,7 @@ public class RacaBanco implements RacaDao {
 		List<Raca> raca = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
+			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_raca");
 			while (rs.next()) {
 				Raca racas = new Raca();
 				racas.setIdRaca(rs.getInt("idRaca"));

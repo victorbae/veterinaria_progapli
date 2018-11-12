@@ -29,7 +29,7 @@ public class RelatorioVendaDialogFactory {
 			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Filtros Relátorio");
+			dialogStage.setTitle("Filtros Relatório");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(produtoDialog);

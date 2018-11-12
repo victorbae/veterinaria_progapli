@@ -38,6 +38,11 @@
                   <Font name="Gabriola" size="23.0" />
                </font>
             </Button>
+            <Button fx:id="btnTipoAnimalRaca" layoutX="2.0" layoutY="518.0" mnemonicParsing="false" onAction="#TipoAnimalRaca" prefHeight="45.0" prefWidth="192.0" text="Tipo do Animal \ Raça">
+               <font>
+                  <Font name="Gabriola" size="23.0" />
+               </font>
+            </Button>
 
 			</children>
 		</Pane>

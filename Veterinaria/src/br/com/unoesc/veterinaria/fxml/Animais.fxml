@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
    <children>
       <TableView fx:id="tvAnimais" layoutX="20.0" layoutY="196.0" prefHeight="500.0" prefWidth="880.0">
          <columns>
@@ -35,6 +34,11 @@
          </font>
       </Button>
       <Button fx:id="btnEditar" layoutX="709.0" layoutY="149.0" mnemonicParsing="false" onAction="#Editar" prefWidth="77.0" text="Editar" textAlignment="CENTER">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnExibeRelatorio" layoutX="24.0" layoutY="147.0" mnemonicParsing="false" onAction="#exibeRelatorio" text="Relatórios" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

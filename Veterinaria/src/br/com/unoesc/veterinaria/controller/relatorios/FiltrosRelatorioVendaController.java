@@ -1,14 +1,20 @@
 package br.com.unoesc.veterinaria.controller.relatorios;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.controlsfx.control.textfield.TextFields;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
+import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
+import br.com.unoesc.veterinaria.dao.VendaDao;
+import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.model.Venda;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,13 +25,10 @@ import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class FiltrosRelatorioVendaController {
-
-	private final String MAIOR_QUE = "Maior que ";
-	private final String MENOR_QUE = "Menor que ";
-	private final String IGUAL_A = "Igual a ";
 
 	@FXML
 	private TextField tfCliente;
@@ -52,7 +55,9 @@ public class FiltrosRelatorioVendaController {
 
 	private boolean clicadoSalvar;
 
-	private Map<String, Object> parametros = new HashMap<>();
+	private FiltrosVenda filtrosVenda;
+
+	private VendaDao vendaDao = new VendaBanco();
 
 	private ClienteDao clienteDao = new ClienteBanco();
 
@@ -70,7 +75,7 @@ public class FiltrosRelatorioVendaController {
 	@FXML
 	void Continuar(ActionEvent event) {
 		validaFiltros();
-		geraRelatorio(parametros);
+		geraRelatorio();
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();
@@ -78,17 +83,18 @@ public class FiltrosRelatorioVendaController {
 
 	}
 
-	public void geraRelatorio(Map<String, Object> parametros) {
-		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioAgrupado.jasper");
+	public void geraRelatorio() {
+		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioVendas.jasper");
 		JasperPrint jasperPrint;
+		List<Venda> listaVendas = vendaDao.findByFiltros(filtrosVenda);
 		try {
-			if (parametros != null) {
-				jasperPrint = JasperFillManager.fillReport(url.getPath(), parametros,
-						ConexaoPrincipal.retornaconecao());
+			if (listaVendas != null) {
+				JRBeanCollectionDataSource pegaLista = new JRBeanCollectionDataSource(listaVendas);
+				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, pegaLista);
 			} else {
 				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, ConexaoPrincipal.retornaconecao());
 			}
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
@@ -102,36 +108,49 @@ public class FiltrosRelatorioVendaController {
 		dpData.setValue(null);
 	}
 
-	private Map<String, Object> validaFiltros() {
-		if (tfCliente.getText() != null) {
-			parametros.put("nomeCliente", tfCliente.getText());
+	private FiltrosVenda validaFiltros() {
+		filtrosVenda = new FiltrosVenda();
+		for (Cliente cliente : clienteDao.listar()) {
+			if (tfCliente.getText() == cliente.getNomeCompleto()) {
+				filtrosVenda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
+			}
 		}
+
 		if (dpData.getValue() != null) {
-			parametros.put("dataVenda", dpData.getValue());
+			filtrosVenda.setDataVenda(dpData.getValue());
 		}
 
 		if (tfValorRange.getText() != null && cbxTipoRange.getValue() != null) {
-			String range = null;
+			Double valor = null;
+			String operacao = null;
 			switch (cbxTipoRange.getValue()) {
-			case MAIOR_QUE:
-				range = ">" + tfValorRange.getText();
+			case EstaticosParaGeral.MAIOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
-			case MENOR_QUE:
-				range = "<" + tfValorRange.getText();
+			case EstaticosParaGeral.MENOR_QUE:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
-			case IGUAL_A:
-				range = "=" + tfValorRange.getText();
+			case EstaticosParaGeral.IGUAL_A:
+				operacao = cbxTipoRange.getValue();
+				valor = Double.valueOf(tfValorRange.getText());
 				break;
 			}
-			parametros.put("rangeValor", range);
+			filtrosVenda.setOperacao(operacao);
+			filtrosVenda.setCondicaoValor(valor);
+		} else {
+			filtrosVenda.setOperacao(null);
+			filtrosVenda.setCondicaoValor(null);
+
 		}
-		return parametros;
+		return filtrosVenda;
 	}
 
 	private void populaCombo() {
-		cbxTipoRange.getItems().add(MAIOR_QUE);
-		cbxTipoRange.getItems().add(MENOR_QUE);
-		cbxTipoRange.getItems().add(IGUAL_A);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MAIOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.MENOR_QUE);
+		cbxTipoRange.getItems().add(EstaticosParaGeral.IGUAL_A);
 	}
 
 	public void setStageDialog(Stage dialogStage) {

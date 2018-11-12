@@ -12,7 +12,9 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Venda;
+import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 
 public class VendaBanco implements VendaDao {
 
@@ -98,5 +100,70 @@ public class VendaBanco implements VendaDao {
 			e.printStackTrace();
 		}
 		return vendas;
+	}
+
+	@Override
+	public List<Venda> findByFiltros(FiltrosVenda filtrosVenda) {
+		List<Venda> listaVenda = new ArrayList<>();
+		String sql = null;
+		try {
+
+			if (filtrosVenda.getOperacao() != null && filtrosVenda.getCondicaoValor() != null) {
+				switch (filtrosVenda.getOperacao()) {
+				case EstaticosParaGeral.MAIOR_QUE:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal > ?)";
+					break;
+				case EstaticosParaGeral.MENOR_QUE:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal < ?)";
+					break;
+				case EstaticosParaGeral.IGUAL_A:
+					sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal = ?)";
+					break;
+				}
+			} else if (filtrosVenda.getCliente() != null && filtrosVenda.getDataVenda() != null) {
+				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+						+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null)";
+			} else {
+				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
+						+ " WHERE (? = ?) OR (? = ?)";
+			}
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			try {
+				stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
+				stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
+			} catch (NullPointerException e) {
+				stmt.setString(1, "null");
+				stmt.setString(2, "null");
+			}
+			try {
+				stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
+				stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
+			} catch (NullPointerException e) {
+				stmt.setString(3, "null");
+				stmt.setString(4, "null");
+			}
+
+			if (filtrosVenda.getOperacao() != null && filtrosVenda.getCondicaoValor() != null) {
+				stmt.setDouble(5, filtrosVenda.getCondicaoValor() != null ? filtrosVenda.getCondicaoValor() : null);
+			}
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Venda venda = new Venda();
+				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
+				venda.setDataVenda(rs.getDate("Data_Venda").toLocalDate());
+				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
+				venda.setValorTotal(rs.getDouble("valorTotal"));
+				venda.setIdVenda(rs.getInt("idVenda"));
+
+				listaVenda.add(venda);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaVenda;
 	}
 }

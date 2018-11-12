@@ -1,16 +1,16 @@
 package br.com.unoesc.veterinaria.model;
 
-public class Tipo_Animal {
+public class TipoAnimal {
 	Integer idTipoAnimal;
 	String nome;
 	Raca raca;
 
-	public Tipo_Animal() {
+	public TipoAnimal() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tipo_Animal(Integer idTipoAnimal, String nome, Raca raca) {
+	public TipoAnimal(Integer idTipoAnimal, String nome, Raca raca) {
 		super();
 		this.idTipoAnimal = idTipoAnimal;
 		this.nome = nome;
@@ -59,7 +59,7 @@ public class Tipo_Animal {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tipo_Animal other = (Tipo_Animal) obj;
+		TipoAnimal other = (TipoAnimal) obj;
 		if (idTipoAnimal == null) {
 			if (other.idTipoAnimal != null)
 				return false;
