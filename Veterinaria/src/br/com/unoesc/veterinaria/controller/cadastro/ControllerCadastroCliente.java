@@ -7,6 +7,7 @@ import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

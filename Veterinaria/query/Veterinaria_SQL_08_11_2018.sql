@@ -7,7 +7,8 @@ CREATE TABLE Filial (
   Endereco VARCHAR(45) NULL,
   id_Gerente INT NULL,
   Telefone VARCHAR(45) NULL,
-  CNPJ VARCHAR(45) NULL
+  CNPJ VARCHAR(45) NULL,
+  capacidadeEstoque int
   );
 
 
@@ -133,7 +134,7 @@ create or replace view view_lista_funcionarios as select idFuncionario as 'Id_Fu
 idFilial as 'Id_Filial', email as 'email', senha as 'senha'
 from funcionario;
 
-create or replace view view_lista_filiais as select idFilial as 'Id_Filial', Nome, Endereco, id_Gerente as 'Id_Gerente', Telefone, CNPJ from filial;
+create or replace view view_lista_filiais as select idFilial as 'Id_Filial', Nome, Endereco, id_Gerente as 'Id_Gerente', Telefone, CNPJ, capacidadeEstoque from filial;
 
 CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Qnt_Estoque, 
 pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idEstoque AS Id_Estoque FROM Produto pd;
@@ -153,7 +154,7 @@ use delimiter $
  end $
  use delimiter ;
  
- insert into Filial(Nome, Endereco, Telefone, CNPJ)values("Filial ROOT", "Endereco ROOT", "666666666", "666666666666");
+ insert into Filial(Nome, Endereco, Telefone, CNPJ, capacidadeEstoque)values("Filial ROOT", "Endereco ROOT", "666666666", "666666666666",666666);
  
  insert into funcionario(Nome, CPF,Data_Nascimento,idFilial,email,senha)values("Funcionário ROOT", "66666666666", "2018-11-08","1", "root", "root");
  

@@ -10,6 +10,7 @@ import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -110,12 +111,13 @@ public class ControllerFuncionario {
 		FuncionarioDialogFactory funcionarioDialog = new FuncionarioDialogFactory(stageDono);
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
 		if (clicadoSalvar) {
+			this.funcionario.getCliente().setIdCliente(EstaticosParaFilial.cliente.getIdCliente());
 			atualizaLista();
 
 		}
 	}
 
 	void atualizaLista() {
-		tvFuncionarios.refresh();
+		initialize();
 	}
 }

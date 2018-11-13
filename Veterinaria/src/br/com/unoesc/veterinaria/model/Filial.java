@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.model;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
@@ -12,6 +13,7 @@ public class Filial {
 	Funcionario gerente;
 	String telefone;
 	String cnpj;
+	Integer capacidadeEstoque;
 
 	public Filial() {
 		super();
@@ -75,7 +77,17 @@ public class Filial {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+	
+	
 
+
+	public Integer getCapacidadeEstoque() {
+		return capacidadeEstoque;
+	}
+
+	public void setCapacidadeEstoque(Integer capacidadeEstoque) {
+		this.capacidadeEstoque = capacidadeEstoque;
+	}
 
 	@Override
 	public int hashCode() {

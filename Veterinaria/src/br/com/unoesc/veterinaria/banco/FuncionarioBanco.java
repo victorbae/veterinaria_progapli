@@ -13,6 +13,7 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 
 public class FuncionarioBanco implements FuncionarioDao {
 
@@ -27,9 +28,14 @@ public class FuncionarioBanco implements FuncionarioDao {
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
+
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			EstaticosParaFilial.funcionario.setIdFuncionario(rs.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
