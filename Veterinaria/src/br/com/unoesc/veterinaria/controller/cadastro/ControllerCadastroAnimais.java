@@ -90,9 +90,10 @@ public class ControllerCadastroAnimais {
 	@FXML
 	void Salvar(ActionEvent event) {
 		preencheAnimais();
+
 		if (EstaticosParaAnimal.isEditando) {
 			animaisDao.alterar(animais);
-			EstaticosParaCliente.isEditando = false;
+			EstaticosParaAnimal.isEditando = false;
 		} else {
 			animaisDao.inserir(animais);
 		}

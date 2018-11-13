@@ -26,13 +26,13 @@ public class TipoAnimalDialogFactory {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroTipoAnimal.fxml"));
 		try {
-			AnchorPane animaisDialog = (AnchorPane) loader.load();
+			AnchorPane TipoAnimalDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Novo Animal");
+			dialogStage.setTitle("Novo Tipo Do Animal");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
-			Scene scene = new Scene(animaisDialog);
+			Scene scene = new Scene(TipoAnimalDialog);
 			dialogStage.setScene(scene);
 
 			ControllerCadastroTipoAnimal controller = loader.getController();

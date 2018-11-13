@@ -3,6 +3,7 @@ package br.com.unoesc.veterinaria.controller.cadastro;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.model.Raca;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,8 +44,12 @@ public class ControllerCadastroRaca {
 	@FXML
 	void Salvar(ActionEvent event) {
 		preencheRaca();
-		racaDao.inserir(racas);
-
+		if (EstaticosParaRaca.isEditando) {
+			racaDao.alterar(racas);
+			EstaticosParaRaca.isEditando = false;
+		} else {
+			racaDao.inserir(racas);
+		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
 			dialogStage.close();

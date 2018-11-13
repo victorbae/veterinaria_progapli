@@ -37,7 +37,7 @@
       </Button>
       <TableView fx:id="tvRaca" layoutX="130.0" layoutY="473.0" prefHeight="201.0" prefWidth="645.0">
         <columns>
-          <TableColumn fx:id="tcNomeRaca" prefWidth="644.0" resizable="false" text="Nome" />
+          <TableColumn fx:id="tcNomeRaca" minWidth="0.0" prefWidth="643.0" resizable="false" text="Nome" />
         </columns>
       </TableView>
       <Label layoutX="420.0" layoutY="377.0" text="Raça">
@@ -45,7 +45,7 @@
             <Font name="Gabriola" size="44.0" />
          </font>
       </Label>
-      <Button fx:id="btnNovoRaca" layoutX="520.0" layoutY="428.0" mnemonicParsing="false" onAction="#NovaRaca" prefWidth="77.0" text="Nova " textAlignment="CENTER">
+      <Button fx:id="btnNovaRaca" layoutX="520.0" layoutY="428.0" mnemonicParsing="false" onAction="#NovaRaca" prefWidth="77.0" text="Nova " textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

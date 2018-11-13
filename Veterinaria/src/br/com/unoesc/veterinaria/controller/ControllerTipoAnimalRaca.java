@@ -68,7 +68,8 @@ public class ControllerTipoAnimalRaca {
 		tcRaca.setCellValueFactory(new PropertyValueFactory<>("raca"));
 		tvTipoAnimal.setItems(FXCollections.observableArrayList(tipoAnimalDao.listar()));
 		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
-
+		atualizaListaRaca();
+		atualizaListaTipoAnimal();
 	}
 
 	@FXML
@@ -83,7 +84,7 @@ public class ControllerTipoAnimalRaca {
 		boolean clicadoSalvar = racaDialog.showDialog();
 
 		if (clicadoSalvar) {
-			atualizaLista();
+			atualizaListaRaca();
 		}
 	}
 
@@ -99,7 +100,7 @@ public class ControllerTipoAnimalRaca {
 		boolean clicadoSalvar = tipoAnimalDialog.showDialog();
 
 		if (clicadoSalvar) {
-			atualizaLista();
+			atualizaListaTipoAnimal();
 		}
 	}
 
@@ -109,7 +110,7 @@ public class ControllerTipoAnimalRaca {
 			raca = tvRaca.getSelectionModel().getSelectedItem();
 			racaDao.excluir(raca);
 		}
-		atualizaLista();
+		atualizaListaRaca();
 	}
 
 	@FXML
@@ -118,7 +119,7 @@ public class ControllerTipoAnimalRaca {
 			tipoAnimal = tvTipoAnimal.getSelectionModel().getSelectedItem();
 			tipoAnimalDao.excluir(tipoAnimal);
 		}
-		atualizaLista();
+		atualizaListaTipoAnimal();
 	}
 
 	@FXML
@@ -131,7 +132,7 @@ public class ControllerTipoAnimalRaca {
 
 		if (clicadoSalvar) {
 			dialogStage.close();
-
+			atualizaListaRaca();
 		}
 
 	}
@@ -146,17 +147,21 @@ public class ControllerTipoAnimalRaca {
 
 		if (clicadoSalvar) {
 			dialogStage.close();
-
+			atualizaListaTipoAnimal();
 		}
 
 	}
 
-	public void atualizaLista() {
+	public void atualizaListaTipoAnimal() {
 		tvTipoAnimal.setItems(FXCollections.observableArrayList(tipoAnimalDao.listar()));
 		tvTipoAnimal.refresh();
+
+	}
+
+	public void atualizaListaRaca() {
+
 		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
 		tvRaca.refresh();
-
 	}
 
 	public void setStageDialog(Stage dialogStage) {

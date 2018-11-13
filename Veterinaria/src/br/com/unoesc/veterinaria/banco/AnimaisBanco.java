@@ -44,10 +44,9 @@ public class AnimaisBanco implements AnimaisDao {
 
 	@Override
 	public void alterar(Animais dado) {
-		// TODO Auto-generated method stub
 		try {
-			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`= ?,"
-					+ "`idTipo_Animal`= ?,`idCliente`= ?,`idRaca`= ? WHERE `idAnimal`= ?";
+			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`=?,"
+					+ "`idTipo_Animal`=?,`idCliente`=?,`idRaca`=? WHERE `idAnimal`=?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
@@ -55,7 +54,6 @@ public class AnimaisBanco implements AnimaisDao {
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getRaca().getIdRaca());
 			stmt.setInt(6, dado.getIdAnimal());
-
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

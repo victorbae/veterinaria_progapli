@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
    <children>
       <TableView fx:id="tvAnimais" layoutX="20.0" layoutY="196.0" prefHeight="500.0" prefWidth="880.0">
          <columns>
-            <TableColumn fx:id="tcNome" prefWidth="240.0" text="Nome" />
-            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" text="Data Nascimento" />
-            <TableColumn fx:id="tcRaca" prefWidth="128.0" text="Raça" />
-            <TableColumn fx:id="tcCliente" prefWidth="128.0" text="Cliente" />
-            <TableColumn fx:id="tcTipo_Animal" prefWidth="128.0" text="Tipo Do Animal" />
+            <TableColumn fx:id="tcNome" prefWidth="240.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" resizable="false" text="Data Nascimento" />
+            <TableColumn fx:id="tcRaca" prefWidth="128.0" resizable="false" text="Raça" />
+            <TableColumn fx:id="tcCliente" prefWidth="128.0" resizable="false" text="Cliente" />
+            <TableColumn fx:id="tcTipo_Animal" prefWidth="128.0" resizable="false" text="Tipo Do Animal" />
          </columns>
       </TableView>
       <Label layoutX="379.0" layoutY="24.0" text="Animais">

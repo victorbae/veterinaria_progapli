@@ -45,8 +45,6 @@ public class ControllerCadastroTipoAnimal {
 		if (EstaticosParaTipoAnimal.isEditando) {
 			populaTela();
 		}
-
-		populaCombo();
 	}
 
 	@FXML
@@ -65,9 +63,11 @@ public class ControllerCadastroTipoAnimal {
 		preencheTipoAnimal();
 		if (EstaticosParaTipoAnimal.isEditando) {
 			tipoAnimalDao.alterar(tipoAnimal);
+			;
 			EstaticosParaTipoAnimal.isEditando = false;
 		} else {
 			tipoAnimalDao.inserir(tipoAnimal);
+			;
 		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
