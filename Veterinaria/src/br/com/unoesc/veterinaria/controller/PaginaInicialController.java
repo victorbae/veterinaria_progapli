@@ -29,10 +29,7 @@ public class PaginaInicialController {
 	private Button btnAnimais;
 
 	@FXML
-	private Button btnRaca;
-
-	@FXML
-	private Button btnTipoAnimal;
+	private Button btnTipoAnimalRaca;
 
 	@FXML
 	public void initialize() {
@@ -138,13 +135,17 @@ public class PaginaInicialController {
 	}
 
 	@FXML
-	void Raca(ActionEvent event) {
-
-	}
-
-	@FXML
-	void TipoAnimal(ActionEvent event) {
-
+	void TipoAnimalRaca(ActionEvent event) {
+		if (EstaticosDeAcesso.isLogado()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/TipoAnimalRaca.fxml"));
+			try {
+				AnchorPane cursoView = (AnchorPane) loader.load();
+				bpPrincipal.setCenter(cursoView);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	public Button getBtnCliente() {
@@ -179,19 +180,12 @@ public class PaginaInicialController {
 		this.btnAnimais = btnAnimais;
 	}
 
-	public Button getBtnRaca() {
-		return btnRaca;
+	public Button getBtnTipoAnimalRaca() {
+		return btnTipoAnimalRaca;
 	}
 
-	public void setBtnRaca(Button btnRaca) {
-		this.btnRaca = btnRaca;
+	public void setBtnTipoAnimalRaca(Button btnTipoAnimalRaca) {
+		this.btnTipoAnimalRaca = btnTipoAnimalRaca;
 	}
 
-	public Button getBtnTipoAnimal() {
-		return btnTipoAnimal;
-	}
-
-	public void setBtnTipoAnimal(Button btnTipoAnimal) {
-		this.btnTipoAnimal = btnTipoAnimal;
-	}
 }

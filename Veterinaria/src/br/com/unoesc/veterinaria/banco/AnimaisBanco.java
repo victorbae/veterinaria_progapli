@@ -44,10 +44,8 @@ public class AnimaisBanco implements AnimaisDao {
 
 	@Override
 	public void alterar(Animais dado) {
-		// TODO Auto-generated method stub
 		try {
-			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`= ?,"
-					+ "`idTipo_Animal`= ?,`idCliente`= ?,`idRaca`= ? WHERE `idAnimal`= ?";
+			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`=?,`idTipo_Animal`=?,`idCliente`=?,`idRaca`=? WHERE `idAnimal`=?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
@@ -55,7 +53,6 @@ public class AnimaisBanco implements AnimaisDao {
 			stmt.setInt(4, dado.getCliente().getIdCliente());
 			stmt.setInt(5, dado.getRaca().getIdRaca());
 			stmt.setInt(6, dado.getIdAnimal());
-
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,6 +75,8 @@ public class AnimaisBanco implements AnimaisDao {
 	}
 
 	/*
+	 * 
+	 * 
 	 * CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS
 	 * Id_Animal, ani.Nome AS Nome, ani.Data_Nascimento AS Data_Nascimento,
 	 * ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as
@@ -92,7 +91,7 @@ public class AnimaisBanco implements AnimaisDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
-				animal.setIdAnimal(rs.getInt("id_Animal"));
+				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
 				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				animal.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
@@ -112,7 +111,7 @@ public class AnimaisBanco implements AnimaisDao {
 		List<Animais> animais = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_animal ORDER BY a.Id_Animal");
+			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_animal ORDER BY a.Id_Animal");
 			while (rs.next()) {
 				Animais animal = new Animais();
 				animal.setIdAnimal(rs.getInt("Id_Animal"));
