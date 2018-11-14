@@ -45,8 +45,7 @@ public class AnimaisBanco implements AnimaisDao {
 	@Override
 	public void alterar(Animais dado) {
 		try {
-			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`=?,"
-					+ "`idTipo_Animal`=?,`idCliente`=?,`idRaca`=? WHERE `idAnimal`=?";
+			String sql = "UPDATE `animal` SET `Nome`=?, `Data_Nascimento`=?,`idTipo_Animal`=?,`idCliente`=?,`idRaca`=? WHERE `idAnimal`=?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDate(2, Date.valueOf(dado.getData_Nascimento()));
