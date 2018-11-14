@@ -12,6 +12,7 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 
 public class ClienteBanco implements ClienteDao {
 	@Override

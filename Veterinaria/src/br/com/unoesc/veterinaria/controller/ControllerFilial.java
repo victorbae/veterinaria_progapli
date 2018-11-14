@@ -3,9 +3,11 @@ package br.com.unoesc.veterinaria.controller;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.FilialDialogFactory;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +67,7 @@ public class ControllerFilial {
 	@FXML
 	void Novo(ActionEvent event) {
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
-		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
+		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
 
 		boolean clicadoSalvar = clienteDialog.showDialog();
 
@@ -82,7 +84,18 @@ public class ControllerFilial {
 
 	@FXML
 	void Editar(ActionEvent event) {
+		
+		EstaticosParaFilial.filial = tvFilial.getSelectionModel().getSelectedItem();
+		EstaticosParaFilial.editando = true;
+		
+		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
+		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
 
+		boolean clicadoSalvar = clienteDialog.showDialog();
+
+		if (clicadoSalvar) {
+			atualizaLista();
+		}
 	}
 
 	public void atualizaLista() {

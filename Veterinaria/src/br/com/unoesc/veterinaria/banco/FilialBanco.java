@@ -17,13 +17,14 @@ public class FilialBanco implements FilialDao {
 	@Override
 	public void inserir(Filial dado) {
 		try {
-			String sql = "INSERT INTO `veterinaria`.`filial`(`Nome`,`Endereco`,`id_Gerente`,`Telefone`,`CNPJ`)VALUES(?,?,?,?,?);";
+			String sql = "INSERT INTO `veterinaria`.`filial`(`Nome`,`Endereco`,`id_Gerente`,`Telefone`,`CNPJ`,`capacidadeEstoque`)VALUES(?,?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
-			stmt.setInt(2, dado.getGerente().getIdFuncionario());
-			stmt.setString(3, dado.getTelefone());
+			stmt.setString(2, dado.getEndereco());
+			stmt.setInt(3, dado.getGerente().getIdFuncionario());
 			stmt.setString(4, dado.getTelefone());
 			stmt.setString(5, dado.getCnpj());
+			stmt.setInt(6, dado.getCapacidadeEstoque());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -33,14 +34,15 @@ public class FilialBanco implements FilialDao {
 	@Override
 	public void alterar(Filial dado) {
 		try {
-			String sql = "UPDATE `veterinaria`.`filial` SET `Nome` = ?,`Endereco` = ?,`id_Gerente` = ?,`Telefone` = ?,`CNPJ` = ? WHERE `idFilial` = ?;";
+			String sql = "UPDATE `veterinaria`.`filial` SET `Nome` = ?,`Endereco` = ?,`id_Gerente` = ?,`Telefone` = ?,`CNPJ` = ?, `capacidadeEstoque` = ? WHERE `idFilial` = ?;";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
-			stmt.setInt(2, dado.getGerente().getIdFuncionario());
-			stmt.setString(3, dado.getTelefone());
+			stmt.setString(2, dado.getEndereco());
+			stmt.setInt(3, dado.getGerente().getIdFuncionario());
 			stmt.setString(4, dado.getTelefone());
 			stmt.setString(5, dado.getCnpj());
-			stmt.setInt(6, dado.getIdFilial());
+			stmt.setInt(6, dado.getCapacidadeEstoque());
+			stmt.setInt(7, dado.getIdFilial());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,6 +78,7 @@ public class FilialBanco implements FilialDao {
 				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
+				filial.setCapacidadeEstoque(rs.getInt("capacidadeEstoque"));
 				filiais.add(filial);
 			}
 		} catch (SQLException e) {
@@ -97,6 +100,7 @@ public class FilialBanco implements FilialDao {
 				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
+				filial.setCapacidadeEstoque(rs.getInt("capacidadeEstoque"));
 				filiais.add(filial);
 			}
 		} catch (SQLException e) {

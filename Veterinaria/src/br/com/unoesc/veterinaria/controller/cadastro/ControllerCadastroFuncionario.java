@@ -15,6 +15,7 @@ import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -86,9 +87,11 @@ public class ControllerCadastroFuncionario {
 		if (EstaticosDeFuncionario.editando) {
 			funcionariodao.alterar(funcionario);
 			EstaticosDeFuncionario.editando = false;
+			EstaticosDeFuncionario.funcionario = new Funcionario();
 			dialogStage.close();
 		} else {
 			funcionariodao.inserir(funcionario);
+			EstaticosParaFilial.funcionario = this.funcionario;
 			dialogStage.close();
 		}
 		clicadoSalvar = true;
@@ -99,6 +102,8 @@ public class ControllerCadastroFuncionario {
 
 	@FXML
 	void Limpar(ActionEvent event) {
+		this.funcionario = new Funcionario();
+		initialize();
 
 	}
 
@@ -107,7 +112,11 @@ public class ControllerCadastroFuncionario {
 		Stage stageDono = (Stage) ChamaTelaAddCliente.getScene().getWindow();
 		ClienteDialogFactoryRapid clienteDialog = new ClienteDialogFactoryRapid(stageDono);
 		clienteDialog.showDialog();
+		
+		
 		cbxCliente.setValue(EstaticosParaCliente.cliente);
+		EstaticosParaCliente.cliente = new Cliente();
+		EstaticosParaFilial.cliente = clienteDialog.retornaCliente();
 	}
 
 	public void setStageDialog(Stage dialogStage) {

@@ -17,7 +17,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 	@Override
 	public void inserir(TipoAnimal dado) {
 		try {
-			String sql = "INSERT INTO `tipo_animal`(`idTipo_Animal`,`Nome`,`idRaca`) " + " VALUES (null,?,?)";
+			String sql = "INSERT INTO `tipo_animal`(`idTipo_Animal`,`Nome`,`Id_Raca`) " + " VALUES (null,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
@@ -37,7 +37,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 	@Override
 	public void alterar(TipoAnimal dado) {
 		try {
-			String sql = "UPDATE `tipo_animal` SET `Nome`=?,`idRaca`= ? WHERE `idTipo_Animal`= ?";
+			String sql = "UPDATE `tipo_animal` SET `Nome`=?,`Id_Raca`= ? WHERE `idTipo_Animal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setInt(2, dado.getRaca().getIdRaca());
@@ -68,7 +68,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 		List<TipoAnimal> tipoAnimal = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_tipo_animal");
+			ResultSet rs = stmt.executeQuery("SELECT  FROM lista_dados_tipo_animal");
 			while (rs.next()) {
 				TipoAnimal tipo_Animal = new TipoAnimal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
@@ -85,7 +85,6 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 
 	@Override
 	public List<TipoAnimal> listarSemObjSecundarios() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -94,7 +93,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 		List<TipoAnimal> tipoAnimal = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_tipo_animal");
+			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_tipo_animal");
 			while (rs.next()) {
 				TipoAnimal tipo_Animal = new TipoAnimal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));

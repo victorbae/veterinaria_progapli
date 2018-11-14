@@ -2,21 +2,22 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnimal;
-import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroAnimais;
+import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroFilial;
+import br.com.unoesc.veterinaria.model.Animais;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class TipoAnimalDialogFactory {
+public class FilialDialogFactory {
 
 	private Stage stageDono;
 
-	private TipoAnimal tipoAnimalDevolta;
+	private Animais animaisDevolta;
 
-	public TipoAnimalDialogFactory(Stage stage) {
+	public FilialDialogFactory(Stage stage) {
 		this.stageDono = stage;
 	}
 
@@ -24,19 +25,19 @@ public class TipoAnimalDialogFactory {
 		boolean clicandoSalvar = false;
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroTipoAnimal.fxml"));
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroFilial.fxml"));
 		try {
-			AnchorPane TipoAnimalDialog = (AnchorPane) loader.load();
+			AnchorPane filialDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Novo Tipo Do Animal");
+			dialogStage.setTitle("Nova Filial");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
-			Scene scene = new Scene(TipoAnimalDialog);
+			Scene scene = new Scene(filialDialog);
 			dialogStage.setScene(scene);
 
-			ControllerCadastroTipoAnimal controller = loader.getController();
-			controller.setDialogStage(dialogStage);
+			ControllerCadastroFilial controller = loader.getController();
+			controller.setStageDialog(dialogStage);
 			dialogStage.showAndWait();
 
 			clicandoSalvar = controller.clicadoSalvar();
@@ -47,7 +48,7 @@ public class TipoAnimalDialogFactory {
 		return clicandoSalvar;
 	}
 
-	public TipoAnimal retornaTipoAnimal() {
-		return tipoAnimalDevolta;
+	public Animais retornaAnimais() {
+		return animaisDevolta;
 	}
 }

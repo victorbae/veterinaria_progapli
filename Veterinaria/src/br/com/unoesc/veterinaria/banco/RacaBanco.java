@@ -13,6 +13,9 @@ import br.com.unoesc.veterinaria.model.Raca;
 
 public class RacaBanco implements RacaDao {
 
+	// CREATE OR REPLACE VIEW lista_dados_raca AS SELECT r.idRaca AS idRaca, r.Nome
+	// AS Nome FROM Raca r;
+
 	@Override
 	public void inserir(Raca dado) {
 		try {
@@ -49,7 +52,7 @@ public class RacaBanco implements RacaDao {
 	@Override
 	public void excluir(Raca dado) {
 		try {
-			String sql = "DELETE FROM `raca` WHERE `idRaca`= ?";
+			String sql = "DELETE FROM `raca` WHERE `idRaca`=?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setInt(1, dado.getIdRaca());
 			stmt.executeUpdate();
@@ -71,7 +74,7 @@ public class RacaBanco implements RacaDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
 			while (rs.next()) {
 				Raca racas = new Raca();
-				racas.setIdRaca(rs.getInt("ID_Raca"));
+				racas.setIdRaca(rs.getInt("idRaca"));
 				racas.setNome(rs.getString("Nome"));
 
 				raca.add(racas);
@@ -89,7 +92,7 @@ public class RacaBanco implements RacaDao {
 		List<Raca> raca = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
+			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_raca");
 			while (rs.next()) {
 				Raca racas = new Raca();
 				racas.setIdRaca(rs.getInt("idRaca"));
