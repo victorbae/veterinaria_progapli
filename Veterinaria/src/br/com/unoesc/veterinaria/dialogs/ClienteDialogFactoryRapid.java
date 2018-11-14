@@ -20,7 +20,7 @@ public class ClienteDialogFactoryRapid {
 		this.stageDono = stage;
 	}
 
-	public Boolean showDialog() {
+	public Cliente showDialog() {
 		boolean clicandoSalvar = false;
 
 		FXMLLoader loader = new FXMLLoader();
@@ -40,11 +40,11 @@ public class ClienteDialogFactoryRapid {
 			dialogStage.showAndWait();
 
 			clicandoSalvar = controller.clicadoSalvar();
+			clienteDevolta = controller.getCliente();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
-		return clicandoSalvar;
+		return clienteDevolta;
 	}
 
 	public Cliente retornaCliente() {

@@ -80,14 +80,15 @@ public class ControllerFilial {
 	void Excluir(ActionEvent event) {
 		populaFilialByOnCLick();
 		filialDao.excluir(filial);
+		initialize();
 	}
 
 	@FXML
 	void Editar(ActionEvent event) {
-		
+
 		EstaticosParaFilial.filial = tvFilial.getSelectionModel().getSelectedItem();
 		EstaticosParaFilial.editando = true;
-		
+
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
 
