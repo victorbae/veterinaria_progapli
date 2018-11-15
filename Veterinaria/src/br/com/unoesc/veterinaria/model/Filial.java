@@ -1,11 +1,5 @@
 package br.com.unoesc.veterinaria.model;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
-import br.com.unoesc.veterinaria.dao.FuncionarioDao;
-
 public class Filial {
 	Integer idFilial;
 	String nome;
@@ -14,21 +8,6 @@ public class Filial {
 	String telefone;
 	String cnpj;
 	Integer capacidadeEstoque;
-
-	public Filial() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Filial(Integer idFilial, String nome, String endereco, Funcionario gerente, String telefone, String cnpj) {
-		super();
-		this.idFilial = idFilial;
-		this.nome = nome;
-		this.endereco = endereco;
-		this.gerente = gerente;
-		this.telefone = telefone;
-		this.cnpj = cnpj;
-	}
 
 	public Integer getIdFilial() {
 		return idFilial;
@@ -77,9 +56,6 @@ public class Filial {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	
-	
-
 
 	public Integer getCapacidadeEstoque() {
 		return capacidadeEstoque;

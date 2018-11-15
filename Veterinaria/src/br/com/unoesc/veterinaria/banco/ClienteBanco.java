@@ -94,7 +94,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setDataNascimento((rs.getDate("Data_Nascimento").toLocalDate()));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
-				cliente.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));
+				cliente.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 
 				clientes.add(cliente);
 			}

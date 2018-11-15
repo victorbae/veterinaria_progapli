@@ -9,20 +9,6 @@ public class VendaProduto {
 	private Double valorUnitario;
 	private Double valorTotal;
 
-	public VendaProduto() {
-	}
-
-	public VendaProduto(Integer idVendaProduto, Venda venda, Produto produto, Double quantidade, Double valorUnitario,
-			Double valorTotal) {
-		super();
-		IdVendaProduto = idVendaProduto;
-		this.venda = venda;
-		this.produto = produto;
-		this.quantidade = quantidade;
-		this.valorUnitario = valorUnitario;
-		this.setValorTotal(valorTotal);
-	}
-
 	public Integer getIdVendaProduto() {
 		return IdVendaProduto;
 	}

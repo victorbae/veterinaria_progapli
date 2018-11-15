@@ -17,7 +17,7 @@ public class FilialBanco implements FilialDao {
 	@Override
 	public void inserir(Filial dado) {
 		try {
-			String sql = "INSERT INTO `veterinaria`.`filial`(`Nome`,`Endereco`,`id_Gerente`,`Telefone`,`CNPJ`,`capacidadeEstoque`)VALUES(?,?,?,?,?,?);";
+			String sql = "INSERT INTO `veterinaria`.`filial`(`Nome`,`Endereco`,`id_Gerente`,`Telefone`,`CNPJ`,`CapacidadeEstoque`)VALUES(?,?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setString(2, dado.getEndereco());
@@ -34,7 +34,7 @@ public class FilialBanco implements FilialDao {
 	@Override
 	public void alterar(Filial dado) {
 		try {
-			String sql = "UPDATE `veterinaria`.`filial` SET `Nome` = ?,`Endereco` = ?,`id_Gerente` = ?,`Telefone` = ?,`CNPJ` = ?, `capacidadeEstoque` = ? WHERE `idFilial` = ?;";
+			String sql = "UPDATE `veterinaria`.`filial` SET `Nome` = ?,`Endereco` = ?,`id_Gerente` = ?,`Telefone` = ?,`CNPJ` = ?, `CapacidadeEstoque` = ? WHERE `idFilial` = ?;";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setString(2, dado.getEndereco());
@@ -78,29 +78,7 @@ public class FilialBanco implements FilialDao {
 				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
 				filial.setTelefone(rs.getString("Telefone"));
 				filial.setCnpj(rs.getString("CNPJ"));
-				filial.setCapacidadeEstoque(rs.getInt("capacidadeEstoque"));
-				filiais.add(filial);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return filiais;
-	}
-
-	public List<Filial> listarSemObjSecundarios() {
-		List<Filial> filiais = new ArrayList<>();
-		try {
-			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM view_lista_filiais");
-			while (rs.next()) {
-				Filial filial = new Filial();
-				filial.setIdFilial(rs.getInt("Id_Filial"));
-				filial.setNome(rs.getString("Nome"));
-				filial.setEndereco(rs.getString("Endereco"));
-				filial.setGerente(EstaticosDeFuncionario.buscaFuncionarioById(rs.getInt("Id_Gerente")));
-				filial.setTelefone(rs.getString("Telefone"));
-				filial.setCnpj(rs.getString("CNPJ"));
-				filial.setCapacidadeEstoque(rs.getInt("capacidadeEstoque"));
+				filial.setCapacidadeEstoque(rs.getInt("Capacidade_Estoque"));
 				filiais.add(filial);
 			}
 		} catch (SQLException e) {

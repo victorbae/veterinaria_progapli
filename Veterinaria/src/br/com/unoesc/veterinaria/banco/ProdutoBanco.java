@@ -11,6 +11,7 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 
 public class ProdutoBanco implements ProdutoDao {
@@ -18,7 +19,7 @@ public class ProdutoBanco implements ProdutoDao {
 	@Override
 	public void inserir(Produto dado) {
 		try {
-			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`) "
+			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idFilial`) "
 					+ "VALUES (null,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
@@ -26,6 +27,7 @@ public class ProdutoBanco implements ProdutoDao {
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
+			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
 
 			// Quando o campo é auto increment no banco
@@ -42,13 +44,14 @@ public class ProdutoBanco implements ProdutoDao {
 	@Override
 	public void alterar(Produto dado) {
 		try {
-			String sql = "UPDATE `produto` SET `Nome`= ?,`Quantidade_Estoque`=?,`Valor_Entrada_Unt`= ?,`Margem_Lucro`= ?,"
+			String sql = "UPDATE `produto` SET `Nome`= ?,`Quantidade_Estoque`=?,`Valor_Entrada_Unt`= ?,`Margem_Lucro`= ?, `idFilial` = ?"
 					+ " WHERE `idProduto` = ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setDouble(2, dado.getQuantidadeEstoque());
 			stmt.setDouble(3, dado.getValorEntrada());
 			stmt.setDouble(4, dado.getMargemLucro());
+			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.setInt(6, dado.getIdProduto());
 
 			stmt.executeUpdate();
@@ -91,18 +94,13 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setQuantidadeEstoque(rs.getDouble("Qnt_Estoque"));
 				produto.setValorEntrada(rs.getDouble("Valor_Ent_Unt"));
 				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
+				produto.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("idFilial")));
 				produtos.add(produto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return produtos;
-	}
-
-	@Override
-	public List<Produto> listarNome() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -157,6 +155,7 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setQuantidadeEstoque(rs.getDouble("Quantidade_Estoque"));
 				produto.setValorEntrada(rs.getDouble("Valor_Entrada_Unt"));
 				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
+				produto.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("idFilial")));
 				listaProdutos.add(produto);
 			}
 		} catch (SQLException e) {

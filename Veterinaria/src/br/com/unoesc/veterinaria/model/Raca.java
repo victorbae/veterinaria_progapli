@@ -1,19 +1,9 @@
 package br.com.unoesc.veterinaria.model;
 
 public class Raca {
-	Integer idRaca;
-	String nome;
-
-	public Raca() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Raca(Integer idRaca, String nome) {
-		super();
-		this.idRaca = idRaca;
-		this.nome = nome;
-	}
+	private Integer idRaca;
+	private String nome;
+	private TipoAnimal tipoAnimal;
 
 	public Integer getIdRaca() {
 		return idRaca;
@@ -31,12 +21,19 @@ public class Raca {
 		this.nome = nome;
 	}
 
+	public TipoAnimal getTipoAnimal() {
+		return tipoAnimal;
+	}
+
+	public void setTipoAnimal(TipoAnimal tipoAnimal) {
+		this.tipoAnimal = tipoAnimal;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((idRaca == null) ? 0 : idRaca.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -53,11 +50,6 @@ public class Raca {
 			if (other.idRaca != null)
 				return false;
 		} else if (!idRaca.equals(other.idRaca))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}

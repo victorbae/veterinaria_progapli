@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
@@ -11,40 +13,24 @@ import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
-import br.com.unoesc.veterinaria.model.Cliente;
-import br.com.unoesc.veterinaria.model.Raca;
-import br.com.unoesc.veterinaria.model.TipoAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroAnimais {
+
 	@FXML
 	private TextField tfNome;
 
 	@FXML
 	private DatePicker dtDataNascimento;
-
-	@FXML
-	private ComboBox<Raca> cbxRaca;
-
-	@FXML
-	private ComboBox<Cliente> cbxCliente;
-
-	@FXML
-	private ComboBox<TipoAnimal> cbxTipoAnimal;
-
-	@FXML
-	private Button btnOutraRaca;
-
-	@FXML
-	private Button btnOutroTipoAnimal;
 
 	@FXML
 	private Button btnSalvar;
@@ -54,6 +40,21 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	private Button btnCancelar;
+
+	@FXML
+	private Button btnOutraRaca;
+
+	@FXML
+	private Button btnOutroTipoAnimal;
+
+	@FXML
+	private TextField tfRaca;
+
+	@FXML
+	private TextField tfTipoAnimal;
+
+	@FXML
+	private TextField tfCliente;
 
 	private Animais animais;
 
@@ -68,7 +69,9 @@ public class ControllerCadastroAnimais {
 	@FXML
 	private void initialize() {
 		this.animais = EstaticosParaAnimal.animal;
-		populaCombo();
+		tfRaca.setDisable(true);
+		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
+		TextFields.bindAutoCompletion(tfTipoAnimal, tipoAnimalDao.listar());
 
 		if (EstaticosParaAnimal.isEditando) {
 			populaTela();
@@ -104,6 +107,21 @@ public class ControllerCadastroAnimais {
 	}
 
 	@FXML
+	void carregaRaca(ActionEvent event) {
+		tfRaca.setDisable(false);
+		TextFields.bindAutoCompletion(tfRaca,
+				racaDao.findByTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText())));
+	}
+
+	public void populaTela() {
+		tfNome.setText(animais.getNome());
+		dtDataNascimento.setValue(animais.getData_Nascimento());
+		tfTipoAnimal.setText(animais.getTipo_animal().getNome());
+		tfRaca.setText(animais.getRaca().getNome());
+		tfCliente.setText(animais.getCliente().getNomeCompleto());
+	}
+
+	@FXML
 	void OutraRaca(ActionEvent event) {
 		Stage stageDono = (Stage) btnOutraRaca.getScene().getWindow();
 		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
@@ -114,14 +132,6 @@ public class ControllerCadastroAnimais {
 			dialogStage.close();
 
 		}
-	}
-
-	public void populaTela() {
-		tfNome.setText(animais.getNome());
-		dtDataNascimento.setValue(animais.getData_Nascimento());
-		cbxRaca.setValue(animais.getRaca());
-		cbxCliente.setValue(animais.getCliente());
-		cbxTipoAnimal.setValue(animais.getTipo_animal());
 	}
 
 	@FXML
@@ -141,30 +151,17 @@ public class ControllerCadastroAnimais {
 		animais = new Animais();
 		animais.setNome(tfNome.getText());
 		animais.setData_Nascimento(dtDataNascimento.getValue());
-		animais.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
-		animais.setCliente(EstaticosParaCliente.achaCliente(cbxCliente.getValue().getIdCliente()));
-		animais.setTipo_animal(EstaticosParaAnimal.achaTipoAnimal(cbxTipoAnimal.getValue().getIdTipoAnimal()));
+		animais.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText()));
+		animais.setRaca(EstaticosParaRaca.achaRacaByNome(tfRaca.getText()));
+		animais.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
 	}
 
 	public void limpaTela() {
 		tfNome.clear();
 		dtDataNascimento.setValue(null);
-		cbxRaca.getSelectionModel().clearSelection();
-		cbxCliente.getSelectionModel().clearSelection();
-		cbxTipoAnimal.getSelectionModel().clearSelection();
-
-	}
-
-	private void populaCombo() {
-		for (Cliente cliente : clienteDao.listar()) {
-			cbxCliente.getItems().add(cliente);
-		}
-		for (Raca raca : racaDao.listar()) {
-			cbxRaca.getItems().add(raca);
-		}
-		for (TipoAnimal tipoAnimal : tipoAnimalDao.listar()) {
-			cbxTipoAnimal.getItems().add(tipoAnimal);
-		}
+		tfRaca.clear();
+		tfCliente.clear();
+		tfTipoAnimal.clear();
 
 	}
 

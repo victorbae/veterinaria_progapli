@@ -1,7 +1,6 @@
 package br.com.unoesc.veterinaria.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
@@ -20,22 +19,6 @@ public class Funcionario {
 	Filial filial;
 	String senha;
 	String email;
-
-	public Funcionario() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Funcionario(Integer idFuncionario, String nome, String cpf, LocalDate data_Nascimento, Cliente cliente,
-			Filial filial) {
-		super();
-		this.idFuncionario = idFuncionario;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.data_Nascimento = data_Nascimento;
-		this.cliente = cliente;
-		this.filial = filial;
-	}
 
 	public Integer getIdFuncionario() {
 		return idFuncionario;

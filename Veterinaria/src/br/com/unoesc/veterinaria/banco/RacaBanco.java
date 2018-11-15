@@ -10,6 +10,8 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.model.Raca;
+import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 
 public class RacaBanco implements RacaDao {
 
@@ -74,7 +76,7 @@ public class RacaBanco implements RacaDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
 			while (rs.next()) {
 				Raca racas = new Raca();
-				racas.setIdRaca(rs.getInt("idRaca"));
+				racas.setIdRaca(rs.getInt("Id_Raca"));
 				racas.setNome(rs.getString("Nome"));
 
 				raca.add(racas);
@@ -87,22 +89,28 @@ public class RacaBanco implements RacaDao {
 	}
 
 	@Override
-	public List<Raca> listarNome() {
-
-		List<Raca> raca = new ArrayList<>();
+	public List<Raca> findByTipoAnimal(TipoAnimal tipoAnimal) {
+		List<Raca> listaRaca = new ArrayList<>();
+		String sql = null;
 		try {
-			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT Nome FROM lista_dados_raca");
+			sql = "SELECT * FROM raca WHERE idTipoAnimal = ?";
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+
+			stmt.setInt(1, tipoAnimal.getIdTipoAnimal());
+			ResultSet rs = stmt.executeQuery();
+
 			while (rs.next()) {
-				Raca racas = new Raca();
-				racas.setIdRaca(rs.getInt("idRaca"));
-				racas.setNome(rs.getString("Nome"));
-				raca.add(racas);
+				Raca raca = new Raca();
+				raca.setIdRaca(rs.getInt("idRaca"));
+				raca.setNome(rs.getString("Nome"));
+				raca.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipoAnimal")));
+
+				listaRaca.add(raca);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return raca;
+		return listaRaca;
 	}
 
 }

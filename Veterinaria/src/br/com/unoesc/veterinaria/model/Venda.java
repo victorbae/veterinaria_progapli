@@ -13,20 +13,6 @@ public class Venda {
 	private Double valorTotal;
 	private List<VendaProduto> carrinho;
 
-	public Venda() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Venda(Integer idVenda, LocalDate dataVenda, Cliente cliente, Double valorDesconto, Double valorTotal) {
-		super();
-		this.idVenda = idVenda;
-		this.dataVenda = dataVenda;
-		this.cliente = cliente;
-		this.valorDesconto = valorDesconto;
-		this.valorTotal = valorTotal;
-	}
-
 	public Integer getIdVenda() {
 		return idVenda;
 	}

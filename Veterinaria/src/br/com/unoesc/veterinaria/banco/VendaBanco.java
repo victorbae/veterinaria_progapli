@@ -14,6 +14,7 @@ import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 
 public class VendaBanco implements VendaDao {
@@ -92,7 +93,7 @@ public class VendaBanco implements VendaDao {
 				venda.setDataVenda(LocalDate.parse(rs.getString("Data_Venda")));
 				venda.setValorTotal(rs.getDouble("Valor_Total"));
 				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
-				venda.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));
+				venda.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 
 				vendas.add(venda);
 			}
@@ -158,6 +159,7 @@ public class VendaBanco implements VendaDao {
 				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
 				venda.setValorTotal(rs.getDouble("valorTotal"));
 				venda.setIdVenda(rs.getInt("idVenda"));
+				venda.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 
 				listaVenda.add(venda);
 			}

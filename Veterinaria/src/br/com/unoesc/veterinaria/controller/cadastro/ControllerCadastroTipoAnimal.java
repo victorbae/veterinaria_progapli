@@ -6,7 +6,6 @@ import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,11 +62,9 @@ public class ControllerCadastroTipoAnimal {
 		preencheTipoAnimal();
 		if (EstaticosParaTipoAnimal.isEditando) {
 			tipoAnimalDao.alterar(tipoAnimal);
-			;
 			EstaticosParaTipoAnimal.isEditando = false;
 		} else {
 			tipoAnimalDao.inserir(tipoAnimal);
-			;
 		}
 		clicadoSalvar = true;
 		if (dialogStage != null) {
@@ -77,14 +74,12 @@ public class ControllerCadastroTipoAnimal {
 
 	public void populaTela() {
 		tfNome.setText(tipoAnimal.getNome());
-		cbxRaca.setValue(tipoAnimal.getRaca());
 
 	}
 
 	public void preencheTipoAnimal() {
 		tipoAnimal = new TipoAnimal();
 		tipoAnimal.setNome(tfNome.getText());
-		tipoAnimal.setRaca(EstaticosParaAnimal.achaRaca(cbxRaca.getValue().getIdRaca()));
 
 	}
 

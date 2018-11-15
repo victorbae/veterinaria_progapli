@@ -7,8 +7,6 @@ import br.com.unoesc.veterinaria.model.filtros.FiltrosProdutos;
 
 public interface ProdutoDao extends CrudDao<Produto> {
 
-	List<Produto> listarNome();
-
 	List<Produto> findByFiltros(FiltrosProdutos filtrosProdutos);
 
 }

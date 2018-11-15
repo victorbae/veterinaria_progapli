@@ -114,7 +114,7 @@ public class ControllerCadastroCliente {
 		cliente.setEndereco(tfEndereco.getText());
 		cliente.setDataNascimento(dtDataNascimento.getValue());
 		cliente.setTelefone(tfTelefone.getText());
-		cliente.setFilial(EstaticosParaCliente.achaFilial(cbxFilial.getValue().getIdFilial()));
+		cliente.setFilial(EstaticosParaFilial.achaFilial(cbxFilial.getValue().getIdFilial()));
 	}
 
 	public void limpaTela() {
