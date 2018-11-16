@@ -107,7 +107,7 @@ public class ControllerFuncionario {
 		FuncionarioDialogFactory funcionarioDialog = new FuncionarioDialogFactory(stageDono);
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
 		if (clicadoSalvar) {
-			this.funcionario.getCliente().setIdCliente(EstaticosParaFilial.cliente.getIdCliente());
+			this.funcionario.setCliente(EstaticosParaFilial.cliente);
 			initialize();
 		}
 	}
