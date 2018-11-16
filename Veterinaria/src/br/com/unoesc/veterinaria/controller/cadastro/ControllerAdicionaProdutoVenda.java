@@ -55,7 +55,7 @@ public class ControllerAdicionaProdutoVenda {
 	}
 
 	@FXML
-	void Adicionar(ActionEvent event) {
+	void adicionar(ActionEvent event) {
 		populaVendaProduto();
 
 		EstaticosParaVenda.carrinhoAux.add(vendaProduto);
@@ -65,7 +65,7 @@ public class ControllerAdicionaProdutoVenda {
 	}
 
 	@FXML
-	void Cancelar(ActionEvent event) {
+	void cancelar(ActionEvent event) {
 		dialogStage.close();
 	}
 
