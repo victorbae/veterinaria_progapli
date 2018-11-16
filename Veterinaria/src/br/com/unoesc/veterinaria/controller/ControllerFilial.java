@@ -78,6 +78,7 @@ public class ControllerFilial {
 	void Excluir(ActionEvent event) {
 		populaFilialByOnCLick();
 		filialDao.excluir(filial);
+		initialize();
 	}
 
 	@FXML

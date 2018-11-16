@@ -72,12 +72,10 @@ public class ControllerFuncionario {
 		if (escolhido) {
 			EstaticosDeFuncionario.editando = true;
 			EstaticosDeFuncionario.funcionario = this.funcionario;
-
 			dialogFunc();
-
 			escolhido = false;
+			initialize();
 		}
-
 	}
 
 	@FXML
@@ -86,21 +84,19 @@ public class ControllerFuncionario {
 		if (escolhido) {
 			funcionariodao.excluir(this.funcionario);
 			escolhido = false;
-			atualizaLista();
+			initialize();
 		}
 	}
 
 	@FXML
 	void novo(ActionEvent event) {
 		dialogFunc();
-		atualizaLista();
-
+		initialize();
 	}
 
 	void preencheFuncionario() {
 		this.funcionario = tvFuncionarios.getSelectionModel().getSelectedItem();
 		this.escolhido = true;
-
 	}
 
 	void dialogFunc() {
@@ -109,12 +105,7 @@ public class ControllerFuncionario {
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
 		if (clicadoSalvar) {
 			this.funcionario.getCliente().setIdCliente(EstaticosParaFilial.cliente.getIdCliente());
-			atualizaLista();
-
+			initialize();
 		}
-	}
-
-	void atualizaLista() {
-		initialize();
 	}
 }

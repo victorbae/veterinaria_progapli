@@ -90,8 +90,8 @@ public class ControllerCadastroFuncionario {
 			EstaticosDeFuncionario.funcionario = new Funcionario();
 			dialogStage.close();
 		} else {
-			funcionariodao.inserir(funcionario);
 			EstaticosParaFilial.funcionario = this.funcionario;
+			funcionariodao.inserir(funcionario);
 			dialogStage.close();
 		}
 		clicadoSalvar = true;
@@ -112,8 +112,7 @@ public class ControllerCadastroFuncionario {
 		Stage stageDono = (Stage) ChamaTelaAddCliente.getScene().getWindow();
 		ClienteDialogFactoryRapid clienteDialog = new ClienteDialogFactoryRapid(stageDono);
 		clienteDialog.showDialog();
-		
-		
+
 		cbxCliente.setValue(EstaticosParaCliente.cliente);
 		EstaticosParaCliente.cliente = new Cliente();
 		EstaticosParaFilial.cliente = clienteDialog.retornaCliente();

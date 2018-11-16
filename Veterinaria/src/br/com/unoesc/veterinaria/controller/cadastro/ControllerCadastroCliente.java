@@ -141,4 +141,8 @@ public class ControllerCadastroCliente {
 	public boolean clicadoSalvar() {
 		return clicadoSalvar;
 	}
+
+	public Cliente getCliente() {
+		return this.cliente;
+	}
 }

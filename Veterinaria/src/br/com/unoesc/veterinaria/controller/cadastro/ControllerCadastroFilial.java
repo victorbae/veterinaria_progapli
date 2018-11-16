@@ -21,9 +21,9 @@ public class ControllerCadastroFilial {
 
 	@FXML
 	private TextField tfTelefone;
-	
+
 	@FXML
-    private Label tfTitulo;
+	private Label tfTitulo;
 
 	@FXML
 	private TextField tfCapEstoque;

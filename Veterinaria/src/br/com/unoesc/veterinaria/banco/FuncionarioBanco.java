@@ -21,7 +21,8 @@ public class FuncionarioBanco implements FuncionarioDao {
 	public void inserir(Funcionario dado) {
 		try {
 			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`) VALUES (?,?,?,?,?);";
-			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
+			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, String.valueOf(dado.getNome()));
 			stmt.setString(2, dado.getCpf());
 			stmt.setString(3, dado.getData_Nascimento().toString());
