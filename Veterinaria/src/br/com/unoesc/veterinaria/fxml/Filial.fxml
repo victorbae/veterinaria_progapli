@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,34 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFilial">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFilial">
    <children>
-      <TableView fx:id="tvFilial" layoutX="10.0" layoutY="187.0" onMouseClicked="#filialClicked" prefHeight="500.0" prefWidth="880.0">
+      <TableView fx:id="tvFilial" layoutX="5.0" layoutY="116.0" onMouseClicked="#filialClicked" styleClass="tableView">
          <columns>
-            <TableColumn fx:id="tcId" prefWidth="75.0" text="Id " />
-            <TableColumn fx:id="tcNome" prefWidth="240.0" text="Nome" />
-            <TableColumn fx:id="tcEndereco" prefWidth="141.0" text="Endereco" />
-            <TableColumn fx:id="tcGerente" prefWidth="141.0" text="Gerente" />
-            <TableColumn fx:id="tcTelefone" prefWidth="141.0" text="Telefone" />
-            <TableColumn fx:id="tcCNPJ" prefWidth="141.0" text="CNPJ" />
+            <TableColumn fx:id="tcNome" prefWidth="150.0" text="Nome" />
+            <TableColumn fx:id="tcEndereco" prefWidth="150.0" text="Endereço" />
+            <TableColumn fx:id="tcGerente" prefWidth="150.0" text="Gerente" />
+            <TableColumn fx:id="tcTelefone" prefWidth="150.0" text="Telefone" />
+            <TableColumn fx:id="tcCNPJ" prefWidth="150.0" text="CNPJ" />
          </columns>
       </TableView>
-      <Label layoutX="375.0" layoutY="23.0" text="Filial">
+      <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Filial">
          <font>
             <Font name="Gabriola" size="66.0" />
          </font>
       </Label>
-      <Button fx:id="btnNovo" layoutX="591.0" layoutY="137.0" mnemonicParsing="false" onAction="#Novo" prefWidth="77.0" text="Novo " textAlignment="CENTER">
+      <Button fx:id="btnNovo" layoutX="695.0" layoutY="79.0" mnemonicParsing="false" onAction="#Novo" styleClass="btn-success" text="Novo " textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExcluir" layoutX="808.0" layoutY="137.0" mnemonicParsing="false" onAction="#Excluir" prefWidth="77.0" text="Excluir" textAlignment="CENTER">
+      <Button fx:id="btnExcluir" layoutX="553.0" layoutY="79.0" mnemonicParsing="false" onAction="#Excluir" styleClass="btn-danger" text="Excluir" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="699.0" layoutY="137.0" mnemonicParsing="false" onAction="#Editar" prefWidth="77.0" text="Editar" textAlignment="CENTER">
+      <Button fx:id="btnEditar" layoutX="627.0" layoutY="79.0" mnemonicParsing="false" onAction="#Editar" styleClass="btn-primary" text="Editar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

@@ -7,21 +7,7 @@ public class Produto {
 	private Double quantidadeEstoque;
 	private Double valorEntrada;
 	private Double margemLucro;
-//private	Estoque estoque;
-
-	public Produto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Produto(Integer idProduto, String nome, Double quantidadeEstoque, Double valorEntrada, Double margemLucro) {
-		super();
-		this.idProduto = idProduto;
-		this.nome = nome;
-		this.quantidadeEstoque = quantidadeEstoque;
-		this.valorEntrada = valorEntrada;
-		this.margemLucro = margemLucro;
-	}
+	private Filial filial;
 
 	public Double getValorUnitario() {
 		return this.valorEntrada + (this.valorEntrada * this.margemLucro / 100);
@@ -65,6 +51,14 @@ public class Produto {
 
 	public void setMargemLucro(Double margemLucro) {
 		this.margemLucro = margemLucro;
+	}
+
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
 	}
 
 	@Override

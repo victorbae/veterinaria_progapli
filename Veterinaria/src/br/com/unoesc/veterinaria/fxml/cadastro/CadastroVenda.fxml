@@ -9,80 +9,80 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroVenda">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="anchorPane" stylesheets="@../../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroVenda">
    <children>
-      <Label layoutX="53.0" layoutY="188.0" text="Data Venda:">
+      <Label layoutX="29.0" layoutY="146.0" styleClass="labelCustom" text="Data Venda:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="119.0" text="Cliente:">
+      <Label layoutX="66.0" layoutY="93.0" styleClass="labelCustom" text="Cliente:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="458.0" layoutY="119.0" text="Valor Desconto:">
+      <Label layoutX="335.0" layoutY="202.0" styleClass="labelCustom" text="Valor Desconto:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="486.0" layoutY="188.0" text="Valor Total:">
+      <Label layoutX="373.0" layoutY="265.0" styleClass="labelCustom" text="Valor Total:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="210.0" layoutY="31.0" text="Nova Venda">
+      <Label layoutX="223.0" layoutY="14.0" styleClass="h1" text="Nova Venda">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="560.0" layoutY="43.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Button fx:id="btnCancelar" layoutX="518.0" layoutY="26.0" mnemonicParsing="false" onAction="#Cancelar" styleClass="btn-danger" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalvar" layoutX="769.0" layoutY="43.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="682.0" layoutY="26.0" mnemonicParsing="false" onAction="#Salvar" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnLimpar" layoutX="664.0" layoutY="43.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
+      <Button fx:id="btnLimpar" layoutX="605.0" layoutY="26.0" mnemonicParsing="false" onAction="#Limpar" styleClass="btn-warning" text="Limpar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <DatePicker fx:id="dtDataVenda" layoutX="153.0" layoutY="192.0" prefWidth="266.0" />
-      <TextField fx:id="tfValorDesconto" layoutX="580.0" layoutY="123.0" prefHeight="26.0" prefWidth="126.0" />
-      <TextField fx:id="tfValorTotal" layoutX="580.0" layoutY="190.0" prefHeight="26.0" prefWidth="266.0" />
-      <TableView fx:id="tvCarinho" layoutX="31.0" layoutY="299.0" prefHeight="373.0" prefWidth="842.0">
+      <DatePicker fx:id="dtDataVenda" layoutX="140.0" layoutY="143.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfValorDesconto" layoutX="473.0" layoutY="200.0" prefHeight="32.0" prefWidth="142.0" />
+      <TextField fx:id="tfValorTotal" layoutX="473.0" layoutY="262.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TableView fx:id="tvCarinho" layoutX="5.0" layoutY="299.0" prefHeight="374.0" prefWidth="750.0">
         <columns>
-          <TableColumn fx:id="tcNomeProduto" prefWidth="242.0" text="Nome" />
-          <TableColumn fx:id="tcQuantidade" prefWidth="200.0" text="Quantidade" />
-            <TableColumn fx:id="tcValorUnitario" prefWidth="200.0" text="Valor Unitario" />
-            <TableColumn fx:id="tcValorTotal" prefWidth="200.0" text="Valor Total" />
+          <TableColumn fx:id="tcNomeProduto" prefWidth="195.0" text="Nome" />
+          <TableColumn fx:id="tcQuantidade" prefWidth="184.0" text="Quantidade" />
+            <TableColumn fx:id="tcValorUnitario" prefWidth="184.0" text="Valor Unitario" />
+            <TableColumn fx:id="tcValorTotal" prefWidth="184.0" text="Valor Total" />
         </columns>
       </TableView>
-      <Button fx:id="btnExcluirProduto" layoutX="719.0" layoutY="250.0" mnemonicParsing="false" onAction="#ExcluirProduto" text="Excluir Produto" textAlignment="CENTER">
+      <Button fx:id="btnExcluirProduto" layoutX="5.0" layoutY="262.0" mnemonicParsing="false" onAction="#ExcluirProduto" styleClass="btn-danger" text="Excluir Produto" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnAdicionarProduto" layoutX="560.0" layoutY="250.0" mnemonicParsing="false" onAction="#AdicionarProduto" text="Adicionar Produto" textAlignment="CENTER">
+      <Button fx:id="btnAdicionarProduto" layoutX="134.0" layoutY="262.0" mnemonicParsing="false" onAction="#AdicionarProduto" styleClass="btn-success" text="Adicionar Produto" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Label layoutX="227.0" layoutY="238.0" text="Produtos">
-         <font>
-            <Font name="Gabriola" size="42.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfCliente" layoutX="153.0" layoutY="123.0" prefHeight="26.0" prefWidth="266.0" />
-      <Button fx:id="btnAplicaDesconto" layoutX="710.0" layoutY="122.0" mnemonicParsing="false" onAction="#AplicarDesconto" text="Aplicar Desconto">
+      <TextField fx:id="tfCliente" layoutX="140.0" layoutY="90.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <Button fx:id="btnAplicaDesconto" layoutX="616.0" layoutY="198.0" mnemonicParsing="false" onAction="#AplicarDesconto" styleClass="btn-primary" text="Aplicar Desconto">
          <font>
             <Font name="Bell MT" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="lblDescontoAplicado" layoutX="580.0" layoutY="160.0" prefHeight="26.0" prefWidth="266.0" text="Label" />
+      <Label fx:id="lblDescontoAplicado" layoutX="473.0" layoutY="233.0" prefHeight="26.0" prefWidth="260.0" styleClass="labelMenor" text="Label" />
+      <Label layoutX="5.0" layoutY="201.0" styleClass="h2" text="Produtos">
+         <font>
+            <Font name="Gabriola" size="42.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

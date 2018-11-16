@@ -11,22 +11,6 @@ public class Animais {
 	TipoAnimal tipo_animal;
 	Raca raca;
 
-	public Animais() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Animais(Integer idAnimal, String nome, LocalDate data_Nascimento, Cliente cliente, TipoAnimal tipo_animal,
-			Raca raca) {
-		super();
-		this.idAnimal = idAnimal;
-		this.nome = nome;
-		this.data_Nascimento = data_Nascimento;
-		this.cliente = cliente;
-		this.tipo_animal = tipo_animal;
-		this.raca = raca;
-	}
-
 	public Integer getIdAnimal() {
 		return idAnimal;
 	}

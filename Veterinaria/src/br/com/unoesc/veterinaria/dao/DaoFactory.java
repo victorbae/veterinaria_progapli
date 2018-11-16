@@ -9,4 +9,14 @@ public interface DaoFactory {
 	ClienteDao clienteDao();
 
 	VendaProdutoDao vendaProdutoDao();
+
+	FilialDao filialDao();
+
+	FuncionarioDao funcionarioDao();
+
+	RacaDao racaDao();
+
+	TipoAnimalDao tipoAnimalDao();
+
+	AnimaisDao animaisDao();
 }

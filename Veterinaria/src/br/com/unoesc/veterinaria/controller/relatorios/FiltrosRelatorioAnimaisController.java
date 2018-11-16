@@ -16,8 +16,9 @@ import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosAnimais;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -118,10 +119,10 @@ public class FiltrosRelatorioAnimaisController {
 			filtroAnimal.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
 		}
 		if (!tfRaca.getText().isEmpty() && tfRaca.getText() != null) {
-			filtroAnimal.setRaca(EstaticosParaAnimal.achaRacaByNome(tfRaca.getText()));
+			filtroAnimal.setRaca(EstaticosParaRaca.achaRacaByNome(tfRaca.getText()));
 		}
 		if (!tfTipoAnimal.getText().isEmpty() && tfTipoAnimal.getText() != null) {
-			filtroAnimal.setTipoAnimal(EstaticosParaAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText()));
+			filtroAnimal.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText()));
 		}
 
 		return filtroAnimal;

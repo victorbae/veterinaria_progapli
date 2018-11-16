@@ -7,38 +7,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerProduto">
+<AnchorPane prefWidth="760.0" styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerProduto">
    <children>
-      <TableView fx:id="tvProdutos" layoutX="10.0" layoutY="186.0" prefHeight="500.0" prefWidth="880.0">
+      <TableView fx:id="tvProdutos" layoutX="5.0" layoutY="116.0" styleClass="tableView">
         <columns>
-          <TableColumn fx:id="tcNome" prefWidth="240.0" text="Nome" />
-            <TableColumn fx:id="tcQuantidade" prefWidth="160.0" text="Quantidade" />
-            <TableColumn fx:id="tcValorEntrada" prefWidth="160.0" text="Valor Entrada" />
-            <TableColumn fx:id="tcMargemLucro" prefWidth="160.0" text="Margem de lucro" />
-            <TableColumn fx:id="tcIdEstoque" prefWidth="160.0" text="Id Estoque" />
+          <TableColumn fx:id="tcNome" prefWidth="187.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tcQuantidade" prefWidth="187.0" resizable="false" text="Quantidade" />
+            <TableColumn fx:id="tcValorEntrada" prefWidth="187.0" resizable="false" text="Valor Entrada" />
+            <TableColumn fx:id="tcMargemLucro" prefWidth="187.0" resizable="false" text="Margem de lucro" />
         </columns>
       </TableView>
-      <Label layoutX="358.0" layoutY="14.0" text="Produtos">
+      <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Produtos">
          <font>
             <Font name="Gabriola" size="66.0" />
          </font>
       </Label>
-      <Button fx:id="btnNovo" layoutX="591.0" layoutY="137.0" mnemonicParsing="false" onAction="#Novo" prefWidth="77.0" text="Novo " textAlignment="CENTER">
+      <Button fx:id="btnNovo" layoutX="695.0" layoutY="79.0" mnemonicParsing="false" onAction="#Novo" styleClass="btn-success" text="Novo " textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExcluir" layoutX="808.0" layoutY="137.0" mnemonicParsing="false" onAction="#Excluir" prefWidth="77.0" text="Excluir" textAlignment="CENTER">
+      <Button fx:id="btnExcluir" layoutX="553.0" layoutY="79.0" mnemonicParsing="false" onAction="#Excluir" styleClass="btn-danger" text="Excluir" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="699.0" layoutY="137.0" mnemonicParsing="false" onAction="#Editar" prefWidth="77.0" text="Editar" textAlignment="CENTER">
+      <Button fx:id="btnEditar" layoutX="627.0" layoutY="79.0" mnemonicParsing="false" onAction="#Editar" styleClass="btn-primary" text="Editar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExibeRelatorio" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#exibeRelatorio" text="Relatórios" textAlignment="CENTER">
+      <Button fx:id="btnExibeRelatorio" layoutX="5.0" layoutY="79.0" mnemonicParsing="false" onAction="#exibeRelatorio" styleClass="btn-info" text="Relatórios" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

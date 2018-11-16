@@ -17,7 +17,7 @@ public class Main extends Application {
 		try {
 			root = (BorderPane) FXMLLoader
 					.load(getClass().getResource("/br/com/unoesc/veterinaria/fxml/PaginaInicial.fxml"));
-			Scene scene = new Scene(root, 1200, 800);
+			Scene scene = new Scene(root, 807, 653);
 			scene.getStylesheets().add(
 					getClass().getResource("/br/com/unoesc/veterinaria/principal/application.css").toExternalForm());
 			primaryStage.setTitle("Veterinaria PRK");

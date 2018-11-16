@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.controller;
 
+import java.io.IOException;
+
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dialogs.AnimaisDialogFactory;
@@ -8,15 +10,19 @@ import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ControllerAnimais {
@@ -46,6 +52,12 @@ public class ControllerAnimais {
 
 	@FXML
 	private Button btnEditar;
+
+	@FXML
+	private Button btnTipoAnimal;
+
+	@FXML
+	private Button btnRaca;
 
 	@FXML
 	private Button btnExibeRelatorio;
@@ -98,6 +110,34 @@ public class ControllerAnimais {
 
 		if (clicadoSalvar) {
 			atualizaLista();
+		}
+	}
+
+	@FXML
+	void tipoAnimal(ActionEvent event) {
+		if (EstaticosDeAcesso.isLogado()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/TipoAnimal.fxml"));
+			try {
+				AnchorPane cursoView = (AnchorPane) loader.load();
+				EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	void raca(ActionEvent event) {
+		if (EstaticosDeAcesso.isLogado()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Raca.fxml"));
+			try {
+				AnchorPane cursoView = (AnchorPane) loader.load();
+				EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 

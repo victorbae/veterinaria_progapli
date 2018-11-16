@@ -6,46 +6,53 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerAdicionaProdutoVenda">
+<AnchorPane prefHeight="460.0" prefWidth="500.0" stylesheets="@../../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerAdicionaProdutoVenda">
    <children>
-      <TextField fx:id="tfQuantidade" layoutX="181.0" layoutY="211.0" onAction="#carregaValorTotal" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfValorUnitario" layoutX="181.0" layoutY="263.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfValorTotal" layoutX="181.0" layoutY="315.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="97.0" layoutY="157.0" text="Produto:">
+      <TextField fx:id="tfQuantidade" layoutX="181.0" layoutY="215.0" onAction="#carregaValorTotal" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfValorUnitario" layoutX="180.0" layoutY="276.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfValorTotal" layoutX="180.0" layoutY="328.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <Label layoutX="94.0" layoutY="161.0" styleClass="labelCustom" text="Produto:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="272.0" layoutY="415.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Button fx:id="btnCancelar" layoutX="256.0" layoutY="406.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-danger" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnAdicionar" layoutX="380.0" layoutY="415.0" mnemonicParsing="false" onAction="#Adicionar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnAdicionar" layoutX="417.0" layoutY="406.0" mnemonicParsing="false" onAction="#adicionar" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Label layoutX="70.0" layoutY="209.0" text="Quantidade:">
+      <Label layoutX="69.0" layoutY="218.0" styleClass="labelCustom" text="Quantidade:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="52.0" layoutY="261.0" text="Valor Unitário:">
+      <Label layoutX="51.0" layoutY="279.0" styleClass="labelCustom" text="Valor Unitário:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="76.0" layoutY="313.0" text="Valor Total:">
+      <Label layoutX="72.0" layoutY="331.0" styleClass="labelCustom" text="Valor Total:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="130.0" layoutY="44.0" text="Adicionar Produto">
+      <Label layoutX="83.0" layoutY="39.0" styleClass="h1" text="Adicionar Produto">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <TextField fx:id="tfProduto" layoutX="180.0" layoutY="158.0" onAction="#carregaProduto" prefHeight="26.0" prefWidth="266.0" />
+      <TextField fx:id="tfProduto" layoutX="180.0" layoutY="158.0" onAction="#carregaProduto" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <Label layoutX="181.0" layoutY="188.0" styleClass="labelMenor" text="Escolha o produto e pressione Enter." />
+      <Label layoutX="181.0" layoutY="247.0" styleClass="labelMenor" text="Entre com a quantidade e pressione Enter." />
+      <Button fx:id="btnLimpar" layoutX="342.0" layoutY="406.0" mnemonicParsing="false" onAction="#limpar" styleClass="btn-warning" text="Limpar" textAlignment="CENTER">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

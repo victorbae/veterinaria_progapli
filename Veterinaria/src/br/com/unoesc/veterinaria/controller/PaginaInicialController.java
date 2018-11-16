@@ -24,19 +24,22 @@ public class PaginaInicialController {
 	private BorderPane bpPrincipal;
 
 	@FXML
-	private Button btnCliente;
+	private Button btAnimais;
+
+	@FXML
+	private Button btCliente;
+
+	@FXML
+	private Button btVendas;
 
 	@FXML
 	private Button btnProduto;
 
 	@FXML
-	private Button btnAdicionarVenda;
+	private Button btFuncionario;
 
 	@FXML
-	private Button btnAnimais;
-
-	@FXML
-	private Button btnTipoAnimalRaca;
+	private Button btFilial;
 
 	@FXML
 	public void initialize() {
@@ -58,7 +61,7 @@ public class PaginaInicialController {
 	}
 
 	@FXML
-	void Cliente(ActionEvent event) {
+	void cliente(ActionEvent event) {
 		if (EstaticosDeAcesso.isLogado()) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
@@ -72,7 +75,7 @@ public class PaginaInicialController {
 	}
 
 	@FXML
-	void Produto(ActionEvent event) {
+	void produto(ActionEvent event) {
 		if (EstaticosDeAcesso.isLogado()) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Produto.fxml"));
@@ -86,7 +89,7 @@ public class PaginaInicialController {
 	}
 
 	@FXML
-	void Venda(ActionEvent event) {
+	void vendas(ActionEvent event) {
 		if (EstaticosDeAcesso.isLogado()) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Venda.fxml"));
@@ -128,7 +131,7 @@ public class PaginaInicialController {
 	}
 
 	@FXML
-	void Animais(ActionEvent event) {
+	void animais(ActionEvent event) {
 		if (EstaticosDeAcesso.isLogado()) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Animais.fxml"));
@@ -141,69 +144,4 @@ public class PaginaInicialController {
 		}
 	}
 
-	@FXML
-	void TipoAnimalRaca(ActionEvent event) {
-		if (EstaticosDeAcesso.isLogado()) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/TipoAnimalRaca.fxml"));
-			try {
-				AnchorPane cursoView = (AnchorPane) loader.load();
-				bpPrincipal.setCenter(cursoView);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
-
-	@FXML
-	void alterarFilial(ActionEvent event) throws IOException {
-		if (EstaticosDeAcesso.isLogado()) {
-			Stage stageDono = (Stage) btnAdicionarVenda.getScene().getWindow();
-			TrocaFiliaisDialogFactory funcionarioDialog = new TrocaFiliaisDialogFactory(stageDono);
-			boolean clicadoSalvar = funcionarioDialog.showDialog();
-			if (clicadoSalvar) {
-
-			}
-		}
-	}
-
-	public Button getBtnCliente() {
-		return btnCliente;
-	}
-
-	public void setBtnCliente(Button btnCliente) {
-		this.btnCliente = btnCliente;
-	}
-
-	public Button getBtnProduto() {
-		return btnProduto;
-	}
-
-	public void setBtnProduto(Button btnProduto) {
-		this.btnProduto = btnProduto;
-	}
-
-	public Button getBtnAdicionarVenda() {
-		return btnAdicionarVenda;
-	}
-
-	public void setBtnAdicionarVenda(Button btnAdicionarVenda) {
-		this.btnAdicionarVenda = btnAdicionarVenda;
-	}
-
-	public Button getBtnAnimais() {
-		return btnAnimais;
-	}
-
-	public void setBtnAnimais(Button btnAnimais) {
-		this.btnAnimais = btnAnimais;
-	}
-
-	public Button getBtnTipoAnimalRaca() {
-		return btnTipoAnimalRaca;
-	}
-
-	public void setBtnTipoAnimalRaca(Button btnTipoAnimalRaca) {
-		this.btnTipoAnimalRaca = btnTipoAnimalRaca;
-	}
 }

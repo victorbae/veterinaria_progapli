@@ -34,6 +34,9 @@ public class ControllerAdicionaProdutoVenda {
 	@FXML
 	private Button btnAdicionar;
 
+	@FXML
+	private Button btnLimpar;
+
 	private Stage dialogStage;
 
 	private boolean clicadoSalvar;
@@ -78,6 +81,14 @@ public class ControllerAdicionaProdutoVenda {
 		tfValorTotal
 				.setText(String.valueOf(EstaticosParaProduto.achaProdutoByNome(tfProduto.getText()).getValorUnitario()
 						* Double.parseDouble(tfQuantidade.getText())));
+	}
+
+	@FXML
+	void limpar() {
+		tfProduto.clear();
+		tfQuantidade.clear();
+		tfValorUnitario.clear();
+		tfValorTotal.clear();
 	}
 
 	public void populaVendaProduto() {

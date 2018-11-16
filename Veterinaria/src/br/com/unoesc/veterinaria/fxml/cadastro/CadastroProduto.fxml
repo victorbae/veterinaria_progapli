@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroProduto">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" stylesheets="@../../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroProduto">
    <children>
-      <TextField fx:id="tfNome" layoutX="278.0" layoutY="152.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfQntEstoque" layoutX="278.0" layoutY="204.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfValorEntrada" layoutX="278.0" layoutY="256.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfMargemLucro" layoutX="278.0" layoutY="308.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="195.0" layoutY="150.0" text="Nome:">
+      <TextField fx:id="tfNome" layoutX="200.0" layoutY="105.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfQntEstoque" layoutX="200.0" layoutY="157.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfValorEntrada" layoutX="200.0" layoutY="209.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <TextField fx:id="tfMargemLucro" layoutX="200.0" layoutY="261.0" prefHeight="26.0" prefWidth="266.0" styleClass="inputText" />
+      <Label layoutX="117.0" layoutY="103.0" styleClass="labelCustom" text="Nome:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="202.0" text="Quantidade Estoque:">
+      <Label layoutX="14.0" layoutY="155.0" styleClass="labelCustom" text="Quantidade Estoque:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="136.0" layoutY="254.0" text="Valor Entrada:">
+      <Label layoutX="58.0" layoutY="207.0" styleClass="labelCustom" text="Valor Entrada:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="308.0" text="Margem de Lucro:">
+      <Label layoutX="32.0" layoutY="261.0" styleClass="labelCustom" text="Margem de Lucro:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbxEstoque" layoutX="278.0" layoutY="359.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="181.0" layoutY="359.0" text="Estoque:">
-         <font>
-            <Font name="Gabriola" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="195.0" layoutY="45.0" text="Novo Produto">
+      <Label layoutX="124.0" layoutY="14.0" styleClass="h1" text="Novo Produto">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="278.0" layoutY="485.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Button fx:id="btnCancelar" layoutX="238.0" layoutY="352.0" mnemonicParsing="false" onAction="#Cancelar" styleClass="btn-danger" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalvar" layoutX="465.0" layoutY="485.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="408.0" layoutY="352.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnLimpar" layoutX="378.0" layoutY="485.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
+      <Button fx:id="btnLimpar" layoutX="324.0" layoutY="352.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" styleClass="btn-warning" text="Limpar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

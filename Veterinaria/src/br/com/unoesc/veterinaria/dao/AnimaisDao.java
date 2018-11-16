@@ -9,6 +9,8 @@ public interface AnimaisDao extends CrudDao<Animais> {
 
 	List<Animais> listarNome();
 
+	List<Animais> listarPorRacaETipoAnimal();
+
 	List<Animais> findByFiltros(FiltrosAnimais filtroAnimal);
 
 }

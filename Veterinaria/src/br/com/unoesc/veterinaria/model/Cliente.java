@@ -12,21 +12,6 @@ public class Cliente {
 	String telefone;
 	Filial filial;
 
-	public Cliente() {
-		super();
-	}
-
-	public Cliente(Integer idCliente, String nomeCompleto, String cpf, LocalDate dataNascimento, String endereco,
-			String telefone) {
-		super();
-		this.idCliente = idCliente;
-		this.nomeCompleto = nomeCompleto;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.endereco = endereco;
-		this.telefone = telefone;
-	}
-
 	public Integer getIdCliente() {
 		return idCliente;
 	}

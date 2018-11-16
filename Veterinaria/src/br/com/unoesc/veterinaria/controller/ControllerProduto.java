@@ -57,7 +57,6 @@ public class ControllerProduto {
 		tcQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidadeEstoque"));
 		tcValorEntrada.setCellValueFactory(new PropertyValueFactory<>("valorEntrada"));
 		tcMargemLucro.setCellValueFactory(new PropertyValueFactory<>("margemLucro"));
-//		tcIdEstoque.setCellValueFactory(new PropertyValueFactory<>("estoque"));
 		tvProdutos.setItems(FXCollections.observableArrayList(produtoDao.listar()));
 	}
 
