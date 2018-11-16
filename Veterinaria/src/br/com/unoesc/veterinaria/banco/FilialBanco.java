@@ -127,4 +127,10 @@ public class FilialBanco implements FilialDao {
 		return filiais;
 	}
 
+	@Override
+	public List<Filial> listarSomenteParaFilialLogada() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

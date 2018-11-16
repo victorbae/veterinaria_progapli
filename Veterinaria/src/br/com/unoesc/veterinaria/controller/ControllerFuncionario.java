@@ -64,7 +64,7 @@ public class ControllerFuncionario {
 		tcCPF.setCellValueFactory(new PropertyValueFactory<>("Cpf"));
 		tcNomeFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
 		tcNomeCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-		tvFuncionarios.setItems(FXCollections.observableArrayList(funcionariodao.listar()));
+		tvFuncionarios.setItems(FXCollections.observableArrayList(funcionariodao.listarSomenteParaFilialLogada()));
 	}
 
 	@FXML
@@ -75,6 +75,9 @@ public class ControllerFuncionario {
 			EstaticosDeFuncionario.funcionario = this.funcionario;
 			dialogFunc();
 			escolhido = false;
+			EstaticosDeFuncionario.editando = false;
+			EstaticosDeFuncionario.funcionario = new Funcionario();
+			;
 			initialize();
 		}
 	}

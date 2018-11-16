@@ -26,7 +26,7 @@ CREATE TABLE Produto(
   Quantidade_Estoque VARCHAR(45) NULL,
   Valor_Entrada_Unt VARCHAR(45) NULL,
   Margem_Lucro VARCHAR(45) NULL,
-  idEstoque INT NOT NULL,
+  idEstoque INT,
   
   CONSTRAINT fk_Produto_Estoque FOREIGN KEY (idEstoque) REFERENCES Estoque (idEstoque)
 );
@@ -120,6 +120,17 @@ CREATE TABLE Venda_Produto(
   
   CONSTRAINT fk_Venda_Produto_Produto FOREIGN KEY (idProduto) REFERENCES Produto (idProduto)
     );
+    
+    
+    
+CREATE TABLE funcionario_filial(
+	id int not null primary key auto_increment,
+	idFilial int not null,
+    idFuncionario int not null,
+    
+    foreign key(idFilial) references filial(idFilial),
+    foreign key(idFuncionario) references funcionario(idFuncionario)
+	);
 
 create or replace view lista_dados_vendaProduto as select vp.idVenda as Id_Venda, vp.idProduto as Id_Produto, vp.idVenda_Produto as Id_Venda_Produto,
 	vp.Quantidade as Quantidade, vp.Valor_Unitario as Valor_Unitario, vp.Valor_Total as Valor_Total from Venda_Produto vp;
@@ -162,5 +173,10 @@ use delimiter $
  
  update Filial set id_Gerente = 1 where idFilial = 1;
  
+ INSERT INTO funcionario_filial(idFuncionario, idFilial) VALUES (1,1);
  
+ 
+ 
+ 
+
  

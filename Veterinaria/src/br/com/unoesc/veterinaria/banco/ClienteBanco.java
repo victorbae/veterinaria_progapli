@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.model.Cliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 
@@ -114,6 +115,31 @@ public class ClienteBanco implements ClienteDao {
 				Cliente cliente = new Cliente();
 				cliente.setIdCliente(rs.getInt("Id_Cliente"));
 				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
+				clientes.add(cliente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+
+	@Override
+	public List<Cliente> listarSomenteParaFilialLogada() {
+		List<Cliente> clientes = new ArrayList<>();
+		try {
+			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_cliente where Id_Filial = "
+					+ EstaticosDeAcesso.getFilial().getIdFilial());
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setIdCliente(rs.getInt("Id_Cliente"));
+				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
+				cliente.setCpf(rs.getString("CPF"));
+				cliente.setDataNascimento((rs.getDate("Data_Nascimento").toLocalDate()));
+				cliente.setEndereco(rs.getString("Endereco"));
+				cliente.setTelefone(rs.getString("Telefone"));
+				cliente.setFilial(EstaticosParaCliente.achaFilial(rs.getInt("Id_Filial")));
+
 				clientes.add(cliente);
 			}
 		} catch (SQLException e) {

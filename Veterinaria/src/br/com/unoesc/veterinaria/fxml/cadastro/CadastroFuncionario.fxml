@@ -14,31 +14,31 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroFuncionario">
    <children>
-      <TextField fx:id="tfNome" layoutX="268.0" layoutY="142.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfCpf" layoutX="268.0" layoutY="194.0" prefHeight="26.0" prefWidth="266.0" />
-      <DatePicker fx:id="dtDataNascimento" layoutX="268.0" layoutY="245.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="177.0" layoutY="140.0" text="Nome:">
+      <TextField fx:id="tfNome" layoutX="167.0" layoutY="97.0" prefHeight="26.0" prefWidth="266.0" />
+      <TextField fx:id="tfCpf" layoutX="167.0" layoutY="145.0" prefHeight="26.0" prefWidth="266.0" />
+      <DatePicker fx:id="dtDataNascimento" layoutX="167.0" layoutY="195.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="91.0" layoutY="98.0" text="Nome:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="187.0" layoutY="192.0" text="CPF:">
+      <Label layoutX="103.0" layoutY="146.0" text="CPF:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="96.0" layoutY="243.0" text="Data Nascimento:">
+      <Label layoutX="12.0" layoutY="193.0" text="Data Nascimento:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="134.0" layoutY="294.0" text="Já é Cliente?">
+      <Label layoutX="51.0" layoutY="246.0" text="Já é Cliente?">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbxFilial" layoutX="268.0" layoutY="395.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="182.0" layoutY="393.0" text="Filial:">
+      <ComboBox fx:id="cbxFilial" layoutX="167.0" layoutY="309.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="95.0" layoutY="310.0" text="Filial:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
@@ -63,9 +63,22 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <ComboBox fx:id="cbxCliente" layoutX="268.0" layoutY="293.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="268.0" layoutY="344.0" text="Caso não for," />
-      <Hyperlink fx:id="ChamaTelaAddCliente" layoutX="336.0" layoutY="342.0" onAction="#ChamaTelaAddClienteRapid" text="Clique aqui" />
-      <Label layoutX="402.0" layoutY="344.0" text="para adiciona-lo." />
+      <ComboBox fx:id="cbxCliente" layoutX="167.0" layoutY="245.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="168.0" layoutY="279.0" text="Caso não for," />
+      <Hyperlink fx:id="ChamaTelaAddCliente" layoutX="237.0" layoutY="272.0" onAction="#ChamaTelaAddClienteRapid" text="Clique aqui" />
+      <Label layoutX="308.0" layoutY="279.0" text="para adiciona-lo." />
+      <Label layoutX="49.0" layoutY="356.0" text="Se caso este profissional irá acessar o sistema, preencha o login e senha dele:" />
+      <Label layoutX="22.0" layoutY="386.0" text="Login(e-mail):">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="435.0" text="Senha:">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfLogin" layoutX="163.0" layoutY="385.0" prefHeight="31.0" prefWidth="266.0" />
+      <PasswordField fx:id="tfpSenha" layoutX="163.0" layoutY="434.0" prefHeight="31.0" prefWidth="266.0" />
    </children>
 </AnchorPane>

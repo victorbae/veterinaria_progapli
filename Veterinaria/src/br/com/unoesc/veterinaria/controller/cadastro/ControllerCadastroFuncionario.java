@@ -23,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroFuncionario {
@@ -53,6 +54,12 @@ public class ControllerCadastroFuncionario {
 
 	@FXML
 	private TextField tfNome;
+
+	@FXML
+	private TextField tfLogin;
+
+	@FXML
+	private PasswordField tfpSenha = new PasswordField();
 
 	private Stage dialogStage;
 
@@ -134,6 +141,8 @@ public class ControllerCadastroFuncionario {
 		funcionario.setCliente(cbxCliente.getValue());
 		funcionario.setFilial(cbxFilial.getValue());
 		funcionario.setData_Nascimento(dtDataNascimento.getValue());
+		funcionario.setSenha(tfpSenha.getText());
+		funcionario.setEmail(tfLogin.getText());
 	}
 
 	void preencheTela() {
@@ -142,6 +151,8 @@ public class ControllerCadastroFuncionario {
 		cbxCliente.setValue(EstaticosParaCliente.achaCliente(this.funcionario.getCliente().getIdCliente()));
 		cbxFilial.setValue(this.funcionario.getFilial());
 		dtDataNascimento.setValue(LocalDate.parse(String.valueOf(this.funcionario.getData_Nascimento())));
+		tfpSenha.setText(String.valueOf(this.funcionario.getSenha()));
+		tfLogin.setText(this.funcionario.getEmail());
 	}
 
 	private void populaComboFilial() {

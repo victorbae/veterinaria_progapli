@@ -2,14 +2,21 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
 
+import br.com.unoesc.veterinaria.banco.PermissoesBanco;
+import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.TrocaFiliaisDialogFactory;
+import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class PaginaInicialController {
 
@@ -148,6 +155,18 @@ public class PaginaInicialController {
 		}
 	}
 
+	@FXML
+	void alterarFilial(ActionEvent event) throws IOException {
+		if (EstaticosDeAcesso.isLogado()) {
+			Stage stageDono = (Stage) btnAdicionarVenda.getScene().getWindow();
+			TrocaFiliaisDialogFactory funcionarioDialog = new TrocaFiliaisDialogFactory(stageDono);
+			boolean clicadoSalvar = funcionarioDialog.showDialog();
+			if (clicadoSalvar) {
+
+			}
+		}
+	}
+
 	public Button getBtnCliente() {
 		return btnCliente;
 	}
@@ -187,5 +206,4 @@ public class PaginaInicialController {
 	public void setBtnTipoAnimalRaca(Button btnTipoAnimalRaca) {
 		this.btnTipoAnimalRaca = btnTipoAnimalRaca;
 	}
-
 }

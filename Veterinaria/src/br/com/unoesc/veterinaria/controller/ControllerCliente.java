@@ -61,7 +61,7 @@ public class ControllerCliente {
 		tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
 		tcFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
 		tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
-		tvCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
+		tvCliente.setItems(FXCollections.observableArrayList(clienteDao.listarSomenteParaFilialLogada()));
 	}
 
 	@FXML
