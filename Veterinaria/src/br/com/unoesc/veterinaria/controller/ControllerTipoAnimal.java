@@ -1,5 +1,6 @@
 package br.com.unoesc.veterinaria.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -11,14 +12,18 @@ import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -45,6 +50,9 @@ public class ControllerTipoAnimal {
 
 	@FXML
 	private Button btEditar;
+
+	@FXML
+	private Button btVoltar;
 
 	private TipoAnimal tipoAnimal;
 
@@ -99,7 +107,7 @@ public class ControllerTipoAnimal {
 
 	@FXML
 	void exibeRelatorio(ActionEvent event) {
-		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioRaca.jasper");
+		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioTipoAnimal.jasper");
 		JasperPrint jasperPrint;
 		List<Animais> listaAnimais = animalDao.listar();
 		try {
@@ -112,6 +120,20 @@ public class ControllerTipoAnimal {
 			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void voltar(ActionEvent event) {
+		if (EstaticosDeAcesso.isLogado()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Animais.fxml"));
+			try {
+				AnchorPane cursoView = (AnchorPane) loader.load();
+				EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 

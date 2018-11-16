@@ -20,7 +20,7 @@
             <Font name="Gabriola" size="44.0" />
          </font>
       </Label>
-      <Button fx:id="btnExibeRelatorio" layoutX="5.0" layoutY="79.0" mnemonicParsing="false" onAction="#exibeRelatorio" styleClass="btn-info" text="Relatórios" textAlignment="CENTER">
+      <Button fx:id="btnExibeRelatorio" layoutX="5.0" layoutY="79.0" mnemonicParsing="false" onAction="#exibeRelatorio" styleClass="btn-info" text="Relatório" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
@@ -40,5 +40,6 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
+      <Button fx:id="btVoltar" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#voltar" styleClass="btn-light" text="Voltar" />
    </children>
 </AnchorPane>

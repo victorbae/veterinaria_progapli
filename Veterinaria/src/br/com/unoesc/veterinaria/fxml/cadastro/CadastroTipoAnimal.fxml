@@ -24,7 +24,7 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalvar" layoutX="422.0" layoutY="252.0" mnemonicParsing="false" onAction="#salvar" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="426.0" layoutY="251.0" mnemonicParsing="false" onAction="#salvar" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

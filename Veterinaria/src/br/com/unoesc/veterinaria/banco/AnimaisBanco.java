@@ -186,7 +186,7 @@ public class AnimaisBanco implements AnimaisDao {
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca");
+					"SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca order by a.nome");
 			while (rs.next()) {
 				Animais animal = new Animais();
 				animal.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));

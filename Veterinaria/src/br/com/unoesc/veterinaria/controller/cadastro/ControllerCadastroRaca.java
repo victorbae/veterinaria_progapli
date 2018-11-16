@@ -82,6 +82,7 @@ public class ControllerCadastroRaca {
 
 	public void populaRaca() {
 		raca = new Raca();
+		raca.setIdRaca(EstaticosParaRaca.raca.getIdRaca());
 		raca.setNome(tfNome.getText());
 		raca.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText()));
 	}
