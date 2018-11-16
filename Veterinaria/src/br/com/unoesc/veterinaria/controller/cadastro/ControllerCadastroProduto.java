@@ -3,6 +3,7 @@ package br.com.unoesc.veterinaria.controller.cadastro;
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,9 +44,9 @@ public class ControllerCadastroProduto {
 
 	@FXML
 	private void initialize() {
-		this.produto = EstaticosParaProduto.produto;
 
 		if (EstaticosParaProduto.isEditando) {
+			this.produto = EstaticosParaProduto.produto;
 			populaTela();
 		}
 	}
@@ -97,6 +98,7 @@ public class ControllerCadastroProduto {
 		produto.setQuantidadeEstoque(Double.parseDouble(tfQntEstoque.getText()));
 		produto.setValorEntrada(Double.parseDouble(tfValorEntrada.getText()));
 		produto.setMargemLucro(Double.parseDouble(tfMargemLucro.getText()));
+		produto.setFilial(EstaticosDeAcesso.getFilial());
 	}
 
 	public void limpaTela() {

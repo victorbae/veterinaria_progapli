@@ -2,7 +2,6 @@ package br.com.unoesc.veterinaria.controller;
 
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.FilialDao;
-import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.FilialDialogFactory;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
@@ -58,7 +57,6 @@ public class ControllerFilial {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-		tcId.setCellValueFactory(new PropertyValueFactory<>("idFilial"));
 		tcGerente.setCellValueFactory(new PropertyValueFactory<>("gerente"));
 		tcCNPJ.setCellValueFactory(new PropertyValueFactory<>("Cnpj"));
 		tvFilial.setItems(FXCollections.observableArrayList(filialDao.listar()));
@@ -84,10 +82,10 @@ public class ControllerFilial {
 
 	@FXML
 	void Editar(ActionEvent event) {
-		
+
 		EstaticosParaFilial.filial = tvFilial.getSelectionModel().getSelectedItem();
 		EstaticosParaFilial.editando = true;
-		
+
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
 

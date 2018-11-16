@@ -6,31 +6,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroRaca">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" stylesheets="@../../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroRaca">
    <children>
-      <TextField fx:id="tfNome" layoutX="225.0" layoutY="220.0" prefHeight="26.0" prefWidth="320.0" />
-      <Label layoutX="141.0" layoutY="218.0" prefHeight="29.0" prefWidth="54.0" text="Nome:">
+      <TextField fx:id="tfNome" layoutX="164.0" layoutY="128.0" prefHeight="26.0" prefWidth="320.0" styleClass="inputText" />
+      <Label layoutX="104.0" layoutY="131.0" styleClass="labelCustom" text="Nome:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="225.0" layoutY="46.0" prefHeight="52.0" prefWidth="150.0" text="Nova Raça">
+      <Label layoutX="152.0" layoutY="14.0" styleClass="h1" text="Nova Raça">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="278.0" layoutY="485.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" textAlignment="CENTER">
+      <Label layoutX="54.0" layoutY="175.0" styleClass="labelCustom" text="Tipo Animal:">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfTipoAnimal" layoutX="164.0" layoutY="176.0" styleClass="inputText" />
+      <Button fx:id="btnCancelar" layoutX="271.0" layoutY="262.0" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-danger" text="Cancelar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalvar" layoutX="465.0" layoutY="485.0" mnemonicParsing="false" onAction="#Salvar" prefWidth="77.0" text="Salvar" textAlignment="CENTER">
+      <Button fx:id="btnSalvar" layoutX="432.0" layoutY="262.0" mnemonicParsing="false" onAction="#salvar" styleClass="btn-success" text="Salvar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnLimpar" layoutX="378.0" layoutY="485.0" mnemonicParsing="false" onAction="#Limpar" prefWidth="77.0" text="Limpar" textAlignment="CENTER">
+      <Button fx:id="btnLimpar" layoutX="357.0" layoutY="262.0" mnemonicParsing="false" onAction="#limpar" styleClass="btn-warning" text="Limpar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>

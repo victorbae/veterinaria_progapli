@@ -1,46 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFuncionario">
+<AnchorPane styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerFuncionario">
    <children>
-      <Pane prefHeight="700.0" prefWidth="900.0">
-         <children>
-            <TableView fx:id="tvFuncionarios" layoutX="10.0" layoutY="187.0" prefHeight="500.0" prefWidth="880.0">
-              <columns>
-                <TableColumn fx:id="tcId" prefWidth="75.0" text="#" />
-                <TableColumn fx:id="tcNome" prefWidth="247.0" text="Nome" />
-                  <TableColumn fx:id="tcCPF" prefWidth="136.0" text="CPF" />
-                  <TableColumn fx:id="tcDtNascimento" prefWidth="150.0" text="Data de Nascimento" />
-                  <TableColumn fx:id="tcNomeCliente" prefWidth="145.0" text="Nome como cliente" />
-                  <TableColumn fx:id="tcNomeFilial" prefWidth="126.0" text="Nome da Filial" />
-              </columns>
-            </TableView>
-            <Button fx:id="btSalvar" layoutX="699.0" layoutY="137.0" mnemonicParsing="false" onAction="#salvar" prefWidth="77.0" text="Editar">
-               <font>
-                  <Font name="Gabriola" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btExcluir" layoutX="808.0" layoutY="137.0" mnemonicParsing="false" onAction="#excluir" prefWidth="77.0" text="Excluir">
-               <font>
-                  <Font name="Gabriola" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btNovo" layoutX="591.0" layoutY="137.0" mnemonicParsing="false" onAction="#novo" prefWidth="77.0" text="Novo">
-               <font>
-                  <Font name="Gabriola" size="20.0" />
-               </font>
-            </Button>
-            <Label layoutX="318.0" layoutY="20.0" text="Funcionários">
-               <font>
-                  <Font name="Gabriola" size="66.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <TableView fx:id="tvFuncionarios" layoutX="5.0" layoutY="116.0" styleClass="tableView">
+        <columns>
+          <TableColumn fx:id="tcNome" prefWidth="150.0" text="Nome" />
+            <TableColumn fx:id="tcCPF" prefWidth="150.0" text="CPF" />
+            <TableColumn fx:id="tcDtNascimento" prefWidth="150.0" text="Data de Nascimento" />
+            <TableColumn fx:id="tcNomeCliente" prefWidth="150.0" text="Cliente" />
+            <TableColumn fx:id="tcNomeFilial" prefWidth="150.0" text="Filial" />
+        </columns>
+      </TableView>
+      <Button fx:id="btSalvar" layoutX="627.0" layoutY="79.0" mnemonicParsing="false" onAction="#salvar" styleClass="btn-primary" text="Editar">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btExcluir" layoutX="553.0" layoutY="79.0" mnemonicParsing="false" onAction="#excluir" styleClass="btn-danger" text="Excluir">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btNovo" layoutX="695.0" layoutY="79.0" mnemonicParsing="false" onAction="#novo" styleClass="btn-success" text="Novo ">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="262.0" layoutY="14.0" styleClass="h1" text="Funcionários">
+         <font>
+            <Font name="Gabriola" size="66.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

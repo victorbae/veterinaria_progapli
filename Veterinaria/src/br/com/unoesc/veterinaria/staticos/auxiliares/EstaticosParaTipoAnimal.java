@@ -7,7 +7,7 @@ import br.com.unoesc.veterinaria.model.TipoAnimal;
 public class EstaticosParaTipoAnimal {
 
 	public static boolean isEditando;
-	public static TipoAnimal tipo_animal = new TipoAnimal();
+	public static TipoAnimal tipoAnimal = new TipoAnimal();
 
 	public static TipoAnimal achaTipoAnimal(Integer idTipo_Animal) {
 		TipoAnimal TipoAnimalAchado = new TipoAnimal();

@@ -22,7 +22,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ControllerCadastroAnimais {
 
@@ -56,6 +58,9 @@ public class ControllerCadastroAnimais {
 	@FXML
 	private TextField tfCliente;
 
+	private Tooltip tooltipRaca = new Tooltip();
+	private Tooltip tooltipTipoAnimal = new Tooltip();
+
 	private Animais animais;
 
 	private Stage dialogStage;
@@ -72,6 +77,14 @@ public class ControllerCadastroAnimais {
 		tfRaca.setDisable(true);
 		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 		TextFields.bindAutoCompletion(tfTipoAnimal, tipoAnimalDao.listar());
+
+		tooltipRaca.setShowDelay(Duration.millis(230d));
+		tooltipRaca.setText("Adicionar nova raça.");
+		btnOutraRaca.setTooltip(tooltipRaca);
+
+		tooltipTipoAnimal.setShowDelay(Duration.millis(230d));
+		tooltipTipoAnimal.setText("Adicionar novo tipo animal.");
+		btnOutroTipoAnimal.setTooltip(tooltipTipoAnimal);
 
 		if (EstaticosParaAnimal.isEditando) {
 			populaTela();

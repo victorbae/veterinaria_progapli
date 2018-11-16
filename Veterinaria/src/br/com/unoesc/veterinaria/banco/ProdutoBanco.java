@@ -20,7 +20,7 @@ public class ProdutoBanco implements ProdutoDao {
 	public void inserir(Produto dado) {
 		try {
 			String sql = "INSERT INTO `produto`(`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idFilial`) "
-					+ "VALUES (null,?,?,?,?)";
+					+ "VALUES (null,?,?,?,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
@@ -91,7 +91,7 @@ public class ProdutoBanco implements ProdutoDao {
 				Produto produto = new Produto();
 				produto.setIdProduto(rs.getInt("Id_Produto"));
 				produto.setNome(rs.getString("Nome"));
-				produto.setQuantidadeEstoque(rs.getDouble("Qnt_Estoque"));
+				produto.setQuantidadeEstoque(rs.getDouble("Quantidade_Estoque"));
 				produto.setValorEntrada(rs.getDouble("Valor_Ent_Unt"));
 				produto.setMargemLucro(rs.getDouble("Margem_Lucro"));
 				produto.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("idFilial")));

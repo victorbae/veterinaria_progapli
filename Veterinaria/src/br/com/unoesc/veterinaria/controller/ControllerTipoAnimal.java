@@ -4,18 +4,13 @@ import java.net.URL;
 import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
-import br.com.unoesc.veterinaria.banco.RacaBanco;
 import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
-import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
-import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
-import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -31,7 +26,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class ControllerTipoAnimalRaca {
+public class ControllerTipoAnimal {
 
 	@FXML
 	private TableView<TipoAnimal> tvTipoAnimal;
@@ -40,77 +35,36 @@ public class ControllerTipoAnimalRaca {
 	private TableColumn<TipoAnimal, String> tcNome;
 
 	@FXML
-	private TableColumn<TipoAnimal, Raca> tcRaca;
-
-	@FXML
-	private Button btnNovoTipoAnimal;
-
-	@FXML
-	private Button btnExcluirTipoAnimal;
-
-	@FXML
-	private Button btnEditarTipoAnimal;
-
-	@FXML
-	private TableView<Raca> tvRaca;
-
-	@FXML
-	private TableColumn<Raca, String> tcNomeRaca;
-
-	@FXML
-	private Button btnNovaRaca;
-
-	@FXML
-	private Button btnEditarRaca;
-
-	@FXML
-	private Button btnExcluirRaca;
-
-	@FXML
 	private Button btnExibeRelatorio;
 
-	Raca raca;
-	TipoAnimal tipoAnimal;
-	private Stage dialogStage;
-	private boolean clicadoSalvar;
-	RacaDao racaDao = new RacaBanco();
-	TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
+	@FXML
+	private Button btNovo;
+
+	@FXML
+	private Button btExcluir;
+
+	@FXML
+	private Button btEditar;
+
+	private TipoAnimal tipoAnimal;
+
+	private TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
 	private AnimaisDao animalDao = new AnimaisBanco();
 
 	@FXML
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tcNomeRaca.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tcRaca.setCellValueFactory(new PropertyValueFactory<>("raca"));
 		tvTipoAnimal.setItems(FXCollections.observableArrayList(tipoAnimalDao.listar()));
-		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
-		atualizaListaRaca();
 		atualizaListaTipoAnimal();
 	}
 
 	@FXML
-	void EditarRaca(ActionEvent event) {
-		if (tvRaca.getSelectionModel().getSelectedItem() != null) {
-			EstaticosParaRaca.raca = tvRaca.getSelectionModel().getSelectedItem();
-			EstaticosParaRaca.isEditando = true;
-		}
-		Stage stageDono = (Stage) btnEditarRaca.getScene().getWindow();
-		RacaDialogFactory racaDialog = new RacaDialogFactory(stageDono);
-
-		boolean clicadoSalvar = racaDialog.showDialog();
-
-		if (clicadoSalvar) {
-			atualizaListaRaca();
-		}
-	}
-
-	@FXML
-	void EditarTipoAnimal(ActionEvent event) {
+	void editar(ActionEvent event) {
 		if (tvTipoAnimal.getSelectionModel().getSelectedItem() != null) {
-			EstaticosParaTipoAnimal.tipo_animal = tvTipoAnimal.getSelectionModel().getSelectedItem();
+			EstaticosParaTipoAnimal.tipoAnimal = tvTipoAnimal.getSelectionModel().getSelectedItem();
 			EstaticosParaTipoAnimal.isEditando = true;
 		}
-		Stage stageDono = (Stage) btnEditarTipoAnimal.getScene().getWindow();
+		Stage stageDono = (Stage) btEditar.getScene().getWindow();
 		TipoAnimalDialogFactory tipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
 
 		boolean clicadoSalvar = tipoAnimalDialog.showDialog();
@@ -121,16 +75,7 @@ public class ControllerTipoAnimalRaca {
 	}
 
 	@FXML
-	void ExcluirRaca(ActionEvent event) {
-		if (tvRaca.getSelectionModel().getSelectedItem() != null) {
-			raca = tvRaca.getSelectionModel().getSelectedItem();
-			racaDao.excluir(raca);
-		}
-		atualizaListaRaca();
-	}
-
-	@FXML
-	void ExcluirTipoAnimal(ActionEvent event) {
+	void excluir(ActionEvent event) {
 		if (tvTipoAnimal.getSelectionModel().getSelectedItem() != null) {
 			tipoAnimal = tvTipoAnimal.getSelectionModel().getSelectedItem();
 			tipoAnimalDao.excluir(tipoAnimal);
@@ -139,30 +84,14 @@ public class ControllerTipoAnimalRaca {
 	}
 
 	@FXML
-	void NovaRaca(ActionEvent event) {
+	void novo(ActionEvent event) {
 
-		Stage stageDono = (Stage) btnNovaRaca.getScene().getWindow();
-		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
-
-		boolean clicadoSalvar = adicionaRacaDialog.showDialog();
-
-		if (clicadoSalvar) {
-			dialogStage.close();
-			atualizaListaRaca();
-		}
-
-	}
-
-	@FXML
-	void NovoTipoAnimal(ActionEvent event) {
-
-		Stage stageDono = (Stage) btnNovoTipoAnimal.getScene().getWindow();
+		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		TipoAnimalDialogFactory adicionaTipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
 
 		boolean clicadoSalvar = adicionaTipoAnimalDialog.showDialog();
 
 		if (clicadoSalvar) {
-			dialogStage.close();
 			atualizaListaTipoAnimal();
 		}
 
@@ -192,17 +121,4 @@ public class ControllerTipoAnimalRaca {
 
 	}
 
-	public void atualizaListaRaca() {
-
-		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
-		tvRaca.refresh();
-	}
-
-	public void setStageDialog(Stage dialogStage) {
-		this.dialogStage = dialogStage;
-	}
-
-	public boolean clicadoSalvar() {
-		return clicadoSalvar;
-	}
 }

@@ -1,25 +1,18 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import br.com.unoesc.veterinaria.banco.RacaBanco;
 import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
-import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
-import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroTipoAnimal {
 	@FXML
 	private TextField tfNome;
-
-	@FXML
-	private ComboBox<Raca> cbxRaca;
 
 	@FXML
 	private Button btnCancelar;
@@ -34,32 +27,30 @@ public class ControllerCadastroTipoAnimal {
 	private Stage dialogStage;
 	private boolean clicadoSalvar;
 	private TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
-	private RacaDao racaDao = new RacaBanco();
 
 	@FXML
 	private void initialize() {
-		this.tipoAnimal = EstaticosParaTipoAnimal.tipo_animal;
-		populaCombo();
 
 		if (EstaticosParaTipoAnimal.isEditando) {
+			this.tipoAnimal = EstaticosParaTipoAnimal.tipoAnimal;
 			populaTela();
 		}
 	}
 
 	@FXML
-	void Cancelar(ActionEvent event) {
+	void cancelar(ActionEvent event) {
 		limpaTela();
 		dialogStage.close();
 	}
 
 	@FXML
-	void Limpar(ActionEvent event) {
+	void limpar(ActionEvent event) {
 		limpaTela();
 	}
 
 	@FXML
-	void Salvar(ActionEvent event) {
-		preencheTipoAnimal();
+	void salvar(ActionEvent event) {
+		populaTipoAnimal();
 		if (EstaticosParaTipoAnimal.isEditando) {
 			tipoAnimalDao.alterar(tipoAnimal);
 			EstaticosParaTipoAnimal.isEditando = false;
@@ -74,25 +65,16 @@ public class ControllerCadastroTipoAnimal {
 
 	public void populaTela() {
 		tfNome.setText(tipoAnimal.getNome());
-
 	}
 
-	public void preencheTipoAnimal() {
+	public void populaTipoAnimal() {
 		tipoAnimal = new TipoAnimal();
 		tipoAnimal.setNome(tfNome.getText());
-
+		tipoAnimal.setIdTipoAnimal(EstaticosParaTipoAnimal.tipoAnimal.getIdTipoAnimal());
 	}
 
 	public void limpaTela() {
 		tfNome.clear();
-		cbxRaca.getSelectionModel().clearSelection();
-
-	}
-
-	private void populaCombo() {
-		for (Raca raca : racaDao.listar()) {
-			cbxRaca.getItems().add(raca);
-		}
 	}
 
 	public void setDialogStage(Stage dialogStage) {

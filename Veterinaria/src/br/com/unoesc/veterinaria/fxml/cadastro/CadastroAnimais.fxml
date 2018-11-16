@@ -9,19 +9,19 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroAnimais">
    <children>
-      <TextField fx:id="tfNome" layoutX="266.0" layoutY="142.0" prefHeight="26.0" prefWidth="266.0" />
-      <DatePicker fx:id="dtDataNascimento" layoutX="266.0" layoutY="192.0" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="181.0" layoutY="140.0" text="Nome:">
+      <TextField fx:id="tfNome" layoutX="222.0" layoutY="141.0" prefHeight="26.0" prefWidth="266.0" />
+      <DatePicker fx:id="dtDataNascimento" layoutX="222.0" layoutY="191.0" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="137.0" layoutY="139.0" text="Nome:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="102.0" layoutY="190.0" text="Data Nascimento:">
+      <Label layoutX="58.0" layoutY="189.0" text="Data Nascimento:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="190.0" layoutY="349.0" text="Dono:">
+      <Label layoutX="146.0" layoutY="348.0" text="Dono:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
@@ -46,29 +46,29 @@
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Label layoutX="193.0" layoutY="296.0" text="Raça:">
+      <Label layoutX="149.0" layoutY="295.0" text="Raça:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="115.0" layoutY="243.0" text="Tipo do Animal:">
+      <Label layoutX="71.0" layoutY="242.0" text="Tipo do Animal:">
          <font>
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Button fx:id="btnOutraRaca" layoutX="37.0" layoutY="506.0" mnemonicParsing="false" onAction="#OutraRaca" text="Outra Raça -&gt; Cadastre Aqui" textAlignment="CENTER">
+      <Button fx:id="btnOutraRaca" layoutX="490.0" layoutY="297.0" mnemonicParsing="false" onAction="#OutraRaca" prefHeight="26.0" text="+" textAlignment="CENTER">
          <font>
-            <Font name="Gabriola" size="20.0" />
+            <Font name="Bookshelf Symbol 7" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="btnOutroTipoAnimal" layoutX="265.0" layoutY="506.0" mnemonicParsing="false" onAction="#OutroTipoAnimal" text="Outra Tipo do Animal -&gt; Cadastre Aqui" textAlignment="CENTER">
+      <Button fx:id="btnOutroTipoAnimal" layoutX="490.0" layoutY="243.0" mnemonicParsing="false" onAction="#OutroTipoAnimal" prefHeight="26.0" text="+" textAlignment="CENTER">
          <font>
-            <Font name="Gabriola" size="20.0" />
+            <Font name="Bookshelf Symbol 7" size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="tfRaca" layoutX="267.0" layoutY="298.0" prefHeight="26.0" prefWidth="266.0" />
-      <TextField fx:id="tfTipoAnimal" layoutX="266.0" layoutY="245.0" onAction="#carregaRaca" prefHeight="26.0" prefWidth="266.0" />
-      <Label layoutX="267.0" layoutY="273.0" text="Escolha o tipo do animal e pressione Enter." />
-      <TextField fx:id="tfCliente" layoutX="268.0" layoutY="350.0" prefHeight="26.0" prefWidth="266.0" />
+      <TextField fx:id="tfRaca" layoutX="222.0" layoutY="297.0" prefHeight="26.0" prefWidth="266.0" />
+      <TextField fx:id="tfTipoAnimal" layoutX="222.0" layoutY="244.0" onAction="#carregaRaca" prefHeight="26.0" prefWidth="266.0" />
+      <Label layoutX="224.0" layoutY="272.0" text="Escolha o tipo do animal e pressione Enter." />
+      <TextField fx:id="tfCliente" layoutX="224.0" layoutY="349.0" prefHeight="26.0" prefWidth="266.0" />
    </children>
 </AnchorPane>

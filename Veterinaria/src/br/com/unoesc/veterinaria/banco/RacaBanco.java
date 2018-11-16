@@ -21,10 +21,11 @@ public class RacaBanco implements RacaDao {
 	@Override
 	public void inserir(Raca dado) {
 		try {
-			String sql = "INSERT INTO `raca`(`idRaca`, `Nome`) " + " VALUES (null,?)";
+			String sql = "INSERT INTO `raca`(`idRaca`, `Nome`, `idTipoAnimal`) " + " VALUES (null,?,?)";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dado.getNome());
+			stmt.setInt(2, dado.getTipoAnimal().getIdTipoAnimal());
 			stmt.executeUpdate();
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -40,10 +41,11 @@ public class RacaBanco implements RacaDao {
 	@Override
 	public void alterar(Raca dado) {
 		try {
-			String sql = "UPDATE `raca` SET `Nome`=? WHERE `idRaca`= ?";
+			String sql = "UPDATE `raca` SET `Nome`=?, `idTipoAnimal` = ? WHERE `idRaca`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
-			stmt.setInt(2, dado.getIdRaca());
+			stmt.setInt(2, dado.getTipoAnimal().getIdTipoAnimal());
+			stmt.setInt(3, dado.getIdRaca());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -70,21 +72,22 @@ public class RacaBanco implements RacaDao {
 	 */
 	@Override
 	public List<Raca> listar() {
-		List<Raca> raca = new ArrayList<>();
+		List<Raca> racas = new ArrayList<>();
 		try {
 			Statement stmt = ConexaoPrincipal.retornaconecao().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM lista_dados_raca");
 			while (rs.next()) {
-				Raca racas = new Raca();
-				racas.setIdRaca(rs.getInt("Id_Raca"));
-				racas.setNome(rs.getString("Nome"));
+				Raca raca = new Raca();
+				raca.setIdRaca(rs.getInt("Id_Raca"));
+				raca.setNome(rs.getString("Nome"));
+				raca.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipoAnimal")));
 
-				raca.add(racas);
+				racas.add(raca);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return raca;
+		return racas;
 
 	}
 

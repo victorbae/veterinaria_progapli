@@ -7,40 +7,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerAnimais">
    <children>
-      <TableView fx:id="tvAnimais" layoutX="20.0" layoutY="196.0" prefHeight="500.0" prefWidth="880.0">
+      <TableView fx:id="tvAnimais" layoutX="5.0" layoutY="116.0" prefHeight="500.0" prefWidth="880.0" styleClass="tableView">
          <columns>
-            <TableColumn fx:id="tcNome" prefWidth="240.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="tcDataNascimento" prefWidth="128.0" resizable="false" text="Data Nascimento" />
-            <TableColumn fx:id="tcRaca" prefWidth="128.0" resizable="false" text="Raça" />
-            <TableColumn fx:id="tcCliente" prefWidth="128.0" resizable="false" text="Cliente" />
-            <TableColumn fx:id="tcTipo_Animal" prefWidth="128.0" resizable="false" text="Tipo Do Animal" />
+            <TableColumn fx:id="tcNome" prefWidth="150.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tcDataNascimento" prefWidth="150.0" resizable="false" text="Data Nascimento" />
+            <TableColumn fx:id="tcRaca" prefWidth="150.0" resizable="false" text="Raça" />
+            <TableColumn fx:id="tcCliente" prefWidth="150.0" resizable="false" text="Cliente" />
+            <TableColumn fx:id="tcTipo_Animal" prefWidth="150.0" resizable="false" text="Tipo Do Animal" />
          </columns>
       </TableView>
-      <Label layoutX="379.0" layoutY="24.0" text="Animais">
+      <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Animais">
          <font>
             <Font name="Gabriola" size="66.0" />
          </font>
       </Label>
-      <Button fx:id="btnNovo" layoutX="601.0" layoutY="149.0" mnemonicParsing="false" onAction="#Novo" prefWidth="77.0" text="Novo " textAlignment="CENTER">
+      <Button fx:id="btnNovo" layoutX="695.0" layoutY="79.0" mnemonicParsing="false" onAction="#Novo" styleClass="btn-success" text="Novo " textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExcluir" layoutX="818.0" layoutY="149.0" mnemonicParsing="false" onAction="#Excluir" prefWidth="77.0" text="Excluir" textAlignment="CENTER">
+      <Button fx:id="btnExcluir" layoutX="553.0" layoutY="79.0" mnemonicParsing="false" onAction="#Excluir" styleClass="btn-danger" text="Excluir" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="709.0" layoutY="149.0" mnemonicParsing="false" onAction="#Editar" prefWidth="77.0" text="Editar" textAlignment="CENTER">
+      <Button fx:id="btnEditar" layoutX="627.0" layoutY="79.0" mnemonicParsing="false" onAction="#Editar" styleClass="btn-primary" text="Editar" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExibeRelatorio" layoutX="24.0" layoutY="147.0" mnemonicParsing="false" onAction="#exibeRelatorio" text="Relatórios" textAlignment="CENTER">
+      <Button fx:id="btnExibeRelatorio" layoutX="5.0" layoutY="79.0" mnemonicParsing="false" onAction="#exibeRelatorio" styleClass="btn-info" text="Relatórios" textAlignment="CENTER">
          <font>
             <Font name="Gabriola" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnTipoAnimal" layoutX="99.0" layoutY="79.0" mnemonicParsing="false" onAction="#tipoAnimal" styleClass="btn-light" text="Ver Tipo Animal ">
+         <font>
+            <Font name="Gabriola" size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRaca" layoutX="236.0" layoutY="79.0" mnemonicParsing="false" onAction="#raca" styleClass="btn-light" text="Ver Raças">
+         <font>
+            <Font name="Gabriola" size="23.0" />
          </font>
       </Button>
    </children>

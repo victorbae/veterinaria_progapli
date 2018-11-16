@@ -60,7 +60,6 @@ public class ControllerFuncionario {
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tcDtNascimento.setCellValueFactory(new PropertyValueFactory<>("data_Nascimento"));
-		tcId.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
 		tcCPF.setCellValueFactory(new PropertyValueFactory<>("Cpf"));
 		tcNomeFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
 		tcNomeCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
