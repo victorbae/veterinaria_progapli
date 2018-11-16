@@ -11,47 +11,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="anchorPane"
-	stylesheets="@../principal/application.css"
-	xmlns="http://javafx.com/javafx/9.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.com.unoesc.veterinaria.controller.ControllerLogin">
+<AnchorPane styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.ControllerLogin">
 	<children>
-		<Label layoutX="312.0" layoutY="14.0" styleClass="h1"
-			text="Login">
+		<Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Login">
 			<font>
 				<Font name="Gabriola" size="42.0" />
 			</font>
 		</Label>
-		<Label layoutX="198.0" layoutY="174.0" styleClass="labelCustom"
-			text="Login:">
+		<Label layoutX="198.0" layoutY="174.0" styleClass="labelCustom" text="Login:">
 			<font>
 				<Font size="19.0" />
 			</font>
 		</Label>
-		<Label layoutX="192.0" layoutY="267.0" styleClass="labelCustom"
-			text="Senha:">
+		<Label layoutX="192.0" layoutY="267.0" styleClass="labelCustom" text="Senha:">
 			<font>
 				<Font size="19.0" />
 			</font>
 		</Label>
-		<Hyperlink fx:id="hyperSenha" layoutX="395.0"
-			layoutY="564.0" onAction="#enviarEmail" prefHeight="27.0"
-			styleClass="labelMenor" text="Clique Aqui" />
-		<Label layoutX="288.0" layoutY="564.0" prefHeight="27.0"
-			styleClass="labelMenor" text="Esqueceu a senha?" />
-		<Label fx:id="lbSenhaIncorreta" layoutX="330.0" layoutY="315.0"
-			prefHeight="19.0" prefWidth="99.0" textFill="#f50000">
+		<Hyperlink fx:id="hyperSenha" layoutX="395.0" layoutY="564.0" onAction="#enviarEmail" prefHeight="27.0" styleClass="labelMenor" text="Clique Aqui" />
+		<Label layoutX="288.0" layoutY="564.0" prefHeight="27.0" styleClass="labelMenor" text="Esqueceu a senha?" />
+		<Label fx:id="lbSenhaIncorreta" layoutX="330.0" layoutY="315.0" prefHeight="19.0" prefWidth="99.0" textFill="#f50000">
 			<font>
 				<Font name="Georgia" size="15.0" />
 			</font>
 		</Label>
-		<TextField fx:id="tfLogin" layoutX="256.0" layoutY="171.0"
-			prefHeight="26.0" prefWidth="200.0" styleClass="inputText" />
-		<TextField fx:id="tfSenha" layoutX="256.0" layoutY="264.0"
-			prefHeight="26.0" prefWidth="200.0" styleClass="inputText" />
-		<Button fx:id="btnAcessar" layoutX="348.0" layoutY="355.0"
-			mnemonicParsing="false" onAction="#entrar" styleClass="btn-success"
-			text="Entrar" textAlignment="CENTER" />
+		<TextField fx:id="tfLogin" layoutX="256.0" layoutY="171.0" prefHeight="26.0" prefWidth="200.0" styleClass="inputText" />
+		<Button fx:id="btnAcessar" layoutX="348.0" layoutY="355.0" mnemonicParsing="false" onAction="#entrar" styleClass="btn-success" text="Entrar" textAlignment="CENTER" />
+      <PasswordField fx:id="tfpSenha" layoutX="257.0" layoutY="267.0" prefHeight="31.0" prefWidth="277.0" />
 	</children>
 </AnchorPane>
