@@ -159,7 +159,7 @@ public class VendaBanco implements VendaDao {
 				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
 				venda.setValorTotal(rs.getDouble("valorTotal"));
 				venda.setIdVenda(rs.getInt("idVenda"));
-				venda.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
+				venda.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("IdFilial")));
 
 				listaVenda.add(venda);
 			}

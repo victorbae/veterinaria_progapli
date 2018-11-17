@@ -132,10 +132,10 @@ public class AnimaisBanco implements AnimaisDao {
 		try {
 			if (filtroAnimal.getCliente() != null || filtroAnimal.getTipoAnimal() != null
 					|| filtroAnimal.getRaca() != null) {
-				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca "
-						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (ta.idRaca = ? or ? is null) ORDER BY a.idAnimal";
+				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idTipo_Animal = ra.idTipoAnimal "
+						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (a.idRaca = ? or ? is null) ORDER BY a.idAnimal";
 			} else {
-				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca"
+				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idTipo_Animal = ra.idTipoAnimal"
 						+ " WHERE (? = ?) OR (? = ?) OR (? = ?) ORDER BY a.idAnimal";
 			}
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);

@@ -11,10 +11,8 @@ import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
-import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 
 public class FuncionarioBanco implements FuncionarioDao {
@@ -22,7 +20,6 @@ public class FuncionarioBanco implements FuncionarioDao {
 	@Override
 	public void inserir(Funcionario dado) {
 		PermissoesBanco permissoes = new PermissoesBanco();
-		;
 		try {
 			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`,`email`,`senha`) VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,

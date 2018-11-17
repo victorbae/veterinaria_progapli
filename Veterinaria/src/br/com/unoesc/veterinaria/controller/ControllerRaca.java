@@ -2,7 +2,6 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
@@ -10,7 +9,6 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
-import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
@@ -29,7 +27,6 @@ import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class ControllerRaca {
@@ -118,15 +115,9 @@ public class ControllerRaca {
 	@FXML
 	void exibeRelatorio(ActionEvent event) {
 		URL url = getClass().getResource("/br/com/unoesc/veterinaria/relatorios/RelatorioRaca.jasper");
-		JasperPrint jasperPrint;
-		List<Animais> listaAnimais = animalDao.listar();
 		try {
-			if (listaAnimais != null) {
-				JRBeanCollectionDataSource pegaLista = new JRBeanCollectionDataSource(listaAnimais);
-				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, pegaLista);
-			} else {
-				jasperPrint = JasperFillManager.fillReport(url.getPath(), null, ConexaoPrincipal.retornaconecao());
-			}
+			JasperPrint jasperPrint = JasperFillManager.fillReport(url.getPath(), null,
+					ConexaoPrincipal.retornaconecao());
 			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
