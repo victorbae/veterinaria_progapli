@@ -19,7 +19,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 
 	@Override
 	public void inserir(Funcionario dado) {
-		PermissoesBanco permissoes = new PermissoesBanco();
+		// PermissoesBanco permissoes = new PermissoesBanco();
 		try {
 			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`,`email`,`senha`) VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
@@ -38,8 +38,8 @@ public class FuncionarioBanco implements FuncionarioDao {
 			EstaticosParaFilial.funcionario = dado;
 			EstaticosParaFilial.funcionario.setIdFuncionario(rs.getInt(1));
 
-			permissoes.inserirNovaPermissaoDeFilial(EstaticosParaFilial.funcionario.getFilial(),
-					EstaticosParaFilial.funcionario);
+//			permissoes.inserirNovaPermissaoDeFilial(EstaticosParaFilial.funcionario.getFilial(),
+//					EstaticosParaFilial.funcionario);
 
 			EstaticosParaFilial.cliente = dado.getCliente();
 

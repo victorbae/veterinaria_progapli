@@ -1,12 +1,11 @@
 package br.com.unoesc.veterinaria.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
-import br.com.unoesc.veterinaria.banco.PermissoesBanco;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 public class ControllerTrocaFIliais {
 
@@ -29,12 +28,12 @@ public class ControllerTrocaFIliais {
 		dialogStage.close();
 	}
 
-	void preencheCombo() {
-		PermissoesBanco permissoes = null;
-		for (Filial filial : permissoes.getFiliaisByPermissoesDoFuncionario(EstaticosDeAcesso.getFuncionario())) {
-			cbxFiliaisPermitidas.getItems().add(filial);
-		}
-	}
+//	void preencheCombo() {
+//		PermissoesBanco permissoes = null;
+//		for (Filial filial : permissoes.getFiliaisByPermissoesDoFuncionario(EstaticosDeAcesso.getFuncionario())) {
+//			cbxFiliaisPermitidas.getItems().add(filial);
+//		}
+//	}
 
 	public void setStageDialog(Stage dialogStage) {
 		this.dialogStage = dialogStage;

@@ -10,7 +10,6 @@ import br.com.unoesc.veterinaria.banco.VendaBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
-import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.filtros.FiltrosVenda;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
@@ -110,10 +109,10 @@ public class FiltrosRelatorioVendaController {
 
 	private FiltrosVenda validaFiltros() {
 		filtrosVenda = new FiltrosVenda();
-		for (Cliente cliente : clienteDao.listar()) {
-			if (tfCliente.getText() == cliente.getNomeCompleto()) {
-				filtrosVenda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
-			}
+		if (tfCliente.getText().isEmpty()) {
+			filtrosVenda.setCliente(null);
+		} else {
+			filtrosVenda.setCliente(EstaticosParaCliente.achaClienteByName(tfCliente.getText()));
 		}
 
 		if (dpData.getValue() != null) {
