@@ -31,7 +31,7 @@
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="223.0" layoutY="14.0" styleClass="h1" text="Nova Venda">
+      <Label fx:id="lblTitulo" layoutX="223.0" layoutY="14.0" styleClass="h1" text="Nova Venda">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
@@ -84,5 +84,6 @@
             <Font name="Gabriola" size="42.0" />
          </font>
       </Label>
+      <Button fx:id="btVoltar" layoutX="5.0" layoutY="26.0" mnemonicParsing="false" onAction="#voltar" styleClass="btn-light" text="Voltar" />
    </children>
 </AnchorPane>

@@ -70,6 +70,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 				TipoAnimal tipo_Animal = new TipoAnimal();
 				tipo_Animal.setIdTipoAnimal(rs.getInt("idTipoAnimal"));
 				tipo_Animal.setNome(rs.getString("Nome"));
+				tipo_Animal.setQntAnimais(rs.getInt("Qnt_Animais"));
 
 				tipoAnimal.add(tipo_Animal);
 			}

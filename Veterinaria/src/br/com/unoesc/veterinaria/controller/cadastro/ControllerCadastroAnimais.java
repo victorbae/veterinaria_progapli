@@ -88,6 +88,7 @@ public class ControllerCadastroAnimais {
 
 		if (EstaticosParaAnimal.isEditando) {
 			populaTela();
+			animais = EstaticosParaAnimal.animal;
 		}
 
 	}
@@ -161,7 +162,9 @@ public class ControllerCadastroAnimais {
 	}
 
 	public void preencheAnimais() {
-		animais = new Animais();
+		if (!EstaticosParaAnimal.isEditando) {
+			animais = new Animais();
+		}
 		animais.setNome(tfNome.getText());
 		animais.setData_Nascimento(dtDataNascimento.getValue());
 		animais.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimalByNome(tfTipoAnimal.getText()));

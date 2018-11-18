@@ -2,9 +2,7 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroProduto;
 import br.com.unoesc.veterinaria.controller.cadastro.ControllerRedefinirSenha;
-import br.com.unoesc.veterinaria.model.Produto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

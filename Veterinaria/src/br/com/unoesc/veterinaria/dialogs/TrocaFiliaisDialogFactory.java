@@ -3,7 +3,6 @@ package br.com.unoesc.veterinaria.dialogs;
 import java.io.IOException;
 
 import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnimal;
-import br.com.unoesc.veterinaria.model.TipoAnimal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

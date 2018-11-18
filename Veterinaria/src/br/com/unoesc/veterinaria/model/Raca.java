@@ -1,9 +1,11 @@
 package br.com.unoesc.veterinaria.model;
 
 public class Raca {
+
 	private Integer idRaca;
 	private String nome;
 	private TipoAnimal tipoAnimal;
+	private Integer qntAnimais;
 
 	public Integer getIdRaca() {
 		return idRaca;
@@ -27,6 +29,14 @@ public class Raca {
 
 	public void setTipoAnimal(TipoAnimal tipoAnimal) {
 		this.tipoAnimal = tipoAnimal;
+	}
+
+	public Integer getQntAnimais() {
+		return qntAnimais;
+	}
+
+	public void setQntAnimais(Integer qntAnimais) {
+		this.qntAnimais = qntAnimais;
 	}
 
 	@Override

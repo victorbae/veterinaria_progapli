@@ -1,49 +1,49 @@
 @import url('https://fonts.googleapis.com/css?family=KoHo');
 
 .anchorPane {
-	-fx-pref-width: 760px;
-	-fx-pref-height: 630px;
+	-fx-pref-width: 760.0px;
+	-fx-pref-height: 630.0px;
 }
 
 .tableView {
-	-fx-pref-width: 750px;
-	-fx-pref-height: 500px;
+	-fx-pref-width: 750.0px;
+	-fx-pref-height: 500.0px;
 }
 
 .h1 {
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 42px;
+	-fx-font-size: 42.0px;
 }
 
 .h2 {
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 38px;
+	-fx-font-size: 38.0px;
 }
 
 .inputText {
-	-fx-pref-height: 32px;
-	-fx-pref-width: 277px;
+	-fx-pref-height: 32.0px;
+	-fx-pref-width: 277.0px;
 }
 
 .labelCustom {
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 19px;
+	-fx-font-size: 19.0px;
 }
 
 .labelId {
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 15px;
+	-fx-font-size: 15.0px;
 }
 
 .labelMenor {
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 13px;
+	-fx-font-size: 13.0px;
 }
 
 .btn-light, .btn-success, .btn-primary, .btn-danger, .btn-warning, .btn-info {
-	-fx-border-radius: 4px;
+	-fx-border-radius: 4.0px;
 	-fx-font-family: 'KoHo', sans-serif;
-	-fx-font-size: 15px;
+	-fx-font-size: 15.0px;
 }
 
 .btn-light {
@@ -51,33 +51,51 @@
 	-fx-background-color: #e2e6ea;
 	-fx-border-color: #dae0e5;
 }
-
+.btn-light:hover{
+	-fx-background-color: #f8f9fa;
+}
 .btn-success {
 	-fx-text-fill: #fff;
 	-fx-background-color: #449d44;
 	-fx-border-color: #398439;
 }
-
+.btn-success:hover{
+	-fx-background-color: #218838;
+	-fx-border-color: #1e7e34;
+}
 .btn-primary {
 	-fx-text-fill: #fff;
 	-fx-background-color: #286090;
 	-fx-border-color: #204d74;
 }
-
+.btn-primary:hover{
+	-fx-background-color: #0069d9;
+	-fx-border-color: #0062cc;
+}
 .btn-danger {
 	-fx-text-fill: #fff;
 	-fx-background-color: #E80719;
 	-fx-border-color: #bd2130;
 }
-
+.btn-danger:hover{
+	-fx-background-color: #c82333;
+	-fx-border-color: #bd2130;
+}
 .btn-warning {
 	-fx-text-fill: #fff;
 	-fx-background-color: #ec971f;
 	-fx-border-color: #d58512;
 }
-
+.btn-warning:hover{
+	-fx-background-color: #e0a800;
+	-fx-border-color: #d39e00;
+}
 .btn-info {
 	-fx-text-fill: #fff;
 	-fx-background-color: #31b0d5;
 	-fx-border-color: #269abc;
+}
+.btn-info:hover{
+	-fx-background-color: #138496;
+	-fx-border-color: #117a8b;
 }

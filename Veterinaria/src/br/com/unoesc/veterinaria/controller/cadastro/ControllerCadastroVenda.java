@@ -16,6 +16,7 @@ import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
 import br.com.unoesc.veterinaria.model.VendaProduto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
@@ -34,6 +35,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ControllerCadastroVenda {
+
+	@FXML
+	private Label lblTitulo;
 
 	@FXML
 	private Button btnCancelar;
@@ -83,6 +87,9 @@ public class ControllerCadastroVenda {
 	@FXML
 	private Label lblDescontoAplicado;
 
+	@FXML
+	private Button btVoltar;
+
 	private Venda venda;
 
 	private Cliente cliente;
@@ -102,6 +109,7 @@ public class ControllerCadastroVenda {
 		btnAplicaDesconto.setDisable(false);
 		tfValorDesconto.setEditable(true);
 		lblDescontoAplicado.setText("Nenhum desconto aplicado.");
+		btVoltar.setVisible(false);
 
 		if (EstaticosParaVenda.isVisualizando) {
 			venda = EstaticosParaVenda.venda;
@@ -109,6 +117,8 @@ public class ControllerCadastroVenda {
 			tvCarinho.setItems(FXCollections.observableArrayList(vendaProdutoDao.listarPelaVenda(venda)));
 			lblDescontoAplicado.setText("Desconto de R$" + venda.getValorDesconto() + " aplicado.");
 			bloqueiaTudo(true);
+			btVoltar.setVisible(true);
+			lblTitulo.setText("Venda N° " + venda.getIdVenda());
 		}
 
 		EstaticosParaVenda.tfValorTotalAux = tfValorTotal;
@@ -176,16 +186,32 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void AplicarDesconto(ActionEvent event) {
-		if (Double.valueOf(tfValorTotal.getText()) != null && Double.valueOf(tfValorDesconto.getText()) != null
-				&& Double.valueOf(tfValorTotal.getText()) > Double.valueOf(tfValorDesconto.getText())) {
-			Double valorSemDesconto = Double.valueOf(tfValorTotal.getText());
-			Double desconto = Double.valueOf(tfValorDesconto.getText());
-			Double valorComDesconto = valorSemDesconto - desconto;
-			tfValorTotal.setText(valorComDesconto.toString());
-			lblDescontoAplicado.setText("Desconto de R$" + desconto + " aplicado.");
-			btnAplicaDesconto.setDisable(true);
-			tfValorDesconto.setEditable(false);
-			EstaticosParaVenda.venda.setValorDesconto(desconto);
+		if (!tfValorTotal.getText().isEmpty()) {
+			if (Double.valueOf(tfValorTotal.getText()) != null && Double.valueOf(tfValorDesconto.getText()) != null
+					&& Double.valueOf(tfValorTotal.getText()) > Double.valueOf(tfValorDesconto.getText())) {
+				Double valorSemDesconto = Double.valueOf(tfValorTotal.getText());
+				Double desconto = Double.valueOf(tfValorDesconto.getText());
+				Double valorComDesconto = valorSemDesconto - desconto;
+				tfValorTotal.setText(valorComDesconto.toString());
+				lblDescontoAplicado.setText("Desconto de R$" + desconto + " aplicado.");
+				btnAplicaDesconto.setDisable(true);
+				tfValorDesconto.setEditable(false);
+				EstaticosParaVenda.venda.setValorDesconto(desconto);
+			}
+		}
+	}
+
+	@FXML
+	void voltar(ActionEvent event) {
+		if (EstaticosDeAcesso.isLogado()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Venda.fxml"));
+			try {
+				AnchorPane cursoView = (AnchorPane) loader.load();
+				EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -270,6 +296,9 @@ public class ControllerCadastroVenda {
 		tfValorTotal.setDisable(block);
 		btnAdicionarProduto.setDisable(block);
 		btnExcluirProduto.setDisable(block);
+		btnAplicaDesconto.setDisable(block);
+		btnLimpar.setDisable(block);
+		btnSalvar.setDisable(block);
 	}
 
 }

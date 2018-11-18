@@ -8,7 +8,7 @@ import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
-import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactoryRapid;
+import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
@@ -121,7 +121,7 @@ public class ControllerCadastroFuncionario {
 	@FXML
 	void ChamaTelaAddClienteRapid(ActionEvent event) {
 		Stage stageDono = (Stage) ChamaTelaAddCliente.getScene().getWindow();
-		ClienteDialogFactoryRapid clienteDialog = new ClienteDialogFactoryRapid(stageDono);
+		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
 		clienteDialog.showDialog();
 
 		cbxCliente.setValue(EstaticosParaCliente.cliente);

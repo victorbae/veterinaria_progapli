@@ -11,8 +11,9 @@
    <children>
       <TableView fx:id="tvRaca" layoutX="5.0" layoutY="116.0" prefHeight="500.0" prefWidth="750.0">
          <columns>
-            <TableColumn fx:id="tcNome" prefWidth="375.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="tcTipoAnimal" prefWidth="375.0" text="Tipo Animal" />
+            <TableColumn fx:id="tcNome" prefWidth="250.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tcTipoAnimal" prefWidth="249.0" text="Tipo Animal" />
+            <TableColumn fx:id="tcQntAnimais" prefWidth="250.0" text="Quantidade de Animais nesta Raça" />
          </columns>
       </TableView>
       <Label layoutX="334.0" layoutY="14.0" styleClass="h1" text="Raça">
