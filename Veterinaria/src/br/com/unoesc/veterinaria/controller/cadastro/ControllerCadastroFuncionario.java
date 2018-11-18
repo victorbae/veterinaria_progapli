@@ -1,6 +1,5 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
@@ -13,6 +12,7 @@ import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactoryRapid;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.model.Permissoes;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
@@ -22,8 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroFuncionario {
@@ -59,6 +59,9 @@ public class ControllerCadastroFuncionario {
 	private TextField tfLogin;
 
 	@FXML
+	private ComboBox<Permissoes> cbxPermissoes;
+
+	@FXML
 	private PasswordField tfpSenha = new PasswordField();
 
 	private Stage dialogStage;
@@ -77,6 +80,7 @@ public class ControllerCadastroFuncionario {
 	private void initialize() {
 		populaComboCliente();
 		populaComboFilial();
+		populaComboPermissao();
 		this.funcionario = EstaticosDeFuncionario.funcionario;
 		if (EstaticosDeFuncionario.editando) {
 			preencheTela();
@@ -143,6 +147,7 @@ public class ControllerCadastroFuncionario {
 		funcionario.setData_Nascimento(dtDataNascimento.getValue());
 		funcionario.setSenha(tfpSenha.getText());
 		funcionario.setEmail(tfLogin.getText());
+		funcionario.setPermissao(cbxPermissoes.getValue());
 	}
 
 	void preencheTela() {
@@ -159,6 +164,13 @@ public class ControllerCadastroFuncionario {
 		for (Filial filial : filialdao.listar()) {
 			cbxFilial.getItems().add(filial);
 		}
+	}
+
+	private void populaComboPermissao() {
+		cbxPermissoes.getItems().add(Permissoes.VENDEDOR);
+		cbxPermissoes.getItems().add(Permissoes.SECRETARIO);
+		cbxPermissoes.getItems().add(Permissoes.VENDEDOR_SECRETARIO);
+		cbxPermissoes.getItems().add(Permissoes.ADMINISTRADOR);
 	}
 
 	private void populaComboCliente() {

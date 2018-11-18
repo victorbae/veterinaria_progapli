@@ -1,18 +1,18 @@
 package br.com.unoesc.veterinaria.controller.cadastro;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import java.util.Random;
 
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.edu.unoesc.veterinaria.envioEmail.JavaMailApp;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ControllerRedefinirSenha {
 
@@ -62,7 +62,7 @@ public class ControllerRedefinirSenha {
 	}
 
 	void validarFuncionario(String email) {
-		this.funcionario = funcionario.getFuncionarioByLogin(email);
+		this.funcionario = EstaticosDeFuncionario.getFuncionarioByLogin(email);
 	}
 
 	String novaSenha() {

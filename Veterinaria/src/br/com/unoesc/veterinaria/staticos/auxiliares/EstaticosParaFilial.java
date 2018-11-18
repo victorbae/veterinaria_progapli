@@ -1,5 +1,7 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
+import java.util.List;
+
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.model.Cliente;
@@ -18,6 +20,20 @@ public class EstaticosParaFilial {
 
 		for (Filial filial : filialDao.listar()) {
 			if (idFilial == filial.getIdFilial()) {
+				filialDoCliente = filial;
+			}
+		}
+
+		return filialDoCliente;
+	}
+
+	public static Filial buscaFilialById(Integer id) {
+		Filial filialDoCliente = new Filial();
+		FilialDao filialDao = new FilialBanco();
+		List<Filial> lista = filialDao.listarNome();
+
+		for (Filial filial : lista) {
+			if (id == filial.getIdFilial()) {
 				filialDoCliente = filial;
 			}
 		}

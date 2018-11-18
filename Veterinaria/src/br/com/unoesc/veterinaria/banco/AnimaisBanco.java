@@ -94,7 +94,7 @@ public class AnimaisBanco implements AnimaisDao {
 				Animais animal = new Animais();
 				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
-				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
+				animal.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				animal.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
 				animal.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
 				animal.setRaca(EstaticosParaRaca.achaRaca(rs.getInt("idRaca")));

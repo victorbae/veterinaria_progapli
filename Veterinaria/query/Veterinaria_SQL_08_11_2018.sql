@@ -123,7 +123,7 @@ CREATE OR REPLACE VIEW lista_dados_cliente AS SELECT cl.idCliente AS Id_Cliente,
 cl.Endereco AS Endereco, cl.Telefone AS Telefone, cl.idFilial AS Id_Filial FROM Cliente cl;
 
 create or replace view view_lista_funcionarios as select idFuncionario as Id_Funcionario, Nome as Nome, CPF as CPF, Data_Nascimento, id_Cliente as Id_Cliente,
-idFilial as Id_Filial, email as email, senha as senha from funcionario;
+idFilial as Id_Filial, email as email, senha as senha, permissao from funcionario;
 
 create or replace view view_lista_filiais as select idFilial as Id_Filial, Nome, Endereco, id_Gerente as Id_Gerente, Telefone, CNPJ, CapacidadeEstoque as Capacidade_Estoque from filial;
 
@@ -148,58 +148,66 @@ use delimiter $
  
  insert into Filial(Nome, Endereco, Telefone, CNPJ,CapacidadeEstoque)values("Filial ROOT", "Endereco ROOT", "666666", "666666", 666666);
  
- insert into funcionario(Nome, CPF,Data_Nascimento,idFilial,email,senha)values("Funcionário ROOT", "666666", "2018-11-08","1", "root", "root");
+ /* Insere com Todas as permissoes */
+INSERT INTO `funcionario` (`idFuncionario`, `Nome`, `CPF`, `Data_Nascimento`, `id_Cliente`, `idFilial`, `email`, `senha`, `permissao`) VALUES
+(1, 'Funcionário ROOT', '666666', '2018-11-08', NULL, 1, 'root', 'root', 9),
+(2, 'Secretario', '897456213', '1998-04-26', NULL, 1, 'sec', 'root', 3),
+(3, 'Vendedor', '78945612', '1997-06-05', NULL, 1, 'vend', 'root', 2),
+(4, 'Vendedor Secretario', '185962', '1996-05-15', NULL, 1, 'secvend', 'root', 6);
  
  insert into Cliente(Nome_Completo, CPF, Data_Nascimento, Endereco, Telefone, idFilial) values("Cliente ROOT", "666666", "2018-11-08", "Endereco ROOT", "666666", 1);
  
  update Filial set id_Gerente = 1 where idFilial = 1;
  
- /*
  
-use delimiter $ 
-create trigger tr_atualiza_qnt_animal_raca_insert after insert on animal for each row
+ /* Requisitos banco *considerar views acima */
+use delimiter $
+/* Trigger que chamam as procedures*/
+create trigger tr_atualiza_qtd_animal_raca_insert after insert on animal for each row
 begin 
-	call atualiza_qnt_animal_raca(new.idRaca);
+	call atualiza_qtd_animal_raca(new.idRaca);
+	call att_qtd_tipo_animal(new.idTipo_Animal);
 end $
 
-create trigger tr_atualiza_qnt_animal_raca_delete after delete on animal for each row
-begin 
-	call atualiza_qnt_animal_raca(old.idRaca);
+create trigger tr_atualiza_qtd_animal_raca_delete after delete on animal for each row
+begin
+	call atualiza_qtd_animal_raca(old.idRaca);
+	call att_qtd_tipo_animal(old.idTipo_Animal);
 end $
 
-create trigger tr_atualiza_qnt_animal_raca_update after update on animal for each row
-begin 
-	if new.raca != old.raca then
-		call atualiza_qnt_animal_raca(new.idRaca);
-    end if;
-end $
+create trigger tr_atualiza_qtd_animal_raca_update after update on animal for each row
+begin
+	if new.idRaca != old.idRaca then
+		call atualiza_qtd_animal_raca(new.idRaca);
+	end if;
 
+	if new.idTipo_Animal != old.idTipo_Animal then
+		call att_qtd_tipo_animal(new.idTipo_animal);
+	end if;
+end$
+/* Procedure atualiza qnt_animal na tabela Tipo Animal*/
+create procedure att_qtd_tipo_animal(_id int)
+begin
+	update tipo_Animal set  qnt_Animal = qtd_animais_por_tipo_animal(_id) where idTipo_Animal = _id;
+end $
+/* Procedure atualiza qnt_animal na tabela Raca*/
 create procedure atualiza_qnt_animal_raca(_id int)
-begin 
-	
-    update raca set qntAnimais = quantos_animais_por_raca(_id) where idRaca = _id;
-end
-
-create function quantos_animais_por_raca(_id) returns int
+begin
+	update raca set qntAnimais = quantos_animais_por_raca(_id) where idRaca = _id;
+end $
+/* Procedure acalcula quantos animais tem por TipoAnimal*/
+create function qtd_animais_por_tipo_animal(_id int) returns int
+begin
+	declare qtd_tipo int;
+    select count (idAnimal) into qtd_tipo from animal where idTipoAnimal = _id;
+    return qtd_tipo;
+end $
+/* Procedure acalcula quantos animais tem por Raca*/
+create function quantos_animais_por_raca(_id int) returns int
 begin
 	declare _guarda_qnt int;
-    
-	select count(idAnimal) into _guarda_qnt from animal where idRaca = _id;
-    
+    select count(idAnimal) into _guarda_qnt from animal where idRaca = _id;
     return _guarda_qnt;
-end
-use delimiter ;
+end $
+use delimiter;
 
- 
- SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idRaca = ra.idRaca
- */
- 
-CREATE TABLE funcionario_filial(
-	id int not null primary key auto_increment,
-	idFilial int not null,
-    idFuncionario int not null,
-    
-    foreign key(idFilial) references filial(idFilial),
-    foreign key(idFuncionario) references funcionario(idFuncionario)
-	);
- 

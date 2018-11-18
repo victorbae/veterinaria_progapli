@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +93,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setIdCliente(rs.getInt("Id_Cliente"));
 				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
 				cliente.setCpf(rs.getString("CPF"));
-				cliente.setDataNascimento((rs.getDate("Data_Nascimento").toLocalDate()));
+				cliente.setDataNascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
 				cliente.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
@@ -135,7 +136,7 @@ public class ClienteBanco implements ClienteDao {
 				cliente.setIdCliente(rs.getInt("Id_Cliente"));
 				cliente.setNomeCompleto(rs.getString("Nome_Completo"));
 				cliente.setCpf(rs.getString("CPF"));
-				cliente.setDataNascimento((rs.getDate("Data_Nascimento").toLocalDate()));
+				cliente.setDataNascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				cliente.setEndereco(rs.getString("Endereco"));
 				cliente.setTelefone(rs.getString("Telefone"));
 				cliente.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));

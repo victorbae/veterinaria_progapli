@@ -155,7 +155,7 @@ public class VendaBanco implements VendaDao {
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
-				venda.setDataVenda(rs.getDate("Data_Venda").toLocalDate());
+				venda.setDataVenda(LocalDate.parse(rs.getString("Data_Venda")));
 				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
 				venda.setValorTotal(rs.getDouble("valorTotal"));
 				venda.setIdVenda(rs.getInt("idVenda"));

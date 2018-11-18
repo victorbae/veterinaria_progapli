@@ -30,6 +30,11 @@
 	-fx-font-size: 19px;
 }
 
+.labelId {
+	-fx-font-family: 'KoHo', sans-serif;
+	-fx-font-size: 15px;
+}
+
 .labelMenor {
 	-fx-font-family: 'KoHo', sans-serif;
 	-fx-font-size: 13px;
