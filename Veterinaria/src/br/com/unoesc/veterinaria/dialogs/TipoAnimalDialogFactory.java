@@ -6,6 +6,7 @@ import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnima
 import br.com.unoesc.veterinaria.model.TipoAnimal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ public class TipoAnimalDialogFactory {
 			AnchorPane TipoAnimalDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
+			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/dog.png"));
 			dialogStage.setTitle("Novo Tipo Do Animal");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
