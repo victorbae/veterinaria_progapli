@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane styleClass="anchorPane" stylesheets="@../principal/application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+   <children>
+      <Label layoutX="298.0" layoutY="230.0" styleClass="h1" text="Pet Bull®" />
+      <Label layoutX="84.0" layoutY="288.0" styleClass="labelCustom" text="O sistema mais completo em gerenciamento de veterinárias e pet shops." />
+      <Label layoutX="463.0" layoutY="246.0" styleClass="labelCustom" text="BETA" />
+   </children>
+</AnchorPane>

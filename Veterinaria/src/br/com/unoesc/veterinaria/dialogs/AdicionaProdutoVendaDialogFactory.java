@@ -6,6 +6,7 @@ import br.com.unoesc.veterinaria.controller.cadastro.ControllerAdicionaProdutoVe
 import br.com.unoesc.veterinaria.model.VendaProduto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ public class AdicionaProdutoVendaDialogFactory {
 			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
+			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/productSale.png"));
 			dialogStage.setTitle("Adicionar Produto");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);

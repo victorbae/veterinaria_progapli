@@ -3,6 +3,7 @@ package br.com.unoesc.veterinaria.principal;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class Main extends Application {
 					getClass().getResource("/br/com/unoesc/veterinaria/principal/application.css").toExternalForm());
 			primaryStage.setTitle("Veterinaria PRK");
 			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/dog.png"));
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Login.fxml"));
 			AnchorPane agenciaView = (AnchorPane) loader.load();

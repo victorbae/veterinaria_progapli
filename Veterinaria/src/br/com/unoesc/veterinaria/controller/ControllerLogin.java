@@ -74,7 +74,7 @@ public class ControllerLogin {
 		EstaticosDeAcesso.ftUser.setVisible(true);
 		EstaticosDeAcesso.verificaPermissoes();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Welcome.fxml"));
 		try {
 			AnchorPane cursoView = (AnchorPane) loader.load();
 			EstaticosParaGeral.bpPrincipalAux.setCenter(cursoView);

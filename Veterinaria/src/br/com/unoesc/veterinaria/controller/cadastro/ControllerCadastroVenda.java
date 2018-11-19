@@ -97,7 +97,6 @@ public class ControllerCadastroVenda {
 
 	private VendaProduto vendaProduto;
 
-	private Stage dialogStage;
 	private VendaDao vendaDao = new VendaBanco();
 
 	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
