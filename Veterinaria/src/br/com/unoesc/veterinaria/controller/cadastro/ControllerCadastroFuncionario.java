@@ -16,6 +16,7 @@ import br.com.unoesc.veterinaria.model.Permissoes;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -94,20 +95,24 @@ public class ControllerCadastroFuncionario {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-		preencheFuncionario();
-		if (EstaticosDeFuncionario.editando) {
-			funcionariodao.alterar(funcionario);
-			EstaticosDeFuncionario.editando = false;
-			EstaticosDeFuncionario.funcionario = new Funcionario();
-			dialogStage.close();
-		} else {
-			EstaticosParaFilial.funcionario = this.funcionario;
-			funcionariodao.inserir(funcionario);
-			dialogStage.close();
-		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
+		try {
+			preencheFuncionario();
+			if (EstaticosDeFuncionario.editando) {
+				funcionariodao.alterar(funcionario);
+				EstaticosDeFuncionario.editando = false;
+				EstaticosDeFuncionario.funcionario = new Funcionario();
+				dialogStage.close();
+			} else {
+				EstaticosParaFilial.funcionario = this.funcionario;
+				funcionariodao.inserir(funcionario);
+				dialogStage.close();
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
 	}
 

@@ -7,6 +7,7 @@ import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.Raca;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
@@ -62,16 +63,20 @@ public class ControllerCadastroRaca {
 
 	@FXML
 	void salvar(ActionEvent event) {
-		populaRaca();
-		if (EstaticosParaRaca.isEditando) {
-			racaDao.alterar(raca);
-			EstaticosParaRaca.isEditando = false;
-		} else {
-			racaDao.inserir(raca);
-		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
+		try {
+			populaRaca();
+			if (EstaticosParaRaca.isEditando) {
+				racaDao.alterar(raca);
+				EstaticosParaRaca.isEditando = false;
+			} else {
+				racaDao.inserir(raca);
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
 	}
 

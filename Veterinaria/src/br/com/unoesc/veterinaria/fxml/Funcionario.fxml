@@ -15,7 +15,7 @@
             <TableColumn fx:id="tcCPF" prefWidth="150.0" text="CPF" />
             <TableColumn fx:id="tcDtNascimento" prefWidth="150.0" text="Data de Nascimento" />
             <TableColumn fx:id="tcNomeCliente" prefWidth="150.0" text="Cliente" />
-            <TableColumn fx:id="tcNomeFilial" prefWidth="150.0" text="Filial" />
+            <TableColumn fx:id="tcNomeFilial" prefWidth="147.0" text="Filial" />
         </columns>
       </TableView>
       <Button fx:id="btSalvar" layoutX="627.0" layoutY="79.0" mnemonicParsing="false" onAction="#salvar" styleClass="btn-primary" text="Editar">

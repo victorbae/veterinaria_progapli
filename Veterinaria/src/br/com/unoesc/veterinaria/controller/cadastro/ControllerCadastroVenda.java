@@ -12,6 +12,7 @@ import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dao.VendaDao;
 import br.com.unoesc.veterinaria.dao.VendaProdutoDao;
 import br.com.unoesc.veterinaria.dialogs.AdicionaProdutoVendaDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.ErroNaoPreenchidoDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.Venda;
@@ -96,6 +97,7 @@ public class ControllerCadastroVenda {
 
 	private VendaProduto vendaProduto;
 
+	private Stage dialogStage;
 	private VendaDao vendaDao = new VendaBanco();
 
 	private VendaProdutoDao vendaProdutoDao = new VendaProdutoBanco();
@@ -140,11 +142,15 @@ public class ControllerCadastroVenda {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-		if (!EstaticosParaVenda.isVisualizando) {
-			populaVenda();
-			vendaDao.inserir(venda);
-			salvaCarrinho(EstaticosParaVenda.carrinhoAux);
-			voltaTelaVenda();
+		try {
+			if (!EstaticosParaVenda.isVisualizando) {
+				populaVenda();
+				vendaDao.inserir(venda);
+				salvaCarrinho(EstaticosParaVenda.carrinhoAux);
+				voltaTelaVenda();
+			}
+		} catch (Exception e) {
+			chamaErroNaoPreenchido();
 		}
 	}
 
@@ -299,6 +305,13 @@ public class ControllerCadastroVenda {
 		btnAplicaDesconto.setDisable(block);
 		btnLimpar.setDisable(block);
 		btnSalvar.setDisable(block);
+	}
+
+	private void chamaErroNaoPreenchido() {
+		Stage stageDono = (Stage) btnSalvar.getScene().getWindow();
+		ErroNaoPreenchidoDialogFactory nopeDialog = new ErroNaoPreenchidoDialogFactory(stageDono);
+
+		nopeDialog.showDialog();
 	}
 
 }

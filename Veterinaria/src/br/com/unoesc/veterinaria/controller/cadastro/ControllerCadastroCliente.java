@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -78,19 +79,22 @@ public class ControllerCadastroCliente {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-		preencheCliente();
+		try {
+			preencheCliente();
 
-		if (EstaticosParaCliente.isEditando) {
-			clienteDao.alterar(cliente);
-			EstaticosParaCliente.isEditando = false;
-		} else {
-			clienteDao.inserir(cliente);
+			if (EstaticosParaCliente.isEditando) {
+				clienteDao.alterar(cliente);
+				EstaticosParaCliente.isEditando = false;
+			} else {
+				clienteDao.inserir(cliente);
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
-		}
-
 	}
 
 	public void populaTela() {

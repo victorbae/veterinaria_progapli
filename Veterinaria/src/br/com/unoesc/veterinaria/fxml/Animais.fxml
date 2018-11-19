@@ -13,9 +13,9 @@
          <columns>
             <TableColumn fx:id="tcNome" prefWidth="150.0" resizable="false" text="Nome" />
             <TableColumn fx:id="tcDataNascimento" prefWidth="150.0" resizable="false" text="Data Nascimento" />
-            <TableColumn fx:id="tcRaca" prefWidth="150.0" resizable="false" text="Raça" />
+            <TableColumn fx:id="tcRaca" prefWidth="149.0" resizable="false" text="Raça" />
             <TableColumn fx:id="tcCliente" prefWidth="150.0" resizable="false" text="Cliente" />
-            <TableColumn fx:id="tcTipo_Animal" prefWidth="150.0" resizable="false" text="Tipo Do Animal" />
+            <TableColumn fx:id="tcTipo_Animal" prefWidth="148.0" resizable="false" text="Tipo Do Animal" />
          </columns>
       </TableView>
       <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Animais">

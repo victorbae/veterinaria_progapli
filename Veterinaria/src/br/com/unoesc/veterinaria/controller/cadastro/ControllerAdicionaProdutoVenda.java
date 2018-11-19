@@ -6,6 +6,7 @@ import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.model.VendaProduto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaVenda;
 import javafx.event.ActionEvent;
@@ -56,12 +57,16 @@ public class ControllerAdicionaProdutoVenda {
 
 	@FXML
 	void adicionar(ActionEvent event) {
-		populaVendaProduto();
+		try {
+			populaVendaProduto();
 
-		EstaticosParaVenda.carrinhoAux.add(vendaProduto);
-		ControllerCadastroVenda.atualizaTotalVenda();
-		ControllerCadastroVenda.atualizaListaCarinho();
-		dialogStage.close();
+			EstaticosParaVenda.carrinhoAux.add(vendaProduto);
+			ControllerCadastroVenda.atualizaTotalVenda();
+			ControllerCadastroVenda.atualizaListaCarinho();
+			dialogStage.close();
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
+		}
 	}
 
 	@FXML
@@ -92,6 +97,7 @@ public class ControllerAdicionaProdutoVenda {
 	}
 
 	public void populaVendaProduto() {
+
 		produto = EstaticosParaProduto.achaProdutoByNome(tfProduto.getText());
 
 		vendaProduto = new VendaProduto();

@@ -63,6 +63,9 @@
 	-fx-background-color: #218838;
 	-fx-border-color: #1e7e34;
 }
+.btn-success:focus{
+	-fx-box-shadow: 0 0 0 .2rem rgba(40,167,69,.5);
+}
 .btn-primary {
 	-fx-text-fill: #fff;
 	-fx-background-color: #286090;

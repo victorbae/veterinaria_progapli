@@ -15,6 +15,7 @@ import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaAnimal;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
@@ -106,17 +107,21 @@ public class ControllerCadastroAnimais {
 
 	@FXML
 	void Salvar(ActionEvent event) {
-		preencheAnimais();
+		try {
+			preencheAnimais();
 
-		if (EstaticosParaAnimal.isEditando) {
-			animaisDao.alterar(animais);
-			EstaticosParaAnimal.isEditando = false;
-		} else {
-			animaisDao.inserir(animais);
-		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
+			if (EstaticosParaAnimal.isEditando) {
+				animaisDao.alterar(animais);
+				EstaticosParaAnimal.isEditando = false;
+			} else {
+				animaisDao.inserir(animais);
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
 	}
 

@@ -15,14 +15,7 @@
 		<Pane prefHeight="0.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
 	</left>
 	<right>
-		<Pane prefHeight="0.0" prefWidth="23.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="ftLogout" fitHeight="28.0" fitWidth="23.0" layoutY="9.0" onMouseClicked="#logout">
-               <image>
-                  <Image url="@../img/logout.png" />
-               </image>
-            </ImageView>
-         </children></Pane>
+		<Pane prefHeight="0.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
 	</right>
 	<bottom>
 		<Pane prefHeight="23.0" BorderPane.alignment="CENTER" />
@@ -40,6 +33,11 @@
             <ImageView fx:id="ftUser" fitHeight="25.0" fitWidth="24.0" layoutX="608.0" layoutY="5.0">
                <image>
                   <Image url="@../img/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ftLogout" fitHeight="25.0" fitWidth="24.0" layoutX="782.0" layoutY="5.0" onMouseClicked="#logout">
+               <image>
+                  <Image url="@../img/logout.png" />
                </image>
             </ImageView>
 			</children>

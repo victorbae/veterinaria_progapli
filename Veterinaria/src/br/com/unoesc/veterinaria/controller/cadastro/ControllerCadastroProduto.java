@@ -4,6 +4,7 @@ import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
 import br.com.unoesc.veterinaria.model.Produto;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,20 +65,22 @@ public class ControllerCadastroProduto {
 
 	@FXML
 	void Salvar(ActionEvent event) {
+		try {
+			preencheProduto();
 
-		preencheProduto();
-
-		if (EstaticosParaProduto.isEditando) {
-			produtoDao.alterar(produto);
-			EstaticosParaProduto.isEditando = false;
-		} else {
-			produtoDao.inserir(produto);
+			if (EstaticosParaProduto.isEditando) {
+				produtoDao.alterar(produto);
+				EstaticosParaProduto.isEditando = false;
+			} else {
+				produtoDao.inserir(produto);
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
-		}
-
 	}
 
 	private void populaTela() {

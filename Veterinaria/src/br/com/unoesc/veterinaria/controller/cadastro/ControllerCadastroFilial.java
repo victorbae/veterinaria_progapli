@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,15 +65,18 @@ public class ControllerCadastroFilial {
 
 	@FXML
 	void btnSalvar(ActionEvent event) {
-		preencheFilial();
-		if (EstaticosParaFilial.editando) {
-			filialdao.alterar(filial);
-		} else {
-			filialdao.inserir(filial);
+		try {
+			preencheFilial();
+			if (EstaticosParaFilial.editando) {
+				filialdao.alterar(filial);
+			} else {
+				filialdao.inserir(filial);
+			}
+			clicadoSalvar = true;
+			dialogStage.close();
+		} catch (Exception e) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
 		}
-		clicadoSalvar = true;
-		dialogStage.close();
-
 	}
 
 	@FXML
