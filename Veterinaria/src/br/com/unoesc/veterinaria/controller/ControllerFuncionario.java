@@ -109,7 +109,7 @@ public class ControllerFuncionario {
 		boolean clicadoSalvar = funcionarioDialog.showDialog();
 		if (clicadoSalvar) {
 			this.funcionario.setCliente(EstaticosParaFilial.cliente);
-			initialize();
 		}
+		initialize();
 	}
 }
