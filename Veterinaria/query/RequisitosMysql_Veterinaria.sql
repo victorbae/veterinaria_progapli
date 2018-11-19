@@ -8,7 +8,7 @@ v.idFilial AS  Id_Filial, v.valorTotal AS  Valor_Total from Venda v;
 CREATE OR REPLACE VIEW lista_dados_cliente AS  SELECT cl.idCliente AS  Id_Cliente, cl.Nome_Completo AS  Nome_Completo, cl.CPF AS  CPF, cl.Data_Nascimento AS  Data_Nascimento, 
 cl.Endereco AS  Endereco, cl.Telefone AS  Telefone, cl.idFilial AS  Id_Filial FROM Cliente cl;
 
-CREATE OR REPLACE VIEW view_lista_funcionarios AS  SELECT idFuncionario AS  Id_Funcionario, Nome AS  Nome, CPF AS  CPF, Data_NAS cimento, id_Cliente AS  Id_Cliente,
+CREATE OR REPLACE VIEW view_lista_funcionarios AS  SELECT idFuncionario AS  Id_Funcionario, Nome AS  Nome, CPF AS  CPF, Data_Nascimento, id_Cliente AS  Id_Cliente,
 idFilial AS  Id_Filial, email AS  email, senha AS  senha, permissao from funcionario;
 
 CREATE OR REPLACE VIEW view_lista_filiais AS  SELECT idFilial AS  Id_Filial, Nome, Endereco, id_Gerente AS  Id_Gerente, Telefone, CNPJ, CapacidadeEstoque AS  Capacidade_Estoque from filial;
@@ -16,7 +16,7 @@ CREATE OR REPLACE VIEW view_lista_filiais AS  SELECT idFilial AS  Id_Filial, Nom
 CREATE OR REPLACE VIEW lista_dados_produto AS  SELECT pd.idProduto AS  Id_Produto, pd.Nome AS  Nome, pd.Quantidade_Estoque AS  Quantidade_Estoque, 
 pd.Valor_Entrada_Unt AS  Valor_Ent_Unt, pd.Margem_Lucro AS  Margem_Lucro, pd.idFilial AS  idFilial FROM Produto pd;
 
-CREATE OR REPLACE VIEW lista_dados_animal AS  SELECT ani.idAnimal AS  Id_Animal, ani.Nome AS  Nome, ani.Data_Nascimento AS  Data_Nascimento, ani.idTipo_Animal AS  idTipo_Animal, ani.idCliente AS  idCliente,ani.idRaca AS  idRaca FROM animal ani;
+CREATE OR REPLACE VIEW lista_dados_animal AS  SELECT ani.idAnimal AS  Id_Animal, ani.Nome AS  Nome, ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS  idTipo_Animal, ani.idCliente AS  idCliente,ani.idRaca AS  idRaca FROM animal ani;
 
 CREATE OR REPLACE VIEW lista_dados_tipo_animal AS  SELECT tp.idTipo_Animal AS  idTipoAnimal, tp.Nome AS  Nome, tp.qnt_Animais AS  Qnt_Animais FROM tipo_animal tp;
 
@@ -101,7 +101,7 @@ begin
 	close listaProdutos;
 end $
 
-/* Triggers que chamam as procedures para atualizar contadores de quantidade na raÃ§a e tipoAnimal*/
+/* Triggers que chamam as procedures para atualizar contadores de quantidade na raça e tipoAnimal*/
 create trigger tr_atualiza_qtd_animal_raca_insert after insert on animal for each row
 begin 
 	call atualiza_qnt_animal_raca(new.idRaca);
