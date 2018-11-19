@@ -25,4 +25,8 @@ public class EstaticosParaFilial {
 		return filialDoCliente;
 	}
 
+	
+	
 }
+
+
