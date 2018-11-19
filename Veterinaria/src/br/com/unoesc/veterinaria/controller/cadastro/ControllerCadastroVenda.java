@@ -134,6 +134,7 @@ public class ControllerCadastroVenda {
 		tcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 
 		if (!EstaticosParaVenda.isVisualizando) {
+			EstaticosParaVenda.carrinhoAux.clear();
 			tvCarinho.setItems(FXCollections.observableArrayList(EstaticosParaVenda.carrinhoAux));
 			bloqueiaTudo(false);
 		}
