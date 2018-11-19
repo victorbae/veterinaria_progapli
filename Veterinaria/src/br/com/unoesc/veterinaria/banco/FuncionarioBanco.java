@@ -181,7 +181,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
 				funcionario.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
-				funcionario.setFilial(EstaticosParaFilial.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionario.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {

@@ -48,14 +48,6 @@ CREATE TABLE Venda(
   CONSTRAINT fk_Venda_Filial FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
 );
 
-CREATE TABLE Tipo_Produto(
-  idTipo_Produto INT NOT NULL auto_increment primary key,
-  Nome VARCHAR(45) NULL,
-  idProduto INT NOT NULL,
-
-  CONSTRAINT fk_Tipo_Produto_Produto FOREIGN KEY (idProduto) REFERENCES Produto (idProduto)
-);
-
 CREATE TABLE Tipo_Animal(
   idTipo_Animal INT NOT NULL auto_increment primary key,
   Nome VARCHAR(45) NULL,
@@ -87,8 +79,6 @@ CREATE TABLE Animal(
   CONSTRAINT fk_Animal_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)
 );
 
-	
-
 CREATE TABLE Funcionario (
     idFuncionario INT NOT NULL auto_increment primary key,
     Nome VARCHAR(45) NULL,
@@ -98,6 +88,7 @@ CREATE TABLE Funcionario (
     idFilial INT NOT NULL,
     email varchar(80),
     senha varchar(45),
+    permissao INT NOT NULL,
     
     CONSTRAINT fk_Funcionario_Filial FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
 );
@@ -113,49 +104,164 @@ CREATE TABLE Venda_Produto(
   CONSTRAINT fk_Venda_Produto_Venda FOREIGN KEY (idVenda) REFERENCES Venda (idVenda),
   
   CONSTRAINT fk_Venda_Produto_Produto FOREIGN KEY (idProduto) REFERENCES Produto (idProduto)
-    );
+);
 
-create or replace view lista_dados_vendaProduto as select vp.idVenda_Produto as IdVenda_Produto, vp.idVenda as Id_Venda, vp.idProduto as Id_Produto, 
-	vp.Quantidade as Quantidade, vp.Valor_Unitario as Valor_Unitario, vp.Valor_Total as Valor_Total from venda_produto vp;
-
-create or replace view lista_dados_venda as select v.idVenda as Id_Venda, v.Valor_Desconto as Valor_Desconto, v.Data_Venda as Data_Venda, v.idCliente as Id_Cliente, 
-v.idFilial as Id_Filial, v.valorTotal as Valor_Total from Venda v;
-
-CREATE OR REPLACE VIEW lista_dados_cliente AS SELECT cl.idCliente AS Id_Cliente, cl.Nome_Completo AS Nome_Completo, cl.CPF AS CPF, cl.Data_Nascimento AS Data_Nascimento, 
-cl.Endereco AS Endereco, cl.Telefone AS Telefone, cl.idFilial AS Id_Filial FROM Cliente cl;
-
-create or replace view view_lista_funcionarios as select idFuncionario as Id_Funcionario, Nome as Nome, CPF as CPF, Data_Nascimento, id_Cliente as Id_Cliente,
-idFilial as Id_Filial, email as email, senha as senha, permissao from funcionario;
-
-create or replace view view_lista_filiais as select idFilial as Id_Filial, Nome, Endereco, id_Gerente as Id_Gerente, Telefone, CNPJ, CapacidadeEstoque as Capacidade_Estoque from filial;
-
-CREATE OR REPLACE VIEW lista_dados_produto AS SELECT pd.idProduto AS Id_Produto, pd.Nome AS Nome, pd.Quantidade_Estoque AS Quantidade_Estoque, 
-pd.Valor_Entrada_Unt AS Valor_Ent_Unt, pd.Margem_Lucro AS Margem_Lucro, pd.idFilial AS idFilial FROM Produto pd;
-
-CREATE OR REPLACE VIEW lista_dados_animal AS SELECT ani.idAnimal AS Id_Animal, ani.Nome AS Nome, ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS idTipo_Animal, ani.idCliente AS idCliente,ani.idRaca as idRaca FROM animal ani;
-
-CREATE OR REPLACE VIEW lista_dados_tipo_animal AS SELECT tp.idTipo_Animal AS idTipoAnimal, tp.Nome AS Nome, tp.qnt_Animais AS Qnt_Animais FROM tipo_animal tp;
-
-CREATE OR REPLACE VIEW lista_dados_raca AS SELECT ra.idRaca AS Id_Raca, ra.nome AS Nome, ra.qnt_Animais AS Qnt_Animais, ra.idTipoAnimal AS idTipoAnimal FROM raca ra;
-
+/* inserts BÃ¡sicos para funcionar bala*/
  
-insert into Filial(Nome, Endereco, Telefone, CNPJ,CapacidadeEstoque)values("Filial ROOT", "Endereco ROOT", "666666", "666666", 666666);
- 
- /* Insere com Todas as permissoes */
-INSERT INTO `funcionario` (`idFuncionario`, `Nome`, `CPF`, `Data_Nascimento`, `id_Cliente`, `idFilial`, `email`, `senha`, `permissao`) VALUES
-(1, 'Funcionário ROOT', '666666', '2018-11-08', NULL, 1, 'root', 'root', 9),
-(2, 'Secretario', '897456213', '1998-04-26', NULL, 1, 'sec', 'root', 3),
-(3, 'Vendedor', '78945612', '1997-06-05', NULL, 1, 'vend', 'root', 2),
-(4, 'Vendedor Secretario', '185962', '1996-05-15', NULL, 1, 'secvend', 'root', 6);
+INSERT INTO `filial` (`idFilial`, `Nome`, `Endereco`, `id_Gerente`, `Telefone`, `CNPJ`, `CapacidadeEstoque`) VALUES
+(1, 'Filial ROOT', 'Endereco ROOT', NULL, '666666', '666666', '666666.00');
+
  
  insert into Cliente(Nome_Completo, CPF, Data_Nascimento, Endereco, Telefone, idFilial) values("Cliente ROOT", "666666", "2018-11-08", "Endereco ROOT", "666666", 1);
  
- update Filial set id_Gerente = 1 where idFilial = 1;
- 
- 
- /* Requisitos banco *considerar views acima */
+ update Filial set id_Gerente = 1 where idFilial = 1; 
+
+ /* Insere Funcionarios com Todas as permissoes */
+INSERT INTO `funcionario` (`idFuncionario`, `Nome`, `CPF`, `Data_Nascimento`, `id_Cliente`, `idFilial`, `email`, `senha`, `permissao`) VALUES
+(1, 'FuncionÃ¡rio ROOT', '666666', '2018-11-08', NULL, 1, 'root', 'root', 9),
+(2, 'Secretario', '897456213', '1998-04-26', NULL, 1, 'sec', 'root', 3),
+(3, 'Vendedor', '78945612', '1997-06-05', NULL, 1, 'vend', 'root', 2),
+(4, 'Vendedor Secretario', '185962', '1996-05-15', NULL, 1, 'secvend', 'root', 6);
+
+INSERT INTO `cliente` (`idCliente`, `Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) VALUES
+(2, 'Cliente ROOT', '666666', '2018-11-08', 'Endereco ROOT', '666666', 1),
+(3, 'Joao ', '123456489', '2018-11-15', 'Rua das Briga de Faca', '49 9 99173453', 1);
+
+INSERT INTO `tipo_animal` (`idTipo_Animal`, `Nome`, `qnt_Animais`) VALUES
+(1, 'Cavalo', 3),
+(2, 'Passaro', 2),
+(4, 'Cachorro ssss', 3),
+(6, 'Boi', NULL);
+
+INSERT INTO `raca` (`idRaca`, `Nome`, `qnt_Animais`, `idTipoAnimal`) VALUES
+(3, 'Pastor Alemao', 1, 4),
+(4, 'Pit Bull', 2, 4),
+(5, 'Pardal', 2, 2),
+(7, 'Quarto de Milha', 1, 1),
+(8, 'Manga Larga', 2, 1);
+
+ INSERT INTO `animal` (`idAnimal`, `Nome`, `Data_Nascimento`, `idTipo_Animal`, `idRaca`, `idCliente`) VALUES
+(1, 'Brahma', '2018-01-28', 4, 3, 2),
+(2, 'Bixo Brabo', '2018-11-15', 4, 4, 2),
+(4, 'PÃ© de Pano ss', '2018-11-14', 1, 8, 2),
+(5, 'Pintinho ss', '2018-10-31', 2, 5, 1),
+(12, 'The Cao', '2018-11-11', 4, 4, 2),
+(13, 'Cavalo Do ', '2018-11-18', 1, 7, 2),
+(14, 'Outro Pardal', '2018-11-05', 2, 5, 2),
+(15, 'Outro Cavalo', '2018-11-01', 1, 8, 2);
+
+INSERT INTO `produto` (`idProduto`, `Nome`, `Quantidade_Estoque`, `Valor_Entrada_Unt`, `Margem_Lucro`, `idFilial`) VALUES
+(1, 'MataCura', '676', '25.0', '2.0', 1),
+(2, 'Gelol de Cavalo', '317', '18.0', '2.0', 1);
+
+
+
+
+
+
+CREATE OR REPLACE VIEW lista_dados_vendaProduto AS  SELECT vp.idVenda_Produto AS  IdVenda_Produto, vp.idVenda AS  Id_Venda, vp.idProduto AS  Id_Produto, 
+	vp.Quantidade AS  Quantidade, vp.Valor_Unitario AS  Valor_Unitario, vp.Valor_Total AS  Valor_Total from venda_produto vp;
+
+CREATE OR REPLACE VIEW lista_dados_venda AS  SELECT v.idVenda AS  Id_Venda, v.Valor_Desconto AS  Valor_Desconto, v.Data_Venda AS  Data_Venda, v.idCliente AS  Id_Cliente, 
+v.idFilial AS  Id_Filial, v.valorTotal AS  Valor_Total from Venda v;
+
+CREATE OR REPLACE VIEW lista_dados_cliente AS  SELECT cl.idCliente AS  Id_Cliente, cl.Nome_Completo AS  Nome_Completo, cl.CPF AS  CPF, cl.Data_Nascimento AS  Data_Nascimento, 
+cl.Endereco AS  Endereco, cl.Telefone AS  Telefone, cl.idFilial AS  Id_Filial FROM Cliente cl;
+
+CREATE OR REPLACE VIEW view_lista_funcionarios AS  SELECT idFuncionario AS  Id_Funcionario, Nome AS  Nome, CPF AS  CPF, Data_Nascimento, id_Cliente AS  Id_Cliente,
+idFilial AS  Id_Filial, email AS  email, senha AS  senha, permissao from funcionario;
+
+CREATE OR REPLACE VIEW view_lista_filiais AS  SELECT idFilial AS  Id_Filial, Nome, Endereco, id_Gerente AS  Id_Gerente, Telefone, CNPJ, CapacidadeEstoque AS  Capacidade_Estoque from filial;
+
+CREATE OR REPLACE VIEW lista_dados_produto AS  SELECT pd.idProduto AS  Id_Produto, pd.Nome AS  Nome, pd.Quantidade_Estoque AS  Quantidade_Estoque, 
+pd.Valor_Entrada_Unt AS  Valor_Ent_Unt, pd.Margem_Lucro AS  Margem_Lucro, pd.idFilial AS  idFilial FROM Produto pd;
+
+CREATE OR REPLACE VIEW lista_dados_animal AS  SELECT ani.idAnimal AS  Id_Animal, ani.Nome AS  Nome, ani.Data_Nascimento AS Data_Nascimento, ani.idTipo_Animal AS  idTipo_Animal, ani.idCliente AS  idCliente,ani.idRaca AS  idRaca FROM animal ani;
+
+CREATE OR REPLACE VIEW lista_dados_tipo_animal AS  SELECT tp.idTipo_Animal AS  idTipoAnimal, tp.Nome AS  Nome, tp.qnt_Animais AS  Qnt_Animais FROM tipo_animal tp;
+
+CREATE OR REPLACE VIEW lista_dados_raca AS  SELECT ra.idRaca AS  Id_Raca, ra.nome AS  Nome, ra.qnt_Animais AS  Qnt_Animais, ra.idTipoAnimal AS  idTipoAnimal FROM raca ra;
+
+
 use delimiter $
-/* Trigger que chamam as procedures*/
+
+/* Function calcula quantos animais tem por TipoAnimal*/
+create function qtd_animais_por_tipo_animal(_id int) returns int deterministic
+begin
+	declare qtd_tipo int;
+    select count(idAnimal) into qtd_tipo from animal where idTipo_Animal = _id;
+    return qtd_tipo;
+end $
+
+/* Function calcula quantos animais tem por Raca*/
+create function quantos_animais_por_raca(_id int) returns int deterministic
+begin
+	declare _guarda_qnt int;
+    select count(idAnimal) into _guarda_qnt from animal where idRaca = _id;
+    return _guarda_qnt;
+end $
+
+/* Procedure atualiza qnt_animal na tabela Tipo Animal*/
+create procedure att_qtd_tipo_animal(_id int)
+begin
+	update tipo_Animal set qnt_Animais = qtd_animais_por_tipo_animal(_id) where idTipo_Animal = _id;
+end $
+
+/* Procedure atualiza qnt_animal na tabela Raca*/
+create procedure atualiza_qnt_animal_raca(_id int)
+begin
+	update raca set qnt_Animais = quantos_animais_por_raca(_id) where idRaca = _id;
+end $
+
+/* Quando efetuar uma compra diminuir o estoque daquele produto*/
+create procedure diminui_quantidade_comprada(_idVendaProduto int)
+begin	
+	declare acabou integer default 0;
+	declare _idProduto bigint(20);
+    declare _qnt decimal(12,2);
+        
+    declare listaProdutos cursor for(
+		select idProduto, Quantidade from venda_produto where idVenda_Produto = _idVendaProduto);
+	
+   declare continue handler for not found set acabou = 1;
+    
+   open listaProdutos;
+     repeat
+			fetch listaProdutos into _idProduto, _qnt;
+				if not acabou then 
+					   
+					update produto set Quantidade_Estoque = (Quantidade_Estoque - _qnt) where idProduto = _idProduto;
+					  
+				end if;      
+		until acabou end repeat;
+    close listaProdutos;
+end $
+
+/* Quando cancelar uma compra aumentar o estoque daquele produto*/
+create procedure aumenta_quantidade_comprada(_idVendaProduto int)
+begin	
+	declare acabou integer default 0;
+	declare _idProduto bigint(20);
+    declare _qnt decimal(12,2);
+        
+    declare listaProdutos cursor for(
+		select idProduto, Quantidade from venda_produto where idVenda_Produto = _idVendaProduto);
+	    
+   declare continue handler for not found set acabou = 1;
+    
+   open listaProdutos;
+       repeat
+		  fetch listaProdutos into _idProduto, _qnt;
+			  if not acabou then 
+			   
+			  update produto set Quantidade_Estoque = (Quantidade_Estoque + _qnt) where idProduto = _idProduto;
+			  
+			  end if;      
+		until acabou end repeat;
+	close listaProdutos;
+end $
+
+/* Triggers que chamam as procedures para atualizar contadores de quantidade na raça e tipoAnimal*/
 create trigger tr_atualiza_qtd_animal_raca_insert after insert on animal for each row
 begin 
 	call atualiza_qnt_animal_raca(new.idRaca);
@@ -179,29 +285,16 @@ begin
 	end if;
 end$
 
-/* Procedure atualiza qnt_animal na tabela Tipo Animal*/
-create procedure att_qtd_tipo_animal(_id int)
-begin
-	update tipo_Animal set qnt_Animais = qtd_animais_por_tipo_animal(_id) where idTipo_Animal = _id;
+/* Chama a procedure que diminui quantidade de estoque*/
+create trigger tr_diminui_quantidade_produtos after insert on venda_produto for each row
+begin 
+	call diminui_quantidade_comprada(NEW.idVenda_Produto);
 end $
-/* Procedure atualiza qnt_animal na tabela Raca*/
-create procedure atualiza_qnt_animal_raca(_id int)
-begin
-	update raca set qnt_Animais = quantos_animais_por_raca(_id) where idRaca = _id;
-end $
-/* Procedure acalcula quantos animais tem por TipoAnimal*/
-create function qtd_animais_por_tipo_animal(_id int) returns int
-begin
-	declare qtd_tipo int;
-    select count(idAnimal) into qtd_tipo from animal where idTipo_Animal = _id;
-    return qtd_tipo;
-end $
-/* Procedure acalcula quantos animais tem por Raca*/
-create function quantos_animais_por_raca(_id int) returns int
-begin
-	declare _guarda_qnt int;
-    select count(idAnimal) into _guarda_qnt from animal where idRaca = _id;
-    return _guarda_qnt;
+
+/* Chama a procedure que aumenta quantidade de estoque */
+create trigger tr_aumenta_quantidade_produtos before delete on venda_produto for each row
+begin 
+	call aumenta_quantidade_comprada(OLD.idVenda_Produto);
 end $
 
 /*Trigger para venda Quando apaga uma venda apaga os produtos daquela venda*/
@@ -211,73 +304,5 @@ create trigger trg_apaga_resto_de_venda before delete on venda for each row
   delete from Venda_Produto where idVenda = OLD.idVenda;
     
  end $
-/* Quando efetuar uma compra diminuir o estoque daquele produto*/
-create procedure diminui_quantidade_comprada(_idVendaProduto int)
-begin	
-	declare acabou integer default 0;
-	declare _idProduto bigint(20);
-    declare _qnt decimal(12,2);
-        
-    declare listaProdutos cursor for(
-		select idProduto, Quantidade from venda_produto where idVenda_Produto = _idVendaProduto
-	);
-    
-   declare continue handler for not found set acabou = 1;
-    
-   open listaProdutos;
-        
-   repeat
-   
-       fetch listaProdutos into _idProduto, _qnt;
-      
-      if not acabou then 
-       
-      update produto set Quantidade_Estoque = (Quantidade_Estoque - _qnt) where idProduto = _idProduto;
-      
-      end if;      
-	until acabou end repeat;
-    
-    close listaProdutos;
 
-end $
-/* Quando cancelar uma compra aumentar o estoque daquele produto*/
-create procedure aumenta_quantidade_comprada(_idVendaProduto int)
-begin	
-	declare acabou integer default 0;
-	declare _idProduto bigint(20);
-    declare _qnt decimal(12,2);
-        
-    declare listaProdutos cursor for(
-		select idProduto, Quantidade from venda_produto where idVenda_Produto = _idVendaProduto
-	);
-    
-   declare continue handler for not found set acabou = 1;
-    
-   open listaProdutos;
-        
-   repeat
-   
-       fetch listaProdutos into _idProduto, _qnt;
-      
-      if not acabou then 
-       
-      update produto set Quantidade_Estoque = (Quantidade_Estoque + _qnt) where idProduto = _idProduto;
-      
-      end if;      
-	until acabou end repeat;
-    
-    close listaProdutos;
-
-end $
-/* Chama a procedure que diminui quantidade de estoque*/
-create trigger tr_diminui_quantidade_produtos after insert on venda_produto for each row
-begin 
-	call diminui_quantidade_comprada(NEW.idVenda_Produto);
-end $
-/* Chama a procedure que aumenta quantidade de estoque */
-create trigger tr_aumenta_quantidade_produtos before delete on venda_produto for each row
-begin 
-	call aumenta_quantidade_comprada(OLD.idVenda_Produto);
-end $
-use delimiter;
-
+use delimiter ;
