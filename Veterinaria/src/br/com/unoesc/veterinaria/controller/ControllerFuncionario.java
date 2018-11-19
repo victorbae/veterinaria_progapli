@@ -76,7 +76,7 @@ public class ControllerFuncionario {
 			escolhido = false;
 			EstaticosDeFuncionario.editando = false;
 			EstaticosDeFuncionario.funcionario = new Funcionario();
-			;
+
 			initialize();
 		}
 	}
@@ -93,6 +93,7 @@ public class ControllerFuncionario {
 
 	@FXML
 	void novo(ActionEvent event) {
+		EstaticosDeFuncionario.editando = false;
 		dialogFunc();
 		initialize();
 	}

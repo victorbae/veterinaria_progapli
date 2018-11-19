@@ -91,7 +91,7 @@ public class ControllerTipoAnimal {
 
 	@FXML
 	void novo(ActionEvent event) {
-
+		EstaticosParaTipoAnimal.isEditando = false;
 		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		TipoAnimalDialogFactory adicionaTipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
 

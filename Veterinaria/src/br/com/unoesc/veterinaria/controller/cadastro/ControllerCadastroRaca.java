@@ -13,10 +13,14 @@ import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroRaca {
+
+	@FXML
+	private Label lblMaster;
 
 	@FXML
 	private TextField tfNome;
@@ -45,6 +49,7 @@ public class ControllerCadastroRaca {
 		if (EstaticosParaRaca.isEditando) {
 			raca = EstaticosParaRaca.raca;
 			populaTela();
+			lblMaster.setText("Editando Raça");
 		}
 
 		TextFields.bindAutoCompletion(tfTipoAnimal, tipoAnimalDao.listar());

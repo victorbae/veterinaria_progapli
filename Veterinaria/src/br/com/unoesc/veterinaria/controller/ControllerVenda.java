@@ -92,6 +92,7 @@ public class ControllerVenda {
 
 	@FXML
 	void Novo(ActionEvent event) {
+		EstaticosParaVenda.isVisualizando = false;
 		chamaTelaNovaVenda();
 	}
 

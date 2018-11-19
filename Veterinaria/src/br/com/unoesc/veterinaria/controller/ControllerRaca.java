@@ -102,7 +102,7 @@ public class ControllerRaca {
 
 	@FXML
 	void novo(ActionEvent event) {
-
+		EstaticosParaRaca.isEditando = false;
 		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
 

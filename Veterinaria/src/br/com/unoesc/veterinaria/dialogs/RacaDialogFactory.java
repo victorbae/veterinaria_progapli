@@ -31,7 +31,7 @@ public class RacaDialogFactory {
 
 			Stage dialogStage = new Stage();
 			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/dog.png"));
-			dialogStage.setTitle("Nova Raça");
+			dialogStage.setTitle("Raças");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(racaDialog);

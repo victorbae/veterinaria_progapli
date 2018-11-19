@@ -31,7 +31,7 @@ public class FilialDialogFactory {
 
 			Stage dialogStage = new Stage();
 			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/home.png"));
-			dialogStage.setTitle("Nova Filial");
+			dialogStage.setTitle("Filiais");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(filialDialog);

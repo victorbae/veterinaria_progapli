@@ -20,7 +20,7 @@
             <Button fx:id="btEnviar" layoutX="261.0" layoutY="148.0" mnemonicParsing="false" onAction="#enviar" styleClass="btn-success" text="Enviar nova senha" />
             <Button fx:id="btVoltar" layoutX="14.0" layoutY="148.0" mnemonicParsing="false" onAction="#voltar" styleClass="btn-light" text="Voltar" />
             <Label layoutX="92.0" layoutY="14.0" styleClass="labelMenor" text="Digite o e-mail de acesso de seu usuário!" />
-            <Label layoutX="89.0" layoutY="35.0" styleClass="labelMenor" text=" Enviaremos uma e-mail com a nova senha." />
+            <Label layoutX="48.0" layoutY="33.0" styleClass="labelMenor" text=" Enviaremos uma mensagem de e-mail com a nova senha." />
             <Label fx:id="lbvazio" layoutX="100.0" layoutY="121.0" textFill="#eb2323" />
             <Label fx:id="lbvazio1" layoutX="110.0" layoutY="131.0" textFill="#eb2323" />
          </children>

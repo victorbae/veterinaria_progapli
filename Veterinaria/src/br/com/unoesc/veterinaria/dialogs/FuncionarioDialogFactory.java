@@ -27,7 +27,7 @@ public class FuncionarioDialogFactory {
 
 			Stage dialogStage = new Stage();
 			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/man.png"));
-			dialogStage.setTitle("Novo Funcionario");
+			dialogStage.setTitle("Funcionarios");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(clienteDialog);

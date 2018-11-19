@@ -6,6 +6,7 @@ import br.com.unoesc.veterinaria.controller.relatorios.FiltrosRelatorioVendaCont
 import br.com.unoesc.veterinaria.model.Produto;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,7 +30,8 @@ public class RelatorioVendaDialogFactory {
 			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Filtros Relatório");
+			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/page.png"));
+			dialogStage.setTitle("Filtros Relatório Venda");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(produtoDialog);

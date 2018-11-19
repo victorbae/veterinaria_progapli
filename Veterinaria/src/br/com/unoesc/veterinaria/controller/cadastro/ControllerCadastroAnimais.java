@@ -22,12 +22,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ControllerCadastroAnimais {
+
+	@FXML
+	private Label lblMaster;
 
 	@FXML
 	private TextField tfNome;
@@ -90,6 +94,7 @@ public class ControllerCadastroAnimais {
 		if (EstaticosParaAnimal.isEditando) {
 			populaTela();
 			animais = EstaticosParaAnimal.animal;
+			lblMaster.setText("Editando Animal");
 		}
 
 	}
