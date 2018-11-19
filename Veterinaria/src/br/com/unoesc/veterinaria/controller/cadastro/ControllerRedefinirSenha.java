@@ -6,7 +6,7 @@ import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
-import br.edu.unoesc.veterinaria.envioEmail.JavaMailApp;
+import br.edu.unoesc.veterinaria.envioEmail.EnvioDeEmail;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,13 +45,13 @@ public class ControllerRedefinirSenha {
 	void enviar(ActionEvent event) {
 		validarFuncionario(String.valueOf(tfemail.getText()));
 		if (this.funcionario == null) {
-			lbvazio.setText("e-mail não existe!");
+			lbvazio.setText("e-mail nï¿½o existe!");
 		} else {
 			funcionario.setSenha(novaSenha());
 			funcionariodao.alterarSenha(this.funcionario);
 			btEnviar.setDisable(true);
 			btVoltar.setDisable(true);
-			JavaMailApp.enviar(this.funcionario.getEmail(), this.funcionario.getSenha());
+			EnvioDeEmail.enviar(this.funcionario.getEmail(), this.funcionario.getSenha());
 			dialogStage.close();
 		}
 	}

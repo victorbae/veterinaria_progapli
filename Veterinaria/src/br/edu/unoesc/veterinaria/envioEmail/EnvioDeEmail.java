@@ -1,6 +1,7 @@
 package br.edu.unoesc.veterinaria.envioEmail;
 
 import java.util.Properties;
+
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,7 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class JavaMailApp {
+public class EnvioDeEmail {
 	public static void enviar(String email, String mensagem) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -33,13 +34,13 @@ public class JavaMailApp {
 			Address[] toUser = InternetAddress.parse(email);
 
 			message.setRecipients(Message.RecipientType.TO, toUser);
-			message.setSubject("Redefinição de senha - PET BULL");
-			message.setText("Olá caro usuário!" + (char) 13 + (char) 13
-					+ "Recebemos sua solicitação de alteração de senha, geramos a "
-					+ "seguinte senha temporária para você:  " + mensagem + (char) 13
-					+ "Caso, mesmo com a nova senha, não conseguir acesso, entre em contato conosco!" + (char) 13
+			message.setSubject("Redefiniï¿½ï¿½o de senha - PET BULL");
+			message.setText("Olï¿½ caro usuï¿½rio!" + (char) 13 + (char) 13
+					+ "Recebemos sua solicitaï¿½ï¿½o de alteraï¿½ï¿½o de senha, geramos a "
+					+ "seguinte senha temporï¿½ria para vocï¿½:  " + mensagem + (char) 13
+					+ "Caso, mesmo com a nova senha, nï¿½o conseguir acesso, entre em contato conosco!" + (char) 13
 					+ (char) 13 + (char) 13 + "Atenciosamente, PET BULL." + (char) 13
-					+ "Este E-mail é gerado automáticamente, não sendo preciso responder!" + (char) 13
+					+ "Este E-mail ï¿½ gerado automï¿½ticamente, nï¿½o sendo preciso responder!" + (char) 13
 					+ "Fone para contato: (49) 99912 6830.");
 			Transport.send(message);
 			System.out.println("Enviado");
