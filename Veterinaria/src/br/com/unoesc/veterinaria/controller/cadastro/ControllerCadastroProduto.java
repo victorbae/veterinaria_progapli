@@ -9,10 +9,14 @@ import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroProduto {
+
+	@FXML
+	private Label lblMaster;
 
 	@FXML
 	private TextField tfNome;
@@ -49,6 +53,7 @@ public class ControllerCadastroProduto {
 		if (EstaticosParaProduto.isEditando) {
 			this.produto = EstaticosParaProduto.produto;
 			populaTela();
+			lblMaster.setText("Editando Produto");
 		}
 	}
 

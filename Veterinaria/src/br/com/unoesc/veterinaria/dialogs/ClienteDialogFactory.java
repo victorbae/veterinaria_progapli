@@ -30,7 +30,7 @@ public class ClienteDialogFactory {
 
 			Stage dialogStage = new Stage();
 			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/man.png"));
-			dialogStage.setTitle("Novo Cliente");
+			dialogStage.setTitle("Clientes");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(clienteDialog);

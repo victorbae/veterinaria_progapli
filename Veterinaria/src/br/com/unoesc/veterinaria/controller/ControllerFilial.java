@@ -64,6 +64,7 @@ public class ControllerFilial {
 
 	@FXML
 	void Novo(ActionEvent event) {
+		EstaticosParaFilial.editando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import br.com.unoesc.veterinaria.controller.ControllerErroNaoPreenchido;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,7 +27,8 @@ public class ErroNaoPreenchidoDialogFactory {
 			AnchorPane clienteDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Aviso");
+			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/erro.png"));
+			dialogStage.setTitle("Aviso !!!");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(clienteDialog);

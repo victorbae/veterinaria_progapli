@@ -14,10 +14,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerCadastroCliente {
+
+	@FXML
+	private Label lblMaster;
 
 	@FXML
 	private TextField tfNome;
@@ -63,6 +67,7 @@ public class ControllerCadastroCliente {
 
 		if (EstaticosParaCliente.isEditando) {
 			populaTela();
+			lblMaster.setText("Editando Cliente");
 		}
 	}
 

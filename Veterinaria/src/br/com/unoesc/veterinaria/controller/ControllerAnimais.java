@@ -103,6 +103,7 @@ public class ControllerAnimais {
 
 	@FXML
 	void Novo(ActionEvent event) {
+		EstaticosParaAnimal.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		AnimaisDialogFactory animaisDialog = new AnimaisDialogFactory(stageDono);
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import br.com.unoesc.veterinaria.controller.cadastro.ControllerRedefinirSenha;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ public class SenhaDialogFactory {
 			AnchorPane produtoDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
+			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/passwd.png"));
 			dialogStage.setTitle("Redefinir Senha");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);

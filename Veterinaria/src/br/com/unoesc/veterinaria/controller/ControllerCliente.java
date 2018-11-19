@@ -91,6 +91,7 @@ public class ControllerCliente {
 
 	@FXML
 	void Novo(ActionEvent event) {
+		EstaticosParaCliente.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
 

@@ -46,7 +46,7 @@
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="14.0" styleClass="h1" text="Novo Cliente">
+      <Label fx:id="lblMaster" layoutX="135.0" layoutY="14.0" styleClass="h1" text="Novo Cliente">
          <font>
             <Font name="Gabriola" size="42.0" />
          </font>
