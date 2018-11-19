@@ -80,6 +80,7 @@ public class RacaBanco implements RacaDao {
 				Raca raca = new Raca();
 				raca.setIdRaca(rs.getInt("Id_Raca"));
 				raca.setNome(rs.getString("Nome"));
+				raca.setQntAnimais(rs.getInt("Qnt_Animais"));
 				raca.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipoAnimal")));
 
 				racas.add(raca);
@@ -106,6 +107,7 @@ public class RacaBanco implements RacaDao {
 				Raca raca = new Raca();
 				raca.setIdRaca(rs.getInt("idRaca"));
 				raca.setNome(rs.getString("Nome"));
+				raca.setQntAnimais(rs.getInt("qnt_Animais"));
 				raca.setTipoAnimal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipoAnimal")));
 
 				listaRaca.add(raca);

@@ -15,7 +15,7 @@
             <TableColumn fx:id="tcFilial" editable="false" prefWidth="150.0" resizable="false" text="Filial" />
             <TableColumn fx:id="tcValorDesconto" editable="false" prefWidth="150.0" resizable="false" text="Valor Desconto" />
             <TableColumn fx:id="tcDataVenda" editable="false" prefWidth="150.0" resizable="false" text="Data " />
-            <TableColumn fx:id="tcValorTotal" editable="false" prefWidth="150.0" resizable="false" text="Valor Total" />
+            <TableColumn fx:id="tcValorTotal" editable="false" prefWidth="147.0" resizable="false" text="Valor Total" />
          </columns>
       </TableView>
       <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Vendas">

@@ -94,7 +94,7 @@ public class AnimaisBanco implements AnimaisDao {
 				Animais animal = new Animais();
 				animal.setIdAnimal(rs.getInt("Id_Animal"));
 				animal.setNome(rs.getString("Nome"));
-				animal.setData_Nascimento((rs.getDate("Data_Nascimento").toLocalDate()));
+				animal.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				animal.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
 				animal.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
 				animal.setRaca(EstaticosParaRaca.achaRaca(rs.getInt("idRaca")));
@@ -136,30 +136,28 @@ public class AnimaisBanco implements AnimaisDao {
 						+ "WHERE (a.idCliente = ? or ? is null) AND (a.idTipo_Animal = ? or ? is null) AND (a.idRaca = ? or ? is null) ORDER BY a.idAnimal";
 			} else {
 				sql = "SELECT * FROM animal a JOIN tipo_animal ta ON a.idTipo_Animal = ta.idTipo_Animal join raca ra ON ta.idTipo_Animal = ra.idTipoAnimal"
-						+ " WHERE (? = ?) OR (? = ?) OR (? = ?) ORDER BY a.idAnimal";
+						+ " WHERE (? is null) OR (? is null) OR (? is null) ORDER BY a.idAnimal";
 			}
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 
-			try {
+			if (filtroAnimal.getCliente() != null) {
 				stmt.setInt(1, filtroAnimal.getCliente().getIdCliente());
 				stmt.setInt(2, filtroAnimal.getCliente().getIdCliente());
-			} catch (NullPointerException e) {
-				stmt.setString(1, "null");
-				stmt.setString(2, "null");
+			} else {
+				stmt.setString(1, null);
 			}
-			try {
+			if (filtroAnimal.getTipoAnimal() != null) {
 				stmt.setInt(3, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
 				stmt.setInt(4, filtroAnimal.getTipoAnimal().getIdTipoAnimal());
-			} catch (NullPointerException e) {
-				stmt.setString(3, "null");
-				stmt.setString(4, "null");
+			} else {
+				stmt.setString(2, null);
 			}
-			try {
+
+			if (filtroAnimal.getRaca() != null) {
 				stmt.setInt(5, filtroAnimal.getRaca().getIdRaca());
 				stmt.setInt(6, filtroAnimal.getRaca().getIdRaca());
-			} catch (NullPointerException e) {
-				stmt.setString(5, "null");
-				stmt.setString(6, "null");
+			} else {
+				stmt.setString(3, null);
 			}
 			ResultSet rs = stmt.executeQuery();
 
@@ -171,10 +169,15 @@ public class AnimaisBanco implements AnimaisDao {
 				animal.setNome(rs.getString("Nome"));
 				animal.setRaca(EstaticosParaRaca.achaRaca(rs.getInt("idRaca")));
 				animal.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
-
-				listaAnimais.add(animal);
+				if (listaAnimais.contains(animal)) {
+					System.out.println("Animal já adicionado");
+				} else {
+					listaAnimais.add(animal);
+				}
 			}
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		}
 		return listaAnimais;

@@ -1,60 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="bpPrincipal" prefHeight="653.0"
-	prefWidth="807.0" stylesheets="@../principal/application.css"
-	xmlns="http://javafx.com/javafx/9.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
+<BorderPane fx:id="bpPrincipal" prefHeight="653.0" prefWidth="807.0" stylesheets="@../principal/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unoesc.veterinaria.controller.PaginaInicialController">
 	<center>
-		<Pane prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER" />
+		<Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
 	</center>
 	<left>
-		<Pane prefHeight="0.0" prefWidth="23.0"
-			BorderPane.alignment="CENTER" />
+		<Pane prefHeight="0.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
 	</left>
 	<right>
-		<Pane prefHeight="0.0" prefWidth="23.0"
-			BorderPane.alignment="CENTER" />
+		<Pane prefHeight="0.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
 	</right>
 	<bottom>
 		<Pane prefHeight="23.0" BorderPane.alignment="CENTER" />
 	</bottom>
 	<top>
-		<Pane prefHeight="34.0" prefWidth="200.0"
-			style="-fx-background-color: #e2e6ea;" BorderPane.alignment="CENTER">
+		<Pane prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: #e2e6ea;" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="btAnimais" layoutX="408.0"
-					mnemonicParsing="false" onAction="#animais"
-					style="-fx-border-color: #e2e6ea;" styleClass="btn-light"
-					text="Animais" />
-				<Button fx:id="btCliente" layoutX="331.0"
-					mnemonicParsing="false" onAction="#cliente"
-					style="-fx-border-color: #e2e6ea;" styleClass="btn-light"
-					text="Clientes" />
-				<Button fx:id="btVendas" layoutX="257.0"
-					mnemonicParsing="false" onAction="#vendas"
-					style="-fx-border-color: #e2e6ea;" styleClass="btn-light"
-					text="Vendas" />
-				<Button fx:id="btnProduto" layoutX="172.0"
-					mnemonicParsing="false" onAction="#produto"
-					style="-fx-border-color: #e2e6ea;" styleClass="btn-light"
-					text="Produtos" />
-				<Button fx:id="btFuncionario" layoutX="63.0"
-					mnemonicParsing="false" onAction="#funcionario"
-					style="-fx-border-color: #e2e6ea;" styleClass="btn-light"
-					text="Funcionários" />
-				<Button fx:id="btFilial" mnemonicParsing="false"
-					onAction="#filial" style="-fx-border-color: #e2e6ea;"
-					styleClass="btn-light" text="Filiais" />
+				<Button fx:id="btAnimais" layoutX="169.0" layoutY="1.0" mnemonicParsing="false" onAction="#animais" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Animais" />
+				<Button fx:id="btCliente" layoutX="244.0" layoutY="1.0" mnemonicParsing="false" onAction="#cliente" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Clientes" />
+				<Button fx:id="btVendas" layoutX="404.0" layoutY="1.0" mnemonicParsing="false" onAction="#vendas" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Vendas" />
+				<Button fx:id="btnProduto" layoutX="317.0" mnemonicParsing="false" onAction="#produto" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Produtos" />
+				<Button fx:id="btFuncionario" layoutX="63.0" mnemonicParsing="false" onAction="#funcionario" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Funcionários" />
+				<Button fx:id="btFilial" mnemonicParsing="false" onAction="#filial" style="-fx-border-color: #e2e6ea;" styleClass="btn-light" text="Filiais" />
+            <Label fx:id="lblNomeLogado" layoutX="635.0" layoutY="7.0" styleClass="labelId" text="Label" />
+            <ImageView fx:id="ftUser" fitHeight="25.0" fitWidth="24.0" layoutX="608.0" layoutY="5.0">
+               <image>
+                  <Image url="@../img/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ftLogout" fitHeight="25.0" fitWidth="24.0" layoutX="782.0" layoutY="5.0" onMouseClicked="#logout">
+               <image>
+                  <Image url="@../img/logout.png" />
+               </image>
+            </ImageView>
 			</children>
 		</Pane>
 	</top>

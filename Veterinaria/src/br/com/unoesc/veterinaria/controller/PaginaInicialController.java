@@ -2,21 +2,17 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.banco.PermissoesBanco;
-import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
-import br.com.unoesc.veterinaria.dialogs.TrocaFiliaisDialogFactory;
-import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class PaginaInicialController {
 
@@ -42,21 +38,50 @@ public class PaginaInicialController {
 	private Button btFilial;
 
 	@FXML
+	private ImageView ftLogout;
+
+	@FXML
+	private Label lblNomeLogado;
+
+	@FXML
+	private ImageView ftUser;
+
+	@FXML
 	public void initialize() {
 		EstaticosParaGeral.bpPrincipalAux = bpPrincipal;
+		ftUser.setVisible(false);
+		ftLogout.setVisible(false);
+		lblNomeLogado.setText("");
+		EstaticosDeAcesso.lblNomeLogado = lblNomeLogado;
+		EstaticosDeAcesso.ftLogout = ftLogout;
+		EstaticosDeAcesso.ftUser = ftUser;
+
+		EstaticosDeAcesso.btAnimais = btAnimais;
+		EstaticosDeAcesso.btCliente = btCliente;
+		EstaticosDeAcesso.btFilial = btFilial;
+		EstaticosDeAcesso.btFuncionario = btFuncionario;
+		EstaticosDeAcesso.btnProduto = btnProduto;
+		EstaticosDeAcesso.btVendas = btVendas;
+
+		EstaticosDeAcesso.bloqueiaTudo();
+
 	}
 
 	@FXML
-	void AdicionarVenda(ActionEvent event) {
-		if (EstaticosDeAcesso.isLogado()) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/cadastro/CadastroVenda.fxml"));
-			try {
-				AnchorPane cursoView = (AnchorPane) loader.load();
-				bpPrincipal.setCenter(cursoView);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+	void logout(MouseEvent event) {
+		EstaticosDeAcesso.setFuncionario(null);
+		EstaticosDeAcesso.setFilial(null);
+		EstaticosDeAcesso.setLogado(false);
+		lblNomeLogado.setText(" ");
+		EstaticosDeAcesso.bloqueiaTudo();
+		ftUser.setVisible(false);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/login.fxml"));
+		try {
+			AnchorPane cursoView = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(cursoView);
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 

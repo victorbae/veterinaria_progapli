@@ -15,7 +15,7 @@
             <TableColumn fx:id="tcEndereco" prefWidth="150.0" text="Endereço" />
             <TableColumn fx:id="tcGerente" prefWidth="150.0" text="Gerente" />
             <TableColumn fx:id="tcTelefone" prefWidth="150.0" text="Telefone" />
-            <TableColumn fx:id="tcCNPJ" prefWidth="150.0" text="CNPJ" />
+            <TableColumn fx:id="tcCNPJ" prefWidth="147.0" text="CNPJ" />
          </columns>
       </TableView>
       <Label layoutX="312.0" layoutY="14.0" styleClass="h1" text="Filial">

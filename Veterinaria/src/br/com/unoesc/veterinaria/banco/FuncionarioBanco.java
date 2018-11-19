@@ -13,15 +13,17 @@ import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
 import br.com.unoesc.veterinaria.dao.FuncionarioDao;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
 
 public class FuncionarioBanco implements FuncionarioDao {
 
 	@Override
 	public void inserir(Funcionario dado) {
-		PermissoesBanco permissoes = new PermissoesBanco();
+		// PermissoesBanco permissoes = new PermissoesBanco();
 		try {
-			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`,`email`,`senha`) VALUES (?,?,?,?,?,?,?);";
+			String sql = "INSERT INTO `veterinaria`.`funcionario`(`Nome`,`CPF`,`Data_Nascimento`,`id_Cliente`,`idFilial`,`email`,`senha`,`permissao`) VALUES (?,?,?,?,?,?,?,?);";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, String.valueOf(dado.getNome()));
@@ -31,6 +33,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.setString(6, dado.getEmail());
 			stmt.setString(7, dado.getSenha());
+			stmt.setInt(8, dado.getPermissao().getPermissao());
 			stmt.executeUpdate();
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -38,8 +41,8 @@ public class FuncionarioBanco implements FuncionarioDao {
 			EstaticosParaFilial.funcionario = dado;
 			EstaticosParaFilial.funcionario.setIdFuncionario(rs.getInt(1));
 
-			permissoes.inserirNovaPermissaoDeFilial(EstaticosParaFilial.funcionario.getFilial(),
-					EstaticosParaFilial.funcionario);
+//			permissoes.inserirNovaPermissaoDeFilial(EstaticosParaFilial.funcionario.getFilial(),
+//					EstaticosParaFilial.funcionario);
 
 			EstaticosParaFilial.cliente = dado.getCliente();
 
@@ -52,7 +55,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 	@Override
 	public void alterar(Funcionario dado) {
 		try {
-			String sql = "UPDATE `veterinaria`.`funcionario` SET `Nome` = ?,`CPF` = ?,`Data_Nascimento` = ?,`id_Cliente` = ?,`idFilial` = ?, `senha` = ?, `email` = ? WHERE `idFuncionario` = ?;";
+			String sql = "UPDATE `veterinaria`.`funcionario` SET `Nome` = ?,`CPF` = ?,`Data_Nascimento` = ?,`id_Cliente` = ?,`idFilial` = ?, `senha` = ?, `email` = ?, `permissao` = ? WHERE `idFuncionario` = ?;";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setString(1, dado.getNome());
 			stmt.setString(2, dado.getCpf());
@@ -61,7 +64,8 @@ public class FuncionarioBanco implements FuncionarioDao {
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.setString(6, dado.getSenha());
 			stmt.setString(7, dado.getEmail());
-			stmt.setInt(8, dado.getIdFuncionario());
+			stmt.setInt(8, dado.getPermissao().getPermissao());
+			stmt.setInt(9, dado.getIdFuncionario());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -96,8 +100,9 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
-				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
-				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionario.setPermissao(EstaticosDeFuncionario.achaPermissaoByValor(rs.getInt("permissao")));
+				funcionario.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
+				funcionario.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -116,9 +121,9 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
 				funcionario.setNome(rs.getString("Nome"));
 				funcionario.setCpf(rs.getString("CPF"));
-				funcionario.setData_Nascimento(rs.getDate("Data_Nascimento").toLocalDate());
-				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
-				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionario.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
+				funcionario.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
+				funcionario.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -171,11 +176,12 @@ public class FuncionarioBanco implements FuncionarioDao {
 				funcionario.setIdFuncionario(rs.getInt("Id_Funcionario"));
 				funcionario.setNome(rs.getString("Nome"));
 				funcionario.setCpf(rs.getString("CPF"));
+				funcionario.setPermissao(EstaticosDeFuncionario.achaPermissaoByValor(rs.getInt("permissao")));
 				funcionario.setData_Nascimento(LocalDate.parse(rs.getString("Data_Nascimento")));
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
-				funcionario.setCliente(funcionario.buscaClienteById(rs.getInt("Id_Cliente")));
-				funcionario.setFilial(funcionario.buscaFilialById(rs.getInt("Id_Filial")));
+				funcionario.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("Id_Cliente")));
+				funcionario.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("Id_Filial")));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {

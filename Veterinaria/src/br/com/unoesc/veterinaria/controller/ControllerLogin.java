@@ -1,30 +1,24 @@
 package br.com.unoesc.veterinaria.controller;
 
+import java.io.IOException;
+
+import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
+import br.com.unoesc.veterinaria.dao.FuncionarioDao;
+import br.com.unoesc.veterinaria.dialogs.SenhaDialogFactory;
+import br.com.unoesc.veterinaria.model.Funcionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.List;
-
-import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
-import br.com.unoesc.veterinaria.banco.PermissoesBanco;
-import br.com.unoesc.veterinaria.dao.FuncionarioDao;
-import br.com.unoesc.veterinaria.dialogs.FuncionarioDialogFactory;
-import br.com.unoesc.veterinaria.dialogs.SenhaDialogFactory;
-import br.com.unoesc.veterinaria.model.Filial;
-import br.com.unoesc.veterinaria.model.Funcionario;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
-import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
-import br.edu.unoesc.veterinaria.envioEmail.JavaMailApp;
-import javafx.event.ActionEvent;
-import java.util.Random;
 
 public class ControllerLogin {
 
@@ -43,16 +37,17 @@ public class ControllerLogin {
 	@FXML
 	private Hyperlink hyperSenha;
 
-	Funcionario funcionario = new Funcionario();
-	FuncionarioDao funcionariodao = new FuncionarioBanco();
+	private Funcionario funcionario = new Funcionario();
+	private FuncionarioDao funcionariodao = new FuncionarioBanco();
 
 	@FXML
 	void entrar(ActionEvent event) {
 		preencheVariaveis();
 		if (validaLogin(this.funcionario)) {
 			EstaticosDeAcesso.setLogado(true);
-			EstaticosDeAcesso.setFuncionario(funcionario.getFuncionarioByLogin(this.funcionario.getEmail()));
-			EstaticosDeAcesso.setFilial(funcionario.getFuncionarioByLogin(this.funcionario.getEmail()).getFilial());
+			EstaticosDeAcesso.setFuncionario(EstaticosDeFuncionario.getFuncionarioByLogin(this.funcionario.getEmail()));
+			EstaticosDeAcesso
+					.setFilial(EstaticosDeFuncionario.getFuncionarioByLogin(this.funcionario.getEmail()).getFilial());
 			acessoLiberado();
 		} else {
 			lbSenhaIncorreta.setText("Senha ou Login incorretos");
@@ -74,6 +69,10 @@ public class ControllerLogin {
 	}
 
 	void acessoLiberado() {
+		EstaticosDeAcesso.lblNomeLogado.setText(EstaticosDeAcesso.getFuncionario().getNome());
+		EstaticosDeAcesso.ftLogout.setVisible(true);
+		EstaticosDeAcesso.ftUser.setVisible(true);
+		EstaticosDeAcesso.verificaPermissoes();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/br/com/unoesc/veterinaria/fxml/Cliente.fxml"));
 		try {

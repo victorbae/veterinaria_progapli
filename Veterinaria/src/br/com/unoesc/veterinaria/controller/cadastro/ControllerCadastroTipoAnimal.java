@@ -3,6 +3,7 @@ package br.com.unoesc.veterinaria.controller.cadastro;
 import br.com.unoesc.veterinaria.banco.TipoAnimalBanco;
 import br.com.unoesc.veterinaria.dao.TipoAnimalDao;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,27 +51,37 @@ public class ControllerCadastroTipoAnimal {
 
 	@FXML
 	void salvar(ActionEvent event) {
-		populaTipoAnimal();
-		if (EstaticosParaTipoAnimal.isEditando) {
-			tipoAnimalDao.alterar(tipoAnimal);
-			EstaticosParaTipoAnimal.isEditando = false;
-		} else {
-			tipoAnimalDao.inserir(tipoAnimal);
+
+		if (populaTipoAnimal()) {
+			if (EstaticosParaTipoAnimal.isEditando) {
+
+				tipoAnimalDao.alterar(tipoAnimal);
+				EstaticosParaTipoAnimal.isEditando = false;
+			} else {
+				tipoAnimalDao.inserir(tipoAnimal);
+			}
+			clicadoSalvar = true;
+			if (dialogStage != null) {
+				dialogStage.close();
+			}
 		}
-		clicadoSalvar = true;
-		if (dialogStage != null) {
-			dialogStage.close();
-		}
+
 	}
 
 	public void populaTela() {
 		tfNome.setText(tipoAnimal.getNome());
 	}
 
-	public void populaTipoAnimal() {
-		tipoAnimal = new TipoAnimal();
-		tipoAnimal.setNome(tfNome.getText());
-		tipoAnimal.setIdTipoAnimal(EstaticosParaTipoAnimal.tipoAnimal.getIdTipoAnimal());
+	public boolean populaTipoAnimal() {
+		if (tfNome.getText().isEmpty()) {
+			EstaticosParaGeral.chamaErroNaoPreenchido(dialogStage);
+			return false;
+		} else {
+			tipoAnimal = new TipoAnimal();
+			tipoAnimal.setNome(tfNome.getText());
+			tipoAnimal.setIdTipoAnimal(EstaticosParaTipoAnimal.tipoAnimal.getIdTipoAnimal());
+			return true;
+		}
 	}
 
 	public void limpaTela() {

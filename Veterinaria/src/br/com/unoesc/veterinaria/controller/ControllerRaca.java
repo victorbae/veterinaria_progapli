@@ -3,10 +3,8 @@ package br.com.unoesc.veterinaria.controller;
 import java.io.IOException;
 import java.net.URL;
 
-import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.banco.RacaBanco;
 import br.com.unoesc.veterinaria.banco.conf.ConexaoPrincipal;
-import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dao.RacaDao;
 import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.model.Raca;
@@ -40,6 +38,9 @@ public class ControllerRaca {
 	private TableColumn<Raca, TipoAnimal> tcTipoAnimal;
 
 	@FXML
+	private TableColumn<Raca, Integer> tcQntAnimais;
+
+	@FXML
 	private Button btnExibeRelatorio;
 
 	@FXML
@@ -58,12 +59,12 @@ public class ControllerRaca {
 
 	private Raca raca;
 	private RacaDao racaDao = new RacaBanco();
-	private AnimaisDao animalDao = new AnimaisBanco();
 
 	@FXML
 	private void initialize() {
 		tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tcTipoAnimal.setCellValueFactory(new PropertyValueFactory<>("tipoAnimal"));
+		tcQntAnimais.setCellValueFactory(new PropertyValueFactory<>("qntAnimais"));
 		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
 		tvRaca.refresh();
 	}

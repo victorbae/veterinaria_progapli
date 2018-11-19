@@ -109,14 +109,14 @@ public class VendaProdutoBanco implements VendaProdutoDao {
 		List<VendaProduto> vendaProdutos = new ArrayList<>();
 		try {
 
-			String sql = "SELECT * FROM lista_dados_vendaProduto  where Id_Venda_Produto = ?";
+			String sql = "SELECT * FROM lista_dados_vendaProduto where Id_Venda= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setInt(1, dado.getIdVenda());
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				VendaProduto vendaProduto = new VendaProduto();
-				vendaProduto.setIdVendaProduto(rs.getInt("Id_Venda_Produto"));
+				vendaProduto.setIdVendaProduto(rs.getInt("IdVenda_Produto"));
 				vendaProduto.setProduto(EstaticosParaVenda.achaProduto(rs.getInt("Id_Produto")));
 				vendaProduto.setVenda(EstaticosParaVenda.achaVenda(rs.getInt("Id_Venda")));
 				vendaProduto.setQuantidade(rs.getDouble("Quantidade"));

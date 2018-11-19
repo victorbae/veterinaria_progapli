@@ -2,7 +2,6 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
-import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroAnimais;
 import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroFilial;
 import br.com.unoesc.veterinaria.model.Animais;
 import javafx.fxml.FXMLLoader;

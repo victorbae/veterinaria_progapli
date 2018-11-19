@@ -102,11 +102,8 @@ public class ControllerProduto {
 		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
 		RelatorioProdutoDialogFactory adicionaProdutoVendaDialog = new RelatorioProdutoDialogFactory(stageDono);
 
-		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
+		adicionaProdutoVendaDialog.showDialog();
 
-		if (clicadoSalvar) {
-
-		}
 	}
 
 	public void atualizaLista() {

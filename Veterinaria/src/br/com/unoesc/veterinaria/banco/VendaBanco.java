@@ -124,27 +124,27 @@ public class VendaBanco implements VendaDao {
 							+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null) AND (ve.valorTotal = ?)";
 					break;
 				}
-			} else if (filtrosVenda.getCliente() != null && filtrosVenda.getDataVenda() != null) {
+			} else if (filtrosVenda.getCliente() != null || filtrosVenda.getDataVenda() != null) {
 				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
 						+ " WHERE (ve.idCliente = ? or ? is null) AND (ve.Data_Venda = ? or ? is null)";
 			} else {
 				sql = "SELECT * FROM venda ve JOIN cliente cl on ve.idCliente = cl.idCliente"
-						+ " WHERE (? = ?) OR (? = ?)";
+						+ " WHERE (? is null) OR (? is null) OR (? is null) OR (? is null)";
 			}
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
-			try {
+			if (filtrosVenda.getCliente() != null) {
 				stmt.setInt(1, filtrosVenda.getCliente().getIdCliente());
 				stmt.setInt(2, filtrosVenda.getCliente().getIdCliente());
-			} catch (NullPointerException e) {
-				stmt.setString(1, "null");
-				stmt.setString(2, "null");
+			} else {
+				stmt.setString(1, null);
+				stmt.setString(2, null);
 			}
-			try {
+			if (filtrosVenda.getDataVenda() != null) {
 				stmt.setDate(3, Date.valueOf(filtrosVenda.getDataVenda()));
 				stmt.setDate(4, Date.valueOf(filtrosVenda.getDataVenda()));
-			} catch (NullPointerException e) {
-				stmt.setString(3, "null");
-				stmt.setString(4, "null");
+			} else {
+				stmt.setString(3, null);
+				stmt.setString(4, null);
 			}
 
 			if (filtrosVenda.getOperacao() != null && filtrosVenda.getCondicaoValor() != null) {
@@ -155,7 +155,7 @@ public class VendaBanco implements VendaDao {
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.setCliente(EstaticosParaCliente.achaCliente(rs.getInt("idCliente")));
-				venda.setDataVenda(rs.getDate("Data_Venda").toLocalDate());
+				venda.setDataVenda(LocalDate.parse(rs.getString("Data_Venda")));
 				venda.setValorDesconto(rs.getDouble("Valor_Desconto"));
 				venda.setValorTotal(rs.getDouble("valorTotal"));
 				venda.setIdVenda(rs.getInt("idVenda"));
