@@ -200,7 +200,6 @@ public class AnimaisBanco implements AnimaisDao {
 				animal.setNome(rs.getString("Nome"));
 				animal.setRaca(EstaticosParaRaca.achaRaca(rs.getInt("idRaca")));
 				animal.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
-
 				animais.add(animal);
 			}
 		} catch (SQLException e) {
@@ -208,5 +207,4 @@ public class AnimaisBanco implements AnimaisDao {
 		}
 		return animais;
 	}
-
 }

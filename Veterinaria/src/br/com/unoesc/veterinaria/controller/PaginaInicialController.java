@@ -2,6 +2,8 @@ package br.com.unoesc.veterinaria.controller;
 
 import java.io.IOException;
 
+import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.TrocaFiliaisDialogFactory;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class PaginaInicialController {
 
@@ -30,6 +33,9 @@ public class PaginaInicialController {
 
 	@FXML
 	private Button btnProduto;
+
+	@FXML
+	private Button btnTrocarFilial;
 
 	@FXML
 	private Button btFuncionario;
@@ -61,6 +67,7 @@ public class PaginaInicialController {
 		EstaticosDeAcesso.btFuncionario = btFuncionario;
 		EstaticosDeAcesso.btnProduto = btnProduto;
 		EstaticosDeAcesso.btVendas = btVendas;
+		EstaticosDeAcesso.btnTrocaFiliais = btnTrocarFilial;
 		EstaticosDeAcesso.bloqueiaTudo();
 	}
 
@@ -164,5 +171,13 @@ public class PaginaInicialController {
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	@FXML
+	void trocarFilial(ActionEvent event) {
+		Stage stageDono = (Stage) btnTrocarFilial.getScene().getWindow();
+		TrocaFiliaisDialogFactory trocaFilial = new TrocaFiliaisDialogFactory(stageDono);
+		boolean clicadoSalvar = trocaFilial.showDialog();
+
 	}
 }

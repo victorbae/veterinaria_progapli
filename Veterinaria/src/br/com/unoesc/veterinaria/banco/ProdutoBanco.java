@@ -36,8 +36,7 @@ public class ProdutoBanco implements ProdutoDao {
 			rs.next();
 			dado.setIdProduto(rs.getInt(1));
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 	}
 
@@ -56,8 +55,7 @@ public class ProdutoBanco implements ProdutoDao {
 
 			stmt.executeUpdate();
 			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 	}
 
@@ -100,8 +98,7 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("idFilial")));
 				produtos.add(produto);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 		return produtos;
 	}
@@ -161,8 +158,7 @@ public class ProdutoBanco implements ProdutoDao {
 				produto.setFilial(EstaticosParaFilial.achaFilial(rs.getInt("idFilial")));
 				listaProdutos.add(produto);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 		return listaProdutos;
 	}

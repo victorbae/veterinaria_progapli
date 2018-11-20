@@ -1,11 +1,13 @@
 package br.com.unoesc.veterinaria.controller;
 
+import br.com.unoesc.veterinaria.banco.PermissoesUsuarioFilial;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 public class ControllerTrocaFIliais {
 
@@ -17,29 +19,40 @@ public class ControllerTrocaFIliais {
 	private boolean clicadoSalvar;
 
 	@FXML
+	void initialize() {
+		preencheCombo();
+	}
+
+	@FXML
 	void btCancelar(ActionEvent event) {
-		dialogStage.close();
+		if (dialogStage != null) {
+			dialogStage.close();
+		}
+
 	}
 
 	@FXML
 	void btSalvar(ActionEvent event) {
 		EstaticosDeAcesso.setFilial(cbxFiliaisPermitidas.getValue());
 		clicadoSalvar = true;
-		dialogStage.close();
+		if (dialogStage != null) {
+			dialogStage.close();
+		}
 	}
 
-//	void preencheCombo() {
-//		PermissoesBanco permissoes = null;
-//		for (Filial filial : permissoes.getFiliaisByPermissoesDoFuncionario(EstaticosDeAcesso.getFuncionario())) {
-//			cbxFiliaisPermitidas.getItems().add(filial);
-//		}
-//	}
-
-	public void setStageDialog(Stage dialogStage) {
-		this.dialogStage = dialogStage;
+	void preencheCombo() {
+		PermissoesUsuarioFilial permissoes = new PermissoesUsuarioFilial();
+		for (Filial filial : permissoes.listarFilial()) {
+			cbxFiliaisPermitidas.getItems().add(filial);
+		}
 	}
 
 	public boolean clicadoSalvar() {
 		return clicadoSalvar;
+	}
+
+	public void setDialogStage(Stage dialogStage2) {
+		this.dialogStage = dialogStage;
+
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.unoesc.veterinaria.controller;
 
 import br.com.unoesc.veterinaria.banco.FilialBanco;
+import br.com.unoesc.veterinaria.banco.PermissoesUsuarioFilial;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.dialogs.FilialDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
@@ -53,6 +54,8 @@ public class ControllerFilial {
 	FilialDao filialDao = new FilialBanco();
 
 	Filial filial = new Filial();
+
+	PermissoesUsuarioFilial list = new PermissoesUsuarioFilial();
 
 	@FXML
 	private void initialize() {

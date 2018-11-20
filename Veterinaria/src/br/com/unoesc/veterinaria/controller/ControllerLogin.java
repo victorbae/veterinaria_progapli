@@ -60,8 +60,6 @@ public class ControllerLogin {
 		Stage stageDono = (Stage) hyperSenha.getScene().getWindow();
 		SenhaDialogFactory senhaDialog = new SenhaDialogFactory(stageDono);
 		boolean clicadoSalvar = senhaDialog.showDialog();
-		if (clicadoSalvar) {
-		}
 	}
 
 	void preencheVariaveis() {

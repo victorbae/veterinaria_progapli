@@ -91,7 +91,6 @@ public class ControllerProduto {
 
 	@FXML
 	void Novo(ActionEvent event) {
-		EstaticosParaGeral.naoExcluir(dialogStage);
 		EstaticosParaProduto.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ProdutoDialogFactory produtoDialog = new ProdutoDialogFactory(stageDono);

@@ -2,6 +2,7 @@ package br.com.unoesc.veterinaria.dialogs;
 
 import java.io.IOException;
 
+import br.com.unoesc.veterinaria.controller.ControllerTrocaFIliais;
 import br.com.unoesc.veterinaria.controller.cadastro.ControllerCadastroTipoAnimal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,14 +28,13 @@ public class TrocaFiliaisDialogFactory {
 			AnchorPane TipoAnimalDialog = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.getIcons().add(new Image("/br/com/unoesc/veterinaria/img/home.png"));
 			dialogStage.setTitle("Troca de Filial");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(stageDono);
 			Scene scene = new Scene(TipoAnimalDialog);
 			dialogStage.setScene(scene);
 
-			ControllerCadastroTipoAnimal controller = loader.getController();
+			ControllerTrocaFIliais controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
 

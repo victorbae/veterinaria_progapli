@@ -106,6 +106,15 @@ CREATE TABLE Venda_Produto(
   CONSTRAINT fk_Venda_Produto_Produto FOREIGN KEY (idProduto) REFERENCES Produto (idProduto)
 );
 
+CREATE TABLE Funcionario_Filial(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	idFuncionario INT NOT NULL,
+    idFilial INT NOT NULL,
+    
+    FOREIGN KEY (idFuncionario) REFERENCES Funcionario(idFuncionario),
+    FOREIGN KEY (idFilial) REFERENCES Filial(idFilial)
+);
+
 CREATE OR REPLACE VIEW lista_dados_vendaProduto AS  SELECT vp.idVenda_Produto AS  IdVenda_Produto, vp.idVenda AS  Id_Venda, vp.idProduto AS  Id_Produto, 
 	vp.Quantidade AS  Quantidade, vp.Valor_Unitario AS  Valor_Unitario, vp.Valor_Total AS  Valor_Total from venda_produto vp;
 
@@ -251,6 +260,11 @@ create trigger trg_apaga_resto_de_venda before delete on venda for each row
   delete from Venda_Produto where idVenda = OLD.idVenda;
     
  end $
+ 
+create trigger tr_add_permissao_funcionario after insert on funcionario for each row
+begin 
+	insert into funcionario_filial(idFuncionario, idFilial) values(new.idFuncionario, new.idFilial);
+end $
 use delimiter ;
 
 
@@ -273,4 +287,3 @@ INSERT INTO `funcionario` (`Nome`, `CPF`, `Data_Nascimento`, `id_Cliente`, `idFi
 INSERT INTO `cliente` (`Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) VALUES
 ('Cliente ROOT', '666666', '2018-11-08', 'Endereco ROOT', '666666', 1),
 ('Joao ', '123456489', '2018-11-15', 'Rua das Briga de Faca', '49 9 99173453', 1);
-

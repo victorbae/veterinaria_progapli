@@ -29,6 +29,8 @@ public class EstaticosDeAcesso {
 
 	public static Button btFilial;
 
+	public static Button btnTrocaFiliais;
+
 	public static Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -58,12 +60,14 @@ public class EstaticosDeAcesso {
 			btAnimais.setDisable(false);
 			btCliente.setDisable(false);
 			btFuncionario.setDisable(false);
+			btnTrocaFiliais.setDisable(false);
 
 		}
 		if (EstaticosDeAcesso.getFuncionario().getPermissao() == Permissoes.VENDEDOR) {
 			btVendas.setDisable(false);
 			btCliente.setDisable(false);
 			btnProduto.setDisable(false);
+			btnTrocaFiliais.setDisable(false);
 		}
 		if (EstaticosDeAcesso.getFuncionario().getPermissao() == Permissoes.VENDEDOR_SECRETARIO) {
 			btVendas.setDisable(false);
@@ -71,6 +75,7 @@ public class EstaticosDeAcesso {
 			btCliente.setDisable(false);
 			btFuncionario.setDisable(false);
 			btnProduto.setDisable(false);
+			btnTrocaFiliais.setDisable(false);
 		} else if (EstaticosDeAcesso.getFuncionario().getPermissao() == Permissoes.ADMINISTRADOR) {
 			btVendas.setDisable(false);
 			btAnimais.setDisable(false);
@@ -78,6 +83,7 @@ public class EstaticosDeAcesso {
 			btFuncionario.setDisable(false);
 			btnProduto.setDisable(false);
 			btFilial.setDisable(false);
+			btnTrocaFiliais.setDisable(false);
 		}
 	}
 
@@ -88,6 +94,7 @@ public class EstaticosDeAcesso {
 		btVendas.setDisable(true);
 		btnProduto.setDisable(true);
 		btFilial.setDisable(true);
+		btnTrocaFiliais.setDisable(true);
 	}
 
 }
