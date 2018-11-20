@@ -51,7 +51,7 @@ public class FilialBanco implements FilialDao {
 	}
 
 	@Override
-	public void excluir(Filial dado) {
+	public boolean excluir(Filial dado) {
 		//
 		try {
 			String sql = "DELETE FROM `veterinaria`.`filial` WHERE idFilial = ?;";
@@ -60,7 +60,9 @@ public class FilialBanco implements FilialDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 
 	}
 

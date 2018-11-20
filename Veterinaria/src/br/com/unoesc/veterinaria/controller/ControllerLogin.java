@@ -38,6 +38,7 @@ public class ControllerLogin {
 	private Hyperlink hyperSenha;
 
 	private Funcionario funcionario = new Funcionario();
+
 	private FuncionarioDao funcionariodao = new FuncionarioBanco();
 
 	@FXML

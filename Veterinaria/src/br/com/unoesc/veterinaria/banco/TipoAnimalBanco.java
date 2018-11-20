@@ -48,7 +48,7 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 	}
 
 	@Override
-	public void excluir(TipoAnimal dado) {
+	public boolean excluir(TipoAnimal dado) {
 		try {
 			String sql = "DELETE FROM `tipo_animal` WHERE `idTipo_Animal`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -56,7 +56,9 @@ public class TipoAnimalBanco implements TipoAnimalDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 
 	}
 

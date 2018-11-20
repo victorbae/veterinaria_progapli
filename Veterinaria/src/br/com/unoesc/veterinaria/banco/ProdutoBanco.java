@@ -30,8 +30,8 @@ public class ProdutoBanco implements ProdutoDao {
 			stmt.setInt(5, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
 
-			// Quando o campo é auto increment no banco
-			// SOMENTE QUANDO É AUTO INCEMENT NO BANCO
+			// Quando o campo ï¿½ auto increment no banco
+			// SOMENTE QUANDO ï¿½ AUTO INCEMENT NO BANCO
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			dado.setIdProduto(rs.getInt(1));
@@ -62,15 +62,18 @@ public class ProdutoBanco implements ProdutoDao {
 	}
 
 	@Override
-	public void excluir(Produto dado) {
+	public boolean excluir(Produto dado) {
+		boolean result = true;
 		try {
 			String sql = "DELETE FROM `produto` WHERE `idProduto`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
 			stmt.setInt(1, dado.getIdProduto());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
+			result = false;
 			e.printStackTrace();
 		}
+		return result;
 
 	}
 

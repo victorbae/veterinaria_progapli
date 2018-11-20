@@ -33,8 +33,8 @@ public class ClienteBanco implements ClienteDao {
 			stmt.setInt(6, dado.getFilial().getIdFilial());
 			stmt.executeUpdate();
 
-			// Quando o campo é auto increment no banco
-			// SOMENTE QUANDO É AUTO INCEMENT NO BANCO
+			// Quando o campo ï¿½ auto increment no banco
+			// SOMENTE QUANDO ï¿½ AUTO INCEMENT NO BANCO
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			EstaticosParaCliente.cliente.setIdCliente(rs.getInt(1));
@@ -64,7 +64,7 @@ public class ClienteBanco implements ClienteDao {
 	}
 
 	@Override
-	public void excluir(Cliente dado) {
+	public boolean excluir(Cliente dado) {
 		try {
 			String sql = "DELETE FROM `cliente` WHERE `idCliente`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -72,7 +72,9 @@ public class ClienteBanco implements ClienteDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 
 	}
 

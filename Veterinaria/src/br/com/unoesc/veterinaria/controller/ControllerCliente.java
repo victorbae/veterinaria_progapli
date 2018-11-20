@@ -5,9 +5,11 @@ import java.util.Date;
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.dao.ClienteDao;
 import br.com.unoesc.veterinaria.dialogs.ClienteDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
 import br.com.unoesc.veterinaria.model.Cliente;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaCliente;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,9 +74,7 @@ public class ControllerCliente {
 		}
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
-
 		boolean clicadoSalvar = clienteDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -84,7 +84,9 @@ public class ControllerCliente {
 	void Excluir(ActionEvent event) {
 		if (tvCliente.getSelectionModel().getSelectedItem() != null) {
 			cliente = tvCliente.getSelectionModel().getSelectedItem();
-			clienteDao.excluir(cliente);
+			if (clienteDao.excluir(cliente) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btnExcluir.getScene().getWindow());
+			}
 		}
 		atualizaLista();
 	}
@@ -94,9 +96,7 @@ public class ControllerCliente {
 		EstaticosParaCliente.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ClienteDialogFactory clienteDialog = new ClienteDialogFactory(stageDono);
-
 		boolean clicadoSalvar = clienteDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -106,5 +106,4 @@ public class ControllerCliente {
 		tvCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
 		tvCliente.refresh();
 	}
-
 }

@@ -2,9 +2,11 @@ package br.com.unoesc.veterinaria.controller;
 
 import br.com.unoesc.veterinaria.banco.ProdutoBanco;
 import br.com.unoesc.veterinaria.dao.ProdutoDao;
+import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.ProdutoDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.RelatorioProdutoDialogFactory;
 import br.com.unoesc.veterinaria.model.Produto;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaProduto;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -47,6 +49,8 @@ public class ControllerProduto {
 	@FXML
 	private Button btnEditar;
 
+	private Stage dialogStage;
+
 	Produto produto;
 
 	ProdutoDao produtoDao = new ProdutoBanco();
@@ -68,9 +72,7 @@ public class ControllerProduto {
 		}
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ProdutoDialogFactory produtoDialog = new ProdutoDialogFactory(stageDono);
-
 		boolean clicadoSalvar = produtoDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -80,19 +82,20 @@ public class ControllerProduto {
 	void Excluir(ActionEvent event) {
 		if (tvProdutos.getSelectionModel().getSelectedItem() != null) {
 			produto = tvProdutos.getSelectionModel().getSelectedItem();
-			produtoDao.excluir(produto);
+			if (produtoDao.excluir(produto) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btnExcluir.getScene().getWindow());
+			}
 		}
 		atualizaLista();
 	}
 
 	@FXML
 	void Novo(ActionEvent event) {
+		EstaticosParaGeral.naoExcluir(dialogStage);
 		EstaticosParaProduto.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		ProdutoDialogFactory produtoDialog = new ProdutoDialogFactory(stageDono);
-
 		boolean clicadoSalvar = produtoDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -102,14 +105,11 @@ public class ControllerProduto {
 	void exibeRelatorio(ActionEvent event) {
 		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
 		RelatorioProdutoDialogFactory adicionaProdutoVendaDialog = new RelatorioProdutoDialogFactory(stageDono);
-
 		adicionaProdutoVendaDialog.showDialog();
-
 	}
 
 	public void atualizaLista() {
 		tvProdutos.setItems(FXCollections.observableArrayList(produtoDao.listar()));
 		tvProdutos.refresh();
 	}
-
 }

@@ -55,16 +55,13 @@ public class PaginaInicialController {
 		EstaticosDeAcesso.lblNomeLogado = lblNomeLogado;
 		EstaticosDeAcesso.ftLogout = ftLogout;
 		EstaticosDeAcesso.ftUser = ftUser;
-
 		EstaticosDeAcesso.btAnimais = btAnimais;
 		EstaticosDeAcesso.btCliente = btCliente;
 		EstaticosDeAcesso.btFilial = btFilial;
 		EstaticosDeAcesso.btFuncionario = btFuncionario;
 		EstaticosDeAcesso.btnProduto = btnProduto;
 		EstaticosDeAcesso.btVendas = btVendas;
-
 		EstaticosDeAcesso.bloqueiaTudo();
-
 	}
 
 	@FXML
@@ -168,5 +165,4 @@ public class PaginaInicialController {
 			}
 		}
 	}
-
 }

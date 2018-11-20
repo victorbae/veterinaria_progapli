@@ -58,6 +58,7 @@ public class ControllerRaca {
 	private boolean clicadoSalvar;
 
 	private Raca raca;
+
 	private RacaDao racaDao = new RacaBanco();
 
 	@FXML
@@ -70,7 +71,6 @@ public class ControllerRaca {
 	}
 
 	public void atualizaListaRaca() {
-
 		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
 		tvRaca.refresh();
 	}
@@ -83,9 +83,7 @@ public class ControllerRaca {
 		}
 		Stage stageDono = (Stage) btEditar.getScene().getWindow();
 		RacaDialogFactory racaDialog = new RacaDialogFactory(stageDono);
-
 		boolean clicadoSalvar = racaDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaRaca();
 		}
@@ -95,7 +93,9 @@ public class ControllerRaca {
 	void excluir(ActionEvent event) {
 		if (tvRaca.getSelectionModel().getSelectedItem() != null) {
 			raca = tvRaca.getSelectionModel().getSelectedItem();
-			racaDao.excluir(raca);
+			if (racaDao.excluir(raca) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btExcluir.getScene().getWindow());
+			}
 		}
 		atualizaListaRaca();
 	}
@@ -105,9 +105,7 @@ public class ControllerRaca {
 		EstaticosParaRaca.isEditando = false;
 		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
-
 		boolean clicadoSalvar = adicionaRacaDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaRaca();
 		}

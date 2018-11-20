@@ -33,8 +33,8 @@ public class VendaBanco implements VendaDao {
 			stmt.setDouble(5, dado.getValorTotal());
 			stmt.executeUpdate();
 
-			// Quando o campo é auto increment no banco
-			// SOMENTE QUANDO É AUTO INCEMENT NO BANCO
+			// Quando o campo ï¿½ auto increment no banco
+			// SOMENTE QUANDO ï¿½ AUTO INCEMENT NO BANCO
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			dado.setIdVenda(rs.getInt(1));
@@ -62,7 +62,7 @@ public class VendaBanco implements VendaDao {
 	}
 
 	@Override
-	public void excluir(Venda dado) {
+	public boolean excluir(Venda dado) {
 		try {
 			String sql = "DELETE FROM `venda` WHERE `idVenda`= ?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -70,8 +70,9 @@ public class VendaBanco implements VendaDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-
+		return true;
 	}
 
 	/*

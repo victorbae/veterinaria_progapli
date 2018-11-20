@@ -72,9 +72,7 @@ public class ControllerTipoAnimal {
 		}
 		Stage stageDono = (Stage) btEditar.getScene().getWindow();
 		TipoAnimalDialogFactory tipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
-
 		boolean clicadoSalvar = tipoAnimalDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaTipoAnimal();
 		}
@@ -84,7 +82,9 @@ public class ControllerTipoAnimal {
 	void excluir(ActionEvent event) {
 		if (tvTipoAnimal.getSelectionModel().getSelectedItem() != null) {
 			tipoAnimal = tvTipoAnimal.getSelectionModel().getSelectedItem();
-			tipoAnimalDao.excluir(tipoAnimal);
+			if (tipoAnimalDao.excluir(tipoAnimal) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btExcluir.getScene().getWindow());
+			}
 		}
 		atualizaListaTipoAnimal();
 	}
@@ -94,13 +94,10 @@ public class ControllerTipoAnimal {
 		EstaticosParaTipoAnimal.isEditando = false;
 		Stage stageDono = (Stage) btNovo.getScene().getWindow();
 		TipoAnimalDialogFactory adicionaTipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
-
 		boolean clicadoSalvar = adicionaTipoAnimalDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaTipoAnimal();
 		}
-
 	}
 
 	@FXML
@@ -132,7 +129,5 @@ public class ControllerTipoAnimal {
 	public void atualizaListaTipoAnimal() {
 		tvTipoAnimal.setItems(FXCollections.observableArrayList(tipoAnimalDao.listar()));
 		tvTipoAnimal.refresh();
-
 	}
-
 }

@@ -2,6 +2,8 @@ package br.com.unoesc.veterinaria.controller.cadastro;
 
 import java.time.LocalDate;
 
+import org.jfree.ui.DateCellRenderer;
+
 import br.com.unoesc.veterinaria.banco.ClienteBanco;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.banco.FuncionarioBanco;
@@ -89,7 +91,7 @@ public class ControllerCadastroFuncionario {
 		this.funcionario = EstaticosDeFuncionario.funcionario;
 		if (EstaticosDeFuncionario.editando) {
 			preencheTela();
-			lblMaster.setText("Editar Funcionário");
+			lblMaster.setText("Editar Funcionï¿½rio");
 		}
 	}
 

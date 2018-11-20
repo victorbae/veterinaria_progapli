@@ -47,6 +47,7 @@ public class ControllerAdicionaProdutoVenda {
 	private VendaProduto vendaProduto;
 
 	private ProdutoDao produtoDao = new ProdutoBanco();
+	
 
 	@FXML
 	private void initialize() {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import br.com.unoesc.veterinaria.banco.AnimaisBanco;
 import br.com.unoesc.veterinaria.dao.AnimaisDao;
 import br.com.unoesc.veterinaria.dialogs.AnimaisDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.RelatorioAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Animais;
 import br.com.unoesc.veterinaria.model.Cliente;
@@ -84,9 +85,7 @@ public class ControllerAnimais {
 		}
 		Stage stageDono = (Stage) btnEditar.getScene().getWindow();
 		AnimaisDialogFactory animaisDialog = new AnimaisDialogFactory(stageDono);
-
 		boolean clicadoSalvar = animaisDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -96,7 +95,9 @@ public class ControllerAnimais {
 	void Excluir(ActionEvent event) {
 		if (tvAnimais.getSelectionModel().getSelectedItem() != null) {
 			animais = tvAnimais.getSelectionModel().getSelectedItem();
-			animaisDao.excluir(animais);
+			if (animaisDao.excluir(animais) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btnExcluir.getScene().getWindow());
+			}
 		}
 		atualizaLista();
 	}
@@ -106,9 +107,7 @@ public class ControllerAnimais {
 		EstaticosParaAnimal.isEditando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		AnimaisDialogFactory animaisDialog = new AnimaisDialogFactory(stageDono);
-
 		boolean clicadoSalvar = animaisDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -146,12 +145,7 @@ public class ControllerAnimais {
 	void exibeRelatorio(ActionEvent event) {
 		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
 		RelatorioAnimalDialogFactory animalDialog = new RelatorioAnimalDialogFactory(stageDono);
-
 		boolean clicadoSalvar = animalDialog.showDialog();
-
-		if (clicadoSalvar) {
-
-		}
 	}
 
 	public void atualizaLista() {

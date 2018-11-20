@@ -62,7 +62,7 @@ public class AnimaisBanco implements AnimaisDao {
 	}
 
 	@Override
-	public void excluir(Animais dado) {
+	public boolean excluir(Animais dado) {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "DELETE FROM `animal` WHERE `idAnimal`= ?";
@@ -71,7 +71,9 @@ public class AnimaisBanco implements AnimaisDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 
 	}
 
@@ -170,7 +172,7 @@ public class AnimaisBanco implements AnimaisDao {
 				animal.setRaca(EstaticosParaRaca.achaRaca(rs.getInt("idRaca")));
 				animal.setTipo_animal(EstaticosParaTipoAnimal.achaTipoAnimal(rs.getInt("idTipo_Animal")));
 				if (listaAnimais.contains(animal)) {
-					System.out.println("Animal já adicionado");
+					System.out.println("Animal jï¿½ adicionado");
 				} else {
 					listaAnimais.add(animal);
 				}

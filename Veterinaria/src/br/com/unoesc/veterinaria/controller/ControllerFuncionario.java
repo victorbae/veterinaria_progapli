@@ -9,6 +9,7 @@ import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,7 +77,6 @@ public class ControllerFuncionario {
 			escolhido = false;
 			EstaticosDeFuncionario.editando = false;
 			EstaticosDeFuncionario.funcionario = new Funcionario();
-
 			initialize();
 		}
 	}
@@ -85,7 +85,9 @@ public class ControllerFuncionario {
 	void excluir(ActionEvent event) {
 		preencheFuncionario();
 		if (escolhido) {
-			funcionariodao.excluir(this.funcionario);
+			if (funcionariodao.excluir(this.funcionario) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btExcluir.getScene().getWindow());
+			}
 			escolhido = false;
 			initialize();
 		}

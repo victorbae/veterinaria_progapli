@@ -62,7 +62,6 @@ public class ControllerVenda {
 	private void initialize() {
 
 		EstaticosParaVenda.isVisualizando = false;
-
 		tcDataVenda.setCellValueFactory(new PropertyValueFactory<>("dataVenda"));
 		tcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tcFilial.setCellValueFactory(new PropertyValueFactory<>("filial"));
@@ -85,7 +84,9 @@ public class ControllerVenda {
 	void Excluir(ActionEvent event) {
 		if (tvVendas.getSelectionModel().getSelectedItem() != null) {
 			venda = tvVendas.getSelectionModel().getSelectedItem();
-			vendaDao.excluir(venda);
+			if (vendaDao.excluir(venda) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btnExcluir.getScene().getWindow());
+			}
 		}
 		atualizaLista();
 	}
@@ -116,12 +117,6 @@ public class ControllerVenda {
 	void exibeRelatorio(ActionEvent event) {
 		Stage stageDono = (Stage) btnExibeRelatorio.getScene().getWindow();
 		RelatorioVendaDialogFactory adicionaProdutoVendaDialog = new RelatorioVendaDialogFactory(stageDono);
-
 		boolean clicadoSalvar = adicionaProdutoVendaDialog.showDialog();
-
-		if (clicadoSalvar) {
-
-		}
 	}
-
 }

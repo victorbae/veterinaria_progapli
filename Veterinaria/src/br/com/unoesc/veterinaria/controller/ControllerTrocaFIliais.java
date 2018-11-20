@@ -42,5 +42,4 @@ public class ControllerTrocaFIliais {
 	public boolean clicadoSalvar() {
 		return clicadoSalvar;
 	}
-
 }

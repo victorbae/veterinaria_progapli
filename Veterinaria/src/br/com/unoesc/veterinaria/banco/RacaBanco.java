@@ -54,7 +54,7 @@ public class RacaBanco implements RacaDao {
 	}
 
 	@Override
-	public void excluir(Raca dado) {
+	public boolean excluir(Raca dado) {
 		try {
 			String sql = "DELETE FROM `raca` WHERE `idRaca`=?";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -62,8 +62,9 @@ public class RacaBanco implements RacaDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-
+		return true;
 	}
 
 	/*

@@ -8,7 +8,7 @@ public interface CrudDao<T> {
 
 	void alterar(T dado);
 
-	void excluir(T dado);
+	boolean excluir(T dado);
 
 	List<T> listar();
 

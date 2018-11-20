@@ -3,10 +3,12 @@ package br.com.unoesc.veterinaria.controller;
 import br.com.unoesc.veterinaria.banco.FilialBanco;
 import br.com.unoesc.veterinaria.dao.FilialDao;
 import br.com.unoesc.veterinaria.dialogs.FilialDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.model.Funcionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeFuncionario;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaFilial;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,9 +69,7 @@ public class ControllerFilial {
 		EstaticosParaFilial.editando = false;
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
-
 		boolean clicadoSalvar = clienteDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}
@@ -78,21 +78,19 @@ public class ControllerFilial {
 	@FXML
 	void Excluir(ActionEvent event) {
 		populaFilialByOnCLick();
-		filialDao.excluir(filial);
+		if (filialDao.excluir(filial) == false) {
+			EstaticosParaGeral.naoExcluir((Stage) btnExcluir.getScene().getWindow());
+		}
 		initialize();
 	}
 
 	@FXML
 	void Editar(ActionEvent event) {
-
 		EstaticosParaFilial.filial = tvFilial.getSelectionModel().getSelectedItem();
 		EstaticosParaFilial.editando = true;
-
 		Stage stageDono = (Stage) btnNovo.getScene().getWindow();
 		FilialDialogFactory clienteDialog = new FilialDialogFactory(stageDono);
-
 		boolean clicadoSalvar = clienteDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaLista();
 		}

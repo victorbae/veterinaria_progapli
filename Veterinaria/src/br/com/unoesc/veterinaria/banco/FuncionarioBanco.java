@@ -74,7 +74,7 @@ public class FuncionarioBanco implements FuncionarioDao {
 	}
 
 	@Override
-	public void excluir(Funcionario dado) {
+	public boolean excluir(Funcionario dado) {
 		try {
 			String sql = "DELETE FROM `veterinaria`.`funcionario` WHERE idFuncionario = ?;";
 			PreparedStatement stmt = ConexaoPrincipal.retornaconecao().prepareStatement(sql);
@@ -82,7 +82,9 @@ public class FuncionarioBanco implements FuncionarioDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 
 	}
 

@@ -8,6 +8,7 @@ import br.com.unoesc.veterinaria.dialogs.RacaDialogFactory;
 import br.com.unoesc.veterinaria.dialogs.TipoAnimalDialogFactory;
 import br.com.unoesc.veterinaria.model.Raca;
 import br.com.unoesc.veterinaria.model.TipoAnimal;
+import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaGeral;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaRaca;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosParaTipoAnimal;
 import javafx.collections.FXCollections;
@@ -55,10 +56,15 @@ public class ControllerTipoAnimalRaca {
 	private Button btnExcluirRaca;
 
 	Raca raca;
+
 	TipoAnimal tipoAnimal;
-	private Stage dialogStage;
+
 	private boolean clicadoSalvar;
+
+	Stage dialogStage;
+
 	RacaDao racaDao = new RacaBanco();
+
 	TipoAnimalDao tipoAnimalDao = new TipoAnimalBanco();
 
 	@FXML
@@ -80,9 +86,7 @@ public class ControllerTipoAnimalRaca {
 		}
 		Stage stageDono = (Stage) btnEditarRaca.getScene().getWindow();
 		RacaDialogFactory racaDialog = new RacaDialogFactory(stageDono);
-
 		boolean clicadoSalvar = racaDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaRaca();
 		}
@@ -96,9 +100,7 @@ public class ControllerTipoAnimalRaca {
 		}
 		Stage stageDono = (Stage) btnEditarTipoAnimal.getScene().getWindow();
 		TipoAnimalDialogFactory tipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
-
 		boolean clicadoSalvar = tipoAnimalDialog.showDialog();
-
 		if (clicadoSalvar) {
 			atualizaListaTipoAnimal();
 		}
@@ -117,19 +119,18 @@ public class ControllerTipoAnimalRaca {
 	void ExcluirTipoAnimal(ActionEvent event) {
 		if (tvTipoAnimal.getSelectionModel().getSelectedItem() != null) {
 			tipoAnimal = tvTipoAnimal.getSelectionModel().getSelectedItem();
-			tipoAnimalDao.excluir(tipoAnimal);
+			if (tipoAnimalDao.excluir(tipoAnimal) == false) {
+				EstaticosParaGeral.naoExcluir((Stage) btnExcluirTipoAnimal.getScene().getWindow());
+			}
 		}
 		atualizaListaTipoAnimal();
 	}
 
 	@FXML
 	void NovaRaca(ActionEvent event) {
-
 		Stage stageDono = (Stage) btnNovaRaca.getScene().getWindow();
 		RacaDialogFactory adicionaRacaDialog = new RacaDialogFactory(stageDono);
-
 		boolean clicadoSalvar = adicionaRacaDialog.showDialog();
-
 		if (clicadoSalvar) {
 			dialogStage.close();
 			atualizaListaRaca();
@@ -139,27 +140,21 @@ public class ControllerTipoAnimalRaca {
 
 	@FXML
 	void NovoTipoAnimal(ActionEvent event) {
-
 		Stage stageDono = (Stage) btnNovoTipoAnimal.getScene().getWindow();
 		TipoAnimalDialogFactory adicionaTipoAnimalDialog = new TipoAnimalDialogFactory(stageDono);
-
 		boolean clicadoSalvar = adicionaTipoAnimalDialog.showDialog();
-
 		if (clicadoSalvar) {
 			dialogStage.close();
 			atualizaListaTipoAnimal();
 		}
-
 	}
 
 	public void atualizaListaTipoAnimal() {
 		tvTipoAnimal.setItems(FXCollections.observableArrayList(tipoAnimalDao.listar()));
 		tvTipoAnimal.refresh();
-
 	}
 
 	public void atualizaListaRaca() {
-
 		tvRaca.setItems(FXCollections.observableArrayList(racaDao.listar()));
 		tvRaca.refresh();
 	}

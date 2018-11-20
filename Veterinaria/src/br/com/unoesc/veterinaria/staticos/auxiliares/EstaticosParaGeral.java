@@ -1,6 +1,7 @@
 package br.com.unoesc.veterinaria.staticos.auxiliares;
 
 import br.com.unoesc.veterinaria.dialogs.ErroNaoPreenchidoDialogFactory;
+import br.com.unoesc.veterinaria.dialogs.NaoExcluiDialogFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -17,6 +18,13 @@ public class EstaticosParaGeral {
 		ErroNaoPreenchidoDialogFactory nopeDialog = new ErroNaoPreenchidoDialogFactory(stageDono);
 
 		nopeDialog.showDialog();
+	}
+
+	public static void naoExcluir(Stage stage) {
+		Stage stageDono = (Stage) stage.getScene().getWindow();
+		NaoExcluiDialogFactory nopeDelete = new NaoExcluiDialogFactory(stageDono);
+
+		nopeDelete.showDialog();
 	}
 
 }
