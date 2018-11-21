@@ -284,6 +284,7 @@ INSERT INTO `funcionario` (`Nome`, `CPF`, `Data_Nascimento`, `id_Cliente`, `idFi
 ('Vendedor', '78945612', '1997-06-05', NULL, 1, 'vend', 'root', 2),
 ('Vendedor Secretario', '185962', '1996-05-15', NULL, 1, 'secvend', 'root', 6);
 
+
 INSERT INTO `cliente` (`Nome_Completo`, `CPF`, `Data_Nascimento`, `Endereco`, `Telefone`, `idFilial`) VALUES
 ('Cliente ROOT', '666666', '2018-11-08', 'Endereco ROOT', '666666', 1),
 ('Joao ', '123456489', '2018-11-15', 'Rua das Briga de Faca', '49 9 99173453', 1);
