@@ -1,2 +1,11 @@
-# veterinaria_progapli
-Trabalho de Programaçao Aplicada II - UNOESC
+<h1> Pet Bull® <small>BETA</small></h1>
+<h2> O mais completo sistema de gerenciamento de Veterinárias e PetShops </h2>
+<h3>Trabalho de Programaçao Aplicada II - UNOESC - Xanxere</h3>
+
+Modelo ER -> Pasta _SQL_
+
+Arquivos SQL para Banco de Dados -> Pasta _SQL_
+
+Diagrama de classes -> Pasta Diagrama_Classes
+
+Prototipos de Tela -> Pasta prototipo Telas
