@@ -1,6 +1,6 @@
 package br.com.unoesc.veterinaria.controller;
 
-import br.com.unoesc.veterinaria.banco.PermissoesUsuarioFilial;
+import br.com.unoesc.veterinaria.banco.PermissaoUsuarioFilial;
 import br.com.unoesc.veterinaria.model.Filial;
 import br.com.unoesc.veterinaria.staticos.auxiliares.EstaticosDeAcesso;
 import javafx.event.ActionEvent;
@@ -41,7 +41,7 @@ public class ControllerTrocaFIliais {
 	}
 
 	void preencheCombo() {
-		PermissoesUsuarioFilial permissoes = new PermissoesUsuarioFilial();
+		PermissaoUsuarioFilial permissoes = new PermissaoUsuarioFilial();
 		for (Filial filial : permissoes.listarFilial()) {
 			cbxFiliaisPermitidas.getItems().add(filial);
 		}
