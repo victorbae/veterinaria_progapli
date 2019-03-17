@@ -26,7 +26,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class ControllerCadastroAnimais {
 
@@ -83,11 +82,11 @@ public class ControllerCadastroAnimais {
 		TextFields.bindAutoCompletion(tfCliente, clienteDao.listar());
 		TextFields.bindAutoCompletion(tfTipoAnimal, tipoAnimalDao.listar());
 
-		tooltipRaca.setShowDelay(Duration.millis(230d));
-		tooltipRaca.setText("Adicionar nova raça.");
+//		tooltipRaca.setShowDelay(Duration.millis(230d));
+		tooltipRaca.setText("Adicionar nova raï¿½a.");
 		btnOutraRaca.setTooltip(tooltipRaca);
 
-		tooltipTipoAnimal.setShowDelay(Duration.millis(230d));
+//		tooltipTipoAnimal.setShowDelay(Duration.millis(230d));
 		tooltipTipoAnimal.setText("Adicionar novo tipo animal.");
 		btnOutroTipoAnimal.setTooltip(tooltipTipoAnimal);
 
